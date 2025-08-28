@@ -43,7 +43,7 @@ jobs:
         run: npm ci
 
       - name: Generate data files
-        run: npm run data:refresh
+        run: python3 etl/pipeline.py
 
       - name: Build
         run: npm run build
