@@ -65,9 +65,11 @@ export interface CleanDataLoadResult {
  * Clean Data Loader - Loads pre-processed data from the ETL pipeline
  */
 export class CleanDataLoader {
-  private static readonly ARTIFACTS_PATH = '/artifacts';
-  private static readonly CLEAN_DATA_PATH = '/artifacts/clean_data';
-  private static readonly MANIFEST_PATH = '/artifacts/data_manifest.json';
+  // Handle both development and production (GitHub Pages) paths
+  private static readonly BASE_PATH = import.meta.env.BASE_URL || '/';
+  private static readonly ARTIFACTS_PATH = `${CleanDataLoader.BASE_PATH}artifacts`;
+  private static readonly CLEAN_DATA_PATH = `${CleanDataLoader.BASE_PATH}artifacts/clean_data`;
+  private static readonly MANIFEST_PATH = `${CleanDataLoader.BASE_PATH}artifacts/data_manifest.json`;
   private static readonly CACHE_TTL = 5 * 60 * 1000; // 5 minutes cache
   
   private static cache: Map<string, { data: any; timestamp: number }> = new Map();
