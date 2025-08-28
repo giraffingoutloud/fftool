@@ -22,18 +22,25 @@ sys.path.append(str(Path(__file__).parent.parent))
 from etl.robust_loader import RobustCSVLoader
 
 # Configure logging
+# Determine project root for logging
+SCRIPT_DIR = Path(__file__).parent
+PROJECT_ROOT = SCRIPT_DIR.parent
+LOG_FILE = PROJECT_ROOT / "reports" / "pipeline.log"
+
+# Ensure reports directory exists for logging
+(PROJECT_ROOT / "reports").mkdir(parents=True, exist_ok=True)
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('/mnt/c/Users/giraf/Documents/projects/fftool/reports/pipeline.log'),
+        logging.FileHandler(str(LOG_FILE)),
         logging.StreamHandler()
     ]
 )
 logger = logging.getLogger(__name__)
 
-# Paths
-PROJECT_ROOT = Path("/mnt/c/Users/giraf/Documents/projects/fftool")
+# Paths already defined above for logging
 CANONICAL_DATA_PATH = PROJECT_ROOT / "canonical_data"
 ARTIFACTS_PATH = PROJECT_ROOT / "artifacts"
 CLEAN_DATA_PATH = ARTIFACTS_PATH / "clean_data"

@@ -34,13 +34,15 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Constants
-CANONICAL_DATA_PATH = Path("/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data")
-ARTIFACTS_PATH = Path("/mnt/c/Users/giraf/Documents/projects/fftool/artifacts")
+# Constants - Use relative paths from script location
+SCRIPT_DIR = Path(__file__).parent
+PROJECT_ROOT = SCRIPT_DIR.parent
+CANONICAL_DATA_PATH = PROJECT_ROOT / "canonical_data"
+ARTIFACTS_PATH = PROJECT_ROOT / "artifacts"
 CLEAN_DATA_PATH = ARTIFACTS_PATH / "clean_data"
 QUARANTINE_PATH = ARTIFACTS_PATH / "quarantine"
-REPORTS_PATH = Path("/mnt/c/Users/giraf/Documents/projects/fftool/reports")
-DATA_DICT_PATH = Path("/mnt/c/Users/giraf/Documents/projects/fftool/specs/data_dictionary.json")
+REPORTS_PATH = PROJECT_ROOT / "reports"
+DATA_DICT_PATH = PROJECT_ROOT / "specs" / "data_dictionary.json"
 
 # Ensure output directories exist
 CLEAN_DATA_PATH.mkdir(parents=True, exist_ok=True)
