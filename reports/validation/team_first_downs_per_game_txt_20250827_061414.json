@@ -1,0 +1,40 @@
+{
+  "file_path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/team_data/team_first_downs_per_game.txt",
+  "file_type": "txt",
+  "file_size": 1405,
+  "total_checks": 3,
+  "passed_checks": 3,
+  "failed_checks": 0,
+  "schema_errors": [],
+  "duplicate_rows": [],
+  "missing_values": {},
+  "type_errors": [],
+  "range_errors": [],
+  "uniqueness_violations": [],
+  "content_summary": {
+    "line_count": 33,
+    "file_size": 1405,
+    "is_structured": true,
+    "delimiter": ",",
+    "sample_lines": [
+      "Rank,Team,2024,Last 3,Last 1,Home,Away,2023",
+      "1,Detroit,24.4,25.7,30.0,25.9,22.6,22.6",
+      "2,Baltimore,23.4,24.0,23.0,23.8,23.1,20.9",
+      "3,Tampa Bay,23.0,24.0,19.0,23.1,22.9,18.2",
+      "4,Washington,22.6,23.7,22.0,23.2,22.0,18.9"
+    ],
+    "encoding": "utf-8",
+    "columns": 8,
+    "rows": 33,
+    "headers": [
+      "Rank",
+      "Team",
+      "2024",
+      "Last 3",
+      "Last 1",
+      "Home",
+      "Away",
+      "2023"
+    ]
+  }
+}

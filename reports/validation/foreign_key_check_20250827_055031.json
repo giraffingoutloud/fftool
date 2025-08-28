@@ -1,0 +1,95 @@
+{
+  "check_name": "foreign_key_check",
+  "passed": false,
+  "errors": [
+    "Players in projections but not in ADP: 109",
+    "Players in ADP but not in projections: 49"
+  ],
+  "warnings": [],
+  "details": {
+    "tables_checked": 2,
+    "mismatches": 20
+  },
+  "offending_keys": [
+    {
+      "source": "projections",
+      "key": "eric saubert_te"
+    },
+    {
+      "source": "projections",
+      "key": "jack stoll_te"
+    },
+    {
+      "source": "projections",
+      "key": "brandon allen_qb"
+    },
+    {
+      "source": "projections",
+      "key": "charlie woerner_te"
+    },
+    {
+      "source": "projections",
+      "key": "bills dst_dst"
+    },
+    {
+      "source": "projections",
+      "key": "steelers dst_dst"
+    },
+    {
+      "source": "projections",
+      "key": "andrew ogletree_te"
+    },
+    {
+      "source": "projections",
+      "key": "tommy mellott_wr"
+    },
+    {
+      "source": "projections",
+      "key": "colts dst_dst"
+    },
+    {
+      "source": "projections",
+      "key": "buccaneers dst_dst"
+    },
+    {
+      "source": "adp",
+      "key": "new england patriots dst_dst"
+    },
+    {
+      "source": "adp",
+      "key": "khalil herbert_rb"
+    },
+    {
+      "source": "adp",
+      "key": "zavier scott_rb"
+    },
+    {
+      "source": "adp",
+      "key": "san francisco 49ers dst_dst"
+    },
+    {
+      "source": "adp",
+      "key": "konata mumpfield_wr"
+    },
+    {
+      "source": "adp",
+      "key": "malik heath_wr"
+    },
+    {
+      "source": "adp",
+      "key": "pittsburgh steelers dst_dst"
+    },
+    {
+      "source": "adp",
+      "key": "jacksonville jaguars dst_dst"
+    },
+    {
+      "source": "adp",
+      "key": "mitchell tinsley_wr"
+    },
+    {
+      "source": "adp",
+      "key": "new york jets dst_dst"
+    }
+  ]
+}

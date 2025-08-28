@@ -1,0 +1,32 @@
+category,stat_name,points_value,min,max,description
+passing,passing_yards,0.04,-0.1,0.1,Points per passing yard (1 pt per 25 yards = 0.04)
+passing,passing_touchdowns,4,3,6,Points per passing touchdown
+passing,interceptions,-2,-3,0,Points per interception thrown
+rushing,rushing_yards,0.1,0.05,0.2,Points per rushing yard (1 pt per 10 yards = 0.1)
+rushing,rushing_touchdowns,6,4,8,Points per rushing touchdown
+rushing,rushing_attempts,0,0,0.5,Points per rushing attempt
+receiving,receptions,1,0,1,Points per reception (PPR)
+receiving,receiving_yards,0.1,0.05,0.2,Points per receiving yard (1 pt per 10 yards = 0.1)
+receiving,receiving_touchdowns,6,4,8,Points per receiving touchdown
+receiving,receiving_targets,0,0,0.5,Points per target
+misc,two_point_conversions,2,1,3,Points for 2PT conversion
+misc,fumbles_lost,-2,-3,0,Points per fumble lost
+misc,fumble_recovery_td,6,4,8,Points for fumble recovery TD
+kicking,field_goal_0_39,3,2,4,FG made 0-39 yards
+kicking,field_goal_40_49,4,3,5,FG made 40-49 yards
+kicking,field_goal_50_plus,5,4,6,FG made 50+ yards
+kicking,extra_points,1,0.5,2,Points per PAT made
+kicking,field_goal_missed,-1,-2,0,Points per FG missed
+defense,sacks,1,0.5,2,Points per sack
+defense,interceptions_def,2,1,3,Points per defensive INT
+defense,fumbles_recovered,2,1,3,Points per fumble recovery
+defense,defensive_td,6,4,8,Points per defensive TD
+defense,safeties,2,1,4,Points per safety
+defense,blocks,2,1,3,Points per kick/punt block
+defense,points_allowed_0,10,5,15,Points for 0 points allowed
+defense,points_allowed_1_6,7,4,10,Points for 1-6 points allowed
+defense,points_allowed_7_13,4,2,7,Points for 7-13 points allowed
+defense,points_allowed_14_20,1,0,4,Points for 14-20 points allowed
+defense,points_allowed_21_27,0,-2,2,Points for 21-27 points allowed
+defense,points_allowed_28_34,-1,-4,0,Points for 28-34 points allowed
+defense,points_allowed_35_plus,-4,-7,0,Points for 35+ points allowed

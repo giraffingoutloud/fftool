@@ -1,0 +1,28 @@
+{
+  "file_path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/projections/rb_projections_2025_cbs.txt",
+  "file_type": "txt",
+  "file_size": 7227,
+  "total_checks": 3,
+  "passed_checks": 3,
+  "failed_checks": 0,
+  "schema_errors": [],
+  "duplicate_rows": [],
+  "missing_values": {},
+  "type_errors": [],
+  "range_errors": [],
+  "uniqueness_violations": [],
+  "content_summary": {
+    "line_count": 103,
+    "file_size": 7227,
+    "is_structured": false,
+    "delimiter": null,
+    "sample_lines": [
+      "Running Backs",
+      "Rushing\tReceiving\tMisc",
+      "Player\tgp\tatt\tyds\tavg\ttd\ttgt\trec\tyds\tyds/g\tavg\ttd\tfl\tfpts\tfppg",
+      "Jahmyr Gibbs RB  DET\t17\t226\t1276\t5.7\t11\t72\t56\t538\t31.6\t9.6\t3\t1\t318.2\t18.7",
+      "Saquon Barkley RB  PHI\t17\t319\t1797\t5.6\t10\t51\t39\t301\t17.7\t7.7\t2\t1\t316.4\t18.6"
+    ],
+    "encoding": "utf-8"
+  }
+}

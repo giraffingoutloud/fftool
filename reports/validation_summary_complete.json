@@ -1,0 +1,24 @@
+{
+  "validation_timestamp": "2025-08-27T06:14:14.275508",
+  "duration_seconds": 1.368266,
+  "total_files_found": 123,
+  "csv_files_found": 100,
+  "txt_files_found": 23,
+  "csv_files_validated": 30,
+  "txt_files_validated": 23,
+  "total_files_validated": 53,
+  "total_checks": 192,
+  "passed_checks": 167,
+  "failed_checks": 25,
+  "immutability_check": true,
+  "foreign_key_check": false,
+  "invariants_check": true,
+  "txt_file_hashes": 23,
+  "critical_errors": [
+    "Players in projections but not in ADP: 109",
+    "Players in ADP but not in projections: 49"
+  ],
+  "warnings": [
+    "TXT files not in baseline, computed 23 new hashes"
+  ]
+}

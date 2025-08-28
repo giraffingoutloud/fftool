@@ -1,0 +1,40 @@
+{
+  "file_path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/team_data/team_red_zone_td_scoring_percentage.txt",
+  "file_type": "txt",
+  "file_size": 1786,
+  "total_checks": 3,
+  "passed_checks": 3,
+  "failed_checks": 0,
+  "schema_errors": [],
+  "duplicate_rows": [],
+  "missing_values": {},
+  "type_errors": [],
+  "range_errors": [],
+  "uniqueness_violations": [],
+  "content_summary": {
+    "line_count": 33,
+    "file_size": 1786,
+    "is_structured": true,
+    "delimiter": ",",
+    "sample_lines": [
+      "Rank,Team,2024,Last 3,Last 1,Home,Away,2023",
+      "1,Baltimore,73.97%,72.73%,66.67%,71.79%,76.47%,62.16%",
+      "2,Buffalo,69.62%,58.33%,100.00%,67.44%,72.22%,63.89%",
+      "3,Detroit,67.95%,69.23%,50.00%,70.00%,64.29%,66.67%",
+      "4,Tampa Bay,66.67%,64.29%,66.67%,66.67%,66.67%,48.08%"
+    ],
+    "encoding": "utf-8",
+    "columns": 8,
+    "rows": 33,
+    "headers": [
+      "Rank",
+      "Team",
+      "2024",
+      "Last 3",
+      "Last 1",
+      "Home",
+      "Away",
+      "2023"
+    ]
+  }
+}

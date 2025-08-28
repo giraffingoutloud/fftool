@@ -1,0 +1,16 @@
+{
+  "validation_timestamp": "2025-08-27T05:50:31.630357",
+  "duration_seconds": 0.710185,
+  "files_validated": 20,
+  "total_checks": 83,
+  "passed_checks": 65,
+  "failed_checks": 18,
+  "immutability_check": true,
+  "foreign_key_check": false,
+  "invariants_check": true,
+  "critical_errors": [
+    "Players in projections but not in ADP: 109",
+    "Players in ADP but not in projections: 49"
+  ],
+  "warnings": []
+}

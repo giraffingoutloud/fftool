@@ -1,0 +1,235 @@
+{
+  "timestamp": "2025-08-27T23:06:33.016Z",
+  "datasetSize": 557,
+  "leagueSettings": {
+    "teams": 12,
+    "budget": 200,
+    "rosterSize": 15,
+    "starters": {
+      "QB": 1,
+      "RB": 2,
+      "WR": 3,
+      "TE": 1,
+      "FLEX": 1,
+      "DST": 1,
+      "K": 1
+    }
+  },
+  "invariants": {
+    "budgetConservation": {
+      "passed": true,
+      "message": "Budget conservation holds: Sum of top 180 intrinsic values = $2482.00 (103.4% of total budget)",
+      "details": {
+        "totalBudget": 2400,
+        "totalRosterSpots": 180,
+        "sumIntrinsicValues": 2482,
+        "sumMarketPrices": 2245,
+        "intrinsicRatio": 1.0341666666666667,
+        "marketRatio": 0.9354166666666667,
+        "intrinsicDiff": 0.03416666666666668,
+        "marketDiff": 0.06458333333333333,
+        "tolerance": 0.05
+      }
+    },
+    "replacementLevelZeroing": {
+      "passed": true,
+      "message": "Replacement-level zeroing holds for all positions",
+      "details": {
+        "QB": {
+          "replacementLevel": 220,
+          "playersNearReplacement": 2,
+          "meanVORP": 0,
+          "passed": true
+        },
+        "RB": {
+          "replacementLevel": 100,
+          "playersNearReplacement": 18,
+          "meanVORP": 1.0444444444444458,
+          "passed": true
+        },
+        "WR": {
+          "replacementLevel": 95,
+          "playersNearReplacement": 14,
+          "meanVORP": 0,
+          "passed": true
+        },
+        "TE": {
+          "replacementLevel": 80,
+          "playersNearReplacement": 8,
+          "meanVORP": 0,
+          "passed": true
+        },
+        "DST": {
+          "replacementLevel": 70,
+          "playersNearReplacement": 0,
+          "meanVORP": null,
+          "passed": true
+        },
+        "K": {
+          "replacementLevel": 110,
+          "playersNearReplacement": 0,
+          "meanVORP": null,
+          "passed": true
+        }
+      },
+      "counterexamples": []
+    },
+    "nonNegativity": {
+      "passed": true,
+      "message": "Non-negativity constraint satisfied for all players",
+      "details": {
+        "totalPlayers": 557,
+        "violations": 0
+      },
+      "counterexamples": []
+    },
+    "monotonicity": {
+      "passed": true,
+      "message": "Monotonicity holds for all positions",
+      "details": {
+        "byPosition": {
+          "QB": {
+            "totalPlayers": 67,
+            "violations": 0,
+            "violationRate": 0
+          },
+          "RB": {
+            "totalPlayers": 134,
+            "violations": 0,
+            "violationRate": 0
+          },
+          "WR": {
+            "totalPlayers": 194,
+            "violations": 0,
+            "violationRate": 0
+          },
+          "TE": {
+            "totalPlayers": 98,
+            "violations": 0,
+            "violationRate": 0
+          },
+          "DST": {
+            "totalPlayers": 32,
+            "violations": 0,
+            "violationRate": 0
+          },
+          "K": {
+            "totalPlayers": 32,
+            "violations": 0,
+            "violationRate": 0
+          }
+        },
+        "totalViolations": 0,
+        "tolerance": 0.1
+      },
+      "counterexamples": []
+    },
+    "positionalScarcity": {
+      "passed": false,
+      "message": "Positional value shares outside expected ranges: QB: 4.5% (expected 10-20%), RB: 35.3% (expected 25-35%), TE: 5.3% (expected 8-15%), DST: 0.6% (expected 2-8%), K: 0.5% (expected 1-5%)",
+      "details": {
+        "totalValue": 2859,
+        "positionShares": {
+          "QB": {
+            "starterCount": 12,
+            "totalValue": 129,
+            "valueShare": 0.04512067156348373,
+            "expectedRange": {
+              "min": 0.1,
+              "max": 0.2
+            },
+            "passed": false
+          },
+          "RB": {
+            "starterCount": 24,
+            "totalValue": 1009,
+            "valueShare": 0.35292060160895417,
+            "expectedRange": {
+              "min": 0.25,
+              "max": 0.35
+            },
+            "passed": false
+          },
+          "WR": {
+            "starterCount": 36,
+            "totalValue": 830,
+            "valueShare": 0.29031129765652325,
+            "expectedRange": {
+              "min": 0.25,
+              "max": 0.35
+            },
+            "passed": true
+          },
+          "TE": {
+            "starterCount": 12,
+            "totalValue": 152,
+            "valueShare": 0.05316544246239944,
+            "expectedRange": {
+              "min": 0.08,
+              "max": 0.15
+            },
+            "passed": false
+          },
+          "DST": {
+            "starterCount": 12,
+            "totalValue": 16,
+            "valueShare": 0.005596362364463099,
+            "expectedRange": {
+              "min": 0.02,
+              "max": 0.08
+            },
+            "passed": false
+          },
+          "K": {
+            "starterCount": 12,
+            "totalValue": 15,
+            "valueShare": 0.005246589716684155,
+            "expectedRange": {
+              "min": 0.01,
+              "max": 0.05
+            },
+            "passed": false
+          }
+        }
+      }
+    },
+    "maxBudgetShareCap": {
+      "passed": false,
+      "message": "Max budget share cap violated: 2 player(s) exceed 35% of budget",
+      "details": {
+        "maxAllowedPrice": 70,
+        "maxBudgetShare": 0.35,
+        "highestPriced": {
+          "name": "Bijan Robinson",
+          "position": "RB",
+          "value": 77,
+          "share": 0.385
+        },
+        "violationCount": 2
+      },
+      "counterexamples": [
+        {
+          "name": "Bijan Robinson",
+          "position": "RB",
+          "value": 77,
+          "share": 0.385
+        },
+        {
+          "name": "Jahmyr Gibbs",
+          "position": "RB",
+          "value": 76,
+          "share": 0.38
+        }
+      ]
+    }
+  },
+  "summary": {
+    "totalChecked": 6,
+    "totalPassed": 4,
+    "passRate": 66.66666666666666,
+    "criticalFailures": [
+      "positionalScarcity",
+      "maxBudgetShareCap"
+    ]
+  }
+}

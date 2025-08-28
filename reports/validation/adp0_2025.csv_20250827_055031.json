@@ -1,0 +1,53 @@
+{
+  "file_path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/adp/adp0_2025.csv",
+  "total_checks": 4,
+  "passed_checks": 1,
+  "failed_checks": 3,
+  "schema_errors": [
+    {
+      "type": "dtype_mismatch",
+      "column": "Auction Value",
+      "expected": "object",
+      "actual": "float64"
+    }
+  ],
+  "duplicate_rows": [],
+  "missing_values": {
+    "ADP": 26,
+    "Auction Value": 288
+  },
+  "type_errors": [],
+  "range_errors": [
+    {
+      "type": "range_violation",
+      "column": "ADP",
+      "row": 202,
+      "value": 310.64,
+      "expected_range": [
+        1,
+        300
+      ]
+    },
+    {
+      "type": "range_violation",
+      "column": "ADP",
+      "row": 291,
+      "value": 579.77,
+      "expected_range": [
+        1,
+        300
+      ]
+    },
+    {
+      "type": "range_violation",
+      "column": "ADP",
+      "row": 478,
+      "value": 520.48,
+      "expected_range": [
+        1,
+        300
+      ]
+    }
+  ],
+  "uniqueness_violations": []
+}

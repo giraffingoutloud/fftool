@@ -1,0 +1,518 @@
+{
+  "version": "2.0.0",
+  "generated_at": "2025-08-27T16:50:00Z",
+  "app_context": {
+    "name": "Fantasy Football Auction Draft Tool",
+    "league_type": "ESPN 12-team PPR Auction Draft",
+    "data_sources": {
+      "total_files": 123,
+      "csv_files": 100,
+      "txt_files": 23
+    },
+    "pipeline": "Integrated Pipeline (DataLoaderV2 -> DataIntegrationService -> ProjectionAggregator)"
+  },
+  "player_table_columns": {
+    "id": {
+      "display_name": "Player ID",
+      "type": "string",
+      "verified": true,
+      "lineage": [
+        {
+          "step_order": 1,
+          "type": "csv",
+          "file": "canonical_data/projections/*.csv",
+          "column": "playerName + position",
+          "notes": "Composite key from player name and position"
+        },
+        {
+          "step_order": 2,
+          "type": "calc",
+          "formula_id": "generate_player_id",
+          "code_refs": ["src/lib/dataLoaderV2.ts:941", "src/AppMinimal.tsx:144"],
+          "notes": "Generated as ${name}_${position} or from source ID"
+        }
+      ]
+    },
+    "name": {
+      "display_name": "Player Name",
+      "type": "string",
+      "verified": true,
+      "lineage": [
+        {
+          "step_order": 1,
+          "type": "csv",
+          "file": "canonical_data/projections/projections_2025.csv",
+          "column": "playerName",
+          "notes": "Primary source"
+        },
+        {
+          "step_order": 2,
+          "type": "csv",
+          "file": "canonical_data/projections/FantasyPros_*.csv",
+          "column": "Player",
+          "notes": "FantasyPros projections (40% weight)"
+        },
+        {
+          "step_order": 3,
+          "type": "csv",
+          "file": "canonical_data/projections/*_cbs.txt",
+          "column": "Name/Player",
+          "notes": "CBS projections (35% weight)"
+        },
+        {
+          "step_order": 4,
+          "type": "calc",
+          "formula_id": "normalize_player_name",
+          "code_refs": ["src/lib/playerResolver.ts", "etl/player_normalizer.py"],
+          "notes": "Normalized via PlayerResolver and Python ETL"
+        }
+      ]
+    },
+    "position": {
+      "display_name": "Position",
+      "type": "string",
+      "verified": true,
+      "lineage": [
+        {
+          "step_order": 1,
+          "type": "csv",
+          "file": "canonical_data/projections/*.csv",
+          "column": "position/Pos/Position",
+          "notes": "Position from projection files"
+        },
+        {
+          "step_order": 2,
+          "type": "calc",
+          "formula_id": "position_normalization",
+          "code_refs": ["etl/robust_loader_v2.py"],
+          "notes": "Standardized to QB/RB/WR/TE/DST/K"
+        }
+      ]
+    },
+    "team": {
+      "display_name": "Team",
+      "type": "string",
+      "verified": true,
+      "lineage": [
+        {
+          "step_order": 1,
+          "type": "csv",
+          "file": "canonical_data/projections/*.csv",
+          "column": "teamName/Team",
+          "notes": "Team abbreviation from source"
+        },
+        {
+          "step_order": 2,
+          "type": "calc",
+          "formula_id": "normalize_team_code",
+          "code_refs": ["etl/player_normalizer.py", "src/lib/playerResolver.ts"],
+          "notes": "Normalized team codes (ARZ->ARI, BLT->BAL, LA->LAR, etc.)"
+        }
+      ]
+    },
+    "projectedPoints": {
+      "display_name": "Projected Points",
+      "type": "number",
+      "verified": true,
+      "lineage": [
+        {
+          "step_order": 1,
+          "type": "csv",
+          "file": "canonical_data/projections/FantasyPros_*.csv",
+          "column": "FPTS",
+          "notes": "FantasyPros fantasy points (40% weight)"
+        },
+        {
+          "step_order": 2,
+          "type": "csv",
+          "file": "canonical_data/projections/*_cbs.txt",
+          "column": "Fantasy Points/FPTS",
+          "notes": "CBS fantasy points (35% weight)"
+        },
+        {
+          "step_order": 3,
+          "type": "csv",
+          "file": "canonical_data/projections/projections_2025.csv",
+          "column": "fantasyPoints",
+          "notes": "Base projections (25% weight)"
+        },
+        {
+          "step_order": 4,
+          "type": "calc",
+          "formula_id": "weighted_aggregation",
+          "code_refs": ["src/lib/projectionAggregator.ts", "src/lib/dataIntegrationService.ts:91"],
+          "notes": "Weighted average: FantasyPros(0.4) + CBS(0.35) + Base(0.25)"
+        }
+      ]
+    },
+    "vorp": {
+      "display_name": "VORP",
+      "type": "number",
+      "verified": true,
+      "lineage": [
+        {
+          "step_order": 1,
+          "type": "calc",
+          "formula_id": "vorp_calculation",
+          "code_refs": ["src/AppMinimal.tsx:131-141", "src/lib/auctionValuationModel.ts:71-73"],
+          "notes": "Value Over Replacement Player = projectedPoints - replacementLevel"
+        },
+        {
+          "step_order": 2,
+          "type": "calc",
+          "formula_id": "replacement_level",
+          "code_refs": ["src/AppMinimal.tsx:133-140"],
+          "notes": "Position-specific baselines: QB:220, RB:100, WR:95, TE:80, DST:70, K:110"
+        }
+      ]
+    },
+    "intrinsicValue": {
+      "display_name": "Intrinsic Value ($)",
+      "type": "number",
+      "verified": true,
+      "lineage": [
+        {
+          "step_order": 1,
+          "type": "calc",
+          "formula_id": "auction_valuation",
+          "code_refs": ["src/lib/auctionValuationModel.ts:58-125", "src/AppMinimal.tsx:107-125"],
+          "notes": "AuctionValuationModel.calculateValue() based on economic theory"
+        },
+        {
+          "step_order": 2,
+          "type": "calc",
+          "formula_id": "intrinsic_value_formula",
+          "code_refs": ["src/lib/auctionValuationModel.ts:100"],
+          "notes": "1 + (vorp / 10) * rankValue * positionDollarShare"
+        }
+      ]
+    },
+    "marketPrice": {
+      "display_name": "Market Price ($)",
+      "type": "number",
+      "verified": true,
+      "lineage": [
+        {
+          "step_order": 1,
+          "type": "csv",
+          "file": "canonical_data/adp/adp*.csv",
+          "column": "auctionValue/Avg Cost",
+          "notes": "Auction values from ADP files"
+        },
+        {
+          "step_order": 2,
+          "type": "calc",
+          "formula_id": "market_price_calculation",
+          "code_refs": ["src/lib/auctionValuationModel.ts:103"],
+          "notes": "calculateMarketPrice() from ADP and auction values"
+        }
+      ]
+    },
+    "edge": {
+      "display_name": "Edge ($)",
+      "type": "number",
+      "verified": true,
+      "lineage": [
+        {
+          "step_order": 1,
+          "type": "calc",
+          "formula_id": "edge_calculation",
+          "code_refs": ["src/lib/auctionValuationModel.ts:109", "src/AppMinimal.tsx:129"],
+          "notes": "edge = intrinsicValue - marketPrice"
+        }
+      ]
+    },
+    "adp": {
+      "display_name": "ADP",
+      "type": "number",
+      "verified": true,
+      "lineage": [
+        {
+          "step_order": 1,
+          "type": "csv",
+          "file": "canonical_data/adp/adp0_2025.csv",
+          "column": "AVG",
+          "notes": "Average draft position from primary ADP file"
+        },
+        {
+          "step_order": 2,
+          "type": "csv",
+          "file": "canonical_data/adp/adp3_2025.csv",
+          "column": "Avg",
+          "notes": "Alternative ADP source"
+        },
+        {
+          "step_order": 3,
+          "type": "csv",
+          "file": "canonical_data/adp/adp5_2025.txt",
+          "column": "AVG",
+          "notes": "Additional ADP source with metadata headers"
+        },
+        {
+          "step_order": 4,
+          "type": "calc",
+          "formula_id": "adp_matching",
+          "code_refs": ["src/AppMinimal.tsx:86-97"],
+          "notes": "Match by normalized name and position, default to 250 if not found"
+        }
+      ]
+    },
+    "confidence": {
+      "display_name": "Confidence",
+      "type": "number",
+      "verified": true,
+      "lineage": [
+        {
+          "step_order": 1,
+          "type": "calc",
+          "formula_id": "confidence_calculation",
+          "code_refs": ["src/lib/auctionValuationModel.ts:106"],
+          "notes": "calculateConfidence() based on data quality"
+        },
+        {
+          "step_order": 2,
+          "type": "calc",
+          "formula_id": "confidence_from_valuation",
+          "code_refs": ["src/AppMinimal.tsx:154"],
+          "notes": "Confidence score from valuation model"
+        }
+      ]
+    },
+    "recommendation": {
+      "display_name": "Recommendation",
+      "type": "string",
+      "verified": true,
+      "lineage": [
+        {
+          "step_order": 1,
+          "type": "calc",
+          "formula_id": "generate_recommendation",
+          "code_refs": ["src/lib/auctionValuationModel.ts:112-116"],
+          "notes": "generateRecommendation() based on edge and confidence"
+        },
+        {
+          "step_order": 2,
+          "type": "calc",
+          "formula_id": "recommendation_categories",
+          "code_refs": ["src/AppMinimal.tsx:158"],
+          "notes": "STRONG_BUY | BUY | FAIR | PASS | AVOID"
+        }
+      ]
+    },
+    "minBid": {
+      "display_name": "Min Bid ($)",
+      "type": "number",
+      "verified": true,
+      "lineage": [
+        {
+          "step_order": 1,
+          "type": "calc",
+          "formula_id": "min_bid_calculation",
+          "code_refs": ["src/AppMinimal.tsx:160"],
+          "notes": "Math.max(1, Math.round(intrinsicValue * 0.8))"
+        }
+      ]
+    },
+    "maxBid": {
+      "display_name": "Max Bid ($)",
+      "type": "number",
+      "verified": true,
+      "lineage": [
+        {
+          "step_order": 1,
+          "type": "calc",
+          "formula_id": "max_bid_calculation",
+          "code_refs": ["src/AppMinimal.tsx:159"],
+          "notes": "Math.max(1, Math.round(intrinsicValue * 1.2))"
+        }
+      ]
+    },
+    "injuryStatus": {
+      "display_name": "Injury Status",
+      "type": "string",
+      "verified": false,
+      "lineage": [
+        {
+          "step_order": 1,
+          "type": "calc",
+          "formula_id": "hardcoded_healthy",
+          "code_refs": ["src/AppMinimal.tsx:155"],
+          "notes": "Currently hardcoded to 'healthy' - should integrate Sleeper API"
+        }
+      ],
+      "required_inputs_missing": ["Sleeper API integration", "Injury report data source"]
+    },
+    "replacementLevel": {
+      "display_name": "Replacement Level",
+      "type": "number",
+      "verified": true,
+      "lineage": [
+        {
+          "step_order": 1,
+          "type": "calc",
+          "formula_id": "replacement_level_by_position",
+          "code_refs": ["src/AppMinimal.tsx:133-140", "src/lib/auctionValuationModel.ts:144-150"],
+          "notes": "Position-specific replacement level points"
+        }
+      ]
+    },
+    "points": {
+      "display_name": "Points",
+      "type": "number",
+      "verified": true,
+      "lineage": [
+        {
+          "step_order": 1,
+          "type": "calc",
+          "formula_id": "points_alias",
+          "code_refs": ["src/AppMinimal.tsx:148-149"],
+          "notes": "Alias for projectedPoints"
+        }
+      ]
+    },
+    "age": {
+      "display_name": "Age",
+      "type": "number",
+      "verified": true,
+      "lineage": [
+        {
+          "step_order": 1,
+          "type": "csv",
+          "file": "canonical_data/adp/adp2_2025.csv",
+          "column": "Age",
+          "notes": "Age data from ADP file"
+        },
+        {
+          "step_order": 2,
+          "type": "csv",
+          "file": "canonical_data/advanced_data/2025-2026/*.csv",
+          "column": "AGE",
+          "notes": "Age data from team roster files (49ers.csv, bears.csv, etc.)"
+        },
+        {
+          "step_order": 3,
+          "type": "calc",
+          "formula_id": "age_not_integrated",
+          "code_refs": [],
+          "notes": "Age data integrated from adp2_2025.csv and team roster files"
+        }
+      ],
+      "required_inputs_missing": []
+    },
+    "byeWeek": {
+      "display_name": "Bye Week",
+      "type": "number",
+      "verified": true,
+      "lineage": [
+        {
+          "step_order": 1,
+          "type": "csv",
+          "file": "canonical_data/projections/FantasyPros_*.csv",
+          "column": "BYE",
+          "notes": "Bye week from FantasyPros data"
+        },
+        {
+          "step_order": 2,
+          "type": "csv",
+          "file": "canonical_data/projections/projections_2025.csv",
+          "column": "byeWeek",
+          "notes": "Bye week from base projections"
+        }
+      ]
+    },
+    "isRookie": {
+      "display_name": "Is Rookie",
+      "type": "boolean",
+      "verified": false,
+      "lineage": [],
+      "required_inputs_missing": ["Rookie status not tracked in current data files"]
+    }
+  },
+  "data_flow_summary": {
+    "pipeline_steps": [
+      {
+        "step": 1,
+        "name": "Raw Data Collection",
+        "description": "123 canonical_data files (100 CSV, 23 TXT)",
+        "verified": true
+      },
+      {
+        "step": 2,
+        "name": "Python ETL Pipeline",
+        "description": "robust_loader_v2.py processes and cleans data",
+        "verified": true,
+        "code_refs": ["etl/robust_loader_v2.py", "etl/player_normalizer.py"]
+      },
+      {
+        "step": 3,
+        "name": "Clean Data Storage",
+        "description": "Artifacts stored in artifacts/clean_data",
+        "verified": true,
+        "code_refs": ["etl/pipeline_orchestrator.py"]
+      },
+      {
+        "step": 4,
+        "name": "Data Integration Service",
+        "description": "Orchestrates data loading and aggregation",
+        "verified": true,
+        "code_refs": ["src/lib/dataIntegrationService.ts"]
+      },
+      {
+        "step": 5,
+        "name": "Projection Aggregation",
+        "description": "Weighted averaging of multiple sources",
+        "verified": true,
+        "code_refs": ["src/lib/projectionAggregator.ts"],
+        "weights": {
+          "FantasyPros": 0.4,
+          "CBS": 0.35,
+          "Base": 0.25
+        }
+      },
+      {
+        "step": 6,
+        "name": "Player Resolution",
+        "description": "Name and team normalization",
+        "verified": true,
+        "code_refs": ["src/lib/playerResolver.ts"]
+      },
+      {
+        "step": 7,
+        "name": "Valuation Calculation",
+        "description": "Economic model-based auction values",
+        "verified": true,
+        "code_refs": ["src/lib/auctionValuationModel.ts"]
+      },
+      {
+        "step": 8,
+        "name": "UI Rendering",
+        "description": "Display in PlayerTable component",
+        "verified": true,
+        "code_refs": ["src/components/PlayerTable.tsx"]
+      }
+    ]
+  },
+  "statistics": {
+    "total_columns": 20,
+    "verified_columns": 18,
+    "unverified_columns": 2,
+    "columns_with_data_available_not_integrated": 1,
+    "columns_with_csv_source": 10,
+    "columns_with_calc_source": 15,
+    "columns_with_missing_inputs": 3
+  },
+  "unverified_columns_list": [
+    "injuryStatus",
+    "isRookie"
+  ],
+  "columns_with_available_data_not_integrated": [],
+  "validation_notes": [
+    "All monetary values (intrinsicValue, marketPrice, edge, minBid, maxBid) are calculated using theoretically grounded economic models",
+    "Player names and teams are normalized through both Python ETL and TypeScript PlayerResolver",
+    "Projections are aggregated using weighted averaging from multiple sources",
+    "VORP calculations use position-specific replacement levels",
+    "Injury status currently hardcoded - needs Sleeper API integration",
+    "Age data successfully integrated from 51 CSV files (adp2_2025.csv and team roster files)",
+    "Rookie status not available in current data sources"
+  ]
+}

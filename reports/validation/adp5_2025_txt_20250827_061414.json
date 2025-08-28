@@ -1,0 +1,34 @@
+{
+  "file_path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/adp/adp5_2025.txt",
+  "file_type": "txt",
+  "file_size": 12677,
+  "total_checks": 3,
+  "passed_checks": 3,
+  "failed_checks": 0,
+  "schema_errors": [],
+  "duplicate_rows": [],
+  "missing_values": {},
+  "type_errors": [],
+  "range_errors": [],
+  "uniqueness_violations": [],
+  "content_summary": {
+    "line_count": 252,
+    "file_size": 12677,
+    "is_structured": true,
+    "delimiter": ",",
+    "sample_lines": [
+      "Format:,ppr",
+      "Teams:,12",
+      "Rounds:,15",
+      "Total drafts:,8574",
+      "Start date:,2025-08-11"
+    ],
+    "encoding": "utf-8",
+    "columns": 2,
+    "rows": 252,
+    "headers": [
+      "Format:",
+      "ppr"
+    ]
+  }
+}

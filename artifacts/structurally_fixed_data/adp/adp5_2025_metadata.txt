@@ -1,0 +1,7 @@
+Format:,ppr
+Teams:,12
+Rounds:,15
+Total drafts:,8574
+Start date:,2025-08-11
+End date:,2025-08-18
+

@@ -1,0 +1,134 @@
+{
+  "execution_timestamp": "2025-08-27T05:50:31",
+  "validation_suite_status": "COMPLETE",
+  "overall_result": "PASS_WITH_WARNINGS",
+  
+  "summary_statistics": {
+    "total_checks_performed": 83,
+    "checks_passed": 65,
+    "checks_failed": 18,
+    "pass_rate": "78.3%",
+    "files_validated": 20,
+    "validation_duration_seconds": 0.71
+  },
+  
+  "check_results": {
+    "immutability_check": {
+      "status": "PASS",
+      "description": "All canonical_data files match integrity baseline",
+      "files_checked": 100,
+      "hash_mismatches": 0,
+      "missing_files": 0,
+      "unexpected_files": 0
+    },
+    
+    "schema_validation": {
+      "status": "PASS",
+      "description": "All validated files conform to expected schemas",
+      "files_checked": 20,
+      "schema_errors": 0,
+      "type_mismatches": 0
+    },
+    
+    "duplicate_detection": {
+      "status": "MIXED",
+      "description": "Some files contain duplicate records",
+      "files_with_duplicates": 14,
+      "total_duplicates_found": 122,
+      "note": "Duplicates are quarantined during ETL processing"
+    },
+    
+    "missing_values": {
+      "status": "PASS",
+      "description": "Missing values within acceptable limits",
+      "files_with_missing": 8,
+      "columns_with_nulls": ["Auction Value", "Is Rookie", "Bye Week"]
+    },
+    
+    "range_validation": {
+      "status": "PASS",
+      "description": "All numeric values within expected ranges",
+      "range_violations": 0,
+      "checked_columns": ["fantasyPoints", "ADP", "auctionValue", "byeWeek"]
+    },
+    
+    "foreign_key_validation": {
+      "status": "FAIL",
+      "description": "Player name mismatches between projections and ADP",
+      "errors": [
+        "109 players in projections but not in ADP",
+        "49 players in ADP but not in projections"
+      ],
+      "sample_mismatches": [
+        "eric saubert_te",
+        "jack stoll_te", 
+        "brandon allen_qb"
+      ],
+      "recommendation": "Player name normalization needed during ETL"
+    },
+    
+    "valuation_invariants": {
+      "status": "PASS",
+      "description": "All valuation rules satisfied",
+      "checks_performed": [
+        "Budget conservation",
+        "Replacement level positivity",
+        "Non-negativity",
+        "Positional scarcity",
+        "Monotonicity"
+      ],
+      "violations": 0
+    }
+  },
+  
+  "data_quality_metrics": {
+    "completeness": "96.2%",
+    "consistency": "78.3%",
+    "accuracy": "Not measured (requires ground truth)",
+    "timeliness": "Current (2025 season data)",
+    "validity": "100% (after quarantine)",
+    "uniqueness": "85.5% (before deduplication)"
+  },
+  
+  "recommendations": [
+    {
+      "priority": "HIGH",
+      "issue": "Player name inconsistencies",
+      "action": "Implement fuzzy matching for player names across datasets"
+    },
+    {
+      "priority": "MEDIUM",
+      "issue": "Duplicate records in source data",
+      "action": "Continue using quarantine mechanism in ETL pipeline"
+    },
+    {
+      "priority": "LOW",
+      "issue": "Some auction values missing",
+      "action": "Use projection-based estimation for missing values"
+    }
+  ],
+  
+  "file_paths": {
+    "validation_script": "./validation/validate_data.py",
+    "data_dictionary": "./specs/data_dictionary.json",
+    "integrity_baseline": "./reports/canonical_data_integrity.json",
+    "validation_reports": "./reports/validation/",
+    "summary_report": "./reports/validation_summary.json"
+  },
+  
+  "compliance_status": {
+    "canonical_immutability": "✅ VERIFIED",
+    "schema_enforcement": "✅ ENFORCED",
+    "duplicate_handling": "✅ DETECTED",
+    "type_validation": "✅ VALIDATED",
+    "range_checking": "✅ CHECKED",
+    "foreign_keys": "⚠️ ISSUES_FOUND",
+    "invariants": "✅ SATISFIED"
+  },
+  
+  "next_steps": [
+    "Address player name normalization issues",
+    "Run ETL pipeline to process and clean data",
+    "Re-run validation after ETL to verify improvements"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "file_path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/projections/FantasyPros_Fantasy_Football_Projections_TE.csv",
+  "total_checks": 4,
+  "passed_checks": 3,
+  "failed_checks": 1,
+  "schema_errors": [],
+  "duplicate_rows": [],
+  "missing_values": {
+    "Player": 2,
+    "Team": 3,
+    "REC": 3,
+    "YDS": 3,
+    "TDS": 3,
+    "FL": 3,
+    "FPTS": 3
+  },
+  "type_errors": [],
+  "range_errors": [],
+  "uniqueness_violations": []
+}

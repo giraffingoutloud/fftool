@@ -1,0 +1,222 @@
+{
+  "timestamp": "2025-08-27T18:13:38.136Z",
+  "datasetSize": 557,
+  "leagueSettings": {
+    "teams": 12,
+    "budget": 200,
+    "rosterSize": 15,
+    "starters": {
+      "QB": 1,
+      "RB": 2,
+      "WR": 3,
+      "TE": 1,
+      "FLEX": 1,
+      "DST": 1,
+      "K": 1
+    }
+  },
+  "invariants": {
+    "budgetConservation": {
+      "passed": false,
+      "message": "Budget conservation violated: Sum = $3213.00 (133.9% of total budget, expected ~100%)",
+      "details": {
+        "totalBudget": 2400,
+        "totalRosterSpots": 180,
+        "sumIntrinsicValues": 3213,
+        "sumMarketPrices": 1649,
+        "intrinsicRatio": 1.33875,
+        "marketRatio": 0.6870833333333334,
+        "intrinsicDiff": 0.3387500000000001,
+        "marketDiff": 0.3129166666666666,
+        "tolerance": 0.05
+      }
+    },
+    "replacementLevelZeroing": {
+      "passed": true,
+      "message": "Replacement-level zeroing holds for all positions",
+      "details": {
+        "QB": {
+          "replacementLevel": 220,
+          "playersNearReplacement": 2,
+          "meanVORP": 0,
+          "passed": true
+        },
+        "RB": {
+          "replacementLevel": 100,
+          "playersNearReplacement": 18,
+          "meanVORP": 3.0888888888888886,
+          "passed": true
+        },
+        "WR": {
+          "replacementLevel": 95,
+          "playersNearReplacement": 14,
+          "meanVORP": 3.528571428571428,
+          "passed": true
+        },
+        "TE": {
+          "replacementLevel": 80,
+          "playersNearReplacement": 8,
+          "meanVORP": 2.1999999999999993,
+          "passed": true
+        },
+        "DST": {
+          "replacementLevel": 70,
+          "playersNearReplacement": 0,
+          "meanVORP": null,
+          "passed": true
+        },
+        "K": {
+          "replacementLevel": 110,
+          "playersNearReplacement": 0,
+          "meanVORP": null,
+          "passed": true
+        }
+      },
+      "counterexamples": []
+    },
+    "nonNegativity": {
+      "passed": true,
+      "message": "Non-negativity constraint satisfied for all players",
+      "details": {
+        "totalPlayers": 557,
+        "violations": 0
+      },
+      "counterexamples": []
+    },
+    "monotonicity": {
+      "passed": true,
+      "message": "Monotonicity holds for all positions",
+      "details": {
+        "byPosition": {
+          "QB": {
+            "totalPlayers": 67,
+            "violations": 0,
+            "violationRate": 0
+          },
+          "RB": {
+            "totalPlayers": 134,
+            "violations": 0,
+            "violationRate": 0
+          },
+          "WR": {
+            "totalPlayers": 194,
+            "violations": 0,
+            "violationRate": 0
+          },
+          "TE": {
+            "totalPlayers": 98,
+            "violations": 0,
+            "violationRate": 0
+          },
+          "DST": {
+            "totalPlayers": 32,
+            "violations": 0,
+            "violationRate": 0
+          },
+          "K": {
+            "totalPlayers": 32,
+            "violations": 0,
+            "violationRate": 0
+          }
+        },
+        "totalViolations": 0,
+        "tolerance": 0.1
+      },
+      "counterexamples": []
+    },
+    "positionalScarcity": {
+      "passed": false,
+      "message": "Positional value shares outside expected ranges: QB: 4.4% (expected 10-20%), RB: 20.1% (expected 25-35%), TE: 6.2% (expected 8-15%), DST: 1.4% (expected 2-8%)",
+      "details": {
+        "totalValue": 3739,
+        "positionShares": {
+          "QB": {
+            "starterCount": 12,
+            "totalValue": 166,
+            "valueShare": 0.04439689756619417,
+            "expectedRange": {
+              "min": 0.1,
+              "max": 0.2
+            },
+            "passed": false
+          },
+          "RB": {
+            "starterCount": 24,
+            "totalValue": 753,
+            "valueShare": 0.20139074618882055,
+            "expectedRange": {
+              "min": 0.25,
+              "max": 0.35
+            },
+            "passed": false
+          },
+          "WR": {
+            "starterCount": 36,
+            "totalValue": 1105,
+            "valueShare": 0.2955335651243648,
+            "expectedRange": {
+              "min": 0.25,
+              "max": 0.35
+            },
+            "passed": true
+          },
+          "TE": {
+            "starterCount": 12,
+            "totalValue": 230,
+            "valueShare": 0.061513773736293124,
+            "expectedRange": {
+              "min": 0.08,
+              "max": 0.15
+            },
+            "passed": false
+          },
+          "DST": {
+            "starterCount": 12,
+            "totalValue": 53,
+            "valueShare": 0.014174913078363199,
+            "expectedRange": {
+              "min": 0.02,
+              "max": 0.08
+            },
+            "passed": false
+          },
+          "K": {
+            "starterCount": 12,
+            "totalValue": 38,
+            "valueShare": 0.010163145225996255,
+            "expectedRange": {
+              "min": 0.01,
+              "max": 0.05
+            },
+            "passed": true
+          }
+        }
+      }
+    },
+    "maxBudgetShareCap": {
+      "passed": true,
+      "message": "Max budget share cap satisfied: Highest = $53 (26.5% of budget)",
+      "details": {
+        "maxAllowedPrice": 70,
+        "maxBudgetShare": 0.35,
+        "highestPriced": {
+          "name": "Ja'Marr Chase",
+          "position": "WR",
+          "value": 53,
+          "share": 0.265
+        },
+        "violationCount": 0
+      },
+      "counterexamples": []
+    }
+  },
+  "summary": {
+    "totalChecked": 6,
+    "totalPassed": 4,
+    "passRate": 66.66666666666666,
+    "criticalFailures": [
+      "budgetConservation",
+      "positionalScarcity"
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "file_path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2023-2024/line_pass_blocking_efficiency.csv",
+  "file_type": "csv",
+  "file_size": 1323,
+  "total_checks": 4,
+  "passed_checks": 4,
+  "failed_checks": 0,
+  "schema_errors": [],
+  "duplicate_rows": [],
+  "missing_values": {},
+  "type_errors": [],
+  "range_errors": [],
+  "uniqueness_violations": [],
+  "content_summary": {
+    "rows": 32,
+    "columns": 10,
+    "column_names": [
+      "team_name",
+      "franchise_id",
+      "player_game_count",
+      "attempts",
+      "hits_allowed",
+      "hurries_allowed",
+      "pass_snaps",
+      "pbe",
+      "pressures_allowed",
+      "sacks_allowed"
+    ],
+    "dtypes": {
+      "team_name": "object",
+      "franchise_id": "int64",
+      "player_game_count": "int64",
+      "attempts": "int64",
+      "hits_allowed": "int64",
+      "hurries_allowed": "int64",
+      "pass_snaps": "int64",
+      "pbe": "float64",
+      "pressures_allowed": "int64",
+      "sacks_allowed": "int64"
+    }
+  }
+}

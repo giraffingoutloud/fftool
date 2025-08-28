@@ -1,0 +1,4696 @@
+{
+  "summary": {
+    "timestamp": "2025-08-27T17:38:30.225Z",
+    "rows_tested": 100,
+    "total_mismatches": 57,
+    "mismatch_rate": "57.00%",
+    "field_analysis": [
+      {
+        "field": "projectedPoints",
+        "mismatches": 54,
+        "rate": "54.00%",
+        "avg_diff": "11.152",
+        "max_diff": "45.969"
+      },
+      {
+        "field": "vorp",
+        "mismatches": 32,
+        "rate": "32.00%",
+        "avg_diff": "10.176",
+        "max_diff": "35.815"
+      },
+      {
+        "field": "intrinsicValue",
+        "mismatches": 25,
+        "rate": "25.00%",
+        "avg_diff": "2.680",
+        "max_diff": "9.000"
+      },
+      {
+        "field": "marketPrice",
+        "mismatches": 24,
+        "rate": "24.00%",
+        "avg_diff": "2.083",
+        "max_diff": "6.000"
+      },
+      {
+        "field": "edge",
+        "mismatches": 29,
+        "rate": "29.00%",
+        "avg_diff": "0.791",
+        "max_diff": "2.810"
+      }
+    ],
+    "position_breakdown": {
+      "QB": {
+        "tested": 15,
+        "mismatches": 0,
+        "rate": "0.0%"
+      },
+      "RB": {
+        "tested": 25,
+        "mismatches": 19,
+        "rate": "76.0%"
+      },
+      "WR": {
+        "tested": 26,
+        "mismatches": 20,
+        "rate": "76.9%"
+      },
+      "TE": {
+        "tested": 20,
+        "mismatches": 18,
+        "rate": "90.0%"
+      },
+      "DST": {
+        "tested": 8,
+        "mismatches": 0,
+        "rate": "0.0%"
+      },
+      "K": {
+        "tested": 6,
+        "mismatches": 0,
+        "rate": "0.0%"
+      }
+    },
+    "suspected_causes": [
+      "Projection aggregation weights may differ or source data may be inconsistent",
+      "VORP calculation or replacement levels may be inconsistent",
+      "Intrinsic value formula may have changed or position multipliers differ",
+      "Market price ADP adjustment formula may differ"
+    ],
+    "top_mismatches": [
+      {
+        "player": "J.K. Dobbins",
+        "position": "RB",
+        "adp": 114.5,
+        "mismatched_fields": [
+          "projectedPoints",
+          "vorp",
+          "intrinsicValue",
+          "marketPrice",
+          "edge"
+        ],
+        "worst_diff": [
+          "vorp",
+          {
+            "app": 4.099999999999994,
+            "recomputed": 30.684615384615398,
+            "absDiff": 26.585,
+            "relDiff": 6.484,
+            "match": false
+          }
+        ]
+      },
+      {
+        "player": "Rachaad White",
+        "position": "RB",
+        "adp": 144.1,
+        "mismatched_fields": [
+          "projectedPoints",
+          "vorp",
+          "intrinsicValue",
+          "marketPrice",
+          "edge"
+        ],
+        "worst_diff": [
+          "intrinsicValue",
+          {
+            "app": 1,
+            "recomputed": 4,
+            "absDiff": 3,
+            "relDiff": 3,
+            "match": false
+          }
+        ]
+      },
+      {
+        "player": "Tyjae Spears",
+        "position": "RB",
+        "adp": 125.31,
+        "mismatched_fields": [
+          "projectedPoints",
+          "vorp",
+          "intrinsicValue",
+          "marketPrice",
+          "edge"
+        ],
+        "worst_diff": [
+          "marketPrice",
+          {
+            "app": 1,
+            "recomputed": 3,
+            "absDiff": 2,
+            "relDiff": 2,
+            "match": false
+          }
+        ]
+      },
+      {
+        "player": "Adonai Mitchell",
+        "position": "WR",
+        "adp": 170.1,
+        "mismatched_fields": [
+          "projectedPoints",
+          "vorp",
+          "intrinsicValue",
+          "marketPrice",
+          "edge"
+        ],
+        "worst_diff": [
+          "vorp",
+          {
+            "app": 13,
+            "recomputed": 0,
+            "absDiff": 13,
+            "relDiff": 1,
+            "match": false
+          }
+        ]
+      },
+      {
+        "player": "Braelon Allen",
+        "position": "RB",
+        "adp": 169,
+        "mismatched_fields": [
+          "projectedPoints",
+          "vorp",
+          "intrinsicValue",
+          "edge"
+        ],
+        "worst_diff": [
+          "edge",
+          {
+            "app": 1.16,
+            "recomputed": 0,
+            "absDiff": 1.16,
+            "relDiff": 1,
+            "match": false
+          }
+        ]
+      },
+      {
+        "player": "Breece Hall",
+        "position": "RB",
+        "adp": 57.2,
+        "mismatched_fields": [
+          "projectedPoints",
+          "vorp",
+          "intrinsicValue",
+          "marketPrice",
+          "edge"
+        ],
+        "worst_diff": [
+          "intrinsicValue",
+          {
+            "app": 15,
+            "recomputed": 24,
+            "absDiff": 9,
+            "relDiff": 0.6,
+            "match": false
+          }
+        ]
+      },
+      {
+        "player": "Tre Harris",
+        "position": "WR",
+        "adp": 170,
+        "mismatched_fields": [
+          "projectedPoints",
+          "vorp",
+          "edge"
+        ],
+        "worst_diff": [
+          "vorp",
+          {
+            "app": 0,
+            "recomputed": 5.507692307692295,
+            "absDiff": 5.508,
+            "relDiff": 1,
+            "match": false
+          }
+        ]
+      },
+      {
+        "player": "Roman Wilson",
+        "position": "WR",
+        "adp": 170,
+        "mismatched_fields": [
+          "projectedPoints",
+          "vorp",
+          "edge"
+        ],
+        "worst_diff": [
+          "vorp",
+          {
+            "app": 5.799999999999997,
+            "recomputed": 0,
+            "absDiff": 5.8,
+            "relDiff": 1,
+            "match": false
+          }
+        ]
+      },
+      {
+        "player": "Stone Smartt",
+        "position": "TE",
+        "adp": 250,
+        "mismatched_fields": [
+          "projectedPoints"
+        ],
+        "worst_diff": [
+          "projectedPoints",
+          {
+            "app": 3.3,
+            "recomputed": 9.700000000000001,
+            "absDiff": 6.4,
+            "relDiff": 1.939,
+            "match": false
+          }
+        ]
+      },
+      {
+        "player": "Brandin Cooks",
+        "position": "WR",
+        "adp": 170,
+        "mismatched_fields": [
+          "projectedPoints",
+          "vorp",
+          "edge"
+        ],
+        "worst_diff": [
+          "edge",
+          {
+            "app": 0.17,
+            "recomputed": 0,
+            "absDiff": 0.17,
+            "relDiff": 1,
+            "match": false
+          }
+        ]
+      }
+    ]
+  },
+  "detailed_results": [
+    {
+      "player": "Bo Nix",
+      "position": "QB",
+      "team": "DEN",
+      "adp": 78.1,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 268.6,
+          "recomputed": 268.6,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 48.60000000000002,
+          "recomputed": 48.60000000000002,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 8,
+          "recomputed": 8,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 6,
+          "recomputed": 6,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 2.4,
+          "recomputed": 2.4,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Daniel Jones",
+      "position": "QB",
+      "team": "IND",
+      "adp": 170.1,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 212.6,
+          "recomputed": 212.6,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Aidan O'Connell",
+      "position": "QB",
+      "team": "LV",
+      "adp": 170,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 43.4,
+          "recomputed": 43.4,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Andy Dalton",
+      "position": "QB",
+      "team": "CAR",
+      "adp": 169.9,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 5.5,
+          "recomputed": 5.5,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Chuba Hubbard",
+      "position": "RB",
+      "team": "CAR",
+      "adp": 49.6,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 203.7,
+          "recomputed": 213.7923076923077,
+          "absDiff": 10.092,
+          "relDiff": 0.05,
+          "match": false
+        },
+        "vorp": {
+          "app": 103.69999999999999,
+          "recomputed": 113.7923076923077,
+          "absDiff": 10.092,
+          "relDiff": 0.097,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 24,
+          "recomputed": 26,
+          "absDiff": 2,
+          "relDiff": 0.083,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 21,
+          "recomputed": 23,
+          "absDiff": 2,
+          "relDiff": 0.095,
+          "match": false
+        },
+        "edge": {
+          "app": 3.08,
+          "recomputed": 3.38,
+          "absDiff": 0.3,
+          "relDiff": 0.097,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Will Shipley",
+      "position": "RB",
+      "team": "PHI",
+      "adp": 170,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 66.3,
+          "recomputed": 53.253846153846155,
+          "absDiff": 13.046,
+          "relDiff": 0.197,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "AJ Dillon",
+      "position": "RB",
+      "team": "PHI",
+      "adp": 170,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 52.8,
+          "recomputed": 42.4,
+          "absDiff": 10.4,
+          "relDiff": 0.197,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "LeQuint Allen",
+      "position": "RB",
+      "team": "JAX",
+      "adp": 170,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 10.8,
+          "recomputed": 10.8,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Ja'Marr Chase",
+      "position": "WR",
+      "team": "CIN",
+      "adp": 1.6,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 334.4,
+          "recomputed": 345.84615384615387,
+          "absDiff": 11.446,
+          "relDiff": 0.034,
+          "match": false
+        },
+        "vorp": {
+          "app": 239.39999999999998,
+          "recomputed": 250.84615384615387,
+          "absDiff": 11.446,
+          "relDiff": 0.048,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 53,
+          "recomputed": 55,
+          "absDiff": 2,
+          "relDiff": 0.038,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 77,
+          "recomputed": 81,
+          "absDiff": 4,
+          "relDiff": 0.052,
+          "match": false
+        },
+        "edge": {
+          "app": -24.68,
+          "recomputed": -25.86,
+          "absDiff": 1.18,
+          "relDiff": 0.048,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Rashid Shaheed",
+      "position": "WR",
+      "team": "NO",
+      "adp": 111.5,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 151.5,
+          "recomputed": 166.8230769230769,
+          "absDiff": 15.323,
+          "relDiff": 0.101,
+          "match": false
+        },
+        "vorp": {
+          "app": 56.5,
+          "recomputed": 71.82307692307691,
+          "absDiff": 15.323,
+          "relDiff": 0.271,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 12,
+          "recomputed": 16,
+          "absDiff": 4,
+          "relDiff": 0.333,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 8,
+          "recomputed": 10,
+          "absDiff": 2,
+          "relDiff": 0.25,
+          "match": false
+        },
+        "edge": {
+          "app": 4.88,
+          "recomputed": 6.2,
+          "absDiff": 1.32,
+          "relDiff": 0.27,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Jake Bobo",
+      "position": "WR",
+      "team": "SEA",
+      "adp": 170,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 19.5,
+          "recomputed": 25.83846153846154,
+          "absDiff": 6.338,
+          "relDiff": 0.325,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Jha'Quan Jackson",
+      "position": "WR",
+      "team": "TEN",
+      "adp": 250,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Brenton Strange",
+      "position": "TE",
+      "team": "JAX",
+      "adp": 169.6,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 137.8,
+          "recomputed": 132.3846153846154,
+          "absDiff": 5.415,
+          "relDiff": 0.039,
+          "match": false
+        },
+        "vorp": {
+          "app": 57.80000000000001,
+          "recomputed": 52.38461538461539,
+          "absDiff": 5.415,
+          "relDiff": 0.094,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 10,
+          "recomputed": 9,
+          "absDiff": 1,
+          "relDiff": 0.1,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 6,
+          "recomputed": 5,
+          "absDiff": 1,
+          "relDiff": 0.167,
+          "match": false
+        },
+        "edge": {
+          "app": 4.85,
+          "recomputed": 4.4,
+          "absDiff": 0.45,
+          "relDiff": 0.093,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Zach Ertz",
+      "position": "TE",
+      "team": "WAS",
+      "adp": 169,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 130.3,
+          "recomputed": 137.3153846153846,
+          "absDiff": 7.015,
+          "relDiff": 0.054,
+          "match": false
+        },
+        "vorp": {
+          "app": 50.30000000000001,
+          "recomputed": 57.3153846153846,
+          "absDiff": 7.015,
+          "relDiff": 0.139,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 9,
+          "recomputed": 10,
+          "absDiff": 1,
+          "relDiff": 0.111,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 5,
+          "recomputed": 6,
+          "absDiff": 1,
+          "relDiff": 0.2,
+          "match": false
+        },
+        "edge": {
+          "app": 4.22,
+          "recomputed": 4.81,
+          "absDiff": 0.59,
+          "relDiff": 0.14,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Brock Wright",
+      "position": "TE",
+      "team": "DET",
+      "adp": 250,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 18.2,
+          "recomputed": 32.47692307692307,
+          "absDiff": 14.277,
+          "relDiff": 0.784,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Lucas Krull",
+      "position": "TE",
+      "team": "DEN",
+      "adp": 250,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 9.8,
+          "recomputed": 15.215384615384616,
+          "absDiff": 5.415,
+          "relDiff": 0.553,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "49ers DST",
+      "position": "DST",
+      "team": "SF",
+      "adp": 250,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 121.5,
+          "recomputed": 121.5,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 51.5,
+          "recomputed": 51.5,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 5,
+          "recomputed": 5,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 3,
+          "recomputed": 3,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 2.54,
+          "recomputed": 2.54,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Cowboys DST",
+      "position": "DST",
+      "team": "DAL",
+      "adp": 250,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 113.3,
+          "recomputed": 113.3,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 43.3,
+          "recomputed": 43.3,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 4,
+          "recomputed": 4,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 2,
+          "recomputed": 2,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 2.14,
+          "recomputed": 2.14,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Falcons DST",
+      "position": "DST",
+      "team": "ATL",
+      "adp": 250,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 108,
+          "recomputed": 108,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 38,
+          "recomputed": 38,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 4,
+          "recomputed": 4,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 2,
+          "recomputed": 2,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 1.87,
+          "recomputed": 1.87,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Raiders DST",
+      "position": "DST",
+      "team": "LV",
+      "adp": 250,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 104.2,
+          "recomputed": 104.2,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 34.2,
+          "recomputed": 34.2,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 3,
+          "recomputed": 3,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 2,
+          "recomputed": 2,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 1.69,
+          "recomputed": 1.69,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Jake Bates",
+      "position": "K",
+      "team": "DET",
+      "adp": 107.9,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 156.4,
+          "recomputed": 156.4,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 46.400000000000006,
+          "recomputed": 46.400000000000006,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 4,
+          "recomputed": 4,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 2,
+          "recomputed": 2,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 1.43,
+          "recomputed": 1.43,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Chris Boswell",
+      "position": "K",
+      "team": "PIT",
+      "adp": 189.81,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 149.2,
+          "recomputed": 149.2,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 39.19999999999999,
+          "recomputed": 39.19999999999999,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 3,
+          "recomputed": 3,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 2,
+          "recomputed": 2,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 1.5,
+          "recomputed": 1.5,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Younghoe Koo",
+      "position": "K",
+      "team": "ATL",
+      "adp": 286.87,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 141.8,
+          "recomputed": 141.8,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 31.80000000000001,
+          "recomputed": 31.80000000000001,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 3,
+          "recomputed": 3,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 1.26,
+          "recomputed": 1.26,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Joey Slye",
+      "position": "K",
+      "team": "TEN",
+      "adp": 169.9,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 135,
+          "recomputed": 135,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 25,
+          "recomputed": 25,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 2,
+          "recomputed": 2,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0.93,
+          "recomputed": 0.93,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Najee Harris",
+      "position": "RB",
+      "team": "LAC",
+      "adp": 109.4,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 99.9,
+          "recomputed": 100.14615384615384,
+          "absDiff": 0.246,
+          "relDiff": 0.002,
+          "match": true
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0.14615384615383675,
+          "absDiff": 0.146,
+          "relDiff": 1,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Hunter Henry",
+      "position": "TE",
+      "team": "NE",
+      "adp": 178.06,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 131.4,
+          "recomputed": 133.43076923076922,
+          "absDiff": 2.031,
+          "relDiff": 0.015,
+          "match": false
+        },
+        "vorp": {
+          "app": 51.400000000000006,
+          "recomputed": 53.430769230769215,
+          "absDiff": 2.031,
+          "relDiff": 0.04,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 9,
+          "recomputed": 10,
+          "absDiff": 1,
+          "relDiff": 0.111,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 5,
+          "recomputed": 5,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 4.36,
+          "recomputed": 4.54,
+          "absDiff": 0.18,
+          "relDiff": 0.041,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Cam Akers",
+      "position": "RB",
+      "team": "NO",
+      "adp": 170,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 43.1,
+          "recomputed": 43.1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Travis Kelce",
+      "position": "TE",
+      "team": "KC",
+      "adp": 64.1,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 152.9,
+          "recomputed": 174.56153846153845,
+          "absDiff": 21.662,
+          "relDiff": 0.142,
+          "match": false
+        },
+        "vorp": {
+          "app": 72.9,
+          "recomputed": 94.56153846153845,
+          "absDiff": 21.662,
+          "relDiff": 0.297,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 13,
+          "recomputed": 17,
+          "absDiff": 4,
+          "relDiff": 0.308,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 10,
+          "recomputed": 13,
+          "absDiff": 3,
+          "relDiff": 0.3,
+          "match": false
+        },
+        "edge": {
+          "app": 2.92,
+          "recomputed": 3.79,
+          "absDiff": 0.87,
+          "relDiff": 0.298,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Johnny Wilson",
+      "position": "WR",
+      "team": "PHI",
+      "adp": 170,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 14.1,
+          "recomputed": 14.1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Tyrod Taylor",
+      "position": "QB",
+      "team": "NYJ",
+      "adp": 170,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 24.4,
+          "recomputed": 24.4,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Josh Downs",
+      "position": "WR",
+      "team": "IND",
+      "adp": 120.35,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 188.4,
+          "recomputed": 178.8615384615385,
+          "absDiff": 9.538,
+          "relDiff": 0.051,
+          "match": false
+        },
+        "vorp": {
+          "app": 93.4,
+          "recomputed": 83.86153846153849,
+          "absDiff": 9.538,
+          "relDiff": 0.102,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 21,
+          "recomputed": 18,
+          "absDiff": 3,
+          "relDiff": 0.143,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 12,
+          "recomputed": 11,
+          "absDiff": 1,
+          "relDiff": 0.083,
+          "match": false
+        },
+        "edge": {
+          "app": 8.42,
+          "recomputed": 7.56,
+          "absDiff": 0.86,
+          "relDiff": 0.102,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Parker Washington",
+      "position": "WR",
+      "team": "JAX",
+      "adp": 170,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 74.2,
+          "recomputed": 66.07692307692308,
+          "absDiff": 8.123,
+          "relDiff": 0.109,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Jack Stoll",
+      "position": "TE",
+      "team": "NO",
+      "adp": 250,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 5.4,
+          "recomputed": 5.2153846153846155,
+          "absDiff": 0.185,
+          "relDiff": 0.034,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Hunter Luepke",
+      "position": "RB",
+      "team": "DAL",
+      "adp": 250,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 5.6,
+          "recomputed": 7.507692307692308,
+          "absDiff": 1.908,
+          "relDiff": 0.341,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Braelon Allen",
+      "position": "RB",
+      "team": "NYJ",
+      "adp": 169,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 110.8,
+          "recomputed": 100.70769230769231,
+          "absDiff": 10.092,
+          "relDiff": 0.091,
+          "match": false
+        },
+        "vorp": {
+          "app": 10.799999999999997,
+          "recomputed": 0.7076923076923123,
+          "absDiff": 10.092,
+          "relDiff": 0.934,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 2,
+          "recomputed": 1,
+          "absDiff": 1,
+          "relDiff": 0.5,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 1.16,
+          "recomputed": 0,
+          "absDiff": 1.16,
+          "relDiff": 1,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Bears DST",
+      "position": "DST",
+      "team": "CHI",
+      "adp": 250,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 106.7,
+          "recomputed": 106.7,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 36.7,
+          "recomputed": 36.7,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 4,
+          "recomputed": 4,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 2,
+          "recomputed": 2,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 1.81,
+          "recomputed": 1.81,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Justin Fields",
+      "position": "QB",
+      "team": "NYJ",
+      "adp": 110.95,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 284.6,
+          "recomputed": 284.6,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 64.60000000000002,
+          "recomputed": 64.60000000000002,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 11,
+          "recomputed": 11,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 7,
+          "recomputed": 7,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 4.3,
+          "recomputed": 4.3,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Bijan Robinson",
+      "position": "RB",
+      "team": "ATL",
+      "adp": 3.1,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 316.9,
+          "recomputed": 320.16153846153844,
+          "absDiff": 3.262,
+          "relDiff": 0.01,
+          "match": false
+        },
+        "vorp": {
+          "app": 216.89999999999998,
+          "recomputed": 220.16153846153844,
+          "absDiff": 3.262,
+          "relDiff": 0.015,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 50,
+          "recomputed": 51,
+          "absDiff": 1,
+          "relDiff": 0.02,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 72,
+          "recomputed": 73,
+          "absDiff": 1,
+          "relDiff": 0.014,
+          "match": false
+        },
+        "edge": {
+          "app": -21.94,
+          "recomputed": -22.27,
+          "absDiff": 0.33,
+          "relDiff": 0.015,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Adam Thielen",
+      "position": "WR",
+      "team": "CAR",
+      "adp": 149.49,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 146.7,
+          "recomputed": 150.2076923076923,
+          "absDiff": 3.508,
+          "relDiff": 0.024,
+          "match": false
+        },
+        "vorp": {
+          "app": 51.69999999999999,
+          "recomputed": 55.2076923076923,
+          "absDiff": 3.508,
+          "relDiff": 0.068,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 11,
+          "recomputed": 12,
+          "absDiff": 1,
+          "relDiff": 0.091,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 6,
+          "recomputed": 7,
+          "absDiff": 1,
+          "relDiff": 0.167,
+          "match": false
+        },
+        "edge": {
+          "app": 5.11,
+          "recomputed": 5.46,
+          "absDiff": 0.35,
+          "relDiff": 0.068,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Taysom Hill",
+      "position": "TE",
+      "team": "NO",
+      "adp": 169.8,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 46.8,
+          "recomputed": 27.599999999999994,
+          "absDiff": 19.2,
+          "relDiff": 0.41,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "George Holani",
+      "position": "RB",
+      "team": "SEA",
+      "adp": 170,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 16.2,
+          "recomputed": 15.092307692307692,
+          "absDiff": 1.108,
+          "relDiff": 0.068,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Charlie Woerner",
+      "position": "TE",
+      "team": "ATL",
+      "adp": 250,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 26.8,
+          "recomputed": 31.784615384615385,
+          "absDiff": 4.985,
+          "relDiff": 0.186,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Tyler Conklin",
+      "position": "TE",
+      "team": "LAC",
+      "adp": 170,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 84.8,
+          "recomputed": 81.66153846153846,
+          "absDiff": 3.138,
+          "relDiff": 0.037,
+          "match": false
+        },
+        "vorp": {
+          "app": 4.799999999999997,
+          "recomputed": 1.6615384615384556,
+          "absDiff": 3.138,
+          "relDiff": 0.654,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Isaiah Davis",
+      "position": "RB",
+      "team": "NYJ",
+      "adp": 170.2,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 104.1,
+          "recomputed": 58.130769230769225,
+          "absDiff": 45.969,
+          "relDiff": 0.442,
+          "match": false
+        },
+        "vorp": {
+          "app": 4.099999999999994,
+          "recomputed": 0,
+          "absDiff": 4.1,
+          "relDiff": 1,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Adonai Mitchell",
+      "position": "WR",
+      "team": "IND",
+      "adp": 170.1,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 108,
+          "recomputed": 90.21538461538461,
+          "absDiff": 17.785,
+          "relDiff": 0.165,
+          "match": false
+        },
+        "vorp": {
+          "app": 13,
+          "recomputed": 0,
+          "absDiff": 13,
+          "relDiff": 1,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 3,
+          "recomputed": 1,
+          "absDiff": 2,
+          "relDiff": 0.667,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 2,
+          "recomputed": 1,
+          "absDiff": 1,
+          "relDiff": 0.5,
+          "match": false
+        },
+        "edge": {
+          "app": 1.33,
+          "recomputed": 0,
+          "absDiff": 1.33,
+          "relDiff": 1,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Courtland Sutton",
+      "position": "WR",
+      "team": "DEN",
+      "adp": 68.3,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 200.1,
+          "recomputed": 212.53076923076924,
+          "absDiff": 12.431,
+          "relDiff": 0.062,
+          "match": false
+        },
+        "vorp": {
+          "app": 105.1,
+          "recomputed": 117.53076923076924,
+          "absDiff": 12.431,
+          "relDiff": 0.118,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 23,
+          "recomputed": 26,
+          "absDiff": 3,
+          "relDiff": 0.13,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 17,
+          "recomputed": 20,
+          "absDiff": 3,
+          "relDiff": 0.176,
+          "match": false
+        },
+        "edge": {
+          "app": 5.66,
+          "recomputed": 6.33,
+          "absDiff": 0.67,
+          "relDiff": 0.118,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Saints DST",
+      "position": "DST",
+      "team": "NO",
+      "adp": 250,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 103.1,
+          "recomputed": 103.1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 33.099999999999994,
+          "recomputed": 33.099999999999994,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 3,
+          "recomputed": 3,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 2,
+          "recomputed": 2,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 1.63,
+          "recomputed": 1.63,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Drake Maye",
+      "position": "QB",
+      "team": "NE",
+      "adp": 119.51,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 251.5,
+          "recomputed": 251.5,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 31.5,
+          "recomputed": 31.5,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 5,
+          "recomputed": 5,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 3,
+          "recomputed": 3,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 2.19,
+          "recomputed": 2.19,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Panthers DST",
+      "position": "DST",
+      "team": "CAR",
+      "adp": 250,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 97.8,
+          "recomputed": 97.8,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 27.799999999999997,
+          "recomputed": 27.799999999999997,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 3,
+          "recomputed": 3,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 1.37,
+          "recomputed": 1.37,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Dolphins DST",
+      "position": "DST",
+      "team": "MIA",
+      "adp": 250,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 111.3,
+          "recomputed": 111.3,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 41.3,
+          "recomputed": 41.3,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 4,
+          "recomputed": 4,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 2,
+          "recomputed": 2,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 2.04,
+          "recomputed": 2.04,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Erik Ezukanma",
+      "position": "WR",
+      "team": "MIA",
+      "adp": 170,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 21.6,
+          "recomputed": 21.6,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Tank Bigsby",
+      "position": "RB",
+      "team": "JAX",
+      "adp": 113.1,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 115.9,
+          "recomputed": 116.0230769230769,
+          "absDiff": 0.123,
+          "relDiff": 0.001,
+          "match": true
+        },
+        "vorp": {
+          "app": 15.900000000000006,
+          "recomputed": 16.0230769230769,
+          "absDiff": 0.123,
+          "relDiff": 0.008,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 4,
+          "recomputed": 4,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 2,
+          "recomputed": 2,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 1.45,
+          "recomputed": 1.46,
+          "absDiff": 0.01,
+          "relDiff": 0.007,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Daniel Carlson",
+      "position": "K",
+      "team": "LV",
+      "adp": 169.1,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 141.9,
+          "recomputed": 141.9,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 31.900000000000006,
+          "recomputed": 31.900000000000006,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 3,
+          "recomputed": 3,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 1.19,
+          "recomputed": 1.19,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Matthew Golden",
+      "position": "WR",
+      "team": "GB",
+      "adp": 99.3,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 178.9,
+          "recomputed": 184.74615384615385,
+          "absDiff": 5.846,
+          "relDiff": 0.033,
+          "match": false
+        },
+        "vorp": {
+          "app": 83.9,
+          "recomputed": 89.74615384615385,
+          "absDiff": 5.846,
+          "relDiff": 0.07,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 18,
+          "recomputed": 20,
+          "absDiff": 2,
+          "relDiff": 0.111,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 12,
+          "recomputed": 13,
+          "absDiff": 1,
+          "relDiff": 0.083,
+          "match": false
+        },
+        "edge": {
+          "app": 6.7,
+          "recomputed": 7.16,
+          "absDiff": 0.46,
+          "relDiff": 0.069,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Mason Taylor",
+      "position": "TE",
+      "team": "NYJ",
+      "adp": 170,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 128.2,
+          "recomputed": 117.86153846153846,
+          "absDiff": 10.338,
+          "relDiff": 0.081,
+          "match": false
+        },
+        "vorp": {
+          "app": 48.19999999999999,
+          "recomputed": 37.86153846153846,
+          "absDiff": 10.338,
+          "relDiff": 0.214,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 9,
+          "recomputed": 7,
+          "absDiff": 2,
+          "relDiff": 0.222,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 5,
+          "recomputed": 4,
+          "absDiff": 1,
+          "relDiff": 0.2,
+          "match": false
+        },
+        "edge": {
+          "app": 4.05,
+          "recomputed": 3.18,
+          "absDiff": 0.87,
+          "relDiff": 0.215,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Cooper Kupp",
+      "position": "WR",
+      "team": "SEA",
+      "adp": 92.7,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 172.7,
+          "recomputed": 180.2076923076923,
+          "absDiff": 7.508,
+          "relDiff": 0.043,
+          "match": false
+        },
+        "vorp": {
+          "app": 77.69999999999999,
+          "recomputed": 85.2076923076923,
+          "absDiff": 7.508,
+          "relDiff": 0.097,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 17,
+          "recomputed": 19,
+          "absDiff": 2,
+          "relDiff": 0.118,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 11,
+          "recomputed": 12,
+          "absDiff": 1,
+          "relDiff": 0.091,
+          "match": false
+        },
+        "edge": {
+          "app": 5.87,
+          "recomputed": 6.44,
+          "absDiff": 0.57,
+          "relDiff": 0.097,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Trey Lance",
+      "position": "QB",
+      "team": "LAC",
+      "adp": 170,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 32.1,
+          "recomputed": 32.1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Michael Gallup",
+      "position": "WR",
+      "team": "WAS",
+      "adp": 250,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 9.4,
+          "recomputed": 9.4,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Bucky Irving",
+      "position": "RB",
+      "team": "TB",
+      "adp": 24.9,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 276.4,
+          "recomputed": 262.6153846153846,
+          "absDiff": 13.785,
+          "relDiff": 0.05,
+          "match": false
+        },
+        "vorp": {
+          "app": 176.39999999999998,
+          "recomputed": 162.61538461538458,
+          "absDiff": 13.785,
+          "relDiff": 0.078,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 41,
+          "recomputed": 37,
+          "absDiff": 4,
+          "relDiff": 0.098,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 45,
+          "recomputed": 41,
+          "absDiff": 4,
+          "relDiff": 0.089,
+          "match": false
+        },
+        "edge": {
+          "app": -4.37,
+          "recomputed": -4.03,
+          "absDiff": 0.34,
+          "relDiff": 0.078,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Derius Davis",
+      "position": "WR",
+      "team": "LAC",
+      "adp": 170,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 12.2,
+          "recomputed": 11.092307692307692,
+          "absDiff": 1.108,
+          "relDiff": 0.091,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Jahmyr Gibbs",
+      "position": "RB",
+      "team": "DET",
+      "adp": 5.4,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 315.7,
+          "recomputed": 316.13076923076926,
+          "absDiff": 0.431,
+          "relDiff": 0.001,
+          "match": true
+        },
+        "vorp": {
+          "app": 215.7,
+          "recomputed": 216.13076923076926,
+          "absDiff": 0.431,
+          "relDiff": 0.002,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 50,
+          "recomputed": 50,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 69,
+          "recomputed": 69,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": -19.73,
+          "recomputed": -19.77,
+          "absDiff": 0.04,
+          "relDiff": 0.002,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Breece Hall",
+      "position": "RB",
+      "team": "NYJ",
+      "adp": 57.2,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 166.7,
+          "recomputed": 202.5153846153846,
+          "absDiff": 35.815,
+          "relDiff": 0.215,
+          "match": false
+        },
+        "vorp": {
+          "app": 66.69999999999999,
+          "recomputed": 102.51538461538459,
+          "absDiff": 35.815,
+          "relDiff": 0.537,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 15,
+          "recomputed": 24,
+          "absDiff": 9,
+          "relDiff": 0.6,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 13,
+          "recomputed": 19,
+          "absDiff": 6,
+          "relDiff": 0.462,
+          "match": false
+        },
+        "edge": {
+          "app": 2.78,
+          "recomputed": 4.28,
+          "absDiff": 1.5,
+          "relDiff": 0.54,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Cam Ward",
+      "position": "QB",
+      "team": "TEN",
+      "adp": 158,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 247.9,
+          "recomputed": 247.9,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 27.900000000000006,
+          "recomputed": 27.900000000000006,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 5,
+          "recomputed": 5,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 3,
+          "recomputed": 3,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 2.17,
+          "recomputed": 2.17,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Rachaad White",
+      "position": "RB",
+      "team": "TB",
+      "adp": 144.1,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 96.4,
+          "recomputed": 117.75384615384614,
+          "absDiff": 21.354,
+          "relDiff": 0.222,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 17.75384615384614,
+          "absDiff": 17.754,
+          "relDiff": 1,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 4,
+          "absDiff": 3,
+          "relDiff": 3,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 2,
+          "absDiff": 1,
+          "relDiff": 1,
+          "match": false
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 1.81,
+          "absDiff": 1.81,
+          "relDiff": 1,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Stefon Diggs",
+      "position": "WR",
+      "team": "NE",
+      "adp": 97.5,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 196.3,
+          "recomputed": 195.25384615384615,
+          "absDiff": 1.046,
+          "relDiff": 0.005,
+          "match": true
+        },
+        "vorp": {
+          "app": 101.30000000000001,
+          "recomputed": 100.25384615384615,
+          "absDiff": 1.046,
+          "relDiff": 0.01,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 22,
+          "recomputed": 22,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 14,
+          "recomputed": 14,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 7.97,
+          "recomputed": 7.89,
+          "absDiff": 0.08,
+          "relDiff": 0.01,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Tre Harris",
+      "position": "WR",
+      "team": "LAC",
+      "adp": 170,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 77.8,
+          "recomputed": 100.5076923076923,
+          "absDiff": 22.708,
+          "relDiff": 0.292,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 5.507692307692295,
+          "absDiff": 5.508,
+          "relDiff": 1,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0.21,
+          "absDiff": 0.21,
+          "relDiff": 1,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Noah Fant",
+      "position": "TE",
+      "team": "CIN",
+      "adp": 170,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 47.7,
+          "recomputed": 73.66923076923078,
+          "absDiff": 25.969,
+          "relDiff": 0.544,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Brandin Cooks",
+      "position": "WR",
+      "team": "NO",
+      "adp": 170,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 100.3,
+          "recomputed": 95.62307692307692,
+          "absDiff": 4.677,
+          "relDiff": 0.047,
+          "match": false
+        },
+        "vorp": {
+          "app": 5.299999999999997,
+          "recomputed": 0.6230769230769226,
+          "absDiff": 4.677,
+          "relDiff": 0.882,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0.17,
+          "recomputed": 0,
+          "absDiff": 0.17,
+          "relDiff": 1,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Audric Estime",
+      "position": "RB",
+      "team": "DEN",
+      "adp": 170,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 12.9,
+          "recomputed": 12.9,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Jalen Milroe",
+      "position": "QB",
+      "team": "SEA",
+      "adp": 169.7,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 44.4,
+          "recomputed": 44.4,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Jarrett Stidham",
+      "position": "QB",
+      "team": "DEN",
+      "adp": 170,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 31.3,
+          "recomputed": 31.3,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Kyle Pitts",
+      "position": "TE",
+      "team": "ATL",
+      "adp": 150.25,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 134.4,
+          "recomputed": 134.4,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 54.400000000000006,
+          "recomputed": 54.400000000000006,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 10,
+          "recomputed": 10,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 5,
+          "recomputed": 5,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 4.41,
+          "recomputed": 4.41,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Roman Wilson",
+      "position": "WR",
+      "team": "PIT",
+      "adp": 170,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 100.8,
+          "recomputed": 77.9076923076923,
+          "absDiff": 22.892,
+          "relDiff": 0.227,
+          "match": false
+        },
+        "vorp": {
+          "app": 5.799999999999997,
+          "recomputed": 0,
+          "absDiff": 5.8,
+          "relDiff": 1,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0.28,
+          "recomputed": 0,
+          "absDiff": 0.28,
+          "relDiff": 1,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Stone Smartt",
+      "position": "TE",
+      "team": "NYJ",
+      "adp": 250,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 3.3,
+          "recomputed": 9.700000000000001,
+          "absDiff": 6.4,
+          "relDiff": 1.939,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Demario Douglas",
+      "position": "WR",
+      "team": "NE",
+      "adp": 170,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 155.2,
+          "recomputed": 143.75384615384615,
+          "absDiff": 11.446,
+          "relDiff": 0.074,
+          "match": false
+        },
+        "vorp": {
+          "app": 60.19999999999999,
+          "recomputed": 48.753846153846155,
+          "absDiff": 11.446,
+          "relDiff": 0.19,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 13,
+          "recomputed": 11,
+          "absDiff": 2,
+          "relDiff": 0.154,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 7,
+          "recomputed": 6,
+          "absDiff": 1,
+          "relDiff": 0.143,
+          "match": false
+        },
+        "edge": {
+          "app": 6.18,
+          "recomputed": 5,
+          "absDiff": 1.18,
+          "relDiff": 0.191,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Jalen Hurts",
+      "position": "QB",
+      "team": "PHI",
+      "adp": 29.7,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 327.3,
+          "recomputed": 327.3,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 107.30000000000001,
+          "recomputed": 107.30000000000001,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 18,
+          "recomputed": 18,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 19,
+          "recomputed": 19,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": -0.95,
+          "recomputed": -0.95,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Payne Durham",
+      "position": "TE",
+      "team": "TB",
+      "adp": 250,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 11.2,
+          "recomputed": 22.4,
+          "absDiff": 11.2,
+          "relDiff": 1,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "J.K. Dobbins",
+      "position": "RB",
+      "team": "DEN",
+      "adp": 114.5,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 104.1,
+          "recomputed": 130.6846153846154,
+          "absDiff": 26.585,
+          "relDiff": 0.255,
+          "match": false
+        },
+        "vorp": {
+          "app": 4.099999999999994,
+          "recomputed": 30.684615384615398,
+          "absDiff": 26.585,
+          "relDiff": 6.484,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 7,
+          "absDiff": 6,
+          "relDiff": 6,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 4,
+          "absDiff": 3,
+          "relDiff": 3,
+          "match": false
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 2.81,
+          "absDiff": 2.81,
+          "relDiff": 1,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Evan Engram",
+      "position": "TE",
+      "team": "DEN",
+      "adp": 91.8,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 147.6,
+          "recomputed": 152.76923076923077,
+          "absDiff": 5.169,
+          "relDiff": 0.035,
+          "match": false
+        },
+        "vorp": {
+          "app": 67.6,
+          "recomputed": 72.76923076923077,
+          "absDiff": 5.169,
+          "relDiff": 0.076,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 12,
+          "recomputed": 13,
+          "absDiff": 1,
+          "relDiff": 0.083,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 8,
+          "recomputed": 9,
+          "absDiff": 1,
+          "relDiff": 0.125,
+          "match": false
+        },
+        "edge": {
+          "app": 4.14,
+          "recomputed": 4.46,
+          "absDiff": 0.32,
+          "relDiff": 0.077,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Kyle Monangai",
+      "position": "RB",
+      "team": "CHI",
+      "adp": 170.2,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 34.8,
+          "recomputed": 44.892307692307696,
+          "absDiff": 10.092,
+          "relDiff": 0.29,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Wil Lutz",
+      "position": "K",
+      "team": "DEN",
+      "adp": 168.7,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 141,
+          "recomputed": 141,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 31,
+          "recomputed": 31,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 2,
+          "recomputed": 2,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 1.16,
+          "recomputed": 1.16,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Avery Williams",
+      "position": "WR",
+      "team": "PHI",
+      "adp": 250,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 2.1,
+          "recomputed": 2.4076923076923076,
+          "absDiff": 0.308,
+          "relDiff": 0.147,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Brian Robinson",
+      "position": "RB",
+      "team": "WAS",
+      "adp": 90.5,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 157.8,
+          "recomputed": 157.8,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 57.80000000000001,
+          "recomputed": 57.80000000000001,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 13,
+          "recomputed": 13,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 9,
+          "recomputed": 9,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 4.47,
+          "recomputed": 4.47,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Caleb Williams",
+      "position": "QB",
+      "team": "CHI",
+      "adp": 136.81,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 263.6,
+          "recomputed": 263.6,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 43.60000000000002,
+          "recomputed": 43.60000000000002,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 7,
+          "recomputed": 7,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 4,
+          "recomputed": 4,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 3.23,
+          "recomputed": 3.23,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Amon-Ra St. Brown",
+      "position": "WR",
+      "team": "DET",
+      "adp": 10.5,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 266.8,
+          "recomputed": 280.58461538461535,
+          "absDiff": 13.785,
+          "relDiff": 0.052,
+          "match": false
+        },
+        "vorp": {
+          "app": 171.8,
+          "recomputed": 185.58461538461535,
+          "absDiff": 13.785,
+          "relDiff": 0.08,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 38,
+          "recomputed": 41,
+          "absDiff": 3,
+          "relDiff": 0.079,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 50,
+          "recomputed": 54,
+          "absDiff": 4,
+          "relDiff": 0.08,
+          "match": false
+        },
+        "edge": {
+          "app": -11.74,
+          "recomputed": -12.68,
+          "absDiff": 0.94,
+          "relDiff": 0.08,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Kimani Vidal",
+      "position": "RB",
+      "team": "LAC",
+      "adp": 170,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 27.3,
+          "recomputed": 28.1,
+          "absDiff": 0.8,
+          "relDiff": 0.029,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Emanuel Wilson",
+      "position": "RB",
+      "team": "GB",
+      "adp": 170.1,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 37.8,
+          "recomputed": 41.36923076923077,
+          "absDiff": 3.569,
+          "relDiff": 0.094,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Beaux Collins",
+      "position": "WR",
+      "team": "NYG",
+      "adp": 250,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 34.6,
+          "recomputed": 34.6,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Jeremy Ruckert",
+      "position": "TE",
+      "team": "NYJ",
+      "adp": 170,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 17.1,
+          "recomputed": 31.00769230769231,
+          "absDiff": 13.908,
+          "relDiff": 0.813,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Jake Browning",
+      "position": "QB",
+      "team": "CIN",
+      "adp": 170,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 31.7,
+          "recomputed": 31.7,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "AJ Barner",
+      "position": "TE",
+      "team": "SEA",
+      "adp": 169.9,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 78,
+          "recomputed": 77.6923076923077,
+          "absDiff": 0.308,
+          "relDiff": 0.004,
+          "match": true
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Michael Penix Jr.",
+      "position": "QB",
+      "team": "ATL",
+      "adp": 146,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 253.7,
+          "recomputed": 253.7,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "vorp": {
+          "app": 33.69999999999999,
+          "recomputed": 33.69999999999999,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 6,
+          "recomputed": 6,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 3,
+          "recomputed": 3,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 2.56,
+          "recomputed": 2.56,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Luke Schoonmaker",
+      "position": "TE",
+      "team": "DAL",
+      "adp": 170,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 47.5,
+          "recomputed": 39.86923076923077,
+          "absDiff": 7.631,
+          "relDiff": 0.161,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "KhaDarel Hodge",
+      "position": "WR",
+      "team": "ATL",
+      "adp": 170,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 51.3,
+          "recomputed": 42.56153846153846,
+          "absDiff": 8.738,
+          "relDiff": 0.17,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Tyjae Spears",
+      "position": "RB",
+      "team": "TEN",
+      "adp": 125.31,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 109.8,
+          "recomputed": 119.8923076923077,
+          "absDiff": 10.092,
+          "relDiff": 0.092,
+          "match": false
+        },
+        "vorp": {
+          "app": 9.799999999999997,
+          "recomputed": 19.892307692307696,
+          "absDiff": 10.092,
+          "relDiff": 1.03,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 2,
+          "recomputed": 5,
+          "absDiff": 3,
+          "relDiff": 1.5,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 3,
+          "absDiff": 2,
+          "relDiff": 2,
+          "match": false
+        },
+        "edge": {
+          "app": 0.94,
+          "recomputed": 1.91,
+          "absDiff": 0.97,
+          "relDiff": 1.032,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Miles Sanders",
+      "position": "RB",
+      "team": "DAL",
+      "adp": 170,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 89,
+          "recomputed": 74.04615384615384,
+          "absDiff": 14.954,
+          "relDiff": 0.168,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Nate Adkins",
+      "position": "TE",
+      "team": "DEN",
+      "adp": 250,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 13.2,
+          "recomputed": 16.76923076923077,
+          "absDiff": 3.569,
+          "relDiff": 0.27,
+          "match": false
+        },
+        "vorp": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 1,
+          "recomputed": 1,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 0,
+          "recomputed": 0,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "Brian Thomas Jr.",
+      "position": "WR",
+      "team": "JAX",
+      "adp": 18.9,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 273,
+          "recomputed": 274.04615384615386,
+          "absDiff": 1.046,
+          "relDiff": 0.004,
+          "match": true
+        },
+        "vorp": {
+          "app": 178,
+          "recomputed": 179.04615384615386,
+          "absDiff": 1.046,
+          "relDiff": 0.006,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 39,
+          "recomputed": 39,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 46,
+          "recomputed": 47,
+          "absDiff": 1,
+          "relDiff": 0.022,
+          "match": false
+        },
+        "edge": {
+          "app": -7.25,
+          "recomputed": -7.3,
+          "absDiff": 0.05,
+          "relDiff": 0.007,
+          "match": true
+        }
+      }
+    },
+    {
+      "player": "TreVeyon Henderson",
+      "position": "RB",
+      "team": "NE",
+      "adp": 59.5,
+      "hasMismatch": true,
+      "diffs": {
+        "projectedPoints": {
+          "app": 167.4,
+          "recomputed": 185.67692307692306,
+          "absDiff": 18.277,
+          "relDiff": 0.109,
+          "match": false
+        },
+        "vorp": {
+          "app": 67.4,
+          "recomputed": 85.67692307692306,
+          "absDiff": 18.277,
+          "relDiff": 0.271,
+          "match": false
+        },
+        "intrinsicValue": {
+          "app": 16,
+          "recomputed": 20,
+          "absDiff": 4,
+          "relDiff": 0.25,
+          "match": false
+        },
+        "marketPrice": {
+          "app": 12,
+          "recomputed": 16,
+          "absDiff": 4,
+          "relDiff": 0.333,
+          "match": false
+        },
+        "edge": {
+          "app": 3.03,
+          "recomputed": 3.86,
+          "absDiff": 0.83,
+          "relDiff": 0.274,
+          "match": false
+        }
+      }
+    },
+    {
+      "player": "Jaylen Waddle",
+      "position": "WR",
+      "team": "MIA",
+      "adp": 78.7,
+      "hasMismatch": false,
+      "diffs": {
+        "projectedPoints": {
+          "app": 203.4,
+          "recomputed": 202.6,
+          "absDiff": 0.8,
+          "relDiff": 0.004,
+          "match": true
+        },
+        "vorp": {
+          "app": 108.4,
+          "recomputed": 107.6,
+          "absDiff": 0.8,
+          "relDiff": 0.007,
+          "match": true
+        },
+        "intrinsicValue": {
+          "app": 24,
+          "recomputed": 24,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "marketPrice": {
+          "app": 17,
+          "recomputed": 17,
+          "absDiff": 0,
+          "relDiff": 0,
+          "match": true
+        },
+        "edge": {
+          "app": 6.98,
+          "recomputed": 6.93,
+          "absDiff": 0.05,
+          "relDiff": 0.007,
+          "match": true
+        }
+      }
+    }
+  ]
+}

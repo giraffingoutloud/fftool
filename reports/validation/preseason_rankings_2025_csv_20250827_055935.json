@@ -1,0 +1,44 @@
+{
+  "file_path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/other/preseason_rankings_2025.csv",
+  "file_type": "csv",
+  "file_size": 3101,
+  "total_checks": 4,
+  "passed_checks": 3,
+  "failed_checks": 1,
+  "schema_errors": [],
+  "duplicate_rows": [],
+  "missing_values": {
+    "Strength of Schedule To Date": 32
+  },
+  "type_errors": [],
+  "range_errors": [],
+  "uniqueness_violations": [],
+  "content_summary": {
+    "rows": 32,
+    "columns": 10,
+    "column_names": [
+      "Team",
+      "Point Spread Rating Points",
+      "Point Spread Rating QB",
+      "Strength of Schedule To Date",
+      "Strength of Schedule Remaining",
+      "Projections Avg. Wins",
+      "Projections Make Playoffs",
+      "Projections Win Division Title",
+      "Projections Win Conf Champ",
+      "Projections Win Super Bowl"
+    ],
+    "dtypes": {
+      "Team": "object",
+      "Point Spread Rating Points": "float64",
+      "Point Spread Rating QB": "float64",
+      "Strength of Schedule To Date": "float64",
+      "Strength of Schedule Remaining": "int64",
+      "Projections Avg. Wins": "float64",
+      "Projections Make Playoffs": "float64",
+      "Projections Win Division Title": "float64",
+      "Projections Win Conf Champ": "float64",
+      "Projections Win Super Bowl": "float64"
+    }
+  }
+}

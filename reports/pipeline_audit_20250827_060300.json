@@ -1,0 +1,2555 @@
+{
+  "generated_at": "2025-08-27T16:03:00.176647",
+  "total_files": 100,
+  "successful_loads": 100,
+  "failed_loads": 0,
+  "total_rows_parsed": 34842,
+  "total_rows_quarantined": 122,
+  "total_coercions": 575,
+  "total_nulls": 320,
+  "total_duplicates": 0,
+  "files": {
+    "adp/adp0_2025.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/adp/adp0_2025.csv",
+        "sha256": "3f7ac39d926ef117a5c112216de0c60276ca73482659c6b2c6cfe7ebb020de38",
+        "row_count": 512,
+        "column_count": 11,
+        "parsed_rows": 486,
+        "quarantined_rows": 26,
+        "coercion_count": 3,
+        "null_count": 288,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.519319",
+        "exceptions": [
+          {
+            "row": 113,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 147,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 148,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 195,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 197,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 201,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 212,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 213,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 233,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 234,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 239,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 254,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 287,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 294,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 298,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 380,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 394,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 409,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 430,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 436,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 441,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 443,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 478,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 481,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 504,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          },
+          {
+            "row": 507,
+            "column": "ADP",
+            "value": "null",
+            "error": "Non-nullable column ADP has null value"
+          }
+        ]
+      },
+      "errors": [],
+      "warnings": [
+        "Quarantined 26 rows to /mnt/c/Users/giraf/Documents/projects/fftool/artifacts/quarantine/adp0_2025_dupes.csv"
+      ]
+    },
+    "adp/adp1_2025.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/adp/adp1_2025.csv",
+        "sha256": "5ddb3436392bf3847508966ac24430dd8f64892c239823e595b60a447069dccc",
+        "row_count": 4091,
+        "column_count": 16,
+        "parsed_rows": 4091,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.557250",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "adp/adp2_2025.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/adp/adp2_2025.csv",
+        "sha256": "e8b91771c2a24932d1076e8dfc30aab9e0f922e6b1f1075dcc741b4b4c3685ca",
+        "row_count": 77,
+        "column_count": 8,
+        "parsed_rows": 77,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.578947",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "adp/adp3_2025.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/adp/adp3_2025.csv",
+        "sha256": "212bb36523e66aaa822112b421d2b9322917ee146061fd7e6ac2fcf6e1d372e5",
+        "row_count": 300,
+        "column_count": 13,
+        "parsed_rows": 300,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.591268",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "historical_stats/fantasy-stats-dst_2023.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/historical_stats/fantasy-stats-dst_2023.csv",
+        "sha256": "116935133f6b80d084e6441cd32d83071755a33342390845c6b79e02c7e36dcb",
+        "row_count": 32,
+        "column_count": 35,
+        "parsed_rows": 32,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.603379",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "historical_stats/fantasy-stats-dst_2024.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/historical_stats/fantasy-stats-dst_2024.csv",
+        "sha256": "4b439669e09fa3b7bfce59f6645bf410c377cb0281cd3cd157d875c4a7034327",
+        "row_count": 32,
+        "column_count": 35,
+        "parsed_rows": 32,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.614713",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "historical_stats/fantasy-stats-passing_2023.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/historical_stats/fantasy-stats-passing_2023.csv",
+        "sha256": "29a976f2f0caaf1e708873fbcdaa17552cc3f5e9484cfed727a86cb1e5efd948",
+        "row_count": 83,
+        "column_count": 36,
+        "parsed_rows": 83,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.628393",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "historical_stats/fantasy-stats-passing_2024.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/historical_stats/fantasy-stats-passing_2024.csv",
+        "sha256": "bb5aaf0b22c2a6f51505ba888318b707cf03069f9204ce192698781fc5772af9",
+        "row_count": 79,
+        "column_count": 36,
+        "parsed_rows": 79,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.641379",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "historical_stats/fantasy-stats-receiving_rushing_2023.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/historical_stats/fantasy-stats-receiving_rushing_2023.csv",
+        "sha256": "90006c1bf360dededd203efac0ab85be318b5078373f0f00fbde7558b711a7bf",
+        "row_count": 550,
+        "column_count": 52,
+        "parsed_rows": 550,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.666586",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "historical_stats/fantasy-stats-receiving_rushing_2024.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/historical_stats/fantasy-stats-receiving_rushing_2024.csv",
+        "sha256": "496e30bf3451383589c2e9f01f54e90c4d7f250a28d6decb789dd4351c5a03d3",
+        "row_count": 558,
+        "column_count": 52,
+        "parsed_rows": 558,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.696157",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "other/nfl-power-ratings.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/other/nfl-power-ratings.csv",
+        "sha256": "538b8a56649ad8c947e2dd2591291191eeee40d1e0e787c404651ee07dcfac20",
+        "row_count": 32,
+        "column_count": 10,
+        "parsed_rows": 32,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.715628",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "other/preseason_rankings_2025.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/other/preseason_rankings_2025.csv",
+        "sha256": "538b8a56649ad8c947e2dd2591291191eeee40d1e0e787c404651ee07dcfac20",
+        "row_count": 32,
+        "column_count": 10,
+        "parsed_rows": 27,
+        "quarantined_rows": 5,
+        "coercion_count": 0,
+        "null_count": 32,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.725878",
+        "exceptions": [
+          {
+            "row": 2,
+            "column": "Team",
+            "value": "BLT",
+            "error": "Invalid value BLT for Team"
+          },
+          {
+            "row": 10,
+            "column": "Team",
+            "value": "LA",
+            "error": "Invalid value LA for Team"
+          },
+          {
+            "row": 14,
+            "column": "Team",
+            "value": "HST",
+            "error": "Invalid value HST for Team"
+          },
+          {
+            "row": 18,
+            "column": "Team",
+            "value": "ARZ",
+            "error": "Invalid value ARZ for Team"
+          },
+          {
+            "row": 32,
+            "column": "Team",
+            "value": "CLV",
+            "error": "Invalid value CLV for Team"
+          }
+        ]
+      },
+      "errors": [],
+      "warnings": [
+        "Quarantined 5 rows to /mnt/c/Users/giraf/Documents/projects/fftool/artifacts/quarantine/preseason_rankings_2025_dupes.csv"
+      ]
+    },
+    "other/qb-fantasy-sos.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/other/qb-fantasy-sos.csv",
+        "sha256": "0aae400fdd7eb618d2af7983b063740365b443759a51634dba2a7ede2730c130",
+        "row_count": 79,
+        "column_count": 21,
+        "parsed_rows": 79,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.744204",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "projections/FantasyPros_Fantasy_Football_Projections_FLX.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/projections/FantasyPros_Fantasy_Football_Projections_FLX.csv",
+        "sha256": "8c053b04ec69cfb39abcf0fa7af0a770b6e47db821786e76145790ad1b61a166",
+        "row_count": 527,
+        "column_count": 11,
+        "parsed_rows": 527,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.758859",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "projections/FantasyPros_Fantasy_Football_Projections_RB.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/projections/FantasyPros_Fantasy_Football_Projections_RB.csv",
+        "sha256": "07ae86861f8753aefcc82c42191535802e7f87800456ff803fb7efff845d6358",
+        "row_count": 178,
+        "column_count": 10,
+        "parsed_rows": 178,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.772834",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "projections/FantasyPros_Fantasy_Football_Projections_TE.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/projections/FantasyPros_Fantasy_Football_Projections_TE.csv",
+        "sha256": "f8038c092bc9ab718b888f4c1e6cc11c5c85bcefd36297e4d2ac9f7454d495ae",
+        "row_count": 145,
+        "column_count": 7,
+        "parsed_rows": 145,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.783750",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "projections/FantasyPros_Fantasy_Football_Projections_WR.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/projections/FantasyPros_Fantasy_Football_Projections_WR.csv",
+        "sha256": "b5a5ae5c1559fdff10ea88bee55a6ece4aa0ceb86cb61216cdf444918c65d684",
+        "row_count": 214,
+        "column_count": 10,
+        "parsed_rows": 214,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.794781",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "projections/projections_2025.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/projections/projections_2025.csv",
+        "sha256": "a19728e59f73a6bd0c11eeb179228de69155ddf81003a1d39bdf50470155833d",
+        "row_count": 572,
+        "column_count": 63,
+        "parsed_rows": 481,
+        "quarantined_rows": 91,
+        "coercion_count": 572,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.834314",
+        "exceptions": [
+          {
+            "row": 10,
+            "column": "teamName",
+            "value": "BLT",
+            "error": "Invalid value BLT for teamName"
+          },
+          {
+            "row": 14,
+            "column": "teamName",
+            "value": "LA",
+            "error": "Invalid value LA for teamName"
+          },
+          {
+            "row": 15,
+            "column": "teamName",
+            "value": "LA",
+            "error": "Invalid value LA for teamName"
+          },
+          {
+            "row": 16,
+            "column": "teamName",
+            "value": "HST",
+            "error": "Invalid value HST for teamName"
+          },
+          {
+            "row": 26,
+            "column": "teamName",
+            "value": "ARZ",
+            "error": "Invalid value ARZ for teamName"
+          },
+          {
+            "row": 34,
+            "column": "teamName",
+            "value": "ARZ",
+            "error": "Invalid value ARZ for teamName"
+          },
+          {
+            "row": 38,
+            "column": "teamName",
+            "value": "ARZ",
+            "error": "Invalid value ARZ for teamName"
+          },
+          {
+            "row": 43,
+            "column": "teamName",
+            "value": "BLT",
+            "error": "Invalid value BLT for teamName"
+          },
+          {
+            "row": 44,
+            "column": "teamName",
+            "value": "LA",
+            "error": "Invalid value LA for teamName"
+          },
+          {
+            "row": 68,
+            "column": "teamName",
+            "value": "BLT",
+            "error": "Invalid value BLT for teamName"
+          },
+          {
+            "row": 72,
+            "column": "teamName",
+            "value": "HST",
+            "error": "Invalid value HST for teamName"
+          },
+          {
+            "row": 77,
+            "column": "teamName",
+            "value": "CLV",
+            "error": "Invalid value CLV for teamName"
+          },
+          {
+            "row": 84,
+            "column": "teamName",
+            "value": "CLV",
+            "error": "Invalid value CLV for teamName"
+          },
+          {
+            "row": 109,
+            "column": "teamName",
+            "value": "BLT",
+            "error": "Invalid value BLT for teamName"
+          },
+          {
+            "row": 113,
+            "column": "teamName",
+            "value": "ARZ",
+            "error": "Invalid value ARZ for teamName"
+          },
+          {
+            "row": 116,
+            "column": "teamName",
+            "value": "CLV",
+            "error": "Invalid value CLV for teamName"
+          },
+          {
+            "row": 123,
+            "column": "teamName",
+            "value": "CLV",
+            "error": "Invalid value CLV for teamName"
+          },
+          {
+            "row": 125,
+            "column": "teamName",
+            "value": "HST",
+            "error": "Invalid value HST for teamName"
+          },
+          {
+            "row": 126,
+            "column": "teamName",
+            "value": "HST",
+            "error": "Invalid value HST for teamName"
+          },
+          {
+            "row": 127,
+            "column": "teamName",
+            "value": "CLV",
+            "error": "Invalid value CLV for teamName"
+          },
+          {
+            "row": 130,
+            "column": "teamName",
+            "value": "BLT",
+            "error": "Invalid value BLT for teamName"
+          },
+          {
+            "row": 133,
+            "column": "teamName",
+            "value": "HST",
+            "error": "Invalid value HST for teamName"
+          },
+          {
+            "row": 139,
+            "column": "teamName",
+            "value": "HST",
+            "error": "Invalid value HST for teamName"
+          },
+          {
+            "row": 155,
+            "column": "teamName",
+            "value": "ARZ",
+            "error": "Invalid value ARZ for teamName"
+          },
+          {
+            "row": 166,
+            "column": "teamName",
+            "value": "CLV",
+            "error": "Invalid value CLV for teamName"
+          },
+          {
+            "row": 168,
+            "column": "teamName",
+            "value": "BLT",
+            "error": "Invalid value BLT for teamName"
+          },
+          {
+            "row": 172,
+            "column": "teamName",
+            "value": "LA",
+            "error": "Invalid value LA for teamName"
+          },
+          {
+            "row": 182,
+            "column": "teamName",
+            "value": "BLT",
+            "error": "Invalid value BLT for teamName"
+          },
+          {
+            "row": 188,
+            "column": "teamName",
+            "value": "LA",
+            "error": "Invalid value LA for teamName"
+          },
+          {
+            "row": 191,
+            "column": "teamName",
+            "value": "LA",
+            "error": "Invalid value LA for teamName"
+          },
+          {
+            "row": 197,
+            "column": "teamName",
+            "value": "HST",
+            "error": "Invalid value HST for teamName"
+          },
+          {
+            "row": 198,
+            "column": "teamName",
+            "value": "HST",
+            "error": "Invalid value HST for teamName"
+          },
+          {
+            "row": 208,
+            "column": "teamName",
+            "value": "ARZ",
+            "error": "Invalid value ARZ for teamName"
+          },
+          {
+            "row": 209,
+            "column": "teamName",
+            "value": "LA",
+            "error": "Invalid value LA for teamName"
+          },
+          {
+            "row": 214,
+            "column": "teamName",
+            "value": "LA",
+            "error": "Invalid value LA for teamName"
+          },
+          {
+            "row": 216,
+            "column": "teamName",
+            "value": "BLT",
+            "error": "Invalid value BLT for teamName"
+          },
+          {
+            "row": 219,
+            "column": "teamName",
+            "value": "LA",
+            "error": "Invalid value LA for teamName"
+          },
+          {
+            "row": 228,
+            "column": "teamName",
+            "value": "CLV",
+            "error": "Invalid value CLV for teamName"
+          },
+          {
+            "row": 236,
+            "column": "teamName",
+            "value": "CLV",
+            "error": "Invalid value CLV for teamName"
+          },
+          {
+            "row": 238,
+            "column": "teamName",
+            "value": "HST",
+            "error": "Invalid value HST for teamName"
+          },
+          {
+            "row": 241,
+            "column": "teamName",
+            "value": "CLV",
+            "error": "Invalid value CLV for teamName"
+          },
+          {
+            "row": 245,
+            "column": "teamName",
+            "value": "ARZ",
+            "error": "Invalid value ARZ for teamName"
+          },
+          {
+            "row": 247,
+            "column": "teamName",
+            "value": "BLT",
+            "error": "Invalid value BLT for teamName"
+          },
+          {
+            "row": 251,
+            "column": "teamName",
+            "value": "HST",
+            "error": "Invalid value HST for teamName"
+          },
+          {
+            "row": 283,
+            "column": "teamName",
+            "value": "CLV",
+            "error": "Invalid value CLV for teamName"
+          },
+          {
+            "row": 285,
+            "column": "teamName",
+            "value": "LA",
+            "error": "Invalid value LA for teamName"
+          },
+          {
+            "row": 290,
+            "column": "teamName",
+            "value": "ARZ",
+            "error": "Invalid value ARZ for teamName"
+          },
+          {
+            "row": 293,
+            "column": "teamName",
+            "value": "ARZ",
+            "error": "Invalid value ARZ for teamName"
+          },
+          {
+            "row": 297,
+            "column": "teamName",
+            "value": "ARZ",
+            "error": "Invalid value ARZ for teamName"
+          },
+          {
+            "row": 303,
+            "column": "teamName",
+            "value": "HST",
+            "error": "Invalid value HST for teamName"
+          },
+          {
+            "row": 306,
+            "column": "teamName",
+            "value": "ARZ",
+            "error": "Invalid value ARZ for teamName"
+          },
+          {
+            "row": 322,
+            "column": "teamName",
+            "value": "ARZ",
+            "error": "Invalid value ARZ for teamName"
+          },
+          {
+            "row": 325,
+            "column": "teamName",
+            "value": "BLT",
+            "error": "Invalid value BLT for teamName"
+          },
+          {
+            "row": 330,
+            "column": "teamName",
+            "value": "LA",
+            "error": "Invalid value LA for teamName"
+          },
+          {
+            "row": 335,
+            "column": "teamName",
+            "value": "HST",
+            "error": "Invalid value HST for teamName"
+          },
+          {
+            "row": 342,
+            "column": "teamName",
+            "value": "CLV",
+            "error": "Invalid value CLV for teamName"
+          },
+          {
+            "row": 345,
+            "column": "teamName",
+            "value": "HST",
+            "error": "Invalid value HST for teamName"
+          },
+          {
+            "row": 361,
+            "column": "teamName",
+            "value": "CLV",
+            "error": "Invalid value CLV for teamName"
+          },
+          {
+            "row": 362,
+            "column": "teamName",
+            "value": "LA",
+            "error": "Invalid value LA for teamName"
+          },
+          {
+            "row": 366,
+            "column": "teamName",
+            "value": "BLT",
+            "error": "Invalid value BLT for teamName"
+          },
+          {
+            "row": 369,
+            "column": "teamName",
+            "value": "CLV",
+            "error": "Invalid value CLV for teamName"
+          },
+          {
+            "row": 372,
+            "column": "teamName",
+            "value": "CLV",
+            "error": "Invalid value CLV for teamName"
+          },
+          {
+            "row": 383,
+            "column": "teamName",
+            "value": "ARZ",
+            "error": "Invalid value ARZ for teamName"
+          },
+          {
+            "row": 419,
+            "column": "teamName",
+            "value": "ARZ",
+            "error": "Invalid value ARZ for teamName"
+          },
+          {
+            "row": 422,
+            "column": "teamName",
+            "value": "BLT",
+            "error": "Invalid value BLT for teamName"
+          },
+          {
+            "row": 425,
+            "column": "teamName",
+            "value": "CLV",
+            "error": "Invalid value CLV for teamName"
+          },
+          {
+            "row": 438,
+            "column": "teamName",
+            "value": "BLT",
+            "error": "Invalid value BLT for teamName"
+          },
+          {
+            "row": 447,
+            "column": "teamName",
+            "value": "BLT",
+            "error": "Invalid value BLT for teamName"
+          },
+          {
+            "row": 453,
+            "column": "teamName",
+            "value": "ARZ",
+            "error": "Invalid value ARZ for teamName"
+          },
+          {
+            "row": 454,
+            "column": "teamName",
+            "value": "HST",
+            "error": "Invalid value HST for teamName"
+          },
+          {
+            "row": 459,
+            "column": "teamName",
+            "value": "HST",
+            "error": "Invalid value HST for teamName"
+          },
+          {
+            "row": 460,
+            "column": "teamName",
+            "value": "ARZ",
+            "error": "Invalid value ARZ for teamName"
+          },
+          {
+            "row": 465,
+            "column": "teamName",
+            "value": "HST",
+            "error": "Invalid value HST for teamName"
+          },
+          {
+            "row": 474,
+            "column": "teamName",
+            "value": "LA",
+            "error": "Invalid value LA for teamName"
+          },
+          {
+            "row": 479,
+            "column": "teamName",
+            "value": "CLV",
+            "error": "Invalid value CLV for teamName"
+          },
+          {
+            "row": 483,
+            "column": "teamName",
+            "value": "LA",
+            "error": "Invalid value LA for teamName"
+          },
+          {
+            "row": 486,
+            "column": "teamName",
+            "value": "ARZ",
+            "error": "Invalid value ARZ for teamName"
+          },
+          {
+            "row": 493,
+            "column": "teamName",
+            "value": "BLT",
+            "error": "Invalid value BLT for teamName"
+          },
+          {
+            "row": 497,
+            "column": "teamName",
+            "value": "HST",
+            "error": "Invalid value HST for teamName"
+          },
+          {
+            "row": 503,
+            "column": "teamName",
+            "value": "CLV",
+            "error": "Invalid value CLV for teamName"
+          },
+          {
+            "row": 504,
+            "column": "teamName",
+            "value": "CLV",
+            "error": "Invalid value CLV for teamName"
+          },
+          {
+            "row": 514,
+            "column": "teamName",
+            "value": "BLT",
+            "error": "Invalid value BLT for teamName"
+          },
+          {
+            "row": 522,
+            "column": "teamName",
+            "value": "LA",
+            "error": "Invalid value LA for teamName"
+          },
+          {
+            "row": 525,
+            "column": "teamName",
+            "value": "HST",
+            "error": "Invalid value HST for teamName"
+          },
+          {
+            "row": 528,
+            "column": "teamName",
+            "value": "ARZ",
+            "error": "Invalid value ARZ for teamName"
+          },
+          {
+            "row": 540,
+            "column": "teamName",
+            "value": "CLV",
+            "error": "Invalid value CLV for teamName"
+          },
+          {
+            "row": 550,
+            "column": "teamName",
+            "value": "CLV",
+            "error": "Invalid value CLV for teamName"
+          },
+          {
+            "row": 552,
+            "column": "teamName",
+            "value": "HST",
+            "error": "Invalid value HST for teamName"
+          },
+          {
+            "row": 554,
+            "column": "teamName",
+            "value": "LA",
+            "error": "Invalid value LA for teamName"
+          },
+          {
+            "row": 558,
+            "column": "teamName",
+            "value": "BLT",
+            "error": "Invalid value BLT for teamName"
+          },
+          {
+            "row": 563,
+            "column": "teamName",
+            "value": "ARZ",
+            "error": "Invalid value ARZ for teamName"
+          }
+        ]
+      },
+      "errors": [],
+      "warnings": [
+        "Extra columns found: {'patAtt', 'dstReturnTd', 'patMade', 'idpSafeties', 'fgMade019', 'idpTacklesSolo', 'idpFumblesForced', 'idpSacks', 'fgMade3039', 'dstPts713', 'idpTacklesForLoss', 'dstTd', 'idpInt', 'dstPts2127', 'dstFumblesRecovered', 'fgAtt4049', 'idpTd', 'dstReturnYds', 'dstPts2834', 'idpFumblesRecovered', 'returnYds', 'fgMade4049', 'dstPts16', 'dstInt', 'dstPts35plus', 'dstPts0', 'fgAtt50plus', 'dstSacks', 'idpPassDefended', 'fgMade2029', 'fgMade50plus', 'fgAtt3039', 'dstPts1420', 'idpTacklesAssist', 'returnTd', 'fgAtt019', 'fgAtt2029', 'dstFumblesForced', 'dstSafeties'}",
+        "Quarantined 91 rows to /mnt/c/Users/giraf/Documents/projects/fftool/artifacts/quarantine/projections_2025_dupes.csv"
+      ]
+    },
+    "strength_of_schedule/sos_2025.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/strength_of_schedule/sos_2025.csv",
+        "sha256": "2202f29562beab57784f69db806e74bad466b6f5d2da8fdbbbda9feacc85b8c5",
+        "row_count": 32,
+        "column_count": 24,
+        "parsed_rows": 32,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.863764",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2023-2024/defense_coverage_summary.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2023-2024/defense_coverage_summary.csv",
+        "sha256": "e5ad3c2ab655581affe9f5fb4d30372c31c1b9a94de3ef02985c297468b3a13b",
+        "row_count": 848,
+        "column_count": 40,
+        "parsed_rows": 848,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.887210",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2023-2024/defense_summary.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2023-2024/defense_summary.csv",
+        "sha256": "24fb9bb606554befd922d37729b7f67cefef91d447f0a73c92ff607ff9460432",
+        "row_count": 1045,
+        "column_count": 55,
+        "parsed_rows": 1045,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.929450",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2023-2024/line_pass_blocking_efficiency.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2023-2024/line_pass_blocking_efficiency.csv",
+        "sha256": "844c6b4da4374a345a549ec8d145e296166dd5335674822d99dbb83974202743",
+        "row_count": 32,
+        "column_count": 10,
+        "parsed_rows": 32,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.962327",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2023-2024/offense_blocking.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2023-2024/offense_blocking.csv",
+        "sha256": "2bec2f662658132b961dcb97bac843083a8cc5cb8dff9f8e08618e550684862f",
+        "row_count": 1061,
+        "column_count": 31,
+        "parsed_rows": 1061,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:56.985859",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2023-2024/offense_pass_blocking.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2023-2024/offense_pass_blocking.csv",
+        "sha256": "0fa04662a2fb36c2fe9d163f770e4d613edec4c0b7d2051b5f4499cdfc7f9244",
+        "row_count": 712,
+        "column_count": 30,
+        "parsed_rows": 712,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.015414",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2023-2024/offense_run_blockng.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2023-2024/offense_run_blockng.csv",
+        "sha256": "6061d108b3a12c94e8df735f3ae06e961058b0fa917eaefbfeb2a1e13684421a",
+        "row_count": 1037,
+        "column_count": 22,
+        "parsed_rows": 1037,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.042130",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2023-2024/passing_allowed_pressure.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2023-2024/passing_allowed_pressure.csv",
+        "sha256": "4a721db7d5ae3adcbdb242a5f3226e8d8a8c4ba40cc8e7b476fa7a9ac5a76818",
+        "row_count": 86,
+        "column_count": 32,
+        "parsed_rows": 86,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.063493",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2023-2024/passing_depth.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2023-2024/passing_depth.csv",
+        "sha256": "c81c3b23a702bd7142cd0840193e720351dc26b6b7bf48082f9bc601938122c5",
+        "row_count": 118,
+        "column_count": 522,
+        "parsed_rows": 118,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.094742",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2023-2024/passing_pressure.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2023-2024/passing_pressure.csv",
+        "sha256": "e0373e3ebd6be1f3e86372a5586e80d62da3f77bb6effc7a912595f49f56c748",
+        "row_count": 118,
+        "column_count": 189,
+        "parsed_rows": 118,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.133938",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2023-2024/passing_summary.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2023-2024/passing_summary.csv",
+        "sha256": "345d2f3025c10ea8d5447af5528d455f98a6df5d11cbf0a9606f1b71ada75468",
+        "row_count": 104,
+        "column_count": 42,
+        "parsed_rows": 104,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.152877",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2023-2024/pass_rush_productivity.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2023-2024/pass_rush_productivity.csv",
+        "sha256": "f1d3fe6d6a900419d6a4fbc3140ebbcbccdaf5ebbaafbd6f8a3ff1daf0a62e5f",
+        "row_count": 825,
+        "column_count": 40,
+        "parsed_rows": 825,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.176694",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2023-2024/pass_rush_summary.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2023-2024/pass_rush_summary.csv",
+        "sha256": "167a2e7f9768a9430670d95d30a7e998aeddf22b7497e59930c446ff76f49327",
+        "row_count": 834,
+        "column_count": 34,
+        "parsed_rows": 834,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.208851",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2023-2024/receiving_concept.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2023-2024/receiving_concept.csv",
+        "sha256": "b1a0cab2db8ba94323db5ca084877501f42aa3e6acb8dc5c1c81a3a91850bd80",
+        "row_count": 482,
+        "column_count": 67,
+        "parsed_rows": 482,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.240365",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2023-2024/receiving_depth.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2023-2024/receiving_depth.csv",
+        "sha256": "4b8fcdd0e7e0504d26cba0638ea8c611a6eb09cf84034820c30909c804ce2621",
+        "row_count": 482,
+        "column_count": 473,
+        "parsed_rows": 482,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.339478",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2023-2024/receiving_scheme.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2023-2024/receiving_scheme.csv",
+        "sha256": "aeaf3999066b44dbf8a3667595991e4f5a60599aa548be499c82febbc1d4e8b4",
+        "row_count": 482,
+        "column_count": 67,
+        "parsed_rows": 482,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.429159",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2023-2024/receiving_summary.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2023-2024/receiving_summary.csv",
+        "sha256": "b92eb2b166915438fb7c6dfc39f41ac4620abd910f9aace0929f46bd72b4caf7",
+        "row_count": 482,
+        "column_count": 45,
+        "parsed_rows": 482,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.459405",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2023-2024/run_defense_summary.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2023-2024/run_defense_summary.csv",
+        "sha256": "2f88ef5971cfad14615c131154a6e0c76ea9b42757403f6c90682ad79623f0f0",
+        "row_count": 1014,
+        "column_count": 24,
+        "parsed_rows": 1014,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.487915",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2023-2024/rushing_summary.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2023-2024/rushing_summary.csv",
+        "sha256": "431cb0943bd9d2070f9d5462d89781840f4d83f0717c1f0fcf25c6a99d8cd17c",
+        "row_count": 345,
+        "column_count": 47,
+        "parsed_rows": 345,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.514587",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2023-2024/slot_coverage.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2023-2024/slot_coverage.csv",
+        "sha256": "825fc6747bb78fed1450798093868a8a59ab69348c07dbda2b49eebc19ddd893",
+        "row_count": 443,
+        "column_count": 17,
+        "parsed_rows": 443,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.534187",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2023-2024/time_in_pocket.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2023-2024/time_in_pocket.csv",
+        "sha256": "7a1be93873bc18bf7c632e7dc22bd894cd5f5b7e508da3a95c02118c67b94300",
+        "row_count": 118,
+        "column_count": 101,
+        "parsed_rows": 118,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.552445",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2024-2025/defense_coverage_scheme.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2024-2025/defense_coverage_scheme.csv",
+        "sha256": "87964d1114bbaf01f71689f8d8ad20fff4a641f4669b04a2c48f360dd880388a",
+        "row_count": 845,
+        "column_count": 65,
+        "parsed_rows": 845,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.587556",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2024-2025/defense_coverage_summary.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2024-2025/defense_coverage_summary.csv",
+        "sha256": "abd74e4263394c54e4f67de4dca8000e47d335532d910f91854bcdd67b2a3961",
+        "row_count": 876,
+        "column_count": 40,
+        "parsed_rows": 876,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.630899",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2024-2025/defense_summary.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2024-2025/defense_summary.csv",
+        "sha256": "83e4f0cd0ccc4d2d0c189c47eb133c2e6bee4c2d97a40c88e669fa42fbebd619",
+        "row_count": 1064,
+        "column_count": 55,
+        "parsed_rows": 1064,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.674702",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2024-2025/line_pass_blocking_efficiency.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2024-2025/line_pass_blocking_efficiency.csv",
+        "sha256": "4805f04a8ff334c8b9e37714c45dcf449770cad0f38676572ed61a18f4ad22e2",
+        "row_count": 32,
+        "column_count": 10,
+        "parsed_rows": 32,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.706010",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2024-2025/offense_blocking.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2024-2025/offense_blocking.csv",
+        "sha256": "5b7cf11117e63d5ff994e8e1e9f4c09cadc80468b10bfb87cf96992c832d2bf5",
+        "row_count": 1094,
+        "column_count": 31,
+        "parsed_rows": 1094,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.732361",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2024-2025/offense_pass_blocking.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2024-2025/offense_pass_blocking.csv",
+        "sha256": "defd2ef41685ee4e4a1c3ada11872ef4530bec768edba69e0baadede4a1d35a2",
+        "row_count": 713,
+        "column_count": 30,
+        "parsed_rows": 713,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.762928",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2024-2025/offense_run_blockng.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2024-2025/offense_run_blockng.csv",
+        "sha256": "a086026cc4a6071a9ebef7d015a5d153af8bed37fb3a46c7a7c2dcab7968dd10",
+        "row_count": 1056,
+        "column_count": 22,
+        "parsed_rows": 1056,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.790286",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2024-2025/passing_depth.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2024-2025/passing_depth.csv",
+        "sha256": "dd56726d6ebd34e482a56a5099d11b067aba3e9ce91316efba7267e0bfc7a292",
+        "row_count": 110,
+        "column_count": 522,
+        "parsed_rows": 110,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.830403",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2024-2025/passing_pressure.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2024-2025/passing_pressure.csv",
+        "sha256": "aadedf78aac172164ff1d2c911e290853944fba9700ef2eca40c7d5260640761",
+        "row_count": 110,
+        "column_count": 177,
+        "parsed_rows": 110,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.869743",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2024-2025/passing_summary.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2024-2025/passing_summary.csv",
+        "sha256": "cd307e1ed2a96c67e578c14cff75d9a9f03fafa0e7c902b4f681118a6518edbc",
+        "row_count": 103,
+        "column_count": 42,
+        "parsed_rows": 103,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.889935",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2024-2025/pass_rush_productivity.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2024-2025/pass_rush_productivity.csv",
+        "sha256": "25a5ab9cbc8aeb2f5b1318f012191cf5fa686dfa80a7a39ccb115a87d3964650",
+        "row_count": 864,
+        "column_count": 40,
+        "parsed_rows": 864,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.915504",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2024-2025/pass_rush_summary.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2024-2025/pass_rush_summary.csv",
+        "sha256": "8005f70ad70a61d4876a0938b1b14bda256ff8e45d2ae52fd51c00444412bae9",
+        "row_count": 868,
+        "column_count": 34,
+        "parsed_rows": 868,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.947439",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2024-2025/receiving_concept.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2024-2025/receiving_concept.csv",
+        "sha256": "da8f51d069b36f9d02ccbcccfefefe99e87349466c6f3e7060b9f982f1af03d2",
+        "row_count": 492,
+        "column_count": 67,
+        "parsed_rows": 492,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:57.979028",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2024-2025/receiving_depth.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2024-2025/receiving_depth.csv",
+        "sha256": "69ff98f5889df4ce6ad10358ac1230484a0cfac83b1e7dc1bd0b287b675400ad",
+        "row_count": 492,
+        "column_count": 473,
+        "parsed_rows": 492,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.076845",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2024-2025/receiving_scheme.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2024-2025/receiving_scheme.csv",
+        "sha256": "8a60e4b2bd82bd443d6b1ac30d75c9ce808096ac4ea3b7ded5028de8871e3a89",
+        "row_count": 492,
+        "column_count": 67,
+        "parsed_rows": 492,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.163203",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2024-2025/receiving_summary.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2024-2025/receiving_summary.csv",
+        "sha256": "9b1ea95f10f070a3963d7db44c141385b62d089f3eb03c16d4481761d2a9ba58",
+        "row_count": 492,
+        "column_count": 45,
+        "parsed_rows": 492,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.193589",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2024-2025/run_defense_summary.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2024-2025/run_defense_summary.csv",
+        "sha256": "8cdb419b048c0ad61f2c1bd0a3d95a193779cbb1b9ba1f3b8d061f17c3c097d2",
+        "row_count": 1030,
+        "column_count": 24,
+        "parsed_rows": 1030,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.221822",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2024-2025/rushing_summary.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2024-2025/rushing_summary.csv",
+        "sha256": "8f68e7b21d3bfc5b0b9721c0f32e64817d1bef27ae60ba47dd236ac829f634ad",
+        "row_count": 333,
+        "column_count": 47,
+        "parsed_rows": 333,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.246723",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2024-2025/slot_coverage.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2024-2025/slot_coverage.csv",
+        "sha256": "9b8bb5b28b054299a3c56c875be4aadcd033bcc466a278c965c531cb50bde0f8",
+        "row_count": 449,
+        "column_count": 17,
+        "parsed_rows": 449,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.265426",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2024-2025/time_in_pocket.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2024-2025/time_in_pocket.csv",
+        "sha256": "2d5d8ecf7668b5990c11e45c72d6626d3a8c7a838ac67b04890be225f15127ce",
+        "row_count": 110,
+        "column_count": 95,
+        "parsed_rows": 110,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.284097",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/49ers.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/49ers.csv",
+        "sha256": "94818d7cefac80b207bd93cd373f81075db814fc69dc3056d4962c1e40edf3f3",
+        "row_count": 73,
+        "column_count": 25,
+        "parsed_rows": 73,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.299919",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/bears.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/bears.csv",
+        "sha256": "097a934cd886b3f7e11c1c4c1bc6e79222938563ebc785e103d9c69fc046257d",
+        "row_count": 83,
+        "column_count": 25,
+        "parsed_rows": 83,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.312515",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/bengals.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/bengals.csv",
+        "sha256": "f137b4cdc4fb0697c6afcd93e91dea2ea84c89181130340b10050c9454b0ea9e",
+        "row_count": 86,
+        "column_count": 25,
+        "parsed_rows": 86,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.326532",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/bills.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/bills.csv",
+        "sha256": "ad055cf097f0352d476ade02715f2426454ad20ffd035453f595c17f601521ac",
+        "row_count": 83,
+        "column_count": 25,
+        "parsed_rows": 83,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.339102",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/broncos.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/broncos.csv",
+        "sha256": "d1d708ce0e88fb8cfe2e68394a30b9b9ff3d151f6b8ecaffe343938d5ee56c39",
+        "row_count": 90,
+        "column_count": 25,
+        "parsed_rows": 90,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.351394",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/browns.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/browns.csv",
+        "sha256": "412e11894008f9ea1278006f32f22fe205b3ee0b50163804b23882f7b24f6a50",
+        "row_count": 72,
+        "column_count": 25,
+        "parsed_rows": 72,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.364328",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/buccaneers.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/buccaneers.csv",
+        "sha256": "eb5941cf81322003f81e0dfbaf1ee1a4717e34dfbff40ce5caac0dcf4f3f89cd",
+        "row_count": 58,
+        "column_count": 1,
+        "parsed_rows": 58,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.377153",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/cardinals.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/cardinals.csv",
+        "sha256": "7d1ee7d639e59524a00840cb3fd0fb8e948eee87b104b1486db6ee3358b828a9",
+        "row_count": 92,
+        "column_count": 1,
+        "parsed_rows": 92,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.394541",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/chargers.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/chargers.csv",
+        "sha256": "09796afbd800563587fc6955fb74fcd08aa5e68e417511c0a9f04f82fa647765",
+        "row_count": 92,
+        "column_count": 1,
+        "parsed_rows": 92,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.411350",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/chiefs.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/chiefs.csv",
+        "sha256": "fe21fdc92e0794da08ae1268e70b08d95e7543072e2425cf39e3cd491a6a7e5c",
+        "row_count": 94,
+        "column_count": 25,
+        "parsed_rows": 94,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.428020",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/colts.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/colts.csv",
+        "sha256": "aa5f2eb3baaefc7c792c5999788fbe0c3cab483d87ccd68a161e93870c999190",
+        "row_count": 94,
+        "column_count": 25,
+        "parsed_rows": 94,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.441332",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/commanders.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/commanders.csv",
+        "sha256": "74676396d121a60d70eea4b948e44dbc96f8cdaef71de63f4a8f5888c73b980a",
+        "row_count": 90,
+        "column_count": 1,
+        "parsed_rows": 90,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.454771",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/cowboys.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/cowboys.csv",
+        "sha256": "033418cda2b044496aad38b4420378916dcb7b96dad14b26b8b651b6bfcddd50",
+        "row_count": 88,
+        "column_count": 25,
+        "parsed_rows": 88,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.469702",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/dolphins.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/dolphins.csv",
+        "sha256": "571b704395597aa96711e940ad548950c3a6f9bdba320ff2ca9ea1a6c54fe27a",
+        "row_count": 96,
+        "column_count": 1,
+        "parsed_rows": 96,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.484928",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/eagles.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/eagles.csv",
+        "sha256": "a237fc33fc6a560bde77e85263f0e6f316c504db28c0bcfaa1bdd67182525e4c",
+        "row_count": 89,
+        "column_count": 25,
+        "parsed_rows": 89,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.500187",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/falcons.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/falcons.csv",
+        "sha256": "d9617c1b58d043f6782fdba5aebf850a1d8b0077270ed8084ca66c843e7ad917",
+        "row_count": 78,
+        "column_count": 1,
+        "parsed_rows": 78,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.513208",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/giants.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/giants.csv",
+        "sha256": "1731fc12d028375f0b300670d0160fd04e437a15bc9aa3df2d52ecd5262143de",
+        "row_count": 80,
+        "column_count": 1,
+        "parsed_rows": 80,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.528141",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/jaguars.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/jaguars.csv",
+        "sha256": "1b0a4c3c006a4fdabdffccc9dbda3cf290956f165508af5dda06b1a63035673f",
+        "row_count": 89,
+        "column_count": 1,
+        "parsed_rows": 89,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.545025",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/jets.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/jets.csv",
+        "sha256": "ac90bb66662bbe09179cf12b876d096a4eb58f71b0d58fbdaf5673000150e51f",
+        "row_count": 75,
+        "column_count": 25,
+        "parsed_rows": 75,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.560108",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/lions.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/lions.csv",
+        "sha256": "a42a8c7b5dea35d212b1a273346609291f798deeb4f225c95e81ed63bba4dfa4",
+        "row_count": 95,
+        "column_count": 1,
+        "parsed_rows": 95,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.572875",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/packers.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/packers.csv",
+        "sha256": "e23d671acb9071d00c6786db259e544211f8ff3b31d477442d6045557011e141",
+        "row_count": 89,
+        "column_count": 1,
+        "parsed_rows": 89,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.589305",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/panthers.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/panthers.csv",
+        "sha256": "f04f2cd5b1ebe59584137f632f2b778d6732a0bef4b93729c50e986786a735e4",
+        "row_count": 89,
+        "column_count": 25,
+        "parsed_rows": 89,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.604712",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/patriots.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/patriots.csv",
+        "sha256": "dde68e8695c3e9b8ebea9b046f3d65d4f728fd66632b387c06775d1251c3d354",
+        "row_count": 79,
+        "column_count": 1,
+        "parsed_rows": 79,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:58.617590",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/raiders.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/raiders.csv",
+        "sha256": "e0d939c5fb46d583f5f8f9146aef21f32853e4e9e87b1431d4d341b1381e2454",
+        "row_count": 88,
+        "column_count": 1,
+        "parsed_rows": 88,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:59.871218",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/rams.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/rams.csv",
+        "sha256": "d356911a7721e2e80ddd1c3a6253581c43e70f0ba29cc6bd1486863953c85e6b",
+        "row_count": 77,
+        "column_count": 25,
+        "parsed_rows": 77,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:59.886623",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/ravens.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/ravens.csv",
+        "sha256": "779897d1a0d812512f899a94a7cb60ec7e09aea2deee145372d4d392708b4a67",
+        "row_count": 90,
+        "column_count": 1,
+        "parsed_rows": 90,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:59.901567",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/saints.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/saints.csv",
+        "sha256": "075dfbfe9e019cde1f38815a2bac1f713337bec4c97ba38f3c19111d73fb48b3",
+        "row_count": 90,
+        "column_count": 1,
+        "parsed_rows": 90,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:59.918197",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/seahawks.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/seahawks.csv",
+        "sha256": "3a12ee228cff0301eaf7f11ada5b5d9c1ff28dbc58b00ec8d64e5fa6149bd69c",
+        "row_count": 89,
+        "column_count": 25,
+        "parsed_rows": 89,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:59.934942",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/steelers.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/steelers.csv",
+        "sha256": "03269f06f4fc6d693e587af589d0bc821c3b0ef66c7aa1c1398752a55c47eff0",
+        "row_count": 80,
+        "column_count": 25,
+        "parsed_rows": 80,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:59.949834",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/texans.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/texans.csv",
+        "sha256": "e7807b0f90aa0304749499450156ab9fda58f34a1afacb41e1ed7af43919bc64",
+        "row_count": 89,
+        "column_count": 1,
+        "parsed_rows": 89,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:59.965835",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/titans.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/titans.csv",
+        "sha256": "19477a4faf550a7a44373dce4f569570eefa53f639e028728c9db013532d20d0",
+        "row_count": 90,
+        "column_count": 1,
+        "parsed_rows": 90,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:59.982653",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/2025-2026/vikings.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/2025-2026/vikings.csv",
+        "sha256": "93cc85e5aaedc273c27b9f02dbe9dba1fed4b3952fca6b3ec2f717e1902aaf14",
+        "row_count": 79,
+        "column_count": 25,
+        "parsed_rows": 79,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:02:59.999636",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_2025_Depth_Charts.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_2025_Depth_Charts.csv",
+        "sha256": "b778bed7b0d6a7afa3938d7dd459441a9b9a48aaca5ab8dba8a7297aa9a23623",
+        "row_count": 316,
+        "column_count": 1,
+        "parsed_rows": 316,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:03:00.013849",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_QB.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_QB.csv",
+        "sha256": "6a5eeda70d3b431888db741c28e630fe3b48632561a09ac8feaf3d4d5b02eb41",
+        "row_count": 90,
+        "column_count": 24,
+        "parsed_rows": 90,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:03:00.029773",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_RB.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_RB.csv",
+        "sha256": "7cea3e6f3fd857df223a3eede43d124cdce5b9afa9a16c029aa6c0dedabd8af0",
+        "row_count": 141,
+        "column_count": 24,
+        "parsed_rows": 141,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:03:00.048336",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_TE.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_TE.csv",
+        "sha256": "7e201c928b523a8f85a89925bdb2310f9f00d668c0f1b5d95ab36627210edf46",
+        "row_count": 102,
+        "column_count": 26,
+        "parsed_rows": 102,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:03:00.065212",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_WR.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_WR.csv",
+        "sha256": "0885d676dd9092f4fe123a8fcc178cbf0b8a7028fd1e8ac0a98d14ab328e1eb5",
+        "row_count": 190,
+        "column_count": 26,
+        "parsed_rows": 190,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:03:00.085481",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Statistics_QB.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Statistics_QB.csv",
+        "sha256": "36ba0f3710016e5cf63b48c85424f798a50bf8dc6cf26d96c7cc098817665aa6",
+        "row_count": 119,
+        "column_count": 18,
+        "parsed_rows": 119,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:03:00.106201",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Statistics_RB.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Statistics_RB.csv",
+        "sha256": "1c8a119b273a4e5bb902c0361bb6d620617c3254864b1b4e1dec4c685e27f39e",
+        "row_count": 246,
+        "column_count": 18,
+        "parsed_rows": 246,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:03:00.126634",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Statistics_TE.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Statistics_TE.csv",
+        "sha256": "81af0459ac5c7d90872732686b646a9d8710289b5d3e4c8b9a8f6ce513cda42f",
+        "row_count": 220,
+        "column_count": 17,
+        "parsed_rows": 220,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:03:00.146416",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    },
+    "advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Statistics_WR.csv": {
+      "success": true,
+      "metadata": {
+        "path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Statistics_WR.csv",
+        "sha256": "2a4ed93b08af2304f6b2f61612ef4607c736b2446991830100d56e3681f75451",
+        "row_count": 396,
+        "column_count": 17,
+        "parsed_rows": 396,
+        "quarantined_rows": 0,
+        "coercion_count": 0,
+        "null_count": 0,
+        "duplicate_count": 0,
+        "load_timestamp": "2025-08-27T16:03:00.167879",
+        "exceptions": []
+      },
+      "errors": [],
+      "warnings": []
+    }
+  }
+}

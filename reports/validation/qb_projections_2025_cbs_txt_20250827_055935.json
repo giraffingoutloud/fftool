@@ -1,0 +1,28 @@
+{
+  "file_path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/projections/qb_projections_2025_cbs.txt",
+  "file_type": "txt",
+  "file_size": 5659,
+  "total_checks": 3,
+  "passed_checks": 3,
+  "failed_checks": 0,
+  "schema_errors": [],
+  "duplicate_rows": [],
+  "missing_values": {},
+  "type_errors": [],
+  "range_errors": [],
+  "uniqueness_violations": [],
+  "content_summary": {
+    "line_count": 77,
+    "file_size": 5659,
+    "is_structured": false,
+    "delimiter": null,
+    "sample_lines": [
+      "Quarterbacks",
+      "Passing\tRushing\tMisc",
+      "Player\tgp\tatt\tcmp\tyds\tyds/g\ttd\tint\trate\tatt\tyds\tavg\ttd\tfl\tfpts\tfppg",
+      "Lamar Jackson QB  BAL\t17\t453\t310\t4143\t243.7\t36\t6\t118.2\t132\t850\t6.4\t3\t5\t461.6\t27.2",
+      "Josh Allen QB  BUF\t17\t514\t333\t3883\t228.4\t33\t7\t103.3\t120\t597\t5.0\t11\t3\t457.9\t26.9"
+    ],
+    "encoding": "utf-8"
+  }
+}

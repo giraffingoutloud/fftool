@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Page Load</title>
+</head>
+<body>
+    <h1>Testing Page Load</h1>
+    <iframe src="http://localhost:3002" width="100%" height="600"></iframe>
+    <script>
+        // Check if the page loads
+        window.addEventListener('load', () => {
+            console.log('Page loaded');
+            
+            // Try to fetch from the server
+            fetch('http://localhost:3002')
+                .then(res => res.text())
+                .then(html => {
+                    console.log('HTML received, length:', html.length);
+                    if (html.includes('error') || html.includes('Error')) {
+                        console.error('Found error in HTML');
+                    }
+                })
+                .catch(err => console.error('Fetch error:', err));
+        });
+        
+        // Listen for console errors from iframe
+        window.addEventListener('message', (event) => {
+            console.log('Message from iframe:', event.data);
+        });
+    </script>
+</body>
+</html>

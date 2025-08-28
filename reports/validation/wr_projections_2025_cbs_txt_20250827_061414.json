@@ -1,0 +1,28 @@
+{
+  "file_path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/projections/wr_projections_2025_cbs.txt",
+  "file_type": "txt",
+  "file_size": 7284,
+  "total_checks": 3,
+  "passed_checks": 3,
+  "failed_checks": 0,
+  "schema_errors": [],
+  "duplicate_rows": [],
+  "missing_values": {},
+  "type_errors": [],
+  "range_errors": [],
+  "uniqueness_violations": [],
+  "content_summary": {
+    "line_count": 103,
+    "file_size": 7284,
+    "is_structured": false,
+    "delimiter": null,
+    "sample_lines": [
+      "Wide Receivers",
+      "Receiving\tRushing\tMisc",
+      "Player\tgp\ttgt\trec\tyds\tyds/g\tavg\ttd\tatt\tyds\tavg\ttd\tfl\tfpts\tfppg",
+      "Ja'Marr Chase WR  CIN\t17\t167\t119\t1601\t94.2\t13.5\t14\t3\t21\t7.0\t0\t0\t367.1\t21.6",
+      "Malik Nabers WR  NYG\t17\t181\t116\t1397\t82.2\t12.0\t11\t6\t2\t0.3\t0\t0\t324.7\t19.1"
+    ],
+    "encoding": "utf-8"
+  }
+}

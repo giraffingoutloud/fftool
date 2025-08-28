@@ -1,0 +1,10 @@
+{
+  "check_name": "valuation_invariants",
+  "passed": true,
+  "errors": [],
+  "warnings": [],
+  "details": {
+    "positional_dropoffs": {}
+  },
+  "offending_keys": []
+}

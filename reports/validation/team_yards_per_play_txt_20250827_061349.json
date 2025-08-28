@@ -1,0 +1,40 @@
+{
+  "file_path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/team_data/team_yards_per_play.txt",
+  "file_type": "txt",
+  "file_size": 1213,
+  "total_checks": 3,
+  "passed_checks": 3,
+  "failed_checks": 0,
+  "schema_errors": [],
+  "duplicate_rows": [],
+  "missing_values": {},
+  "type_errors": [],
+  "range_errors": [],
+  "uniqueness_violations": [],
+  "content_summary": {
+    "line_count": 33,
+    "file_size": 1213,
+    "is_structured": true,
+    "delimiter": ",",
+    "sample_lines": [
+      "Rank,Team,2024,Last 3,Last 1,Home,Away,2023",
+      "1,Baltimore,6.8,6.7,7.3,6.7,7.0,5.8",
+      "2,Detroit,6.3,6.7,7.7,6.4,6.2,5.9",
+      "3,San Francisco,6.2,6.6,6.0,6.2,6.2,6.5",
+      "4,Tampa Bay,6.2,6.8,6.5,6.0,6.5,5.2"
+    ],
+    "encoding": "utf-8",
+    "columns": 8,
+    "rows": 33,
+    "headers": [
+      "Rank",
+      "Team",
+      "2024",
+      "Last 3",
+      "Last 1",
+      "Home",
+      "Away",
+      "2023"
+    ]
+  }
+}

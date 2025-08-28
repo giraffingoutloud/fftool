@@ -1,0 +1,40 @@
+{
+  "file_path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/team_data/team_offensive_tds_per_game.txt",
+  "file_type": "txt",
+  "file_size": 1213,
+  "total_checks": 3,
+  "passed_checks": 3,
+  "failed_checks": 0,
+  "schema_errors": [],
+  "duplicate_rows": [],
+  "missing_values": {},
+  "type_errors": [],
+  "range_errors": [],
+  "uniqueness_violations": [],
+  "content_summary": {
+    "line_count": 33,
+    "file_size": 1213,
+    "is_structured": true,
+    "delimiter": ",",
+    "sample_lines": [
+      "Rank,Team,2024,Last 3,Last 1,Home,Away,2023",
+      "1,Detroit,4.0,4.3,4.0,4.3,3.6,3.4",
+      "2,Baltimore,3.6,3.7,3.0,3.6,3.7,3.1",
+      "3,Buffalo,3.6,3.3,4.0,3.9,3.3,3.1",
+      "4,Philadelphia,3.3,4.7,3.0,3.3,3.3,2.6"
+    ],
+    "encoding": "utf-8",
+    "columns": 8,
+    "rows": 33,
+    "headers": [
+      "Rank",
+      "Team",
+      "2024",
+      "Last 3",
+      "Last 1",
+      "Home",
+      "Away",
+      "2023"
+    ]
+  }
+}

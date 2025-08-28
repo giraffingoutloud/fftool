@@ -1,0 +1,26 @@
+{
+  "start_time": "2025-08-27T16:05:21.842649",
+  "end_time": "2025-08-27T16:05:28.205503",
+  "duration_seconds": 6.362854,
+  "stages_completed": [
+    "integrity_pre_check",
+    "data_loading",
+    "data_validation",
+    "data_transformation",
+    "integrity_post_check",
+    "metadata_generation"
+  ],
+  "stages_failed": [],
+  "data_stats": {
+    "files_processed": 123,
+    "successful_loads": 123,
+    "failed_loads": 0,
+    "rows_parsed": 36248,
+    "rows_quarantined": 122,
+    "coercions": 575,
+    "duplicates": 0
+  },
+  "integrity_status": "verified",
+  "errors": [],
+  "warnings": []
+}

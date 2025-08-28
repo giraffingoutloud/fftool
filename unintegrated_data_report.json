@@ -1,0 +1,18 @@
+{
+  "unintegrated_categories": {
+    "height_weight": 64,
+    "college_draft": 64,
+    "advanced_stats": 546,
+    "snap_counts": 371,
+    "strength_of_schedule": 3,
+    "depth_chart": 98,
+    "status_injury": 2
+  },
+  "total_files_scanned": 100,
+  "recommendations": [
+    "Integrate height/weight from team roster files for size-adjusted metrics",
+    "Integrate snap counts to identify usage trends",
+    "Integrate injury status from adp2_2025.csv",
+    "Integrate strength of schedule for matchup-adjusted projections"
+  ]
+}

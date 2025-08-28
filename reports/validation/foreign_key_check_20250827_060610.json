@@ -1,0 +1,54 @@
+{
+  "check_name": "foreign_key_check",
+  "passed": false,
+  "errors": [
+    "Players in projections but not in ADP: 109",
+    "Players in ADP but not in projections: 49"
+  ],
+  "warnings": [],
+  "details": {
+    "mismatches": 10
+  },
+  "offending_keys": [
+    {
+      "source": "projections",
+      "key": "john bates_te"
+    },
+    {
+      "source": "projections",
+      "key": "jack stoll_te"
+    },
+    {
+      "source": "projections",
+      "key": "49ers dst_dst"
+    },
+    {
+      "source": "projections",
+      "key": "colts dst_dst"
+    },
+    {
+      "source": "projections",
+      "key": "lucas krull_te"
+    },
+    {
+      "source": "adp",
+      "key": "isaiah bond_wr"
+    },
+    {
+      "source": "adp",
+      "key": "josh williams_rb"
+    },
+    {
+      "source": "adp",
+      "key": "david moore_wr"
+    },
+    {
+      "source": "adp",
+      "key": "tampa bay buccaneers dst_dst"
+    },
+    {
+      "source": "adp",
+      "key": "pittsburgh steelers dst_dst"
+    }
+  ]
+}

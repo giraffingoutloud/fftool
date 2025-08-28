@@ -1,0 +1,57 @@
+{
+  "file_path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/adp/adp0_2025.csv",
+  "file_type": "csv",
+  "file_size": 30921,
+  "total_checks": 4,
+  "passed_checks": 2,
+  "failed_checks": 2,
+  "schema_errors": [],
+  "duplicate_rows": [],
+  "missing_values": {
+    "ADP": 26,
+    "Auction Value": 288
+  },
+  "type_errors": [],
+  "range_errors": [
+    {
+      "type": "range_violation",
+      "column": "ADP",
+      "violations": 3,
+      "expected_range": [
+        1,
+        300
+      ]
+    }
+  ],
+  "uniqueness_violations": [],
+  "content_summary": {
+    "rows": 512,
+    "columns": 11,
+    "column_names": [
+      "Overall Rank",
+      "Full Name",
+      "Team Abbreviation",
+      "Position",
+      "Position Rank",
+      "Bye Week",
+      "ADP",
+      "Projected Points",
+      "Auction Value",
+      "Is Rookie",
+      "Data Status"
+    ],
+    "dtypes": {
+      "Overall Rank": "int64",
+      "Full Name": "object",
+      "Team Abbreviation": "object",
+      "Position": "object",
+      "Position Rank": "int64",
+      "Bye Week": "int64",
+      "ADP": "float64",
+      "Projected Points": "float64",
+      "Auction Value": "float64",
+      "Is Rookie": "object",
+      "Data Status": "object"
+    }
+  }
+}

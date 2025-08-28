@@ -1,0 +1,28 @@
+{
+  "generated_at": "2025-08-27T06:14:14.454893",
+  "txt_files": {
+    "adp/adp4_2025.txt": "b59168f413924cfde25f490da8f9380b89b797fc49214c70e871a52c4e02778b",
+    "adp/adp5_2025.txt": "d2a9b32f2ff38453b693747038912a1b0aaf222f402dc1927522c4ca15cb9719",
+    "projections/qb_projections_2025_cbs.txt": "083dda8cfd2b0cf72955e698bb425e574c6a0587e2041324007540b4f9b008e1",
+    "projections/rb_projections_2025_cbs.txt": "49dd95515758216e55372edd8888d72c5e75526e16b79457016d1439cb34589f",
+    "projections/te_projections_2025_cbs.txt": "03c0209cd07bb475b461a5163e59caa022f304dd835b447a3c60530f27715d92",
+    "projections/wr_projections_2025_cbs.txt": "3e7c2df88a32f62faca90d30ce144d1ebbbb4bebf2abe904c7f2a28bef8f5f7c",
+    "strength_of_schedule/nfl_schedule_2025-2026.txt": "e877504e8768a15d710263c7f5255ecd26b0fce62b0d8757d7bed8e8344c119a",
+    "advanced_data/team_data/team_average_scoring_margin.txt": "44d6663b2e5f9b512e1bc05a3bab3e37b1ae95c389e69d5cf6983c5e8a9c44ab",
+    "advanced_data/team_data/team_first_downs_per_game.txt": "62827931003642b8363b58995a635cbcf1ad320dd6280107f65b87d1c92deac7",
+    "advanced_data/team_data/team_fourth_down_conversion_percentage.txt": "cca91a6cf82328bd81f5d940573acff8924ad73798ee4a924879fdd0fa1c67d4",
+    "advanced_data/team_data/team_offensive_tds_per_game.txt": "e725c62ab83cc62d59e2413c892239473fc18421a927dd4db79af67fb328c58e",
+    "advanced_data/team_data/team_plays_per_game.txt": "8dd9b86961a8f70e2549079c4b8e75278fb86f900ff0a07c1729e57d065a730e",
+    "advanced_data/team_data/team_points_per_game.txt": "263e43189b01589d3bd8eeb455dbaf479cfc4899ebdc86c8f8d287b20996ba51",
+    "advanced_data/team_data/team_points_per_play.txt": "44833227abfa63e323346118443e253a5ef1ab07e1dc76517cfad523b6d0db3d",
+    "advanced_data/team_data/team_points_per_play_margin.txt": "25e77b8eae72fab4b019800cdd4dbb0925f8f7692fcf878b6d81c304e764ec8b",
+    "advanced_data/team_data/team_red_zone_scoring_attempts_per_game.txt": "fec199ba9f4b1476b8245f42f478cc8c9d51088f8a9e0a561e645516dba02a77",
+    "advanced_data/team_data/team_red_zone_tds_per_game.txt": "565d45f04173fd8f3461861c881f480b428df065157428d0a40b1119cc727f8f",
+    "advanced_data/team_data/team_red_zone_td_scoring_percentage.txt": "b847bb9f8a4db1af2803182694dd724c1cbaff4f1493c7c733e600d395fa96b5",
+    "advanced_data/team_data/team_seconds_per_play.txt": "00f8dec5150a96396c45895a3b526affba66a8f6d2b674a60bc5e89d3c1b789a",
+    "advanced_data/team_data/team_third_down_conversion_percentage.txt": "72ab1a2d442e2e52d08474dadf3508de2f1eedb75c6fb0688685fbd12f89572c",
+    "advanced_data/team_data/team_time_of_possession_percentage.txt": "d46cbff4bce3fc69835adf383aec5d88227127861cda87a0fce38558b23f2c58",
+    "advanced_data/team_data/team_touchdowns_per_game.txt": "8d1ea4719ad56fbab6895d5f88cf35efbb79666f356e0a2795c64fad33caff7b",
+    "advanced_data/team_data/team_yards_per_play.txt": "eee0b869ab06fdecaef61d873a1e1d128a6583f3f949b460eba79e9789eb6944"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "file_path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/advanced_data/team_data/team_time_of_possession_percentage.txt",
+  "file_type": "txt",
+  "file_size": 1789,
+  "total_checks": 3,
+  "passed_checks": 3,
+  "failed_checks": 0,
+  "schema_errors": [],
+  "duplicate_rows": [],
+  "missing_values": {},
+  "type_errors": [],
+  "range_errors": [],
+  "uniqueness_violations": [],
+  "content_summary": {
+    "line_count": 33,
+    "file_size": 1789,
+    "is_structured": true,
+    "delimiter": ",",
+    "sample_lines": [
+      "Rank,Team,2024,Last 3,Last 1,Home,Away,2023",
+      "1,Philadelphia,53.92%,54.66%,61.61%,53.99%,53.83%,50.69%",
+      "2,Detroit,52.95%,53.94%,43.36%,51.54%,54.72%,51.91%",
+      "3,Tampa Bay,52.83%,54.45%,40.94%,53.37%,52.16%,49.32%",
+      "4,Miami,52.69%,53.25%,53.44%,52.60%,52.77%,48.89%"
+    ],
+    "encoding": "utf-8",
+    "columns": 8,
+    "rows": 33,
+    "headers": [
+      "Rank",
+      "Team",
+      "2024",
+      "Last 3",
+      "Last 1",
+      "Home",
+      "Away",
+      "2023"
+    ]
+  }
+}

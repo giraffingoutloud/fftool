@@ -1,0 +1,702 @@
+{
+  "total_unique_players": 7560,
+  "players_with_variations": 174,
+  "variations": {
+    "kenneth walker iii": [
+      "Kenneth Walker",
+      "Kenneth Walker III"
+    ],
+    "aaron jones": [
+      "Aaron Jones",
+      "Aaron Jones Sr."
+    ],
+    "tyrone tracy": [
+      "Tyrone Tracy",
+      "Tyrone Tracy Jr."
+    ],
+    "travis etienne": [
+      "Travis Etienne",
+      "Travis Etienne Jr."
+    ],
+    "brian robinson": [
+      "Brian Robinson",
+      "Brian Robinson Jr."
+    ],
+    "ollie gordon": [
+      "Ollie Gordon",
+      "Ollie Gordon II"
+    ],
+    "chris rodriguez": [
+      "Chris Rodriguez",
+      "Chris Rodriguez Jr."
+    ],
+    "aj dillon": [
+      "A.J. Dillon",
+      "AJ Dillon"
+    ],
+    "jeff wilson": [
+      "Jeff Wilson",
+      "Jeff Wilson Jr."
+    ],
+    "frank gore": [
+      "Frank Gore",
+      "Frank Gore Jr."
+    ],
+    "lequint allen": [
+      "LeQuint Allen",
+      "LeQuint Allen Jr."
+    ],
+    "velus jones": [
+      "Velus Jones",
+      "Velus Jones Jr."
+    ],
+    "carlos washington": [
+      "Carlos Washington",
+      "Carlos Washington Jr."
+    ],
+    "demetric felton": [
+      "Demetric Felton",
+      "Demetric Felton Jr."
+    ],
+    "kyle pitts": [
+      "Kyle Pitts",
+      "Kyle Pitts Sr."
+    ],
+    "harold fannin": [
+      "Harold Fannin",
+      "Harold Fannin Jr."
+    ],
+    "oronde gadsden": [
+      "Oronde Gadsden",
+      "Oronde Gadsden II"
+    ],
+    "thomas fidone": [
+      "Thomas Fidone",
+      "Thomas Fidone II"
+    ],
+    "irv smith": [
+      "Irv Smith",
+      "Irv Smith Jr."
+    ],
+    "erick all": [
+      "Erick All",
+      "Erick All Jr."
+    ],
+    "albert okwuegbunam": [
+      "Albert Okwuegbunam",
+      "Albert Okwuegbunam Jr."
+    ],
+    "brian thomas": [
+      "Brian Thomas",
+      "Brian Thomas Jr."
+    ],
+    "dk metcalf": [
+      "D.K. Metcalf",
+      "DK Metcalf"
+    ],
+    "marvin harrison jr": [
+      "Marvin Harrison",
+      "Marvin Harrison Jr."
+    ],
+    "dj moore": [
+      "D.J. Moore",
+      "DJ Moore"
+    ],
+    "deebo samuel": [
+      "Deebo Samuel",
+      "Deebo Samuel Sr."
+    ],
+    "michael pittman jr": [
+      "Michael Pittman",
+      "Michael Pittman Jr."
+    ],
+    "chris godwin": [
+      "Chris Godwin",
+      "Chris Godwin Jr."
+    ],
+    "marvin mims": [
+      "Marvin Mims",
+      "Marvin Mims Jr."
+    ],
+    "demario douglas": [
+      "DeMario Douglas",
+      "Demario Douglas"
+    ],
+    "luther burden": [
+      "Luther Burden",
+      "Luther Burden III"
+    ],
+    "calvin austin": [
+      "Calvin Austin",
+      "Calvin Austin III"
+    ],
+    "ray-ray mccloud": [
+      "Ray-Ray McCloud",
+      "Ray-Ray McCloud III"
+    ],
+    "dont'e thornton": [
+      "Dont'e Thornton",
+      "Dont'e Thornton Jr."
+    ],
+    "russell gage": [
+      "Russell Gage",
+      "Russell Gage Jr."
+    ],
+    "cedrick wilson": [
+      "Cedrick Wilson",
+      "Cedrick Wilson Jr."
+    ],
+    "john metchie": [
+      "John Metchie",
+      "John Metchie III"
+    ],
+    "trent sherfield": [
+      "Trent Sherfield",
+      "Trent Sherfield Sr."
+    ],
+    "steven sims": [
+      "Steven Sims",
+      "Steven Sims Jr."
+    ],
+    "jimmy horn": [
+      "Jimmy Horn",
+      "Jimmy Horn Jr."
+    ],
+    "michael penix": [
+      "Michael Penix",
+      "Michael Penix Jr."
+    ],
+    "pierre strong": [
+      "Pierre Strong",
+      "Pierre Strong Jr."
+    ],
+    "john stephens": [
+      "John Stephens",
+      "John Stephens Jr."
+    ],
+    "kevin austin": [
+      "Kevin Austin",
+      "Kevin Austin Jr."
+    ],
+    "laviska shenault": [
+      "Laviska Shenault",
+      "Laviska Shenault Jr."
+    ],
+    "david sills": [
+      "David Sills",
+      "David Sills V"
+    ],
+    "mecole hardman": [
+      "Mecole Hardman",
+      "Mecole Hardman Jr."
+    ],
+    "james proche": [
+      "James Proche",
+      "James Proche II"
+    ],
+    "joe milton": [
+      "Joe Milton",
+      "Joe Milton III"
+    ],
+    "BUF DST": [
+      "Bills DST",
+      "Buffalo Bills DST"
+    ],
+    "PIT DST": [
+      "Pittsburgh Steelers DST",
+      "Steelers DST"
+    ],
+    "SF DST": [
+      "49ers DST",
+      "San Francisco 49ers DST"
+    ],
+    "DET DST": [
+      "Detroit Lions DST",
+      "Lions DST"
+    ],
+    "PHI DST": [
+      "Eagles DST",
+      "Philadelphia Eagles DST"
+    ],
+    "DEN DST": [
+      "Broncos DST",
+      "Denver Broncos DST"
+    ],
+    "MIN DST": [
+      "Minnesota Vikings DST",
+      "Vikings DST"
+    ],
+    "GB DST": [
+      "Green Bay Packers DST",
+      "Packers DST"
+    ],
+    "CLE DST": [
+      "Browns DST",
+      "Cleveland Browns DST"
+    ],
+    "DAL DST": [
+      "Cowboys DST",
+      "Dallas Cowboys DST"
+    ],
+    "HOU DST": [
+      "Houston Texans DST",
+      "Texans DST"
+    ],
+    "NE DST": [
+      "New England Patriots DST",
+      "Patriots DST"
+    ],
+    "LAR DST": [
+      "Los Angeles Rams DST",
+      "Rams DST"
+    ],
+    "TB DST": [
+      "Buccaneers DST",
+      "Tampa Bay Buccaneers DST"
+    ],
+    "MIA DST": [
+      "Dolphins DST",
+      "Miami Dolphins DST"
+    ],
+    "JAX DST": [
+      "Jacksonville Jaguars DST",
+      "Jaguars DST"
+    ],
+    "BAL DST": [
+      "Baltimore Ravens DST",
+      "Ravens DST"
+    ],
+    "WAS DST": [
+      "Commanders DST",
+      "Washington Commanders DST"
+    ],
+    "KC DST": [
+      "Chiefs DST",
+      "Kansas City Chiefs DST"
+    ],
+    "SEA DST": [
+      "Seahawks DST",
+      "Seattle Seahawks DST"
+    ],
+    "CIN DST": [
+      "Bengals DST",
+      "Cincinnati Bengals DST"
+    ],
+    "ARI DST": [
+      "Arizona Cardinals DST",
+      "Cardinals DST"
+    ],
+    "ATL DST": [
+      "Atlanta Falcons DST",
+      "Falcons DST"
+    ],
+    "IND DST": [
+      "Colts DST",
+      "Indianapolis Colts DST"
+    ],
+    "NYG DST": [
+      "Giants DST",
+      "New York Giants DST"
+    ],
+    "NYJ DST": [
+      "Jets DST",
+      "New York Jets DST"
+    ],
+    "CHI DST": [
+      "Bears DST",
+      "Chicago Bears DST"
+    ],
+    "LAC DST": [
+      "Chargers DST",
+      "Los Angeles Chargers DST"
+    ],
+    "TEN DST": [
+      "Tennessee Titans DST",
+      "Titans DST"
+    ],
+    "LV DST": [
+      "Las Vegas Raiders DST",
+      "Raiders DST"
+    ],
+    "NO DST": [
+      "New Orleans Saints DST",
+      "Saints DST"
+    ],
+    "CAR DST": [
+      "Carolina Panthers DST",
+      "Panthers DST"
+    ],
+    "efton chism": [
+      "Efton Chism",
+      "Efton Chism III"
+    ],
+    "100": [
+      "1.00",
+      "100"
+    ],
+    "104": [
+      "1.04",
+      "104"
+    ],
+    "105": [
+      "1.05",
+      "105"
+    ],
+    "107": [
+      "1.07",
+      "107"
+    ],
+    "108": [
+      "1.08",
+      "108"
+    ],
+    "109": [
+      "1.09",
+      "109"
+    ],
+    "113": [
+      "1.13",
+      "113"
+    ],
+    "115": [
+      "1.15",
+      "115"
+    ],
+    "116": [
+      "1.16",
+      "116"
+    ],
+    "117": [
+      "1.17",
+      "117"
+    ],
+    "121": [
+      "1.21",
+      "121"
+    ],
+    "122": [
+      "1.22",
+      "122"
+    ],
+    "131": [
+      "1.31",
+      "131"
+    ],
+    "134": [
+      "1.34",
+      "134"
+    ],
+    "140": [
+      "1.40",
+      "140"
+    ],
+    "144": [
+      "1.44",
+      "144"
+    ],
+    "149": [
+      "1.49",
+      "149"
+    ],
+    "151": [
+      "1.51",
+      "151"
+    ],
+    "152": [
+      "1.52",
+      "152"
+    ],
+    "153": [
+      "1.53",
+      "153"
+    ],
+    "156": [
+      "1.56",
+      "156"
+    ],
+    "158": [
+      "1.58",
+      "158"
+    ],
+    "159": [
+      "1.59",
+      "159"
+    ],
+    "160": [
+      "1.60",
+      "160"
+    ],
+    "162": [
+      "1.62",
+      "162"
+    ],
+    "163": [
+      "1.63",
+      "163"
+    ],
+    "164": [
+      "1.64",
+      "164"
+    ],
+    "169": [
+      "1.69",
+      "169"
+    ],
+    "172": [
+      "1.72",
+      "172"
+    ],
+    "175": [
+      "1.75",
+      "175"
+    ],
+    "176": [
+      "1.76",
+      "176"
+    ],
+    "179": [
+      "1.79",
+      "179"
+    ],
+    "185": [
+      "1.85",
+      "185"
+    ],
+    "187": [
+      "1.87",
+      "187"
+    ],
+    "188": [
+      "1.88",
+      "188"
+    ],
+    "199": [
+      "1.99",
+      "199"
+    ],
+    "203": [
+      "2.03",
+      "203"
+    ],
+    "212": [
+      "2.12",
+      "212"
+    ],
+    "218": [
+      "2.18",
+      "218"
+    ],
+    "221": [
+      "2.21",
+      "221"
+    ],
+    "228": [
+      "2.28",
+      "228"
+    ],
+    "235": [
+      "2.35",
+      "235"
+    ],
+    "241": [
+      "2.41",
+      "241"
+    ],
+    "249": [
+      "2.49",
+      "249"
+    ],
+    "250": [
+      "2.50",
+      "250"
+    ],
+    "255": [
+      "2.55",
+      "255"
+    ],
+    "257": [
+      "2.57",
+      "257"
+    ],
+    "264": [
+      "2.64",
+      "264"
+    ],
+    "265": [
+      "2.65",
+      "265"
+    ],
+    "275": [
+      "2.75",
+      "275"
+    ],
+    "277": [
+      "2.77",
+      "277"
+    ],
+    "281": [
+      "2.81",
+      "281"
+    ],
+    "282": [
+      "2.82",
+      "282"
+    ],
+    "292": [
+      "2.92",
+      "292"
+    ],
+    "308": [
+      "3.08",
+      "308"
+    ],
+    "310": [
+      "3.10",
+      "310"
+    ],
+    "318": [
+      "3.18",
+      "318"
+    ],
+    "319": [
+      "3.19",
+      "319"
+    ],
+    "329": [
+      "3.29",
+      "329"
+    ],
+    "333": [
+      "3.33",
+      "333"
+    ],
+    "335": [
+      "3.35",
+      "335"
+    ],
+    "343": [
+      "3.43",
+      "343"
+    ],
+    "345": [
+      "3.45",
+      "345"
+    ],
+    "349": [
+      "3.49",
+      "349"
+    ],
+    "356": [
+      "3.56",
+      "356"
+    ],
+    "362": [
+      "3.62",
+      "362"
+    ],
+    "368": [
+      "3.68",
+      "368"
+    ],
+    "370": [
+      "3.70",
+      "370"
+    ],
+    "382": [
+      "3.82",
+      "382"
+    ],
+    "403": [
+      "4.03",
+      "403"
+    ],
+    "409": [
+      "4.09",
+      "409"
+    ],
+    "410": [
+      "4.10",
+      "410"
+    ],
+    "415": [
+      "4.15",
+      "415"
+    ],
+    "430": [
+      "4.30",
+      "430"
+    ],
+    "433": [
+      "4.33",
+      "433"
+    ],
+    "476": [
+      "4.76",
+      "476"
+    ],
+    "482": [
+      "4.82",
+      "482"
+    ],
+    "487": [
+      "4.87",
+      "487"
+    ],
+    "490": [
+      "4.90",
+      "490"
+    ],
+    "494": [
+      "4.94",
+      "494"
+    ],
+    "500": [
+      "5.00",
+      "500"
+    ],
+    "512": [
+      "5.12",
+      "512"
+    ],
+    "518": [
+      "5.18",
+      "518"
+    ],
+    "522": [
+      "5.22",
+      "522"
+    ],
+    "536": [
+      "5.36",
+      "536"
+    ],
+    "538": [
+      "5.38",
+      "538"
+    ],
+    "563": [
+      "5.63",
+      "563"
+    ],
+    "569": [
+      "5.69",
+      "569"
+    ],
+    "581": [
+      "5.81",
+      "581"
+    ],
+    "592": [
+      "5.92",
+      "592"
+    ],
+    "594": [
+      "5.94",
+      "594"
+    ],
+    "610": [
+      "6.10",
+      "610"
+    ]
+  }
+}

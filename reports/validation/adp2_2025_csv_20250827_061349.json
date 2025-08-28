@@ -1,0 +1,38 @@
+{
+  "file_path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/adp/adp2_2025.csv",
+  "file_type": "csv",
+  "file_size": 3259,
+  "total_checks": 4,
+  "passed_checks": 4,
+  "failed_checks": 0,
+  "schema_errors": [],
+  "duplicate_rows": [],
+  "missing_values": {},
+  "type_errors": [],
+  "range_errors": [],
+  "uniqueness_violations": [],
+  "content_summary": {
+    "rows": 77,
+    "columns": 8,
+    "column_names": [
+      "Name",
+      "Team",
+      "Position",
+      "Age",
+      "Fantasy Score",
+      "Projected Points",
+      "ADP",
+      "Status"
+    ],
+    "dtypes": {
+      "Name": "object",
+      "Team": "object",
+      "Position": "object",
+      "Age": "int64",
+      "Fantasy Score": "int64",
+      "Projected Points": "int64",
+      "ADP": "int64",
+      "Status": "object"
+    }
+  }
+}

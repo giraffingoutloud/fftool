@@ -1,0 +1,31 @@
+{
+  "file_path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/other/qb-fantasy-sos.csv",
+  "total_checks": 4,
+  "passed_checks": 3,
+  "failed_checks": 1,
+  "schema_errors": [],
+  "duplicate_rows": [],
+  "missing_values": {
+    "W1": 40,
+    "W2": 40,
+    "W3": 38,
+    "W4": 43,
+    "W5": 42,
+    "W6": 45,
+    "W7": 34,
+    "W8": 40,
+    "W9": 44,
+    "W10": 47,
+    "W11": 45,
+    "W12": 44,
+    "W13": 42,
+    "W14": 46,
+    "W15": 35,
+    "W16": 44,
+    "W17": 37,
+    "W18": 34
+  },
+  "type_errors": [],
+  "range_errors": [],
+  "uniqueness_violations": []
+}

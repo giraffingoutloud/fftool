@@ -1,0 +1,438 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2025-08-27T00:00:00Z",
+  "app_context": {
+    "name": "Fantasy Football Auction Draft Tool",
+    "league_type": "ESPN 12-team PPR Auction Draft",
+    "data_source": "canonical_data"
+  },
+  "fields": [
+    {
+      "name": "playerName",
+      "description": "Full name of the player",
+      "type": "string",
+      "units": null,
+      "allowed_range": null,
+      "nullable": false,
+      "unique": false,
+      "primary_key": false,
+      "source": {
+        "type": "csv",
+        "files": ["/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/projections/projections_2025.csv"],
+        "columns": ["playerName"]
+      }
+    },
+    {
+      "name": "teamName",
+      "description": "NFL team abbreviation",
+      "type": "string",
+      "units": null,
+      "allowed_range": ["ARI","ATL","BAL","BUF","CAR","CHI","CIN","CLE","DAL","DEN","DET","GB","HOU","IND","JAX","KC","LAC","LAR","LV","MIA","MIN","NE","NO","NYG","NYJ","PHI","PIT","SEA","SF","TB","TEN","WAS"],
+      "nullable": false,
+      "unique": false,
+      "primary_key": false,
+      "source": {
+        "type": "csv",
+        "files": ["/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/projections/projections_2025.csv"],
+        "columns": ["teamName"]
+      }
+    },
+    {
+      "name": "position",
+      "description": "Player position",
+      "type": "string",
+      "units": null,
+      "allowed_range": ["QB","RB","WR","TE","DST","K"],
+      "nullable": false,
+      "unique": false,
+      "primary_key": false,
+      "source": {
+        "type": "csv",
+        "files": ["/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/projections/projections_2025.csv"],
+        "columns": ["position"]
+      }
+    },
+    {
+      "name": "fantasyPoints",
+      "description": "Projected fantasy points for the season",
+      "type": "float",
+      "units": "points",
+      "allowed_range": [0, 500],
+      "nullable": false,
+      "unique": false,
+      "primary_key": false,
+      "source": {
+        "type": "csv",
+        "files": ["/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/projections/projections_2025.csv"],
+        "columns": ["fantasyPoints"]
+      }
+    },
+    {
+      "name": "ADP",
+      "description": "Average Draft Position",
+      "type": "float",
+      "units": "rank",
+      "allowed_range": [1, 300],
+      "nullable": false,
+      "unique": false,
+      "primary_key": false,
+      "source": {
+        "type": "csv",
+        "files": ["/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/adp/adp0_2025.csv"],
+        "columns": ["ADP"]
+      }
+    },
+    {
+      "name": "auctionValue",
+      "description": "Market auction value",
+      "type": "integer",
+      "units": "dollars",
+      "allowed_range": [0, 200],
+      "nullable": true,
+      "unique": false,
+      "primary_key": false,
+      "source": {
+        "type": "csv",
+        "files": ["/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/projections/projections_2025.csv"],
+        "columns": ["auctionValue"]
+      }
+    },
+    {
+      "name": "VORP",
+      "description": "Value Over Replacement Player",
+      "type": "float",
+      "units": "points",
+      "allowed_range": [-100, 300],
+      "nullable": false,
+      "unique": false,
+      "primary_key": false,
+      "source": {
+        "type": "calc",
+        "files": ["/mnt/c/Users/giraf/Documents/projects/fftool/src/lib/enhancedVORPEngine.ts"],
+        "formula_id": "vorp_calculation"
+      }
+    },
+    {
+      "name": "VOLS",
+      "description": "Value Over Last Starter",
+      "type": "float",
+      "units": "points",
+      "allowed_range": [-100, 300],
+      "nullable": false,
+      "unique": false,
+      "primary_key": false,
+      "source": {
+        "type": "calc",
+        "files": ["/mnt/c/Users/giraf/Documents/projects/fftool/src/lib/enhancedVORPEngine.ts"],
+        "formula_id": "vols_calculation"
+      }
+    },
+    {
+      "name": "BEER",
+      "description": "Best Expected Excess Return",
+      "type": "float",
+      "units": "adjusted_points",
+      "allowed_range": [-100, 300],
+      "nullable": false,
+      "unique": false,
+      "primary_key": false,
+      "source": {
+        "type": "calc",
+        "files": ["/mnt/c/Users/giraf/Documents/projects/fftool/src/lib/enhancedVORPEngine.ts"],
+        "formula_id": "beer_calculation"
+      }
+    },
+    {
+      "name": "intrinsicValue",
+      "description": "Calculated intrinsic auction value",
+      "type": "integer",
+      "units": "dollars",
+      "allowed_range": [1, 200],
+      "nullable": false,
+      "unique": false,
+      "primary_key": false,
+      "source": {
+        "type": "calc",
+        "files": [
+          "/mnt/c/Users/giraf/Documents/projects/fftool/src/lib/intrinsicValueEngine.ts",
+          "/mnt/c/Users/giraf/Documents/projects/fftool/src/lib/auctionValuationModel.ts"
+        ],
+        "formula_id": "intrinsic_value_calculation"
+      }
+    },
+    {
+      "name": "replacementLevel",
+      "description": "Position-specific replacement level points",
+      "type": "float",
+      "units": "points",
+      "allowed_range": [0, 300],
+      "nullable": false,
+      "unique": false,
+      "primary_key": false,
+      "source": {
+        "type": "calc",
+        "files": [
+          "/mnt/c/Users/giraf/Documents/projects/fftool/src/lib/enhancedVORPEngine.ts",
+          "/mnt/c/Users/giraf/Documents/projects/fftool/src/lib/intrinsicValueEngine.ts"
+        ],
+        "formula_id": "replacement_level_calculation"
+      }
+    },
+    {
+      "name": "sharpeRatio",
+      "description": "Risk-adjusted return metric",
+      "type": "float",
+      "units": "ratio",
+      "allowed_range": [-5, 5],
+      "nullable": false,
+      "unique": false,
+      "primary_key": false,
+      "source": {
+        "type": "calc",
+        "files": ["/mnt/c/Users/giraf/Documents/projects/fftool/src/lib/enhancedVORPEngine.ts"],
+        "formula_id": "sharpe_ratio_calculation"
+      }
+    },
+    {
+      "name": "confidence",
+      "description": "Confidence level in valuation",
+      "type": "float",
+      "units": "probability",
+      "allowed_range": [0, 1],
+      "nullable": false,
+      "unique": false,
+      "primary_key": false,
+      "source": {
+        "type": "calc",
+        "files": ["/mnt/c/Users/giraf/Documents/projects/fftool/src/lib/enhancedVORPEngine.ts"],
+        "formula_id": "confidence_calculation"
+      }
+    },
+    {
+      "name": "edge",
+      "description": "Value edge (intrinsic - market)",
+      "type": "float",
+      "units": "dollars",
+      "allowed_range": [-200, 200],
+      "nullable": false,
+      "unique": false,
+      "primary_key": false,
+      "source": {
+        "type": "calc",
+        "files": ["/mnt/c/Users/giraf/Documents/projects/fftool/src/lib/auctionValuationModel.ts"],
+        "formula_id": "edge_calculation"
+      }
+    },
+    {
+      "name": "recommendation",
+      "description": "Buy/sell/hold recommendation",
+      "type": "string",
+      "units": null,
+      "allowed_range": ["STRONG_BUY","BUY","FAIR","SELL","AVOID"],
+      "nullable": false,
+      "unique": false,
+      "primary_key": false,
+      "source": {
+        "type": "calc",
+        "files": ["/mnt/c/Users/giraf/Documents/projects/fftool/src/lib/auctionValuationModel.ts"],
+        "formula_id": "recommendation_generation"
+      }
+    }
+  ],
+  "joins": {
+    "stable_keys": [
+      {
+        "key": "playerName + position",
+        "description": "Composite key for player identification",
+        "tables": ["projections", "adp", "historical_stats"]
+      }
+    ],
+    "join_conditions": [
+      {
+        "from": "projections_2025.csv",
+        "to": "adp0_2025.csv",
+        "on": "LOWER(playerName) = LOWER(Full Name) AND position = Position"
+      }
+    ]
+  },
+  "derived_formulas": [
+    {
+      "id": "vorp_calculation",
+      "name": "VORP (Value Over Replacement Player)",
+      "formula_text": "MAX(0, playerPoints - replacementLevel)",
+      "inputs": ["playerPoints", "replacementLevel"],
+      "outputs": ["VORP"],
+      "assumptions": [
+        "Replacement level = average of players ranked n+1 to n+3 where n = starters at position"
+      ],
+      "code_refs": [
+        "/mnt/c/Users/giraf/Documents/projects/fftool/src/lib/enhancedVORPEngine.ts:44-45"
+      ]
+    },
+    {
+      "id": "vols_calculation",
+      "name": "VOLS (Value Over Last Starter)",
+      "formula_text": "MAX(0, playerPoints - lastStarterPoints)",
+      "inputs": ["playerPoints", "lastStarterPoints"],
+      "outputs": ["VOLS"],
+      "assumptions": [
+        "Last starter = player ranked at position starter count"
+      ],
+      "code_refs": [
+        "/mnt/c/Users/giraf/Documents/projects/fftool/src/lib/enhancedVORPEngine.ts:47-49"
+      ]
+    },
+    {
+      "id": "beer_calculation",
+      "name": "BEER (Best Expected Excess Return)",
+      "formula_text": "expectedReturn * confidence - risk * marketPrice * 0.1",
+      "inputs": ["expectedReturn", "confidence", "risk", "marketPrice"],
+      "outputs": ["BEER"],
+      "assumptions": [
+        "Risk includes position variance, injury rate, depth risk, age risk",
+        "Opportunity cost = marketPrice * 0.05"
+      ],
+      "code_refs": [
+        "/mnt/c/Users/giraf/Documents/projects/fftool/src/lib/enhancedVORPEngine.ts:72"
+      ]
+    },
+    {
+      "id": "sharpe_ratio_calculation",
+      "name": "Sharpe Ratio",
+      "formula_text": "expectedReturn / risk (if risk > 0, else 0)",
+      "inputs": ["expectedReturn", "risk"],
+      "outputs": ["sharpeRatio"],
+      "assumptions": [
+        "Risk-adjusted return metric"
+      ],
+      "code_refs": [
+        "/mnt/c/Users/giraf/Documents/projects/fftool/src/lib/enhancedVORPEngine.ts:69"
+      ]
+    },
+    {
+      "id": "replacement_level_calculation",
+      "name": "Position Replacement Level",
+      "formula_text": "Average points of players ranked (starters+1) to (starters+3)",
+      "inputs": ["positionPlayers", "starterCount"],
+      "outputs": ["replacementLevel"],
+      "assumptions": [
+        "QB: 12 starters (1 per team)",
+        "RB: 24 starters (2 per team)",
+        "WR: 36 starters (3 per team)",
+        "TE: 12 starters (1 per team)"
+      ],
+      "code_refs": [
+        "/mnt/c/Users/giraf/Documents/projects/fftool/src/lib/enhancedVORPEngine.ts:104-118",
+        "/mnt/c/Users/giraf/Documents/projects/fftool/src/lib/auctionValuationModel.ts:132-150"
+      ]
+    },
+    {
+      "id": "intrinsic_value_calculation",
+      "name": "Intrinsic Auction Value",
+      "formula_text": "1 + (VORP / 10) * rankValue * positionDollarShare",
+      "inputs": ["VORP", "rankValue", "positionDollarShare"],
+      "outputs": ["intrinsicValue"],
+      "assumptions": [
+        "Total auction budget: $200 per team",
+        "12 teams in league",
+        "Minimum bid: $1 per player",
+        "Auctionable dollars = total - roster spots"
+      ],
+      "code_refs": [
+        "/mnt/c/Users/giraf/Documents/projects/fftool/src/lib/auctionValuationModel.ts:100",
+        "/mnt/c/Users/giraf/Documents/projects/fftool/src/lib/intrinsicValueEngine.ts:88-89"
+      ]
+    },
+    {
+      "id": "edge_calculation",
+      "name": "Value Edge",
+      "formula_text": "intrinsicValue - marketPrice",
+      "inputs": ["intrinsicValue", "marketPrice"],
+      "outputs": ["edge"],
+      "assumptions": [
+        "Positive edge = undervalued",
+        "Negative edge = overvalued"
+      ],
+      "code_refs": [
+        "/mnt/c/Users/giraf/Documents/projects/fftool/src/lib/auctionValuationModel.ts:109"
+      ]
+    },
+    {
+      "id": "confidence_calculation",
+      "name": "Confidence Score",
+      "formula_text": "baseConfidence * dataQualityFactor",
+      "inputs": ["baseConfidence", "dataQualityFactor"],
+      "outputs": ["confidence"],
+      "assumptions": [
+        "Base confidence = 0.75",
+        "Adjusted for data completeness"
+      ],
+      "code_refs": [
+        "/mnt/c/Users/giraf/Documents/projects/fftool/src/lib/enhancedVORPEngine.ts:61"
+      ]
+    }
+  ],
+  "invariants": [
+    {
+      "name": "budget_conservation",
+      "description": "Sum of all team budgets must equal total league dollars",
+      "formula": "SUM(team_budgets) = teams * budget_per_team"
+    },
+    {
+      "name": "replacement_level_positive",
+      "description": "Replacement level must be >= 0 for all positions",
+      "formula": "replacementLevel >= 0"
+    },
+    {
+      "name": "vorp_non_negative",
+      "description": "VORP cannot be negative",
+      "formula": "VORP >= 0"
+    },
+    {
+      "name": "intrinsic_value_minimum",
+      "description": "Intrinsic value must be at least $1",
+      "formula": "intrinsicValue >= 1"
+    },
+    {
+      "name": "confidence_range",
+      "description": "Confidence must be between 0 and 1",
+      "formula": "0 <= confidence <= 1"
+    },
+    {
+      "name": "positional_scarcity_ordering",
+      "description": "RB/WR should have higher replacement levels than QB/TE due to quantity",
+      "formula": "replacementLevel(RB) < replacementLevel(QB)"
+    },
+    {
+      "name": "auction_value_cap",
+      "description": "No player value exceeds team budget",
+      "formula": "intrinsicValue <= budget_per_team"
+    },
+    {
+      "name": "sharpe_ratio_consistency",
+      "description": "Sharpe ratio undefined when risk is 0",
+      "formula": "risk > 0 => sharpeRatio = expectedReturn/risk"
+    }
+  ],
+  "league_settings": {
+    "teams": 12,
+    "budget": 200,
+    "scoring": "PPR",
+    "roster_positions": {
+      "QB": 1,
+      "RB": 2,
+      "WR": 2,
+      "TE": 1,
+      "FLEX": 1,
+      "DST": 1,
+      "K": 1,
+      "BE": 7,
+      "total": 16
+    },
+    "source": {
+      "file": "/mnt/c/Users/giraf/Documents/projects/fftool/src/store/draftStore.ts",
+      "lines": "32-46"
+    }
+  },
+  "missing_inputs": []
+}

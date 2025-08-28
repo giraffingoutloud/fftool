@@ -1,0 +1,13 @@
+{
+  "check_name": "immutability_check",
+  "passed": true,
+  "errors": [],
+  "warnings": [],
+  "details": {
+    "files_checked": 100,
+    "hash_mismatches": 0,
+    "missing_files": 0,
+    "unexpected_files": 0
+  },
+  "offending_keys": []
+}

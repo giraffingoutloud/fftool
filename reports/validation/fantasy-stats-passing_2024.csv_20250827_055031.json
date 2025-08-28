@@ -1,0 +1,15 @@
+{
+  "file_path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/historical_stats/fantasy-stats-passing_2024.csv",
+  "total_checks": 4,
+  "passed_checks": 3,
+  "failed_checks": 1,
+  "schema_errors": [],
+  "duplicate_rows": [],
+  "missing_values": {
+    "depthAim": 4,
+    "ptsPerDb": 2
+  },
+  "type_errors": [],
+  "range_errors": [],
+  "uniqueness_violations": []
+}

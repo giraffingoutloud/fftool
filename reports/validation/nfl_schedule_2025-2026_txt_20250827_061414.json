@@ -1,0 +1,51 @@
+{
+  "file_path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/strength_of_schedule/nfl_schedule_2025-2026.txt",
+  "file_type": "txt",
+  "file_size": 2627,
+  "total_checks": 3,
+  "passed_checks": 3,
+  "failed_checks": 0,
+  "schema_errors": [],
+  "duplicate_rows": [],
+  "missing_values": {},
+  "type_errors": [],
+  "range_errors": [],
+  "uniqueness_violations": [],
+  "content_summary": {
+    "line_count": 33,
+    "file_size": 2627,
+    "is_structured": true,
+    "delimiter": ",",
+    "sample_lines": [
+      "TEAM,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
+      "ARI,@NO,CAR,@SF,SEA,TEN,@IND,GB,BYE,@DAL,@SEA,SF,JAX,@TB,LAR,@HOU,ATL,@CIN,@LAR",
+      "ATL,TB,@MIN,@CAR,WSH,BYE,BUF,@SF,MIA,@NE,@IND,CAR,@NO,@NYJ,SEA,@TB,@ARI,LAR,NO",
+      "BAL,@BUF,CLE,DET,@KC,HOU,LAR,BYE,CHI,@MIA,@MIN,@CLE,NYJ,CIN,PIT,@CIN,NE,@GB,@PIT",
+      "BUF,BAL,@NYJ,MIA,NO,NE,@ATL,BYE,@CAR,KC,@MIA,TB,@HOU,@PIT,CIN,@NE,@CLE,PHI,NYJ"
+    ],
+    "encoding": "utf-8",
+    "columns": 19,
+    "rows": 33,
+    "headers": [
+      "TEAM",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18"
+    ]
+  }
+}

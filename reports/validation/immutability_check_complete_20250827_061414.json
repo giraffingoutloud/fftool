@@ -1,0 +1,17 @@
+{
+  "check_name": "immutability_check_complete",
+  "passed": true,
+  "errors": [],
+  "warnings": [
+    "TXT files not in baseline, computed 23 new hashes"
+  ],
+  "details": {
+    "total_files_found": 123,
+    "csv_files": 100,
+    "txt_files": 23,
+    "files_checked": 146,
+    "hash_mismatches": 0,
+    "missing_files": 0
+  },
+  "offending_keys": []
+}

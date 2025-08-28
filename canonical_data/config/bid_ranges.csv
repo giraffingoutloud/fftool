@@ -1,0 +1,8 @@
+range_type,multiplier,min,max,description
+max_bid,1.15,1.10,1.30,Maximum bid as percentage of calculated value
+target_bid,1.00,1.00,1.00,Target bid equals calculated value
+min_bid,0.85,0.70,0.90,Minimum bid as percentage of calculated value
+aggressive_max,1.25,1.15,1.40,Aggressive bidding maximum
+aggressive_min,0.90,0.80,0.95,Aggressive bidding minimum
+conservative_max,1.10,1.05,1.15,Conservative bidding maximum
+conservative_min,0.80,0.70,0.85,Conservative bidding minimum

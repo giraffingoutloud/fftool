@@ -1,0 +1,28 @@
+{
+  "file_path": "/mnt/c/Users/giraf/Documents/projects/fftool/canonical_data/projections/te_projections_2025_cbs.txt",
+  "file_type": "txt",
+  "file_size": 5883,
+  "total_checks": 3,
+  "passed_checks": 3,
+  "failed_checks": 0,
+  "schema_errors": [],
+  "duplicate_rows": [],
+  "missing_values": {},
+  "type_errors": [],
+  "range_errors": [],
+  "uniqueness_violations": [],
+  "content_summary": {
+    "line_count": 103,
+    "file_size": 5883,
+    "is_structured": false,
+    "delimiter": null,
+    "sample_lines": [
+      "Tight Ends",
+      "Receiving\tMisc",
+      "Player\tgp\ttgt\trec\tyds\tyds/g\tavg\ttd\tfl\tfpts\tfppg",
+      "Brock Bowers TE  LV\t17\t144\t105\t1168\t68.7\t11.1\t6\t0\t259.9\t15.3",
+      "George Kittle TE  SF\t17\t99\t79\t1142\t67.2\t14.5\t10\t0\t256.2\t15.1"
+    ],
+    "encoding": "utf-8"
+  }
+}

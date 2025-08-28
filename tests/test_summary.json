@@ -1,0 +1,206 @@
+{
+  "test_suite_overview": {
+    "total_files": 5,
+    "total_test_classes": 4,
+    "total_test_functions": 31,
+    "coverage_areas": [
+      "VORP computation",
+      "Budget conservation",
+      "Monotonicity invariants",
+      "Canonical data immutability",
+      "Positional value distribution",
+      "Edge cases and extremes"
+    ]
+  },
+  "test_files": [
+    {
+      "file": "./tests/test_valuation.py",
+      "description": "Core valuation calculation tests including VORP computation, auction value generation, and budget conservation",
+      "test_classes": ["TestValuationCalculations"],
+      "key_tests": [
+        "test_vorp_computation_basic: Verifies VORP calculation for standard players",
+        "test_vorp_never_negative: Ensures VORP is always >= 0",
+        "test_auction_value_minimum_dollar: Validates $1 minimum for all players",
+        "test_budget_conservation: Checks total values sum to league budget",
+        "test_dollars_per_point_consistency: Verifies consistent $/VBD within positions",
+        "test_monotonicity_within_position: Higher points = higher value within position",
+        "test_position_multipliers_applied: RB premium vs WR baseline",
+        "test_tier_multipliers_applied: Elite tier premiums",
+        "test_golden_values_real_players: Frozen expected values for real players",
+        "test_confidence_scores: Confidence calculation logic",
+        "test_max_bid_relationships: Bid range calculations"
+      ],
+      "fixtures": [
+        "synthetic_players_basic: 6 players covering elite/mid/replacement tiers",
+        "synthetic_players_edge_cases: 4 edge case players (zero points, negative VBD, etc)",
+        "synthetic_players_full_league: 208 players simulating full 12-team league"
+      ]
+    },
+    {
+      "file": "./tests/test_canonical_immutability.py",
+      "description": "Ensures canonical_data CSV files are never modified by any operation",
+      "test_classes": [
+        "TestCanonicalDataImmutability",
+        "TestDataIntegrity"
+      ],
+      "key_tests": [
+        "test_file_discovery: Verifies canonical data structure exists",
+        "test_hashes_stable_on_read: Reading doesn't change file hashes",
+        "test_csv_parser_immutability: CSV parsing doesn't modify source files",
+        "test_data_loader_immutability: Data loaders don't modify files",
+        "test_valuation_model_immutability: Model operations preserve files",
+        "test_comprehensive_immutability: Full workflow doesn't change any files",
+        "test_hash_consistency: Hash computation is deterministic",
+        "test_critical_files_unchanged: Key files match frozen hashes",
+        "test_csv_structure_consistency: CSV files maintain valid structure",
+        "test_no_write_operations: Writes to canonical_data are prevented"
+      ],
+      "fixtures": [
+        "canonical_data_path: Path to canonical_data directory",
+        "all_canonical_files: List of all CSV/data files",
+        "original_hashes: Pre-computed hashes before operations",
+        "critical_files: List of critical files with expected hashes"
+      ]
+    },
+    {
+      "file": "./tests/test_invariants.py",
+      "description": "Tests for mathematical invariants that must hold across all valuations",
+      "test_classes": ["TestValuationInvariants"],
+      "key_tests": [
+        "test_invariant_budget_conservation: Sum equals total league budget",
+        "test_invariant_replacement_level_zeroing: Replacement players have ~0 VORP",
+        "test_invariant_non_negativity: All values >= $1",
+        "test_invariant_monotonicity: Value decreases with projected points",
+        "test_invariant_positional_scarcity: Position values match expected distribution",
+        "test_invariant_max_budget_share: No player exceeds 40% of budget",
+        "test_invariant_checker_integration: Integration with ValuationInvariantChecker",
+        "test_edge_case_all_identical_players: Identical stats = similar values",
+        "test_edge_case_extreme_scoring: Handles 500-point players reasonably"
+      ],
+      "fixtures": [
+        "standard_league_players: 208 players with realistic distributions",
+        "invariant_checker: ValuationInvariantChecker instance",
+        "valuation_model: CalibratedValuationModel instance"
+      ]
+    },
+    {
+      "file": "./tests/conftest.py",
+      "description": "Pytest configuration and shared fixtures for all tests",
+      "test_classes": [],
+      "key_tests": [],
+      "fixtures": [
+        "project_root: Project root directory path",
+        "canonical_data_dir: Path to canonical_data",
+        "src_dir: Path to src directory",
+        "test_data_dir: Path for test data storage"
+      ],
+      "configuration": [
+        "Custom markers: slow, integration, unit, golden, immutability",
+        "Auto-marking based on test names/locations",
+        "Python path configuration for imports"
+      ]
+    },
+    {
+      "file": "./pytest.ini",
+      "description": "Pytest configuration file with test discovery patterns and options",
+      "test_classes": [],
+      "key_tests": [],
+      "configuration": [
+        "Test discovery: test_*.py files, Test* classes, test_* functions",
+        "Test paths: ./tests directory",
+        "Markers: slow, integration, unit, golden, immutability",
+        "Options: verbose output, short tracebacks, strict markers",
+        "Coverage configuration for src/lib"
+      ]
+    }
+  ],
+  "test_categories": {
+    "unit_tests": {
+      "description": "Fast, isolated tests of individual functions",
+      "tests": [
+        "test_vorp_computation_basic",
+        "test_vorp_never_negative",
+        "test_auction_value_minimum_dollar",
+        "test_position_multipliers_applied",
+        "test_tier_multipliers_applied",
+        "test_confidence_scores",
+        "test_hash_consistency"
+      ]
+    },
+    "integration_tests": {
+      "description": "Tests involving multiple components",
+      "tests": [
+        "test_budget_conservation",
+        "test_dollars_per_point_consistency",
+        "test_data_loader_immutability",
+        "test_valuation_model_immutability",
+        "test_invariant_checker_integration"
+      ]
+    },
+    "golden_tests": {
+      "description": "Tests with frozen expected outputs",
+      "tests": [
+        "test_golden_values_real_players",
+        "test_critical_files_unchanged"
+      ]
+    },
+    "immutability_tests": {
+      "description": "Tests ensuring data files are never modified",
+      "tests": [
+        "test_hashes_stable_on_read",
+        "test_csv_parser_immutability",
+        "test_comprehensive_immutability",
+        "test_no_write_operations"
+      ]
+    },
+    "invariant_tests": {
+      "description": "Mathematical properties that must always hold",
+      "tests": [
+        "test_invariant_budget_conservation",
+        "test_invariant_replacement_level_zeroing",
+        "test_invariant_non_negativity",
+        "test_invariant_monotonicity",
+        "test_invariant_positional_scarcity",
+        "test_invariant_max_budget_share"
+      ]
+    }
+  },
+  "coverage": {
+    "core_functionality": {
+      "VORP_calculation": "✓ Complete",
+      "auction_value_generation": "✓ Complete",
+      "budget_conservation": "✓ Complete",
+      "position_multipliers": "✓ Complete",
+      "tier_adjustments": "✓ Complete"
+    },
+    "invariants": {
+      "budget_conservation": "✓ Tested",
+      "replacement_zeroing": "✓ Tested",
+      "non_negativity": "✓ Tested",
+      "monotonicity": "✓ Tested",
+      "positional_scarcity": "✓ Tested",
+      "max_budget_share": "✓ Tested"
+    },
+    "data_integrity": {
+      "canonical_immutability": "✓ Complete",
+      "hash_verification": "✓ Complete",
+      "structure_consistency": "✓ Complete"
+    },
+    "edge_cases": {
+      "zero_point_players": "✓ Tested",
+      "negative_vbd": "✓ Tested",
+      "extreme_scores": "✓ Tested",
+      "identical_players": "✓ Tested"
+    }
+  },
+  "running_tests": {
+    "run_all": "pytest",
+    "run_specific_file": "pytest tests/test_valuation.py",
+    "run_specific_test": "pytest tests/test_valuation.py::TestValuationCalculations::test_vorp_computation_basic",
+    "run_with_coverage": "pytest --cov=src/lib --cov-report=html",
+    "run_only_unit": "pytest -m unit",
+    "run_exclude_slow": "pytest -m 'not slow'",
+    "run_verbose": "pytest -vv",
+    "run_with_output": "pytest -s"
+  }
+}

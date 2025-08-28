@@ -1,0 +1,54 @@
+{
+  "check_name": "foreign_key_check",
+  "passed": false,
+  "errors": [
+    "Players in projections but not in ADP: 109",
+    "Players in ADP but not in projections: 49"
+  ],
+  "warnings": [],
+  "details": {
+    "mismatches": 10
+  },
+  "offending_keys": [
+    {
+      "source": "projections",
+      "key": "greg dulcich_te"
+    },
+    {
+      "source": "projections",
+      "key": "hunter long_te"
+    },
+    {
+      "source": "projections",
+      "key": "robert woods_wr"
+    },
+    {
+      "source": "projections",
+      "key": "charlie woerner_te"
+    },
+    {
+      "source": "projections",
+      "key": "bills dst_dst"
+    },
+    {
+      "source": "adp",
+      "key": "efton chism iii_wr"
+    },
+    {
+      "source": "adp",
+      "key": "philadelphia eagles dst_dst"
+    },
+    {
+      "source": "adp",
+      "key": "cincinnati bengals dst_dst"
+    },
+    {
+      "source": "adp",
+      "key": "chris rodriguez jr._rb"
+    },
+    {
+      "source": "adp",
+      "key": "isaiah bond_wr"
+    }
+  ]
+}
