@@ -4,6 +4,7 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
+  base: '/fftool/', // GitHub repo name for GitHub Pages
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -18,4 +19,12 @@ export default defineConfig({
       allow: ['..']
     }
   },
+  build: {
+    outDir: 'dist',
+    sourcemap: true,
+    // Ensure assets are properly handled
+    assetsDir: 'assets',
+    // Copy public files to dist
+    copyPublicDir: true
+  }
 });

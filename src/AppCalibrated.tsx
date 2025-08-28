@@ -3,7 +3,7 @@
  * Features comprehensive UI with dark theme and professional aesthetics
  */
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import { 
   AlertTriangle,
@@ -248,7 +248,7 @@ function AppCalibrated() {
       const data = await dataService.getData();
       
       // Debug: Check teams in raw projections
-      const uniqueProjectionTeams = new Set(data.projections.map(p => p.team).filter(Boolean));
+      const uniqueProjectionTeams = new Set(data.projections.map((p: any) => p.team).filter(Boolean));
       console.log('[AppCalibrated] Data loaded:', {
         projections: data.projections.length,
         adp: data.adpData.length,
