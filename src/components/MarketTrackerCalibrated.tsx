@@ -4,8 +4,9 @@
  */
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { TrendingUp, TrendingDown, DollarSign, AlertTriangle, Activity } from 'lucide-react';
+import { TrendingUp, TrendingDown, DollarSign, AlertTriangle, Activity, Gauge } from 'lucide-react';
 import type { ValuationResult } from '@/lib/calibratedValuationService';
+import { useDraftStore } from '@/store/draftStore';
 
 interface DraftedPlayer {
   playerId: string;
@@ -24,6 +25,8 @@ interface MarketTrends {
   recentTrend: 'hot' | 'cold' | 'neutral';
   bargains: number;
   overpays: number;
+  expectedInflation: number; // New: forecast based on money/players remaining
+  inflationMultiplier: number; // New: for adjusting remaining player values
 }
 
 interface Props {
@@ -37,13 +40,16 @@ const MarketTrackerCalibrated: React.FC<Props> = ({
   draftHistory,
   onPriceUpdate 
 }) => {
+  const { teams } = useDraftStore();
   const [draftedPlayers, setDraftedPlayers] = useState<DraftedPlayer[]>([]);
   const [marketTrends, setMarketTrends] = useState<MarketTrends>({
     overallInflation: 0,
     positionInflation: {},
     recentTrend: 'neutral',
     bargains: 0,
-    overpays: 0
+    overpays: 0,
+    expectedInflation: 0,
+    inflationMultiplier: 1.0
   });
 
   // Process draft history into drafted players
@@ -79,12 +85,39 @@ const MarketTrackerCalibrated: React.FC<Props> = ({
   }, [draftHistory, valuations, onPriceUpdate]);
 
   const calculateMarketTrends = (players: DraftedPlayer[]): MarketTrends => {
-    // Overall inflation
+    // Overall inflation (actual vs predicted)
     const totalActual = players.reduce((sum, p) => sum + p.actualPrice, 0);
     const totalPredicted = players.reduce((sum, p) => sum + p.predictedValue, 0);
     const overallInflation = totalPredicted > 0 
       ? ((totalActual - totalPredicted) / totalPredicted) * 100 
       : 0;
+
+    // Calculate expected inflation based on money and players remaining
+    // This is the key formula from best practices
+    const teamCount = teams.length || 12; // Default to 12 teams if not initialized
+    const totalBudget = teamCount * 200; // $200 per team
+    const totalRosterSpots = teamCount * 16; // 16 players per team
+    
+    const moneySpent = players.reduce((sum, p) => sum + p.actualPrice, 0);
+    const moneyRemaining = totalBudget - moneySpent;
+    
+    const playersPickedCount = players.length;
+    const playersRemainingCount = totalRosterSpots - playersPickedCount;
+    
+    // Get value of remaining players
+    const draftedPlayerIds = new Set(players.map(p => p.playerId));
+    const remainingPlayersValue = valuations
+      .filter(v => !draftedPlayerIds.has(v.playerId))
+      .slice(0, playersRemainingCount) // Only count players likely to be drafted
+      .reduce((sum, v) => sum + v.auctionValue, 0);
+    
+    // Calculate inflation multiplier (money remaining / value remaining)
+    const inflationMultiplier = remainingPlayersValue > 0 
+      ? moneyRemaining / remainingPlayersValue 
+      : 1.0;
+    
+    // Expected inflation percentage
+    const expectedInflation = ((inflationMultiplier - 1) * 100);
 
     // Position-specific inflation
     const positionInflation: Record<string, number> = {};
@@ -118,7 +151,9 @@ const MarketTrackerCalibrated: React.FC<Props> = ({
       positionInflation,
       recentTrend,
       bargains,
-      overpays
+      overpays,
+      expectedInflation,
+      inflationMultiplier
     };
   };
 
@@ -175,12 +210,66 @@ const MarketTrackerCalibrated: React.FC<Props> = ({
         </div>
       </div>
 
+      {/* Inflation Indicator - New Enhanced Section */}
+      <div className="bg-gray-800/50 rounded-lg p-3 mb-4">
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-2">
+            <Gauge className="w-4 h-4 text-purple-400" />
+            <span className="text-sm font-semibold text-purple-400">Market Inflation</span>
+          </div>
+          <div className="text-xs text-gray-400">
+            x{marketTrends.inflationMultiplier.toFixed(2)} multiplier
+          </div>
+        </div>
+        
+        {/* Inflation Gauge Bar */}
+        <div className="relative h-6 bg-gray-700 rounded-full overflow-hidden mb-2">
+          <div 
+            className={`absolute inset-y-0 left-0 transition-all duration-500 ${
+              marketTrends.expectedInflation > 20 ? 'bg-gradient-to-r from-red-600 to-red-400' :
+              marketTrends.expectedInflation > 10 ? 'bg-gradient-to-r from-orange-600 to-orange-400' :
+              marketTrends.expectedInflation > 0 ? 'bg-gradient-to-r from-yellow-600 to-yellow-400' :
+              marketTrends.expectedInflation > -10 ? 'bg-gradient-to-r from-cyan-600 to-cyan-400' :
+              'bg-gradient-to-r from-blue-600 to-blue-400'
+            }`}
+            style={{ width: `${Math.min(100, Math.max(0, (marketTrends.expectedInflation + 50) * 1))}%` }}
+          >
+            <div className="h-full flex items-center justify-center">
+              <span className="text-xs font-bold text-white px-2">
+                {marketTrends.expectedInflation > 0 ? '+' : ''}{marketTrends.expectedInflation.toFixed(1)}%
+              </span>
+            </div>
+          </div>
+          {/* Center line for 0% */}
+          <div className="absolute inset-y-0 left-1/2 w-0.5 bg-gray-900 opacity-50"></div>
+        </div>
+        
+        <div className="grid grid-cols-2 gap-2 text-xs">
+          <div>
+            <span className="text-gray-500">Expected: </span>
+            <span className={`font-bold ${getInflationColor(marketTrends.expectedInflation)}`}>
+              {marketTrends.expectedInflation > 0 ? '+' : ''}{marketTrends.expectedInflation.toFixed(1)}%
+            </span>
+          </div>
+          <div>
+            <span className="text-gray-500">Actual: </span>
+            <span className={`font-bold ${getInflationColor(marketTrends.overallInflation)}`}>
+              {marketTrends.overallInflation > 0 ? '+' : ''}{marketTrends.overallInflation.toFixed(1)}%
+            </span>
+          </div>
+        </div>
+      </div>
+
       {/* Market Overview */}
       <div className="grid grid-cols-3 gap-2 mb-4">
         <div className="bg-gray-800/50 rounded-lg p-2">
-          <div className="text-xs text-gray-500">Overall</div>
-          <div className={`text-lg font-bold ${getInflationColor(marketTrends.overallInflation)}`}>
-            {marketTrends.overallInflation > 0 ? '+' : ''}{marketTrends.overallInflation.toFixed(1)}%
+          <div className="text-xs text-gray-500">Trend</div>
+          <div className={`text-sm font-bold ${
+            marketTrends.recentTrend === 'hot' ? 'text-red-400' :
+            marketTrends.recentTrend === 'cold' ? 'text-blue-400' :
+            'text-gray-400'
+          }`}>
+            {marketTrends.recentTrend.toUpperCase()}
           </div>
         </div>
         <div className="bg-gray-800/50 rounded-lg p-2">
@@ -259,14 +348,30 @@ const MarketTrackerCalibrated: React.FC<Props> = ({
         )}
       </div>
 
-      {/* Market Alert */}
-      {Math.abs(marketTrends.overallInflation) > 15 && (
-        <div className="mt-3 p-2 bg-yellow-900/20 border border-yellow-700/50 rounded-lg flex items-center gap-2">
-          <AlertTriangle className="w-4 h-4 text-yellow-400" />
-          <span className="text-xs text-yellow-400">
-            Market is {marketTrends.overallInflation > 0 ? 'significantly inflated' : 'heavily discounted'}!
-            Adjust bidding strategy accordingly.
-          </span>
+      {/* Market Alert - Enhanced with specific advice */}
+      {Math.abs(marketTrends.expectedInflation) > 15 && (
+        <div className={`mt-3 p-2 rounded-lg flex items-center gap-2 ${
+          marketTrends.expectedInflation > 15 
+            ? 'bg-red-900/20 border border-red-700/50' 
+            : 'bg-blue-900/20 border border-blue-700/50'
+        }`}>
+          <AlertTriangle className={`w-4 h-4 ${
+            marketTrends.expectedInflation > 15 ? 'text-red-400' : 'text-blue-400'
+          }`} />
+          <div className="flex-1">
+            <span className={`text-xs font-semibold ${
+              marketTrends.expectedInflation > 15 ? 'text-red-400' : 'text-blue-400'
+            }`}>
+              {marketTrends.expectedInflation > 15 
+                ? `High Inflation Alert (${marketTrends.expectedInflation.toFixed(0)}%)` 
+                : `Deflation Opportunity (${marketTrends.expectedInflation.toFixed(0)}%)`}
+            </span>
+            <p className="text-xs text-gray-400 mt-1">
+              {marketTrends.expectedInflation > 15 
+                ? `Multiply remaining player values by ${marketTrends.inflationMultiplier.toFixed(2)}x. Be aggressive on must-have targets.`
+                : `Values are depressed. Look for bargains and be patient with nominations.`}
+            </p>
+          </div>
         </div>
       )}
     </div>

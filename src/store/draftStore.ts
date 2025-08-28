@@ -25,6 +25,7 @@ interface DraftState {
   placeBid: (amount: number, teamId: string) => void;
   completeAuction: (player: Player, price: number, teamId: string) => void;
   updatePlayerValuations: (valuations: PlayerValuation[]) => void;
+  updateTeamName: (teamId: string, newName: string) => void;
   resetDraft: () => void;
   undoLastPick: () => void;
 }
@@ -66,11 +67,17 @@ export const useDraftStore = create<DraftState>((set, get) => ({
     //   throw new Error(`Invalid league settings: ${errors.join(', ')}`);
     // }
     
+    // Load saved team names from localStorage
+    const savedTeamNames = localStorage.getItem('ffToolTeamNames');
+    const teamNames = savedTeamNames ? JSON.parse(savedTeamNames) : {};
+    
     const teams: Team[] = [];
     for (let i = 0; i < settings.teams; i++) {
+      const teamId = `team_${i}`;
+      const defaultName = i === 0 ? 'My Team' : `Team ${i + 1}`;
       teams.push({
-        id: `team_${i}`,
-        name: i === 0 ? 'My Team' : `Team ${i + 1}`,
+        id: teamId,
+        name: teamNames[teamId] || defaultName,
         budget: settings.budget,
         spent: 0,
         roster: [],
@@ -112,6 +119,12 @@ export const useDraftStore = create<DraftState>((set, get) => ({
   },
   
   completeAuction: (player, price, teamId) => {
+    console.log('[DraftStore] completeAuction called:', {
+      player: player.name,
+      price,
+      teamId
+    });
+    
     // Use atomic update to prevent race conditions
     set(state => {
       // Validate within the update function for atomicity
@@ -179,6 +192,13 @@ export const useDraftStore = create<DraftState>((set, get) => ({
         p => p.id !== player.id
       );
       
+      console.log('[DraftStore] Draft successful:', {
+        playerName: player.name,
+        price,
+        teamName: buyingTeam.name,
+        newHistoryLength: state.draftHistory.length + 1
+      });
+      
       return {
         ...state,
         teams: updatedTeams,
@@ -192,6 +212,20 @@ export const useDraftStore = create<DraftState>((set, get) => ({
   },
   
   updatePlayerValuations: (valuations) => set({ availablePlayers: valuations }),
+  
+  updateTeamName: (teamId, newName) => {
+    set((state) => ({
+      teams: state.teams.map(team => 
+        team.id === teamId ? { ...team, name: newName } : team
+      )
+    }));
+    
+    // Save to localStorage for persistence
+    const savedTeamNames = localStorage.getItem('ffToolTeamNames');
+    const teamNames = savedTeamNames ? JSON.parse(savedTeamNames) : {};
+    teamNames[teamId] = newName;
+    localStorage.setItem('ffToolTeamNames', JSON.stringify(teamNames));
+  },
   
   resetDraft: () => set({
     teams: [],

@@ -1,9 +1,11 @@
-import React from 'react';
-import { Users } from 'lucide-react';
+import React, { useState } from 'react';
+import { Users, Edit2, Check, X } from 'lucide-react';
 import { useDraftStore } from '@/store/draftStore';
 
 const OtherTeamsRosters: React.FC = () => {
-  const { teams, myTeamId } = useDraftStore();
+  const { teams, myTeamId, updateTeamName } = useDraftStore();
+  const [editingTeamId, setEditingTeamId] = useState<string | null>(null);
+  const [editingName, setEditingName] = useState<string>('');
   
   // Get all teams except My Team
   const otherTeams = teams.filter(team => team.id !== myTeamId);
@@ -21,6 +23,24 @@ const OtherTeamsRosters: React.FC = () => {
     return colors[position] || 'text-gray-400';
   };
   
+  const handleStartEdit = (teamId: string, currentName: string) => {
+    setEditingTeamId(teamId);
+    setEditingName(currentName);
+  };
+  
+  const handleSaveEdit = () => {
+    if (editingTeamId && editingName.trim()) {
+      updateTeamName(editingTeamId, editingName.trim());
+    }
+    setEditingTeamId(null);
+    setEditingName('');
+  };
+  
+  const handleCancelEdit = () => {
+    setEditingTeamId(null);
+    setEditingName('');
+  };
+  
   return (
     <div className="space-y-4">
       <div className="bg-gray-900 rounded-lg p-4 border border-gray-700">
@@ -33,7 +53,45 @@ const OtherTeamsRosters: React.FC = () => {
           {otherTeams.map(team => (
             <div key={team.id} className="bg-gray-800 rounded-lg p-3">
               <div className="flex justify-between items-center mb-2">
-                <h3 className="font-semibold text-white">{team.name}</h3>
+                <div className="flex items-center gap-2">
+                  {editingTeamId === team.id ? (
+                    <>
+                      <input
+                        type="text"
+                        value={editingName}
+                        onChange={(e) => setEditingName(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') handleSaveEdit();
+                          if (e.key === 'Escape') handleCancelEdit();
+                        }}
+                        className="px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-sm"
+                        autoFocus
+                      />
+                      <button
+                        onClick={handleSaveEdit}
+                        className="text-green-400 hover:text-green-300"
+                      >
+                        <Check className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={handleCancelEdit}
+                        className="text-red-400 hover:text-red-300"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <h3 className="font-semibold text-white">{team.name}</h3>
+                      <button
+                        onClick={() => handleStartEdit(team.id, team.name)}
+                        className="text-gray-400 hover:text-white"
+                      >
+                        <Edit2 className="w-3 h-3" />
+                      </button>
+                    </>
+                  )}
+                </div>
                 <div className="text-sm">
                   <span className="text-gray-400">Spent: </span>
                   <span className="text-green-400 font-semibold">${team.spent}</span>

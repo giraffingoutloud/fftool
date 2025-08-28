@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import App from './AppCalibrated'; // Using calibrated valuation model
+import App from './AppWithVersionToggle'; // App with version toggle
 import './index.css';
 
 // Import validation functions for browser console access

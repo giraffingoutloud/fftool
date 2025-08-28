@@ -1,6 +1,6 @@
 /**
- * Enhanced Fantasy Football Auction Tool with Calibrated Valuation Model
- * Features comprehensive UI with dark theme and professional aesthetics
+ * EXPERIMENTAL VERSION - Fantasy Football Auction Tool
+ * This is where we test new features and improvements
  */
 
 import { useState, useEffect, useMemo } from 'react';
@@ -24,13 +24,13 @@ import DraftHistory from '@/components/DraftHistory';
 import MarketTrackerCalibrated from '@/components/MarketTrackerCalibrated';
 import BudgetAllocator from '@/components/BudgetAllocator';
 import CompactDashboardPanel from '@/components/CompactDashboardPanel';
-import PlayerDataTable from '@/components/PlayerDataTable';
+import PlayerDataTable from '@/components/PlayerDataTableExperimental';
 import CalculationsExplainerModal from '@/components/CalculationsExplainerModal';
 import SettingsModal from '@/components/SettingsModal';
 import OtherTeamsRosters from '@/components/OtherTeamsRosters';
 import NominationStrategy from '@/components/NominationStrategy';
 
-function AppCalibrated() {
+function AppExperimental() {
   const [loading, setLoading] = useState(true);
   const [dataError, setDataError] = useState<string | null>(null);
   const [valuations, setValuations] = useState<ValuationResult[]>([]);
@@ -369,15 +369,24 @@ function AppCalibrated() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900">
       <Toaster position="top-right" />
       
+      {/* Experimental Banner */}
+      <div className="bg-gradient-to-r from-purple-900/50 to-pink-900/50 border-b border-purple-600/30 py-2">
+        <div className="flex items-center justify-center gap-3 text-purple-300 text-sm font-medium animate-pulse">
+          <span>🧪</span>
+          <span>EXPERIMENTAL BUILD</span>
+          <span>🚀</span>
+        </div>
+      </div>
+      
       {/* Header */}
-      <header className="bg-black/50 backdrop-blur-lg border-b border-blue-500/30 z-50 flex-shrink-0">
+      <header className="bg-black/50 backdrop-blur-lg border-b border-purple-500/30 z-50 flex-shrink-0">
         <div className="px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              FFTool
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              FFTool <span className="text-xs text-purple-400 ml-2">[EXP]</span>
             </h1>
 
 
@@ -474,7 +483,6 @@ function AppCalibrated() {
               {/* Left Column - Team & Budget */}
               <div className="col-span-12 lg:col-span-2 space-y-4">
                 <TeamRoster teamId={myTeamId} />
-                <NominationStrategy valuations={valuations} />
                 <BudgetAllocator
                   remainingBudget={200 - draftHistory.reduce((sum: number, pick: any) => 
                     pick.team === myTeamId ? sum + (pick.price || 0) : sum, 0)}
@@ -498,8 +506,9 @@ function AppCalibrated() {
                 />
               </div>
               
-              {/* Right Column - Market Tracker, Draft History & Other Teams */}
+              {/* Right Column - Nomination Strategy, Market Tracker, Draft History & Other Teams */}
               <div className="col-span-12 lg:col-span-2 space-y-4">
+                <NominationStrategy valuations={valuations} />
                 <MarketTrackerCalibrated 
                   valuations={valuations}
                   draftHistory={draftHistory}
@@ -534,4 +543,4 @@ function AppCalibrated() {
   );
 }
 
-export default AppCalibrated;
+export default AppExperimental;

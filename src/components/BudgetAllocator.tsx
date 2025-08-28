@@ -144,7 +144,7 @@ const BudgetAllocator: React.FC<Props> = ({
         }
       });
     } else if (selectedStrategy === 'zero_rb') {
-      // Prioritize WR/TE
+      // Prioritize WR/TE, minimal RB spending
       const rbBudget = positionNeeds['RB'] > 0 ? positionNeeds['RB'] * 2 : 0; // $2 per RB
       const otherBudget = remainingBudget - rbBudget;
       
@@ -156,6 +156,28 @@ const BudgetAllocator: React.FC<Props> = ({
       if (positionNeeds['RB'] > 0) {
         allocations['RB'] = rbBudget;
       }
+    } else if (selectedStrategy === 'hero_rb') {
+      // One expensive RB, then WRs
+      if (positionNeeds['RB'] > 0) {
+        allocations['RB'] = Math.floor(remainingBudget * 0.4); // 40% on one RB
+      }
+      const remainingAfterRB = remainingBudget - (allocations['RB'] || 0);
+      ['WR', 'TE'].forEach(pos => {
+        if (positionNeeds[pos] > 0) {
+          allocations[pos] = Math.floor(remainingAfterRB * 0.25);
+        }
+      });
+    } else if (selectedStrategy === 'robust_rb') {
+      // Heavy RB investment
+      if (positionNeeds['RB'] > 0) {
+        allocations['RB'] = Math.floor(remainingBudget * 0.5); // 50% on RBs
+      }
+      const remainingAfterRB = remainingBudget - (allocations['RB'] || 0);
+      ['WR', 'QB', 'TE'].forEach(pos => {
+        if (positionNeeds[pos] > 0) {
+          allocations[pos] = Math.floor(remainingAfterRB * 0.15);
+        }
+      });
     }
     
     return allocations;

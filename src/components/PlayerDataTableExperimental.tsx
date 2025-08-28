@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { ChevronUp, ChevronDown, Check, Eye, Plus, Minus } from 'lucide-react';
+import { ChevronUp, ChevronDown, Check, Eye, Plus, Minus, X } from 'lucide-react';
 import type { ValuationResult } from '@/lib/calibratedValuationService';
-import PlayerProfileModal from './PlayerProfileModal';
+import PlayerProfileModal from './PlayerProfileModalExperimentalClean';
 import { useDraftStore } from '@/store/draftStore';
 
 interface PlayerDataTableProps {
@@ -315,13 +315,23 @@ const PlayerDataTable: React.FC<PlayerDataTableProps> = ({
 
               {/* Name with Search */}
               <th className="px-2 py-1 text-left text-xs font-medium min-w-[120px]" style={{ position: 'sticky', left: 0, backgroundColor: '#1f2937', zIndex: 20 }}>
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search..."
-                  className="w-full px-2 py-1 text-xs bg-gray-700 border border-gray-600 rounded text-gray-200 placeholder-gray-400 focus:outline-none focus:border-blue-400"
-                />
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search..."
+                    className="w-full px-2 py-1 pr-6 text-xs bg-gray-700 border border-gray-600 rounded text-gray-200 placeholder-gray-400 focus:outline-none focus:border-blue-400"
+                  />
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery('')}
+                      className="absolute right-1 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  )}
+                </div>
               </th>
 
               {/* Sortable columns */}
@@ -658,6 +668,7 @@ const PlayerDataTable: React.FC<PlayerDataTableProps> = ({
           player={modalPlayer}
           isOpen={!!modalPlayer}
           onClose={() => setModalPlayer(null)}
+          allPlayers={players}
         />
       )}
     </div>
