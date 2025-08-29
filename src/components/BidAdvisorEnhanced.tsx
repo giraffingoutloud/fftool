@@ -413,8 +413,8 @@ const BidAdvisorEnhanced: React.FC<BidAdvisorEnhancedProps> = ({
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <span className="text-gray-400">
-                            {p.projectedPoints ? p.projectedPoints.toFixed(0) : '-'}
+                          <span className="text-cyan-400 font-medium">
+                            {p.pprMetrics?.score ? p.pprMetrics.score.toFixed(0) : '-'}
                           </span>
                           <span className={`${getByeWeekColor(p.byeWeek)}`}>
                             W{p.byeWeek || '-'}
