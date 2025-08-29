@@ -142,8 +142,9 @@ export class ProjectionAggregator {
       teamSeasonSOS: (() => {
         const sos = bestSource?.teamSeasonSOS || 0;
         // Debug logging for key players
-        if (basePlayerId.includes('mahomes') || basePlayerId.includes('jefferson') || basePlayerId.includes('mccaffrey')) {
-          console.log(`Aggregator SOS: ${basePlayerId} -> SOS = ${sos} (from ${bestSource?.source || 'unknown'})`);
+        const playerNameLower = aggregated.player.toLowerCase();
+        if (playerNameLower.includes('mahomes') || playerNameLower.includes('jefferson') || playerNameLower.includes('mccaffrey')) {
+          console.log(`Aggregator SOS: ${aggregated.player} -> SOS = ${sos} (from ${bestSource?.source || 'unknown'})`);
         }
         return sos;
       })(),  // Preserve SOS data
