@@ -40,7 +40,7 @@ const BidAdvisorEnhanced: React.FC<BidAdvisorEnhancedProps> = ({
   onDraft
 }) => {
   const { teams, myTeamId, draftHistory, completeAuction } = useDraftStore();
-  const [simulatedBid, setSimulatedBid] = useState<number | ''>(currentBid || '');
+  const [simulatedBid, setSimulatedBid] = useState<number | ''>(currentBid || player.intrinsicValue || '');
   const [selectedTeam, setSelectedTeam] = useState<string>(teams.find(t => t.id === myTeamId)?.name || 'My Team');
 
   // Get recommendation with all new features
@@ -304,7 +304,7 @@ const BidAdvisorEnhanced: React.FC<BidAdvisorEnhancedProps> = ({
             <ScoreBar 
               label="Budget" 
               score={recommendation.budgetScore} 
-              icon={<Zap className="w-3 h-3 text-gray-400" />}
+              icon={null}
             />
           </div>
           
@@ -460,7 +460,7 @@ const BidAdvisorEnhanced: React.FC<BidAdvisorEnhancedProps> = ({
                 if (onBidChange && typeof value === 'number') onBidChange(value);
               }}
               onKeyPress={handleKeyPress}
-              className="flex-1 px-2 py-1.5 bg-gray-900 border border-gray-600 rounded text-white text-center font-bold text-xl"
+              className="w-16 px-2 py-1.5 bg-gray-900 border border-gray-600 rounded text-white text-center font-bold text-xl"
               placeholder="$"
             />
             <button
