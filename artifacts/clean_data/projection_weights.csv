@@ -1,0 +1,7 @@
+source_name,weight,min_weight,max_weight,enabled,description
+fantasypros,0.40,0.0,1.0,true,FantasyPros consensus projections
+cbs,0.35,0.0,1.0,true,CBS Sports projections
+projections_2025,0.25,0.0,1.0,true,Baseline aggregated projections
+espn,0.00,0.0,1.0,false,ESPN projections (if available)
+yahoo,0.00,0.0,1.0,false,Yahoo projections (if available)
+nfl,0.00,0.0,1.0,false,NFL.com projections (if available)

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Draft Simulation Results</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: #1a1a2e;
+            color: #eee;
+            padding: 20px;
+            margin: 0;
+        }
+        h1 { color: #4CAF50; }
+        pre {
+            background: #0f0f23;
+            border: 1px solid #333;
+            padding: 15px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fantasy Football Draft Simulation Runner</h1>
+    <button onclick="runSims()">Run 2 Detailed Simulations</button>
+    <pre id="output">Click button to run simulations...</pre>
+
+    <script type="module">
+        window.runSims = async function() {
+            const output = document.getElementById('output');
+            output.textContent = 'Importing modules...\n';
+            
+            try {
+                // Import the simulation module directly
+                const module = await import('/fftool/src/runDetailedSimulations.ts');
+                
+                // Capture console output
+                const logs = [];
+                const originalLog = console.log;
+                console.log = function(...args) {
+                    logs.push(args.map(a => typeof a === 'object' ? JSON.stringify(a, null, 2) : String(a)).join(' '));
+                    originalLog.apply(console, args);
+                };
+                
+                output.textContent = 'Running simulations...\n\n';
+                await module.runDetailedSimulations();
+                
+                // Display results
+                output.textContent = logs.join('\n');
+                console.log = originalLog;
+                
+            } catch (error) {
+                output.textContent = 'Error: ' + error.message + '\n\nPlease run this from http://localhost:3009/fftool/simulations.html';
+            }
+        };
+    </script>
+</body>
+</html>

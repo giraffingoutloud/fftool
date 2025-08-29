@@ -1,0 +1,7 @@
+position,min_percent,max_percent,target_percent,description
+QB,5,10,7,Recommended 5-10% of budget on QBs
+RB,45,50,48,Recommended 45-50% of budget on RBs
+WR,35,40,37,Recommended 35-40% of budget on WRs
+TE,5,10,7,Recommended 5-10% of budget on TEs
+DST,0.5,1.5,1,Recommended 0.5-1.5% of budget on DST
+K,0.5,1.0,0.5,Recommended 0.5-1% of budget on K
