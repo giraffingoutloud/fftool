@@ -306,7 +306,15 @@ export class CleanDataLoader {
     const sosMap = new Map<string, number>();
     
     try {
+      logger.info('Attempting to load SOS data from sos_2025.csv');
       const sosData = await this.loadCleanCSV<any>('sos_2025.csv');
+      logger.info(`Loaded ${sosData.length} rows from sos_2025.csv`);
+      
+      // Log first row to verify structure
+      if (sosData.length > 0) {
+        logger.info('First SOS row:', JSON.stringify(sosData[0]));
+      }
+      
       sosData.forEach(row => {
         // New format: Team, SOS_Rank, SOS_Percentage, SOS_Normalized
         if (row.Team) {
@@ -332,7 +340,37 @@ export class CleanDataLoader {
         }
       });
     } catch (error) {
-      logger.warn('Could not load SOS data:', error);
+      logger.error('Failed to load SOS data:', error);
+      console.error('SOS Loading Error:', error);
+      
+      // Try alternative path for GitHub Pages
+      try {
+        const basePath = import.meta.env.BASE_URL || '/';
+        const altPath = `${basePath}artifacts/clean_data/sos_2025.csv`;
+        logger.info(`Trying alternative SOS path: ${altPath}`);
+        
+        const response = await fetch(altPath);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch SOS from ${altPath}: ${response.status}`);
+        }
+        
+        const text = await response.text();
+        const result = parseCSV(text, { header: true, skipEmptyLines: 'greedy' });
+        
+        if (result.data && result.data.length > 0) {
+          logger.info(`Loaded ${result.data.length} rows from alternative path`);
+          result.data.forEach((row: any) => {
+            if (row.Team) {
+              const teamCode = row.Team;
+              const seasonSOS = safeParseFloat(row.SOS_Normalized, null, 0);
+              sosMap.set(teamCode, seasonSOS);
+            }
+          });
+          logger.info(`Built SOS map for ${sosMap.size} teams from alternative path`);
+        }
+      } catch (altError) {
+        logger.error('Alternative SOS loading also failed:', altError);
+      }
     }
     
     return sosMap;

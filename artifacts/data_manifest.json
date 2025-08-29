@@ -1,403 +1,403 @@
 {
   "version": "1.0.0",
-  "generated_at": "2025-08-28T13:40:55.696836",
+  "generated_at": "2025-08-29T20:12:33.074504",
   "pipeline_version": "1.0.0",
   "data_location": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data",
   "files": {
     "49ers.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/49ers.csv",
       "size_bytes": 7446,
-      "modified": "2025-08-28T03:40:53.227994",
+      "modified": "2025-08-29T10:12:31.335854",
       "format": "csv"
     },
     "adp0_2025.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/adp0_2025.csv",
       "size_bytes": 30862,
-      "modified": "2025-08-28T03:40:51.285710",
+      "modified": "2025-08-29T10:12:29.433077",
       "format": "csv"
     },
     "adp1_2025.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/adp1_2025.csv",
       "size_bytes": 58252,
-      "modified": "2025-08-28T03:40:51.330184",
+      "modified": "2025-08-29T10:12:29.474738",
       "format": "csv"
     },
     "adp2_2025.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/adp2_2025.csv",
       "size_bytes": 3338,
-      "modified": "2025-08-28T03:40:51.343266",
+      "modified": "2025-08-29T10:12:29.490750",
       "format": "csv"
     },
     "adp3_2025.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/adp3_2025.csv",
       "size_bytes": 19156,
-      "modified": "2025-08-28T03:40:51.357714",
+      "modified": "2025-08-29T10:12:29.490750",
       "format": "csv"
     },
     "bears.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/bears.csv",
       "size_bytes": 8377,
-      "modified": "2025-08-28T03:40:53.242151",
+      "modified": "2025-08-29T10:12:31.343359",
       "format": "csv"
     },
     "bengals.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/bengals.csv",
       "size_bytes": 8638,
-      "modified": "2025-08-28T03:40:53.255239",
+      "modified": "2025-08-29T10:12:31.358993",
       "format": "csv"
     },
     "bid_ranges.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/bid_ranges.csv",
       "size_bytes": 485,
-      "modified": "2025-08-28T03:40:51.368255",
+      "modified": "2025-08-29T10:12:29.506380",
       "format": "csv"
     },
     "bills.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/bills.csv",
       "size_bytes": 8591,
-      "modified": "2025-08-28T03:40:53.269325",
+      "modified": "2025-08-29T10:12:31.374649",
       "format": "csv"
     },
     "broncos.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/broncos.csv",
       "size_bytes": 9070,
-      "modified": "2025-08-28T03:40:53.283415",
+      "modified": "2025-08-29T10:12:31.390268",
       "format": "csv"
     },
     "browns.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/browns.csv",
       "size_bytes": 7602,
-      "modified": "2025-08-28T03:40:53.295530",
+      "modified": "2025-08-29T10:12:31.397274",
       "format": "csv"
     },
     "buccaneers.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/buccaneers.csv",
       "size_bytes": 4228,
-      "modified": "2025-08-28T03:40:53.307531",
+      "modified": "2025-08-29T10:12:31.406313",
       "format": "csv"
     },
     "budget_allocation.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/budget_allocation.csv",
       "size_bytes": 353,
-      "modified": "2025-08-28T03:40:51.378259",
+      "modified": "2025-08-29T10:12:29.522394",
       "format": "csv"
     },
     "cardinals.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/cardinals.csv",
       "size_bytes": 6503,
-      "modified": "2025-08-28T03:40:53.325017",
+      "modified": "2025-08-29T10:12:31.423013",
       "format": "csv"
     },
     "chargers.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/chargers.csv",
       "size_bytes": 6661,
-      "modified": "2025-08-28T03:40:53.342589",
+      "modified": "2025-08-29T10:12:31.438020",
       "format": "csv"
     },
     "chiefs.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/chiefs.csv",
       "size_bytes": 9456,
-      "modified": "2025-08-28T03:40:53.359691",
+      "modified": "2025-08-29T10:12:31.453689",
       "format": "csv"
     },
     "colts.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/colts.csv",
       "size_bytes": 9254,
-      "modified": "2025-08-28T03:40:53.373607",
+      "modified": "2025-08-29T10:12:31.469277",
       "format": "csv"
     },
     "commanders.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/commanders.csv",
       "size_bytes": 6690,
-      "modified": "2025-08-28T03:40:53.386058",
+      "modified": "2025-08-29T10:12:31.490941",
       "format": "csv"
     },
     "cowboys.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/cowboys.csv",
       "size_bytes": 8988,
-      "modified": "2025-08-28T03:40:53.403062",
+      "modified": "2025-08-29T10:12:31.511174",
       "format": "csv"
     },
     "defense_coverage_scheme.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/defense_coverage_scheme.csv",
       "size_bytes": 176291,
-      "modified": "2025-08-28T03:40:52.491024",
+      "modified": "2025-08-29T10:12:30.613502",
       "format": "csv"
     },
     "defense_coverage_summary.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/defense_coverage_summary.csv",
       "size_bytes": 127757,
-      "modified": "2025-08-28T03:40:52.527579",
+      "modified": "2025-08-29T10:12:30.645645",
       "format": "csv"
     },
     "defense_summary.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/defense_summary.csv",
       "size_bytes": 181437,
-      "modified": "2025-08-28T03:40:52.578739",
+      "modified": "2025-08-29T10:12:30.704564",
       "format": "csv"
     },
     "dolphins.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/dolphins.csv",
       "size_bytes": 6534,
-      "modified": "2025-08-28T03:40:53.418298",
+      "modified": "2025-08-29T10:12:31.523185",
       "format": "csv"
     },
     "eagles.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/eagles.csv",
       "size_bytes": 8842,
-      "modified": "2025-08-28T03:40:53.435731",
+      "modified": "2025-08-29T10:12:31.532690",
       "format": "csv"
     },
     "falcons.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/falcons.csv",
       "size_bytes": 5725,
-      "modified": "2025-08-28T03:40:53.448730",
+      "modified": "2025-08-29T10:12:31.548322",
       "format": "csv"
     },
     "fantasy-stats-dst_2023.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/fantasy-stats-dst_2023.csv",
       "size_bytes": 3478,
-      "modified": "2025-08-28T03:40:51.468830",
+      "modified": "2025-08-29T10:12:29.600528",
       "format": "csv"
     },
     "fantasy-stats-dst_2024.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/fantasy-stats-dst_2024.csv",
       "size_bytes": 3473,
-      "modified": "2025-08-28T03:40:51.480337",
+      "modified": "2025-08-29T10:12:29.616156",
       "format": "csv"
     },
     "fantasy-stats-passing_2023.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/fantasy-stats-passing_2023.csv",
       "size_bytes": 9673,
-      "modified": "2025-08-28T03:40:51.493939",
+      "modified": "2025-08-29T10:12:29.621162",
       "format": "csv"
     },
     "fantasy-stats-passing_2024.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/fantasy-stats-passing_2024.csv",
       "size_bytes": 9253,
-      "modified": "2025-08-28T03:40:51.507011",
+      "modified": "2025-08-29T10:12:29.632169",
       "format": "csv"
     },
     "fantasy-stats-receiving_rushing_2023.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/fantasy-stats-receiving_rushing_2023.csv",
       "size_bytes": 84916,
-      "modified": "2025-08-28T03:40:51.540358",
+      "modified": "2025-08-29T10:12:29.664441",
       "format": "csv"
     },
     "fantasy-stats-receiving_rushing_2024.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/fantasy-stats-receiving_rushing_2024.csv",
       "size_bytes": 85890,
-      "modified": "2025-08-28T03:40:51.572835",
+      "modified": "2025-08-29T10:12:29.695354",
       "format": "csv"
     },
     "FantasyPros_Fantasy_Football_2025_Depth_Charts.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/FantasyPros_Fantasy_Football_2025_Depth_Charts.csv",
       "size_bytes": 1760,
-      "modified": "2025-08-28T03:40:53.718060",
+      "modified": "2025-08-29T10:12:31.836723",
       "format": "csv"
     },
     "FantasyPros_Fantasy_Football_Advanced_Stats_Report_QB.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_QB.csv",
       "size_bytes": 8204,
-      "modified": "2025-08-28T03:40:53.733061",
+      "modified": "2025-08-29T10:12:31.845728",
       "format": "csv"
     },
     "FantasyPros_Fantasy_Football_Advanced_Stats_Report_RB.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_RB.csv",
       "size_bytes": 11714,
-      "modified": "2025-08-28T03:40:53.752197",
+      "modified": "2025-08-29T10:12:31.861390",
       "format": "csv"
     },
     "FantasyPros_Fantasy_Football_Advanced_Stats_Report_TE.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_TE.csv",
       "size_bytes": 9877,
-      "modified": "2025-08-28T03:40:53.768295",
+      "modified": "2025-08-29T10:12:31.876988",
       "format": "csv"
     },
     "FantasyPros_Fantasy_Football_Advanced_Stats_Report_WR.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_WR.csv",
       "size_bytes": 19392,
-      "modified": "2025-08-28T03:40:53.789387",
+      "modified": "2025-08-29T10:12:31.908264",
       "format": "csv"
     },
     "FantasyPros_Fantasy_Football_Projections_FLX.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/FantasyPros_Fantasy_Football_Projections_FLX.csv",
       "size_bytes": 27295,
-      "modified": "2025-08-28T03:40:51.627613",
+      "modified": "2025-08-29T10:12:29.753321",
       "format": "csv"
     },
     "FantasyPros_Fantasy_Football_Projections_RB.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/FantasyPros_Fantasy_Football_Projections_RB.csv",
       "size_bytes": 8241,
-      "modified": "2025-08-28T03:40:51.641125",
+      "modified": "2025-08-29T10:12:29.758838",
       "format": "csv"
     },
     "FantasyPros_Fantasy_Football_Projections_TE.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/FantasyPros_Fantasy_Football_Projections_TE.csv",
       "size_bytes": 5955,
-      "modified": "2025-08-28T03:40:51.652834",
+      "modified": "2025-08-29T10:12:29.774469",
       "format": "csv"
     },
     "FantasyPros_Fantasy_Football_Projections_WR.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/FantasyPros_Fantasy_Football_Projections_WR.csv",
       "size_bytes": 9604,
-      "modified": "2025-08-28T03:40:51.664623",
+      "modified": "2025-08-29T10:12:29.790094",
       "format": "csv"
     },
     "FantasyPros_Fantasy_Football_Statistics_QB.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/FantasyPros_Fantasy_Football_Statistics_QB.csv",
       "size_bytes": 7485,
-      "modified": "2025-08-28T03:40:53.810011",
+      "modified": "2025-08-29T10:12:31.924342",
       "format": "csv"
     },
     "FantasyPros_Fantasy_Football_Statistics_RB.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/FantasyPros_Fantasy_Football_Statistics_RB.csv",
       "size_bytes": 15884,
-      "modified": "2025-08-28T03:40:53.831520",
+      "modified": "2025-08-29T10:12:31.939974",
       "format": "csv"
     },
     "FantasyPros_Fantasy_Football_Statistics_TE.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/FantasyPros_Fantasy_Football_Statistics_TE.csv",
       "size_bytes": 13063,
-      "modified": "2025-08-28T03:40:53.851635",
+      "modified": "2025-08-29T10:12:31.958989",
       "format": "csv"
     },
     "FantasyPros_Fantasy_Football_Statistics_WR.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/FantasyPros_Fantasy_Football_Statistics_WR.csv",
       "size_bytes": 24071,
-      "modified": "2025-08-28T03:40:53.874736",
+      "modified": "2025-08-29T10:12:31.994494",
       "format": "csv"
     },
     "giants.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/giants.csv",
       "size_bytes": 6150,
-      "modified": "2025-08-28T03:40:53.464838",
+      "modified": "2025-08-29T10:12:31.563946",
       "format": "csv"
     },
     "jaguars.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/jaguars.csv",
       "size_bytes": 6211,
-      "modified": "2025-08-28T03:40:53.484397",
+      "modified": "2025-08-29T10:12:31.579602",
       "format": "csv"
     },
     "jets.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/jets.csv",
       "size_bytes": 7674,
-      "modified": "2025-08-28T03:40:53.500405",
+      "modified": "2025-08-29T10:12:31.595196",
       "format": "csv"
     },
     "league_settings.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/league_settings.csv",
       "size_bytes": 1265,
-      "modified": "2025-08-28T03:40:51.392374",
+      "modified": "2025-08-29T10:12:29.538027",
       "format": "csv"
     },
     "line_pass_blocking_efficiency.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/line_pass_blocking_efficiency.csv",
       "size_bytes": 1314,
-      "modified": "2025-08-28T03:40:52.591055",
+      "modified": "2025-08-29T10:12:30.708570",
       "format": "csv"
     },
     "lions.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/lions.csv",
       "size_bytes": 6898,
-      "modified": "2025-08-28T03:40:53.514003",
+      "modified": "2025-08-29T10:12:31.620336",
       "format": "csv"
     },
     "market_adjustments.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/market_adjustments.csv",
       "size_bytes": 429,
-      "modified": "2025-08-28T03:40:51.403456",
+      "modified": "2025-08-29T10:12:29.538027",
       "format": "csv"
     },
     "nfl-power-ratings.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/nfl-power-ratings.csv",
       "size_bytes": 2475,
-      "modified": "2025-08-28T03:40:51.586350",
+      "modified": "2025-08-29T10:12:29.711368",
       "format": "csv"
     },
     "offense_blocking.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/offense_blocking.csv",
       "size_bytes": 119227,
-      "modified": "2025-08-28T03:40:52.627176",
+      "modified": "2025-08-29T10:12:30.741732",
       "format": "csv"
     },
     "offense_pass_blocking.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/offense_pass_blocking.csv",
       "size_bytes": 79621,
-      "modified": "2025-08-28T03:40:52.654081",
+      "modified": "2025-08-29T10:12:30.779450",
       "format": "csv"
     },
     "offense_run_blockng.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/offense_run_blockng.csv",
       "size_bytes": 99989,
-      "modified": "2025-08-28T03:40:52.684226",
+      "modified": "2025-08-29T10:12:30.807605",
       "format": "csv"
     },
     "packers.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/packers.csv",
       "size_bytes": 6443,
-      "modified": "2025-08-28T03:40:53.530963",
+      "modified": "2025-08-29T10:12:31.626861",
       "format": "csv"
     },
     "panthers.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/panthers.csv",
       "size_bytes": 8949,
-      "modified": "2025-08-28T03:40:53.548728",
+      "modified": "2025-08-29T10:12:31.657069",
       "format": "csv"
     },
     "passing_allowed_pressure.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/passing_allowed_pressure.csv",
       "size_bytes": 10292,
-      "modified": "2025-08-28T03:40:51.929363",
+      "modified": "2025-08-29T10:12:30.047689",
       "format": "csv"
     },
     "passing_depth.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/passing_depth.csv",
       "size_bytes": 166819,
-      "modified": "2025-08-28T03:40:52.732613",
+      "modified": "2025-08-29T10:12:30.861435",
       "format": "csv"
     },
     "passing_pressure.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/passing_pressure.csv",
       "size_bytes": 63968,
-      "modified": "2025-08-28T03:40:52.761745",
+      "modified": "2025-08-29T10:12:30.882931",
       "format": "csv"
     },
     "passing_summary.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/passing_summary.csv",
       "size_bytes": 16333,
-      "modified": "2025-08-28T03:40:52.779872",
+      "modified": "2025-08-29T10:12:30.903668",
       "format": "csv"
     },
     "pass_rush_productivity.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/pass_rush_productivity.csv",
       "size_bytes": 105299,
-      "modified": "2025-08-28T03:40:52.815607",
+      "modified": "2025-08-29T10:12:30.934432",
       "format": "csv"
     },
     "pass_rush_summary.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/pass_rush_summary.csv",
       "size_bytes": 102482,
-      "modified": "2025-08-28T03:40:52.849719",
+      "modified": "2025-08-29T10:12:30.963782",
       "format": "csv"
     },
     "patriots.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/patriots.csv",
       "size_bytes": 5896,
-      "modified": "2025-08-28T03:40:53.561856",
+      "modified": "2025-08-29T10:12:31.664235",
       "format": "csv"
     },
     "preseason_rankings_2025.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/preseason_rankings_2025.csv",
       "size_bytes": 2383,
-      "modified": "2025-08-28T03:40:51.597351",
+      "modified": "2025-08-29T10:12:29.724945",
       "format": "csv"
     },
     "projections_2025.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/projections_2025.csv",
       "size_bytes": 123042,
-      "modified": "2025-08-28T03:40:51.712104",
+      "modified": "2025-08-29T10:12:29.837265",
       "format": "csv"
     },
     "projections_2025_4pt_backup.csv": {
@@ -414,8 +414,8 @@
     },
     "projections_2025_backup.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/projections_2025_backup.csv",
-      "size_bytes": 103604,
-      "modified": "2025-08-28T02:54:23.187600",
+      "size_bytes": 123042,
+      "modified": "2025-08-28T04:49:30.713252",
       "format": "csv"
     },
     "projections_2025_complete.csv": {
@@ -432,108 +432,114 @@
     },
     "projections_2025_with_adp.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/projections_2025_with_adp.csv",
-      "size_bytes": 109188,
-      "modified": "2025-08-28T02:54:23.204451",
+      "size_bytes": 122411,
+      "modified": "2025-08-28T04:49:30.730047",
       "format": "csv"
     },
     "projection_weights.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/projection_weights.csv",
       "size_bytes": 416,
-      "modified": "2025-08-28T03:40:51.417019",
+      "modified": "2025-08-29T10:12:29.553650",
       "format": "csv"
     },
     "qb-fantasy-sos.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/qb-fantasy-sos.csv",
       "size_bytes": 4371,
-      "modified": "2025-08-28T03:40:51.610102",
+      "modified": "2025-08-29T10:12:29.733387",
       "format": "csv"
     },
     "raiders.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/raiders.csv",
       "size_bytes": 6261,
-      "modified": "2025-08-28T03:40:53.577928",
+      "modified": "2025-08-29T10:12:31.684947",
       "format": "csv"
     },
     "rams.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/rams.csv",
       "size_bytes": 7884,
-      "modified": "2025-08-28T03:40:53.592928",
+      "modified": "2025-08-29T10:12:31.689490",
       "format": "csv"
     },
     "ravens.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/ravens.csv",
       "size_bytes": 6224,
-      "modified": "2025-08-28T03:40:53.609160",
+      "modified": "2025-08-29T10:12:31.705120",
       "format": "csv"
     },
     "receiving_concept.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/receiving_concept.csv",
       "size_bytes": 105944,
-      "modified": "2025-08-28T03:40:52.886028",
+      "modified": "2025-08-29T10:12:30.994432",
       "format": "csv"
     },
     "receiving_depth.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/receiving_depth.csv",
       "size_bytes": 653228,
-      "modified": "2025-08-28T03:40:53.054560",
+      "modified": "2025-08-29T10:12:31.154394",
       "format": "csv"
     },
     "receiving_scheme.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/receiving_scheme.csv",
       "size_bytes": 113056,
-      "modified": "2025-08-28T03:40:53.091138",
+      "modified": "2025-08-29T10:12:31.200930",
       "format": "csv"
     },
     "receiving_summary.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/receiving_summary.csv",
       "size_bytes": 83763,
-      "modified": "2025-08-28T03:40:53.120815",
+      "modified": "2025-08-29T10:12:31.229137",
       "format": "csv"
     },
     "replacement_levels.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/replacement_levels.csv",
       "size_bytes": 473,
-      "modified": "2025-08-28T03:40:51.430537",
+      "modified": "2025-08-29T10:12:29.569274",
       "format": "csv"
     },
     "run_defense_summary.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/run_defense_summary.csv",
       "size_bytes": 98793,
-      "modified": "2025-08-28T03:40:53.151586",
+      "modified": "2025-08-29T10:12:31.255315",
       "format": "csv"
     },
     "rushing_summary.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/rushing_summary.csv",
       "size_bytes": 53564,
-      "modified": "2025-08-28T03:40:53.175293",
+      "modified": "2025-08-29T10:12:31.281823",
       "format": "csv"
     },
     "saints.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/saints.csv",
       "size_bytes": 6656,
-      "modified": "2025-08-28T03:40:53.624727",
+      "modified": "2025-08-29T10:12:31.735903",
       "format": "csv"
     },
     "scoring_system.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/scoring_system.csv",
       "size_bytes": 1948,
-      "modified": "2025-08-28T03:40:51.442310",
+      "modified": "2025-08-29T10:12:29.569274",
       "format": "csv"
     },
     "seahawks.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/seahawks.csv",
       "size_bytes": 8902,
-      "modified": "2025-08-28T03:40:53.641495",
+      "modified": "2025-08-29T10:12:31.751535",
       "format": "csv"
     },
     "slot_coverage.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/slot_coverage.csv",
       "size_bytes": 30997,
-      "modified": "2025-08-28T03:40:53.194155",
+      "modified": "2025-08-29T10:12:31.295863",
       "format": "csv"
     },
     "sos_2025.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/sos_2025.csv",
+      "size_bytes": 10952,
+      "modified": "2025-08-29T10:12:29.844272",
+      "format": "csv"
+    },
+    "sos_2025_corrupted_backup.csv": {
+      "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/sos_2025_corrupted_backup.csv",
       "size_bytes": 10952,
       "modified": "2025-08-28T03:40:51.725151",
       "format": "csv"
@@ -541,37 +547,37 @@
     "steelers.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/steelers.csv",
       "size_bytes": 8260,
-      "modified": "2025-08-28T03:40:53.653973",
+      "modified": "2025-08-29T10:12:31.767161",
       "format": "csv"
     },
     "texans.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/texans.csv",
       "size_bytes": 6353,
-      "modified": "2025-08-28T03:40:53.669307",
+      "modified": "2025-08-29T10:12:31.782785",
       "format": "csv"
     },
     "tier_multipliers.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/tier_multipliers.csv",
       "size_bytes": 438,
-      "modified": "2025-08-28T03:40:51.453726",
+      "modified": "2025-08-29T10:12:29.584901",
       "format": "csv"
     },
     "time_in_pocket.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/time_in_pocket.csv",
       "size_bytes": 33412,
-      "modified": "2025-08-28T03:40:53.214032",
+      "modified": "2025-08-29T10:12:31.323074",
       "format": "csv"
     },
     "titans.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/titans.csv",
       "size_bytes": 6615,
-      "modified": "2025-08-28T03:40:53.685010",
+      "modified": "2025-08-29T10:12:31.798825",
       "format": "csv"
     },
     "vikings.csv": {
       "path": "/mnt/c/Users/giraf/Documents/projects/fftool/artifacts/clean_data/vikings.csv",
       "size_bytes": 7874,
-      "modified": "2025-08-28T03:40:53.704046",
+      "modified": "2025-08-29T10:12:31.814457",
       "format": "csv"
     }
   },
