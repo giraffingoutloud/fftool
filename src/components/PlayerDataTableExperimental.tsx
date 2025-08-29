@@ -12,7 +12,7 @@ interface PlayerDataTableProps {
 }
 
 type SortField = 'position' | 'team' | 'tier' | 'playerRank' | 'maxBid' | 'intrinsicValue' | 
-                 'marketValue' | 'edge' | 'edgePercent' | 'vorp' | 'adp' | 'projectedPoints' | 'byeWeek' | 'sos';
+                 'marketValue' | 'edge' | 'edgePercent' | 'vorp' | 'adp' | 'projectedPoints' | 'byeWeek' | 'sos' | 'ppr';
 type SortDirection = 'asc' | 'desc';
 
 const PlayerDataTable: React.FC<PlayerDataTableProps> = ({ 
@@ -88,6 +88,9 @@ const PlayerDataTable: React.FC<PlayerDataTableProps> = ({
       } else if (sortField === 'sos') {
         aValue = a.teamSeasonSOS || 0;
         bValue = b.teamSeasonSOS || 0;
+      } else if (sortField === 'ppr') {
+        aValue = a.pprMetrics?.score || 0;
+        bValue = b.pprMetrics?.score || 0;
       }
 
       // Handle null/undefined values
@@ -470,6 +473,14 @@ const PlayerDataTable: React.FC<PlayerDataTableProps> = ({
                   SOS <SortIcon field="sos" />
                 </div>
               </th>
+              <th 
+                className="px-2 py-2 text-center text-xs font-medium text-gray-400 cursor-pointer hover:text-white"
+                onClick={() => handleSort('ppr')}
+              >
+                <div className="flex items-center justify-center gap-1">
+                  PPR <SortIcon field="ppr" />
+                </div>
+              </th>
             </tr>
           </thead>
 
@@ -641,6 +652,33 @@ const PlayerDataTable: React.FC<PlayerDataTableProps> = ({
                     <span className={getSosColor(player.teamSeasonSOS)}>
                       {player.teamSeasonSOS?.toFixed(2) || '-'}
                     </span>
+                  </td>
+
+                  {/* PPR Score */}
+                  <td className="px-2 py-1 text-center">
+                    {player.pprMetrics ? (
+                      <div className="flex items-center justify-center gap-1">
+                        <span 
+                          className={`font-semibold ${player.pprMetrics.color}`}
+                          title={`PPR Score: ${player.pprMetrics.score.toFixed(1)}/100`}
+                        >
+                          {player.pprMetrics.score.toFixed(0)}
+                        </span>
+                        <div 
+                          className="w-8 h-1.5 bg-gray-700 rounded-full overflow-hidden"
+                        >
+                          <div 
+                            className="h-full transition-all duration-300"
+                            style={{ 
+                              width: `${player.pprMetrics.score}%`,
+                              backgroundColor: player.pprMetrics.hexColor 
+                            }}
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <span className="text-gray-600">-</span>
+                    )}
                   </td>
                 </tr>
               );

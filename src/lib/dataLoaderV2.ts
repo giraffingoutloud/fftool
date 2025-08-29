@@ -166,6 +166,13 @@ export class DataLoaderV2 {
 
     const { metrics: teamMetrics, composites: teamComposites } = teamDataResult;
     
+    // Debug: Log playerAdvanced data
+    console.log('[DataLoaderV2] Player Advanced Stats loaded:', {
+      size: playerAdvancedMap?.size || 0,
+      hasJamarrChase: playerAdvancedMap?.has("ja'marr chase_wr"),
+      sampleKeys: playerAdvancedMap ? Array.from(playerAdvancedMap.keys()).slice(0, 5) : []
+    });
+    
     // Load ALL projection sources
     const projectionSources = await this.loadAllProjectionSources();
     

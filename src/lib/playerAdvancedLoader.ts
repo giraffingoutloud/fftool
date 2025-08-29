@@ -36,8 +36,16 @@ function parsePercent(value: any): number | undefined {
 // Load WR advanced stats
 export async function loadWRAdvanced(): Promise<WRAdvancedStats[]> {
   try {
-    const basePath = import.meta.env.BASE_URL || '/';
-    const response = await fetch(`${basePath}canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_WR.csv`);
+    const basePath = import.meta.env?.BASE_URL || '/fftool/';
+    const url = `${basePath}artifacts/clean_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_WR.csv`;
+    console.log('[loadWRAdvanced] Fetching from:', url);
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      console.warn('Failed to fetch WR advanced stats:', response.status);
+      return [];
+    }
+    
     const content = await response.text();
     
     const parsed = parseCSVSafe<any>(content, undefined, ['Player']);
@@ -46,20 +54,32 @@ export async function loadWRAdvanced(): Promise<WRAdvancedStats[]> {
     return parsed.map((record: any) => {
       const { name, team } = parsePlayerNameAndTeam(record['Player'] || record['Name'] || '');
       
+      // Calculate catch rate from REC / CATCHABLE
+      const receptions = parseNumber(record['REC']);
+      const catchable = parseNumber(record['CATCHABLE']);
+      const catchRate = (receptions && catchable && catchable > 0) ? 
+        receptions / catchable : undefined;
+      
+      // Calculate YPRR if we have yards and routes info
+      const yards = parseNumber(record['YDS']);
+      const yardsPerRec = parseNumber(record['Y/R']);
+      
       return {
         name,
         team: team || '',
-        targetShare: parsePercent(record['TGT%'] || record['Target Share'] || record['TGT %']),
-        catchRate: parsePercent(record['CATCH%'] || record['Catch Rate'] || record['REC%']),
-        yardsAfterCatch: parseNumber(record['YAC'] || record['Yards After Catch']),
-        yardsAfterCatchPerRec: parseNumber(record['YAC/R'] || record['YAC/REC']),
-        separationYards: parseNumber(record['SEP'] || record['Separation']),
-        drops: parseNumber(record['DROPS'] || record['Drops']),
-        redZoneTargets: parseNumber(record['RZ TGT'] || record['RZ Targets']),
-        airYards: parseNumber(record['AIR YDS'] || record['Air Yards']),
-        yardsBeforeContact: parseNumber(record['YBC'] || record['YBC/R']),
-        targets: parseNumber(record['TGT'] || record['Targets']),
-        receptions: parseNumber(record['REC'] || record['Receptions'])
+        targetShare: parsePercent(record['% TM'] || record['TGT%']),
+        catchRate: catchRate,
+        yardsAfterCatch: parseNumber(record['YAC']),
+        yardsAfterCatchPerRec: parseNumber(record['YAC/R']),
+        separationYards: parseNumber(record['SEP']),
+        drops: parseNumber(record['DROP']),
+        redZoneTargets: parseNumber(record['RZ TGT']),
+        airYards: parseNumber(record['AIR']),
+        yardsBeforeContact: parseNumber(record['YBC']),
+        targets: parseNumber(record['TGT']),
+        receptions: receptions,
+        receivingYards: yards,
+        yardsPerRouteRun: yardsPerRec // Using Y/R as proxy for now
       };
     });
   } catch (error) {
@@ -71,30 +91,50 @@ export async function loadWRAdvanced(): Promise<WRAdvancedStats[]> {
 // Load TE advanced stats
 export async function loadTEAdvanced(): Promise<TEAdvancedStats[]> {
   try {
-    const basePath = import.meta.env.BASE_URL || '/';
-    const response = await fetch(`${basePath}canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_TE.csv`);
+    const basePath = import.meta.env?.BASE_URL || '/fftool/';
+    const url = `${basePath}artifacts/clean_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_TE.csv`;
+    console.log('[loadTEAdvanced] Fetching from:', url);
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      console.warn('Failed to fetch TE advanced stats:', response.status);
+      return [];
+    }
+    
     const content = await response.text();
     
     const parsed = parseCSVSafe<any>(content, undefined, ['Player']);
-    logger.logCSVParse('WR Advanced Stats', parsed.length);
+    logger.logCSVParse('TE Advanced Stats', parsed.length);
     
     return parsed.map((record: any) => {
       const { name, team } = parsePlayerNameAndTeam(record['Player'] || record['Name'] || '');
       
+      // Calculate catch rate from REC / CATCHABLE
+      const receptions = parseNumber(record['REC']);
+      const catchable = parseNumber(record['CATCHABLE']);
+      const catchRate = (receptions && catchable && catchable > 0) ? 
+        receptions / catchable : undefined;
+      
+      // Get yards data
+      const yards = parseNumber(record['YDS']);
+      const yardsPerRec = parseNumber(record['Y/R']);
+      
       return {
         name,
         team: team || '',
-        targetShare: parsePercent(record['TGT%'] || record['Target Share'] || record['TGT %']),
-        catchRate: parsePercent(record['CATCH%'] || record['Catch Rate'] || record['REC%']),
-        yardsAfterCatch: parseNumber(record['YAC'] || record['Yards After Catch']),
-        yardsAfterCatchPerRec: parseNumber(record['YAC/R'] || record['YAC/REC']),
-        separationYards: parseNumber(record['SEP'] || record['Separation']),
-        drops: parseNumber(record['DROPS'] || record['Drops']),
-        redZoneTargets: parseNumber(record['RZ TGT'] || record['RZ Targets']),
-        airYards: parseNumber(record['AIR YDS'] || record['Air Yards']),
-        yardsBeforeContact: parseNumber(record['YBC'] || record['YBC/R']),
-        targets: parseNumber(record['TGT'] || record['Targets']),
-        receptions: parseNumber(record['REC'] || record['Receptions'])
+        targetShare: parsePercent(record['% TM'] || record['TGT%']),
+        catchRate: catchRate,
+        yardsAfterCatch: parseNumber(record['YAC']),
+        yardsAfterCatchPerRec: parseNumber(record['YAC/R']),
+        separationYards: parseNumber(record['SEP']),
+        drops: parseNumber(record['DROP']),
+        redZoneTargets: parseNumber(record['RZ TGT']),
+        airYards: parseNumber(record['AIR']),
+        yardsBeforeContact: parseNumber(record['YBC']),
+        targets: parseNumber(record['TGT']),
+        receptions: receptions,
+        receivingYards: yards,
+        yardsPerRouteRun: yardsPerRec // Using Y/R as proxy for now
       };
     });
   } catch (error) {
@@ -106,8 +146,16 @@ export async function loadTEAdvanced(): Promise<TEAdvancedStats[]> {
 // Load RB advanced stats
 export async function loadRBAdvanced(): Promise<RBAdvancedStats[]> {
   try {
-    const basePath = import.meta.env.BASE_URL || '/';
-    const response = await fetch(`${basePath}canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_RB.csv`);
+    const basePath = import.meta.env?.BASE_URL || '/fftool/';
+    const url = `${basePath}artifacts/clean_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_RB.csv`;
+    console.log('[loadRBAdvanced] Fetching from:', url);
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      console.warn('Failed to fetch RB advanced stats:', response.status);
+      return [];
+    }
+    
     const content = await response.text();
     
     const parsed = parseCSVSafe<any>(content, undefined, ['Player']);
@@ -150,8 +198,16 @@ export async function loadRBAdvanced(): Promise<RBAdvancedStats[]> {
 // Load QB advanced stats
 export async function loadQBAdvanced(): Promise<QBAdvancedStats[]> {
   try {
-    const basePath = import.meta.env.BASE_URL || '/';
-    const response = await fetch(`${basePath}canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_QB.csv`);
+    const basePath = import.meta.env?.BASE_URL || '/fftool/';
+    const url = `${basePath}artifacts/clean_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_QB.csv`;
+    console.log('[loadQBAdvanced] Fetching from:', url);
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      console.warn('Failed to fetch QB advanced stats:', response.status);
+      return [];
+    }
+    
     const content = await response.text();
     
     const parsed = parseCSVSafe<any>(content, undefined, ['Player']);
@@ -193,22 +249,38 @@ export async function loadQBAdvanced(): Promise<QBAdvancedStats[]> {
 
 // Load all advanced stats
 export async function loadAllPlayerAdvanced(): Promise<Map<string, PlayerAdvanced>> {
-  const [wrStats, teStats, rbStats, qbStats] = await Promise.all([
-    loadWRAdvanced(),
-    loadTEAdvanced(),
-    loadRBAdvanced(),
-    loadQBAdvanced()
-  ]);
+  console.log('[PlayerAdvancedLoader] Starting to load all advanced stats...');
   
-  const result = new Map<string, PlayerAdvanced>();
-  
-  // Normalize player names and create map
-  const normalizeKey = (name: string, position: string): string => {
-    return `${name.toLowerCase().trim()}_${position}`;
-  };
+  try {
+    const [wrStats, teStats, rbStats, qbStats] = await Promise.all([
+      loadWRAdvanced(),
+      loadTEAdvanced(),
+      loadRBAdvanced(),
+      loadQBAdvanced()
+    ]);
+    
+    console.log('[PlayerAdvancedLoader] Loaded stats:', {
+      wrCount: wrStats.length,
+      teCount: teStats.length,
+      rbCount: rbStats.length,
+      qbCount: qbStats.length
+    });
+    
+    const result = new Map<string, PlayerAdvanced>();
+    
+    // Normalize player names and create map
+    const normalizeKey = (name: string, position: string): string => {
+      return `${name.toLowerCase().trim()}_${position.toLowerCase()}`;
+    };
+    
+    console.log('[PlayerAdvancedLoader] Creating player advanced map...');
   
   for (const stat of wrStats) {
-    result.set(normalizeKey(stat.name, 'WR'), stat);
+    const key = normalizeKey(stat.name, 'WR');
+    result.set(key, stat);
+    if (stat.name.includes('Chase') || stat.name.includes('Lamb')) {
+      console.log(`[PlayerAdvancedLoader] Added WR: ${stat.name} with key: ${key}`);
+    }
   }
   
   for (const stat of teStats) {
@@ -223,5 +295,12 @@ export async function loadAllPlayerAdvanced(): Promise<Map<string, PlayerAdvance
     result.set(normalizeKey(stat.name, 'QB'), stat);
   }
   
-  return result;
+    console.log('[PlayerAdvancedLoader] Final map size:', result.size);
+    console.log('[PlayerAdvancedLoader] Sample keys:', Array.from(result.keys()).slice(0, 10));
+    
+    return result;
+  } catch (error) {
+    console.error('[PlayerAdvancedLoader] Error loading advanced stats:', error);
+    return new Map();
+  }
 }

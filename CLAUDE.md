@@ -20,6 +20,12 @@ IMPORTANT!: For server management in this project:
 - For names, statistics, projections, ADP: use canonical_data as source of truth
 - Never manufacture or estimate values when actual data is available
 
+# If you're unsure about any facts, say so explicitly
+# For technical details, indicate your confidence level
+# Break down complex problems step-by-step
+# Ask clarifying questions rather than making assumptions
+# For current events, use web search rather than relying on training data
+
 ## CORE PRINCIPLES
 
 ### Theoretical Justification Required

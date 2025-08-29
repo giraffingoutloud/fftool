@@ -45,6 +45,20 @@ export interface ValuationResult {
   age?: number;
   isRookie?: boolean;
   injuryStatus?: 'Q' | 'D' | 'O' | 'IR' | 'PUP' | 'SUS' | null;
+  
+  // PPR-related stats (optional - used for PPR scoring display only)
+  targets?: number;
+  receptions?: number;
+  games?: number;
+  teamTargets?: number;
+  catchableTargets?: number;
+  yardsPerRouteRun?: number;
+  redZoneTargets?: number;
+  routesRun?: number;
+  teamPassPlays?: number;
+  receivingYards?: number;
+  teamReceivingYards?: number;
+  dropRate?: number;
 }
 
 export interface ValuationSummary {
@@ -78,7 +92,8 @@ class CalibratedValuationService {
   processPlayers(
     projections: PlayerProjection[],
     adpData?: any[],
-    sosData?: Map<string, number>
+    sosData?: Map<string, number>,
+    advancedStats?: Map<string, any>
   ): { valuations: ValuationResult[]; summary: ValuationSummary } {
     
     // Convert projections to PlayerData format
@@ -159,26 +174,21 @@ class CalibratedValuationService {
         marketPrice = Math.min(2, Math.max(1, Math.round(val.auctionValue * 0.5)));
       }
       
-      // Debug Breece Hall
-      if (val.playerName === 'Breece Hall') {
-        console.log('[DEBUG] Breece Hall in service:', {
-          adpEntry,
-          marketPrice,
-          valAuctionValue: val.auctionValue,
-          teamSeasonSOS: originalProj?.teamSeasonSOS
-        });
-      }
-      
-      // Debug SOS for some teams
-      if (val.team === 'NYJ' || val.team === 'SF' || val.team === 'DET') {
-        console.log(`[SOS DEBUG] ${val.playerName} (${val.team}): SOS = ${originalProj?.teamSeasonSOS}`);
-      }
-      
       // Calculate edge (value - market price)
       const edge = val.auctionValue - marketPrice;
       
       // Calculate intrinsic value (theoretical fair value)
       const intrinsicValue = val.auctionValue; // Use model's calculated value as intrinsic
+
+      // Get advanced stats for PPR scoring
+      // Try multiple key formats since advanced stats are keyed by name_position
+      const namePositionKey = `${val.playerName.toLowerCase()}_${val.position.toLowerCase()}`;
+      const nameTeamKey = `${val.playerName}_${val.team}`.toLowerCase();
+      const nameOnlyKey = val.playerName.toLowerCase();
+      
+      const advanced = advancedStats?.get(namePositionKey) || 
+                      advancedStats?.get(nameTeamKey) || 
+                      advancedStats?.get(nameOnlyKey);
 
       return {
         // Core identification
@@ -218,7 +228,23 @@ class CalibratedValuationService {
         teamSeasonSOS: originalProj?.teamSeasonSOS,
         age: originalProj?.age || adpEntry?.age,
         isRookie: originalProj?.isRookie || adpEntry?.isRookie,
-        injuryStatus: originalProj?.injuryStatus
+        injuryStatus: originalProj?.injuryStatus,
+        
+        // PPR-related stats from advanced data
+        targets: advanced?.targets || 0,
+        receptions: advanced?.receptions || originalProj?.receptions || 0,
+        games: originalProj?.games || 16,
+        teamTargets: advanced?.teamTargets,
+        catchableTargets: advanced?.catchableTargets,
+        yardsPerRouteRun: advanced?.yardsPerRouteRun,
+        redZoneTargets: advanced?.redZoneTargets,
+        routesRun: advanced?.routesRun,
+        teamPassPlays: advanced?.teamPassPlays,
+        receivingYards: advanced?.receivingYards || originalProj?.receivingYards || 0,
+        teamReceivingYards: advanced?.teamReceivingYards,
+        dropRate: advanced?.dropRate,
+        targetShare: advanced?.targetShare,
+        catchRate: advanced?.catchRate
       };
     });
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { 
   X, 
   TrendingUp, 
@@ -19,6 +19,8 @@ import { useDraftStore } from '@/store/draftStore';
 import type { ValuationResult } from '@/lib/calibratedValuationService';
 import type { Player, Position } from '@/types';
 import BidAdvisorEnhanced from './BidAdvisorEnhanced';
+import { pprScoringService } from '@/lib/pprScoringService';
+import { bidAdvisorService } from '@/lib/bidAdvisorService';
 
 interface PlayerDetailPanelProps {
   player: ValuationResult | null;
@@ -31,7 +33,91 @@ const PlayerDetailPanel: React.FC<PlayerDetailPanelProps> = ({
   allPlayers = [],
   onClose
 }) => {
-  const { completeAuction, myTeamId } = useDraftStore();
+  const { completeAuction, myTeamId, draftHistory, teams } = useDraftStore();
+
+  // Calculate PPR metrics - must be before any early returns due to React hooks rules
+  const pprMetrics = useMemo(() => {
+    if (!player) return null;
+    
+    // Map ValuationResult data to PPR service format
+    const playerStats = {
+      position: player.position,
+      targets: player.targets,
+      receptions: player.receptions,
+      games: player.games || 16, // Default to 16 if not provided
+      teamTargets: player.teamTargets,
+      catchableTargets: player.catchableTargets || player.targets, // Fallback to targets
+      yardsPerRouteRun: player.yardsPerRouteRun,
+      redZoneTargets: player.redZoneTargets,
+      routesRun: player.routesRun,
+      teamPassPlays: player.teamPassPlays,
+      receivingYards: player.receivingYards,
+      teamReceivingYards: player.teamReceivingYards,
+      dropRate: player.dropRate
+    };
+    
+    return pprScoringService.calculatePPRScore(playerStats);
+  }, [player]);
+
+  // Calculate market inflation using the same logic as BidAdvisorEnhanced
+  const marketInflation = useMemo(() => {
+    if (!player) return 0;
+    
+    const foundTeam = teams.find(t => t.id === myTeamId);
+    const myPlayers = foundTeam?.roster?.map(pick => pick.player) || [];
+    const remainingBudget = foundTeam ? (foundTeam.budget - foundTeam.spent) : 200;
+    
+    const myTeam = {
+      id: foundTeam?.id || myTeamId || 'team_0',
+      name: foundTeam?.name || 'My Team',
+      budget: remainingBudget,
+      players: myPlayers,
+      isUser: true,
+      maxBid: foundTeam?.maxBid || remainingBudget,
+      nominations: 0
+    };
+
+    const convertedTeams = teams.map(t => ({
+      id: t.id,
+      name: t.name,
+      budget: t.budget - t.spent,
+      players: t.roster?.map(pick => pick.player) || [],
+      isUser: t.id === myTeamId,
+      maxBid: t.maxBid || (t.budget - t.spent),
+      nominations: 0
+    }));
+    
+    const draftedIds = new Set(
+      draftHistory.map(pick => pick.player?.id || (pick.player as any)?.playerId).filter(Boolean)
+    );
+    
+    const availablePlayers = allPlayers.filter(p => {
+      const playerId = p.playerId || p.id;
+      return !draftedIds.has(playerId);
+    });
+
+    const context = {
+      myTeam,
+      allTeams: convertedTeams.length > 0 ? convertedTeams : [myTeam],
+      draftHistory: draftHistory || [],
+      availablePlayers,
+      currentBid: 0,
+      totalBudget: 200,
+      rosterRequirements: {
+        QB: { min: 1, max: 2, optimal: 1 },
+        RB: { min: 2, max: 6, optimal: 4 },
+        WR: { min: 2, max: 6, optimal: 4 },
+        TE: { min: 1, max: 3, optimal: 2 },
+        DST: { min: 1, max: 2, optimal: 1 },
+        K: { min: 1, max: 2, optimal: 1 },
+        FLEX: { count: 1, eligiblePositions: ['RB', 'WR', 'TE'] },
+        BENCH: 6
+      }
+    };
+
+    const recommendation = bidAdvisorService.getRecommendation(player, context, 0);
+    return recommendation.marketInflation;
+  }, [player, teams, myTeamId, draftHistory, allPlayers]);
 
   if (!player) {
     return (
@@ -117,77 +203,223 @@ const PlayerDetailPanel: React.FC<PlayerDetailPanelProps> = ({
       <div className="bg-gradient-to-r from-gray-800 to-gray-850 px-4 py-2.5 border-b border-gray-700/50">
         <div className="flex items-center justify-between gap-3">
           {/* Left: Player Identity */}
-          <div className="flex items-center gap-2">
-            <div className={`px-1.5 py-0.5 rounded text-[10px] font-bold border ${getPositionColor()}`}>
+          <div className="flex items-center gap-3">
+            <div className={`px-2 py-1 rounded text-lg font-bold border-2 ${getPositionColor()}`}>
               {player.position}
             </div>
-            <h2 className="text-base font-bold text-white">{player.playerName}</h2>
-            <span className="text-gray-400 text-xs">{player.team}</span>
-            <div className={`px-3 py-1.5 rounded text-sm font-bold ${tier.color}`}>
+            <h2 className="text-2xl font-bold text-white">{player.playerName}</h2>
+            <span className="text-gray-400 text-xl">{player.team}</span>
+            <div className={`px-3 py-1.5 rounded text-lg font-bold ${tier.color}`}>
               {tier.label}
             </div>
-            <div className={`flex items-center gap-1 px-2 py-0.5 rounded-full ${recommendation.bg} ${recommendation.color}`}>
+            <div className={`flex items-center gap-1 px-3 py-1 rounded-full ${recommendation.bg} ${recommendation.color}`}>
               {recommendation.icon}
-              <span className="text-[10px] font-semibold">{recommendation.text}</span>
+              <span className="text-sm font-semibold">{recommendation.text}</span>
             </div>
           </div>
 
-          {/* Center: Valuation Metrics */}
-          <div className="flex items-center gap-6 bg-gray-900/50 rounded px-4 py-2">
-            <div className="text-center">
-              <div className="text-xs text-gray-500 font-medium">VALUE</div>
-              <div className="text-2xl font-bold text-white">${player.intrinsicValue?.toFixed(0) || 0}</div>
-            </div>
-            <div className="text-center">
-              <div className="text-xs text-gray-500 font-medium">MARKET</div>
-              <div className="text-2xl font-bold text-blue-400">${player.marketValue || 0}</div>
-            </div>
-            <div className="text-center">
-              <div className="text-xs text-gray-500 font-medium">EDGE</div>
-              <div className={`text-2xl font-bold ${player.edge && player.edge > 0 ? 'text-green-400' : 'text-red-400'}`}>
-                {player.edge && player.edge > 0 ? '+' : ''}${Math.abs(player.edge || 0).toFixed(0)}
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="text-xs text-gray-500 font-medium">MAX</div>
-              <div className="text-2xl font-bold text-yellow-400">
-                ${player.value || 0}
-              </div>
-            </div>
-          </div>
-
-          {/* Right: Draft Button, Value Rating Bar and Close */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => handleDraft((player.auctionValue || 0), myTeamId)}
-              className="px-4 py-1.5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white font-bold rounded-lg text-sm transition-all transform hover:scale-105 shadow-lg"
-            >
-              Draft Player
-            </button>
-            <div className="bg-gray-900/50 rounded px-2 py-0.5">
-              <div className="flex items-center gap-2">
-                <div>
-                  <div className="text-[9px] text-gray-500">EDGE</div>
-                  <div className="text-[10px] font-bold text-white">{edgePercent}%</div>
+          {/* Center: Budget, Valuation Metrics, and Draft Progress */}
+          <div className="flex items-center gap-4">
+            {/* Budget Info */}
+            {(() => {
+              const myTeam = teams.find(t => t.id === myTeamId);
+              const myBudget = myTeam ? (myTeam.budget - myTeam.spent) : 200;
+              // Calculate average of OPPONENT teams only (excluding my team)
+              const opponentTeams = teams.filter(t => t.id !== myTeamId);
+              const avgOpponentBudget = opponentTeams.length > 0 
+                ? Math.round(opponentTeams.reduce((sum, t) => sum + (t.budget - t.spent), 0) / opponentTeams.length)
+                : 200;
+              
+              // Calculate difference for additional context
+              const budgetDiff = myBudget - avgOpponentBudget;
+              
+              return (
+                <div className="flex items-center gap-2">
+                  <DollarSign className="w-5 h-5 text-green-400" />
+                  <div>
+                    <div className="text-xs text-gray-500 font-medium">BUDGET</div>
+                    <div className="text-2xl font-bold">
+                      <span className={`${
+                        myBudget > avgOpponentBudget ? 'text-green-400' : 
+                        myBudget < avgOpponentBudget ? 'text-red-400' : 'text-gray-300'
+                      }`}>
+                        ${myBudget}
+                      </span>
+                      <span className="text-lg text-gray-500 ml-2">
+                        vs ${avgOpponentBudget}
+                      </span>
+                      {budgetDiff !== 0 && (
+                        <span className={`text-base ml-2 ${
+                          budgetDiff > 0 ? 'text-green-400' : 'text-red-400'
+                        }`}>
+                          ({budgetDiff > 0 ? '+' : ''}{budgetDiff})
+                        </span>
+                      )}
+                    </div>
+                  </div>
                 </div>
-                <div className="flex gap-0.5">
-                  {[1,2,3,4,5].map(i => (
+              );
+            })()}
+            
+            {/* Valuation Metrics */}
+            <div className="flex items-center gap-6 bg-gray-900/50 rounded px-4 py-2">
+              <div className="text-center">
+                <div className="text-xs text-gray-500 font-medium">VALUE</div>
+                <div className="text-2xl font-bold text-white">${player.intrinsicValue?.toFixed(0) || 0}</div>
+              </div>
+              <div className="text-center">
+                <div className="text-xs text-gray-500 font-medium">MARKET</div>
+                <div className="text-2xl font-bold text-blue-400">${player.marketValue || 0}</div>
+              </div>
+              <div className="text-center">
+                <div className="text-xs text-gray-500 font-medium">EDGE</div>
+                <div className={`text-2xl font-bold ${player.edge && player.edge > 0 ? 'text-green-400' : 'text-red-400'}`}>
+                  {player.edge && player.edge > 0 ? '+' : ''}${Math.abs(player.edge || 0).toFixed(0)}
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="text-xs text-gray-500 font-medium">MAX</div>
+                <div className="text-2xl font-bold text-yellow-400">
+                  ${player.value || 0}
+                </div>
+              </div>
+            </div>
+
+            {/* PPR Score Display */}
+            {pprMetrics && (
+              <div className="flex items-center gap-2 bg-gray-900/50 rounded px-3 py-2">
+                <Target className="w-5 h-5 text-purple-400" />
+                <div>
+                  <div className="text-xs text-gray-500 font-medium">PPR</div>
+                  <div className="flex items-center gap-2">
+                    <div className={`text-2xl font-bold ${pprMetrics.color}`}>
+                      {pprMetrics.score.toFixed(0)}
+                    </div>
                     <div 
-                      key={i} 
-                      className={`w-2 h-3 rounded-sm ${
-                        i <= Math.ceil((Number(edgePercent) + 50) / 20) 
-                          ? 'bg-gradient-to-r from-green-500 to-green-400' 
-                          : 'bg-gray-700'
-                      }`}
-                    />
-                  ))}
+                      className="w-12 h-2 bg-gray-700 rounded-full overflow-hidden"
+                      title={`PPR Score: ${pprMetrics.score.toFixed(1)}/100`}
+                    >
+                      <div 
+                        className="h-full transition-all duration-300"
+                        style={{ 
+                          width: `${pprMetrics.score}%`,
+                          backgroundColor: pprMetrics.hexColor 
+                        }}
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <div className="text-[9px] text-gray-500">CONF</div>
-                  <div className="text-[10px] font-bold text-white">{player.confidence?.toFixed(0) || '-'}/10</div>
+              </div>
+            )}
+            
+            {/* Draft Progress */}
+            {(() => {
+              const totalPicks = (teams.length || 12) * 16;
+              const percentComplete = Math.round((draftHistory.length / totalPicks) * 100);
+              const phase = percentComplete < 25 ? 'early' : 
+                          percentComplete < 50 ? 'early-mid' :
+                          percentComplete < 75 ? 'late-mid' : 'late';
+              
+              return (
+                <div className="flex items-center gap-2">
+                  <Activity className="w-5 h-5 text-blue-400" />
+                  <div>
+                    <div className="text-xs text-gray-500 font-medium">DRAFT</div>
+                    <div className="text-2xl font-bold">
+                      <span className="text-white">{percentComplete}%</span>
+                      <span className="text-lg text-gray-500 ml-2">
+                        ({phase})
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
+            
+            {/* Market Inflation - Moved from BidAdvisorEnhanced */}
+            <div className="flex items-center gap-2 bg-gray-900/50 rounded px-3 py-2">
+              <TrendingUp className="w-5 h-5 text-purple-400" />
+              <div>
+                <div className="text-xs text-gray-500 font-medium">INFLATION</div>
+                <div className={`text-2xl font-bold ${
+                  marketInflation > 10 ? 'text-red-400' :
+                  marketInflation > 5 ? 'text-orange-400' :
+                  marketInflation < -10 ? 'text-blue-400' :
+                  marketInflation < -5 ? 'text-cyan-400' :
+                  'text-gray-400'
+                }`}>
+                  {marketInflation > 0 ? '+' : ''}{marketInflation}%
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Right: Tier Availability Indicators and Close */}
+          <div className="flex items-center gap-3">
+            {/* Tier Availability */}
+            <div className="bg-gray-900/50 rounded px-4 py-2">
+              {(() => {
+                const draftedIds = new Set(draftHistory.map(pick => pick.player?.id).filter(Boolean));
+                
+                // Filter available players at same position
+                const availableAtPosition = allPlayers.filter(
+                  p => p.position === player.position && !draftedIds.has(p.playerId)
+                );
+                
+                // Group by tier and count
+                const tierCounts = {
+                  elite: availableAtPosition.filter(p => p.tier === 'elite').length,
+                  tier1: availableAtPosition.filter(p => p.tier === 'tier1').length,
+                  tier2: availableAtPosition.filter(p => p.tier === 'tier2').length,
+                  tier3: availableAtPosition.filter(p => p.tier === 'tier3').length,
+                };
+                
+                return (
+                  <div className="flex items-center gap-4">
+                    {/* Elite */}
+                    <div className="text-center">
+                      <div className="text-xs text-gray-500 font-medium">ELITE</div>
+                      <div className={`text-2xl font-bold ${
+                        tierCounts.elite > 0 ? 'text-purple-400' : 'text-gray-600'
+                      }`}>
+                        {tierCounts.elite}
+                      </div>
+                    </div>
+                    
+                    {/* Tier 1 */}
+                    <div className="text-center">
+                      <div className="text-xs text-gray-500 font-medium">TIER 1</div>
+                      <div className={`text-2xl font-bold ${
+                        tierCounts.tier1 > 0 ? 'text-blue-400' : 'text-gray-600'
+                      }`}>
+                        {tierCounts.tier1}
+                      </div>
+                    </div>
+                    
+                    {/* Tier 2 */}
+                    <div className="text-center">
+                      <div className="text-xs text-gray-500 font-medium">TIER 2</div>
+                      <div className={`text-2xl font-bold ${
+                        tierCounts.tier2 > 0 ? 'text-green-400' : 'text-gray-600'
+                      }`}>
+                        {tierCounts.tier2}
+                      </div>
+                    </div>
+                    
+                    {/* Tier 3 */}
+                    <div className="text-center">
+                      <div className="text-xs text-gray-500 font-medium">TIER 3</div>
+                      <div className={`text-2xl font-bold ${
+                        tierCounts.tier3 > 0 ? 'text-yellow-400' : 'text-gray-600'
+                      }`}>
+                        {tierCounts.tier3}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
+            </div>
+            
             {onClose && (
               <button
                 onClick={onClose}

@@ -90,7 +90,7 @@ const PlayerProfileModal: React.FC<PlayerProfileModalProps> = ({ player, isOpen,
           
           <div className="flex items-start justify-between">
             <div>
-              <h2 className="text-3xl font-bold text-white mb-2">{player.playerName}</h2>
+              <h2 className="text-3xl font-bold text-white mb-2">{player.playerName || player.name || 'Unknown Player'}</h2>
               <div className="flex items-center gap-4 text-white/90">
                 <span className="font-semibold">{player.position}</span>
                 <span>{player.team}</span>
@@ -150,13 +150,13 @@ const PlayerProfileModal: React.FC<PlayerProfileModalProps> = ({ player, isOpen,
                 <div>
                   <div className="text-gray-400 text-sm mb-1">Projected Points</div>
                   <div className="text-2xl font-bold text-white">
-                    {player.projectedPoints.toFixed(1)}
+                    {(player.projectedPoints || player.points || 0).toFixed(1)}
                   </div>
                 </div>
                 <div>
                   <div className="text-gray-400 text-sm mb-1">VORP</div>
                   <div className="text-xl font-semibold text-green-400">
-                    {player.vorp.toFixed(1)}
+                    {(player.vorp || player.vbd || 0).toFixed(1)}
                   </div>
                 </div>
                 <div>

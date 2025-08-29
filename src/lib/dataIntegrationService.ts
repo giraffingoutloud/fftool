@@ -19,6 +19,7 @@ import { sosLoader } from './sosLoader';
 import { logger } from './utils/logger';
 import type { PlayerProjection } from '@/types';
 import { safeParseFloat, safeParseInt } from './utils/csvParsingUtils';
+import { loadAllPlayerAdvanced } from './playerAdvancedLoader';
 
 interface IntegrationResult {
   success: boolean;
@@ -471,6 +472,11 @@ export class DataIntegrationService {
     // Build the comprehensive data structure directly
     // This avoids circular dependency with DataLoaderV2
     
+    // Load advanced stats
+    console.log('[DataIntegrationService] Loading player advanced stats...');
+    const playerAdvancedMap = await loadAllPlayerAdvanced();
+    console.log('[DataIntegrationService] Loaded advanced stats:', playerAdvancedMap.size);
+    
     const comprehensiveData: ComprehensiveData = {
       // Core data from integration
       players: normalizedData.projections,
@@ -481,7 +487,7 @@ export class DataIntegrationService {
       // Initialize empty structures for compatibility
       teamMetrics: new Map(),
       teamComposites: new Map(),
-      playerAdvanced: new Map(),
+      playerAdvanced: playerAdvancedMap,
       playerStats: new Map(),
       depthCharts: {
         teams: [],

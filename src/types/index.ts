@@ -220,6 +220,8 @@ export interface WRAdvancedStats {
   yardsBeforeContact?: number;
   targets?: number;
   receptions?: number;
+  receivingYards?: number;
+  yardsPerRouteRun?: number;
 }
 
 export interface RBAdvancedStats {
@@ -237,7 +239,9 @@ export interface RBAdvancedStats {
   redZoneCarries?: number;
 }
 
-export interface TEAdvancedStats extends WRAdvancedStats {}
+export interface TEAdvancedStats extends WRAdvancedStats {
+  // TE inherits all WR stats including receivingYards and yardsPerRouteRun
+}
 
 export interface QBAdvancedStats {
   name: string;

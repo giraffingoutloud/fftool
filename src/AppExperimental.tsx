@@ -18,6 +18,7 @@ import { dataService } from '@/lib/dataService';
 import { calibratedValuationService, type ValuationResult, type ValuationSummary } from '@/lib/calibratedValuationService';
 import { DataIntegrityChecker } from '@/lib/dataIntegrityChecker';
 import { dynamicValuationService, type DraftContext } from '@/lib/dynamicValuationService';
+import { pprScoringService } from '@/lib/pprScoringService';
 
 // Import components
 import TeamRoster from '@/components/TeamRoster';
@@ -194,37 +195,10 @@ function AppExperimental() {
         });
       }
       
-      // Quick check: Are values actually different?
-      if (draftHistory.length > 0 && dynamicVals.length > 0) {
-        const firstPlayer = dynamicVals[0];
-        const baseFirst = baseValuations[0];
-        console.log('[Value Comparison]', {
-          playerName: firstPlayer.playerName,
-          baseValue: baseFirst.value,
-          dynamicValue: firstPlayer.value,
-          isDifferent: baseFirst.value !== firstPlayer.value
-        });
-      }
-      
-      // Check if values actually changed
-      const samplePlayer = dynamicVals[0];
-      const baseSample = baseValuations[0];
-      console.log('[Dynamic Values Set]', {
-        playerName: samplePlayer?.playerName,
-        dynamicValue: samplePlayer?.value,
-        baseValue: baseSample?.value,
-        changed: samplePlayer?.value !== baseSample?.value
-      });
       
       setValuations(dynamicVals);
       updatePlayerValuations(dynamicVals as any);
     } else {
-      console.log('[Static Mode] Using base valuations');
-      const baseSample = baseValuations[0];
-      console.log('[Static Values Set]', {
-        playerName: baseSample?.playerName,
-        value: baseSample?.value
-      });
       // Use base valuations in static mode
       setValuations(baseValuations);
       updatePlayerValuations(baseValuations as any);
@@ -259,59 +233,29 @@ function AppExperimental() {
   const loadData = async () => {
     try {
       setLoading(true);
-      console.log('[AppCalibrated] Loading data...');
-      
       const data = await dataService.getData();
-      
-      // Debug: Check teams in raw projections
-      const uniqueProjectionTeams = new Set(data.projections.map((p: any) => p.team).filter(Boolean));
-      console.log('[AppCalibrated] Data loaded:', {
-        projections: data.projections.length,
-        adp: data.adpData.length,
-        uniqueTeamsInProjections: uniqueProjectionTeams.size,
-        teamsInProjections: Array.from(uniqueProjectionTeams).sort()
-      });
-      
-      // Debug Breece Hall
-      const breeceAdp = data.adpData.find((a: any) => a.name === 'Breece Hall');
-      if (breeceAdp) {
-        console.log('[DEBUG] Breece Hall ADP data from dataService:', breeceAdp);
-        console.log('[DEBUG] Breece Hall auctionValue specifically:', breeceAdp.auctionValue);
-      }
-      
-      // Debug SOS data for specific teams
-      const nyjPlayers = data.projections.filter((p: any) => p.team === 'NYJ').slice(0, 2);
-      const sfPlayers = data.projections.filter((p: any) => p.team === 'SF').slice(0, 2);
-      console.log('[SOS DEBUG] NYJ players with SOS:', nyjPlayers.map((p: any) => ({ 
-        name: p.name, 
-        team: p.team, 
-        teamSeasonSOS: p.teamSeasonSOS 
-      })));
-      console.log('[SOS DEBUG] SF players with SOS:', sfPlayers.map((p: any) => ({ 
-        name: p.name, 
-        team: p.team, 
-        teamSeasonSOS: p.teamSeasonSOS 
-      })));
       
       // Process with calibrated valuation model
       const { valuations: vals, summary: sum } = calibratedValuationService.processPlayers(
         data.projections,
-        data.adpData
+        data.adpData,
+        undefined, // sosData - already in projections
+        data.playerAdvanced // Pass advanced stats for PPR metrics
       );
       
-      // Debug: Check teams in valuations
-      const uniqueTeams = new Set(vals.map(v => v.team).filter(Boolean));
-      console.log('[AppCalibrated] Valuations calculated:', {
-        count: vals.length,
-        budgetPercentage: sum.budgetPercentage.toFixed(1) + '%',
-        uniqueTeamsCount: uniqueTeams.size,
-        teams: Array.from(uniqueTeams).sort()
+      // Calculate PPR metrics for each player
+      const valsWithPPR = vals.map(player => {
+        const pprMetrics = pprScoringService.calculatePPRScore(player);
+        return {
+          ...player,
+          pprMetrics
+        };
       });
       
-      setValuations(vals);
-      setBaseValuations(vals); // Store base valuations
+      setValuations(valsWithPPR);
+      setBaseValuations(valsWithPPR); // Store base valuations
       setSummary(sum);
-      updatePlayerValuations(vals as any);
+      updatePlayerValuations(valsWithPPR as any);
       
       // Initialize dynamic valuation service
       dynamicValuationService.setBaseValuations(vals);
@@ -330,13 +274,6 @@ function AppExperimental() {
         message: integrityResult.passed 
           ? `✓`
           : `⚠`
-      });
-      
-      console.log('[Data Integrity Check]', {
-        passed: integrityResult.passed,
-        sourceTeams: integrityResult.sourceTeams.size,
-        renderedTeams: integrityResult.renderedTeams.size,
-        performanceMs: integrityResult.performanceMs.toFixed(2)
       });
       
       toast.success('Calibrated valuations loaded successfully!');
@@ -401,23 +338,146 @@ function AppExperimental() {
       <header className="bg-black/50 backdrop-blur-lg border-b border-purple-500/30 z-50 flex-shrink-0">
         <div className="px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              FFTool <span className="text-xs text-purple-400 ml-2">[EXP]</span>
-            </h1>
-
+            <div className="flex items-center gap-4">
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                FFTool
+              </h1>
+              
+              {/* Search Bar */}
+              <div className="relative w-64">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => {
+                    const query = e.target.value;
+                    setSearchQuery(query);
+                    setHighlightedIndex(-1);
+                    
+                    if (query.trim()) {
+                      const filtered = valuations.filter(player => 
+                        player.playerName?.toLowerCase().includes(query.toLowerCase()) ||
+                        player.team?.toLowerCase().includes(query.toLowerCase())
+                      ).slice(0, 10);
+                      setFilteredPlayers(filtered);
+                      setShowDropdown(filtered.length > 0);
+                    } else {
+                      setShowDropdown(false);
+                      setFilteredPlayers([]);
+                    }
+                  }}
+                  onKeyDown={(e) => {
+                    if (!showDropdown) return;
+                    
+                    if (e.key === 'ArrowDown') {
+                      e.preventDefault();
+                      setHighlightedIndex(prev => 
+                        prev < filteredPlayers.length - 1 ? prev + 1 : prev
+                      );
+                    } else if (e.key === 'ArrowUp') {
+                      e.preventDefault();
+                      setHighlightedIndex(prev => prev > 0 ? prev - 1 : -1);
+                    } else if (e.key === 'Enter' && highlightedIndex >= 0) {
+                      e.preventDefault();
+                      const player = filteredPlayers[highlightedIndex];
+                      setSelectedPlayer(player);
+                      setSearchQuery('');
+                      setShowDropdown(false);
+                      setFilteredPlayers([]);
+                      setHighlightedIndex(-1);
+                    } else if (e.key === 'Escape') {
+                      setShowDropdown(false);
+                      setHighlightedIndex(-1);
+                    }
+                  }}
+                  onFocus={() => {
+                    if (searchQuery.trim() && filteredPlayers.length > 0) {
+                      setShowDropdown(true);
+                    }
+                  }}
+                  onBlur={() => {
+                    setTimeout(() => setShowDropdown(false), 200);
+                  }}
+                  placeholder="Search players..."
+                  className="w-full px-3 py-1.5 pr-8 text-sm bg-gray-800 border border-gray-700 rounded-lg text-gray-200 placeholder-gray-400 focus:outline-none focus:border-blue-400"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => {
+                      setSearchQuery('');
+                      setShowDropdown(false);
+                      setFilteredPlayers([]);
+                      setHighlightedIndex(-1);
+                    }}
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white z-10"
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                )}
+                
+                {/* Dropdown */}
+                {showDropdown && (
+                  <div className="absolute top-full left-0 right-0 mt-1 bg-gray-800 border border-gray-700 rounded-lg shadow-xl max-h-80 overflow-y-auto z-50">
+                    {filteredPlayers.map((player, index) => {
+                      const getPositionColor = () => {
+                        const colors: Record<string, string> = {
+                          QB: 'text-red-400',
+                          RB: 'text-green-400',
+                          WR: 'text-blue-400',
+                          TE: 'text-orange-400',
+                          DST: 'text-purple-400',
+                          K: 'text-yellow-400'
+                        };
+                        return colors[player.position] || 'text-gray-400';
+                      };
+                      
+                      return (
+                        <div
+                          key={player.playerId}
+                          onClick={() => {
+                            setSelectedPlayer(player);
+                            setSearchQuery('');
+                            setShowDropdown(false);
+                            setFilteredPlayers([]);
+                            setHighlightedIndex(-1);
+                          }}
+                          className={`px-3 py-2 cursor-pointer transition-colors flex items-center justify-between ${
+                            index === highlightedIndex
+                              ? 'bg-gray-700'
+                              : 'hover:bg-gray-700/50'
+                          }`}
+                        >
+                          <div className="flex items-center gap-3">
+                            <span className={`text-xs font-bold ${getPositionColor()}`}>
+                              {player.position}
+                            </span>
+                            <span className="text-sm font-medium text-white">
+                              {player.playerName}
+                            </span>
+                            <span className="text-xs text-gray-400">
+                              {player.team}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-3 text-xs">
+                            <span className="text-green-400 font-semibold">
+                              ${player.auctionValue}
+                            </span>
+                            <span className="text-gray-500">
+                              Rank #{player.rank || '-'}
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </div>
 
             {/* Draft Status */}
             <div className="flex items-center gap-4">
               {/* Dynamic Mode Toggle */}
               <button
-                onClick={() => {
-                  console.log('[Toggle Dynamic Mode]', {
-                    currentMode: isDynamicMode ? 'Dynamic' : 'Static',
-                    switchingTo: !isDynamicMode ? 'Dynamic' : 'Static',
-                    draftHistoryLength: draftHistory.length
-                  });
-                  setIsDynamicMode(!isDynamicMode);
-                }}
+                onClick={() => setIsDynamicMode(!isDynamicMode)}
                 className={`px-3 py-1 rounded-lg text-sm flex items-center gap-2 transition-colors ${
                   isDynamicMode 
                     ? 'bg-purple-600 hover:bg-purple-700 text-white' 
@@ -491,135 +551,6 @@ function AppExperimental() {
       <main className="px-2 sm:px-4 md:px-6 lg:px-8 py-4 md:py-6 max-w-full overflow-x-hidden">
         {summary && (
           <div className="flex flex-col gap-4">
-            {/* Full Width Search Bar with Autocomplete */}
-            <div className="relative">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => {
-                  const query = e.target.value;
-                  setSearchQuery(query);
-                  setHighlightedIndex(-1);
-                  
-                  if (query.trim()) {
-                    const filtered = valuations.filter(player => 
-                      player.playerName?.toLowerCase().includes(query.toLowerCase()) ||
-                      player.team?.toLowerCase().includes(query.toLowerCase())
-                    ).slice(0, 10); // Limit to 10 results
-                    setFilteredPlayers(filtered);
-                    setShowDropdown(filtered.length > 0);
-                  } else {
-                    setShowDropdown(false);
-                    setFilteredPlayers([]);
-                  }
-                }}
-                onKeyDown={(e) => {
-                  if (!showDropdown) return;
-                  
-                  if (e.key === 'ArrowDown') {
-                    e.preventDefault();
-                    setHighlightedIndex(prev => 
-                      prev < filteredPlayers.length - 1 ? prev + 1 : prev
-                    );
-                  } else if (e.key === 'ArrowUp') {
-                    e.preventDefault();
-                    setHighlightedIndex(prev => prev > 0 ? prev - 1 : -1);
-                  } else if (e.key === 'Enter' && highlightedIndex >= 0) {
-                    e.preventDefault();
-                    const player = filteredPlayers[highlightedIndex];
-                    setSelectedPlayer(player);
-                    setSearchQuery('');
-                    setShowDropdown(false);
-                    setFilteredPlayers([]);
-                    setHighlightedIndex(-1);
-                  } else if (e.key === 'Escape') {
-                    setShowDropdown(false);
-                    setHighlightedIndex(-1);
-                  }
-                }}
-                onFocus={() => {
-                  if (searchQuery.trim() && filteredPlayers.length > 0) {
-                    setShowDropdown(true);
-                  }
-                }}
-                onBlur={() => {
-                  // Delay to allow click on dropdown items
-                  setTimeout(() => setShowDropdown(false), 200);
-                }}
-                placeholder="Search players..."
-                className="w-full px-3 py-2 pr-8 text-sm bg-gray-800 border border-gray-700 rounded-lg text-gray-200 placeholder-gray-400 focus:outline-none focus:border-blue-400"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => {
-                    setSearchQuery('');
-                    setShowDropdown(false);
-                    setFilteredPlayers([]);
-                    setHighlightedIndex(-1);
-                  }}
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white z-10"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              )}
-              
-              {/* Dropdown */}
-              {showDropdown && (
-                <div className="absolute top-full left-0 right-0 mt-1 bg-gray-800 border border-gray-700 rounded-lg shadow-xl max-h-80 overflow-y-auto z-50">
-                  {filteredPlayers.map((player, index) => {
-                    const getPositionColor = () => {
-                      const colors: Record<string, string> = {
-                        QB: 'text-red-400',
-                        RB: 'text-green-400',
-                        WR: 'text-blue-400',
-                        TE: 'text-orange-400',
-                        DST: 'text-purple-400',
-                        K: 'text-yellow-400'
-                      };
-                      return colors[player.position] || 'text-gray-400';
-                    };
-                    
-                    return (
-                      <div
-                        key={player.playerId}
-                        onClick={() => {
-                          setSelectedPlayer(player);
-                          setSearchQuery('');
-                          setShowDropdown(false);
-                          setFilteredPlayers([]);
-                          setHighlightedIndex(-1);
-                        }}
-                        className={`px-3 py-2 cursor-pointer transition-colors flex items-center justify-between ${
-                          index === highlightedIndex
-                            ? 'bg-gray-700'
-                            : 'hover:bg-gray-700/50'
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className={`text-xs font-bold ${getPositionColor()}`}>
-                            {player.position}
-                          </span>
-                          <span className="text-sm font-medium text-white">
-                            {player.playerName}
-                          </span>
-                          <span className="text-xs text-gray-400">
-                            {player.team}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-3 text-xs">
-                          <span className="text-green-400 font-semibold">
-                            ${player.auctionValue}
-                          </span>
-                          <span className="text-gray-500">
-                            Rank #{player.rank || '-'}
-                          </span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
             
             {/* Full Width Player Detail Panel */}
             <PlayerDetailPanel 

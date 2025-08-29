@@ -1,8 +1,9 @@
 import React, { useState, useMemo } from 'react';
-import { ChevronUp, ChevronDown, Check, Eye, Plus, Minus } from 'lucide-react';
+import { ChevronUp, ChevronDown, Eye, Plus, Minus } from 'lucide-react';
 import type { ValuationResult } from '@/lib/calibratedValuationService';
 import PlayerProfileModal from './PlayerProfileModal';
 import { useDraftStore } from '@/store/draftStore';
+import { pprScoringService } from '@/lib/pprScoringService';
 
 interface PlayerDataTableProps {
   players: ValuationResult[];
@@ -11,7 +12,7 @@ interface PlayerDataTableProps {
 }
 
 type SortField = 'position' | 'team' | 'tier' | 'playerRank' | 'maxBid' | 'intrinsicValue' | 
-                 'marketValue' | 'edge' | 'edgePercent' | 'vorp' | 'adp' | 'projectedPoints' | 'byeWeek' | 'sos';
+                 'marketValue' | 'edge' | 'edgePercent' | 'vorp' | 'adp' | 'projectedPoints' | 'byeWeek' | 'sos' | 'ppr';
 type SortDirection = 'asc' | 'desc';
 
 const PlayerDataTable: React.FC<PlayerDataTableProps> = ({ 
@@ -51,9 +52,53 @@ const PlayerDataTable: React.FC<PlayerDataTableProps> = ({
     'repl': 1,
   };
 
+  // Calculate PPR scores for all players
+  const playersWithPPR = useMemo(() => {
+    // Debug first few players
+    console.log('[PlayerDataTable] Sample players:', players.slice(0, 3).map(p => ({
+      name: p.playerName || p.name,
+      targets: p.targets,
+      receptions: p.receptions,
+      hasPprMetrics: !!p.pprMetrics,
+      pprScore: p.pprMetrics?.score
+    })));
+    
+    return players.map(player => {
+      // Use existing pprMetrics if available
+      if (player.pprMetrics) {
+        return player;
+      }
+      
+      // Otherwise calculate PPR metrics
+      const playerStats = {
+        position: player.position,
+        targets: player.targets,
+        receptions: player.receptions,
+        targetShare: player.targetShare,
+        catchRate: player.catchRate,
+        games: player.games || 16,
+        teamTargets: player.teamTargets,
+        catchableTargets: player.catchableTargets || player.targets,
+        yardsPerRouteRun: player.yardsPerRouteRun,
+        redZoneTargets: player.redZoneTargets,
+        routesRun: player.routesRun,
+        teamPassPlays: player.teamPassPlays,
+        receivingYards: player.receivingYards,
+        teamReceivingYards: player.teamReceivingYards,
+        dropRate: player.dropRate
+      };
+      
+      const pprMetrics = pprScoringService.calculatePPRScore(playerStats);
+      return {
+        ...player,
+        pprMetrics
+      };
+    });
+  }, [players]);
+
   // Sorting logic
   const sortedPlayers = useMemo(() => {
-    const sorted = [...players].sort((a, b) => {
+    const sorted = [...playersWithPPR].sort((a, b) => {
       let aValue: any = a[sortField as keyof ValuationResult];
       let bValue: any = b[sortField as keyof ValuationResult];
 
@@ -82,6 +127,9 @@ const PlayerDataTable: React.FC<PlayerDataTableProps> = ({
       } else if (sortField === 'sos') {
         aValue = a.teamSeasonSOS || 0;
         bValue = b.teamSeasonSOS || 0;
+      } else if (sortField === 'ppr') {
+        aValue = a.pprMetrics?.score || 0;
+        bValue = b.pprMetrics?.score || 0;
       }
 
       // Handle null/undefined values
@@ -95,7 +143,7 @@ const PlayerDataTable: React.FC<PlayerDataTableProps> = ({
     });
 
     return sorted;
-  }, [players, sortField, sortDirection]);
+  }, [playersWithPPR, sortField, sortDirection]);
 
   // Filter players by search query and position
   const filteredPlayers = useMemo(() => {
@@ -354,6 +402,16 @@ const PlayerDataTable: React.FC<PlayerDataTableProps> = ({
 
               <th 
                 className="px-2 py-2 text-center text-xs font-medium text-gray-400 cursor-pointer hover:text-white"
+                onClick={() => handleSort('ppr')}
+                title="PPR Reception Value Score (0-100)"
+              >
+                <div className="flex items-center justify-center gap-1">
+                  PPR <SortIcon field="ppr" />
+                </div>
+              </th>
+
+              <th 
+                className="px-2 py-2 text-center text-xs font-medium text-gray-400 cursor-pointer hover:text-white"
                 onClick={() => handleSort('playerRank')}
               >
                 <div className="flex items-center justify-center gap-1">
@@ -530,6 +588,33 @@ const PlayerDataTable: React.FC<PlayerDataTableProps> = ({
                     </span>
                   </td>
 
+                  {/* PPR Score */}
+                  <td className="px-2 py-1 text-center">
+                    {player.pprMetrics ? (
+                      <div className="flex items-center justify-center gap-1">
+                        <span 
+                          className={`font-semibold ${player.pprMetrics.color}`}
+                          title={`PPR Score: ${player.pprMetrics.score.toFixed(1)}/100`}
+                        >
+                          {player.pprMetrics.score.toFixed(0)}
+                        </span>
+                        <div 
+                          className="w-8 h-1.5 bg-gray-700 rounded-full overflow-hidden"
+                        >
+                          <div 
+                            className="h-full transition-all duration-300"
+                            style={{ 
+                              width: `${player.pprMetrics.score}%`,
+                              backgroundColor: player.pprMetrics.hexColor 
+                            }}
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <span className="text-gray-600">-</span>
+                    )}
+                  </td>
+
                   {/* Player Rank */}
                   <td className="px-2 py-1 text-center">
                     <span className={getRankColor(player.rank)}>
@@ -541,12 +626,6 @@ const PlayerDataTable: React.FC<PlayerDataTableProps> = ({
                   <td className="px-2 py-1 text-center">
                     <span className="text-white">
                       ${player.value || 0}
-                      {/* Show (D) if value is different in dynamic mode */}
-                      {player.dynamicValue && player.dynamicValue !== player.value && (
-                        <span className="text-xs text-purple-400 ml-1" title="Dynamic adjustment applied">
-                          *
-                        </span>
-                      )}
                     </span>
                   </td>
 

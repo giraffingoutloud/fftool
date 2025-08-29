@@ -131,10 +131,10 @@ export interface RosterRequirements {
 // Bench: 7 spots
 // Total: 16 players
 const DEFAULT_ROSTER_REQUIREMENTS: RosterRequirements = {
-  QB: { min: 1, max: 2, optimal: 1 },
-  RB: { min: 2, max: 6, optimal: 6 }, // Per strat.md: 5-6 RBs total (lean towards 6)
-  WR: { min: 2, max: 7, optimal: 7 }, // Per strat.md: 6-7 WRs total (lean towards 7)
-  TE: { min: 1, max: 2, optimal: 1 },
+  QB: { min: 1, max: 2, optimal: 1 },  // Only 1 QB needed
+  RB: { min: 2, max: 5, optimal: 5 },  // Target: 1 elite, 2 tier2, 2 value
+  WR: { min: 2, max: 6, optimal: 5 },  // 5 WRs to balance spending
+  TE: { min: 1, max: 2, optimal: 1 },  // Only 1 TE needed
   DST: { min: 1, max: 1, optimal: 1 },
   K: { min: 1, max: 1, optimal: 1 },
   FLEX: { count: 1, eligiblePositions: ['RB', 'WR', 'TE'] },
@@ -145,15 +145,15 @@ const DEFAULT_ROSTER_REQUIREMENTS: RosterRequirements = {
 const ROBUST_RB_CONFIG = {
   enabled: true,
   targetBudgetPercent: 0.55, // 50-60% on RBs per strat.md
-  eliteRBTarget: 2, // Target 2-3 elite RBs
-  maxEliteRBs: 3,
-  firstFiveRounds: 5, // Get elite RBs in first 5 nomination rounds
-  eliteRBBudget: 140, // $120-140 for 2-3 elite RBs (increased for 70-80% top player spend)
-  tier1RBRange: { min: 50, max: 70 }, // Increased for elite acquisition
-  tier2RBRange: { min: 40, max: 50 }, // Solid tier 2 range
+  eliteRBTarget: 1, // Target only 1 elite RB
+  maxEliteRBs: 1,
+  firstFiveRounds: 5, // Get elite RB in first 5 nomination rounds
+  eliteRBBudget: 50, // $45-55 for 1 elite RB
+  tier1RBRange: { min: 35, max: 45 }, // Tier 1 range
+  tier2RBRange: { min: 20, max: 30 }, // Tier 2 range for 2 RBs
   inflationThreshold: 1.35, // Pivot if RBs cost 35% more than expected
-  totalRBTarget: 5.5, // Target 5-6 total RBs
-  totalWRTarget: 6.5 // Target 6-7 total WRs
+  totalRBTarget: 5, // Target exactly 5 RBs
+  totalWRTarget: 5 // Target exactly 5 WRs
 };
 
 // Backup Strategy Configurations
@@ -569,41 +569,85 @@ class BidAdvisorService {
     }).length;
     const draftRound = Math.floor(context.draftHistory.length / 12) + 1;
     
-    // Apply Robust RB strategy if enabled - MORE AGGRESSIVE
+    // Apply strategy-specific bonuses
     let robustRBBonus = 0;
     let wrDepthBonus = 0;
     
-    if (this.robustRBConfig.enabled && player.position === 'RB') {
-      if (draftRound <= this.robustRBConfig.firstFiveRounds) {
-        if (player.tier === 'elite' && eliteRBCount < this.robustRBConfig.eliteRBTarget) {
-          // MAXIMUM aggression on elite RBs to ensure 70-80% top player spend
-          robustRBBonus = 0.60; // 60% bonus for elite RBs (increased)
-          console.log('[Robust RB] Elite RB MAXIMUM bonus applied:', player.playerName);
-        } else if (player.tier === 'tier1' && myRBs.length < 3) {
-          robustRBBonus = 0.45; // 45% bonus for tier1 RBs (increased)
-          console.log('[Robust RB] Tier1 RB bonus applied:', player.playerName);
-        } else if (player.tier === 'tier2' && myRBs.length < 4) {
-          robustRBBonus = 0.35; // 35% bonus for tier 2 RBs (increased)
+    // ROBUST RB STRATEGY: Balanced aggression on elite RBs early (target 50-60% budget)
+    if (this.activeStrategy === 'robust-rb' && player.position === 'RB') {
+      // Calculate how much we've already spent on RBs
+      const rbSpent = context.draftHistory
+        .filter(pick => pick.team === context.myTeam.id && pick.player?.position === 'RB')
+        .reduce((sum, pick) => sum + (pick.price || 0), 0);
+      
+      // If we've already spent >60% of starting budget on RBs, reduce bonuses
+      const rbBudgetPercent = rbSpent / 200;
+      
+      if (draftRound <= this.robustRBConfig.firstFiveRounds && rbBudgetPercent < 0.6) {
+        if (player.tier === 'elite' && eliteRBCount < 1) {
+          // Only bonus for the FIRST elite RB
+          robustRBBonus = 0.05; // Only 5% bonus for first elite RB
+          console.log('[Robust RB] First elite RB bonus applied:', player.playerName, 'Bonus:', robustRBBonus);
+        } else if (player.tier === 'tier2' && myRBs.length < 3) {
+          robustRBBonus = 0.02; // Tiny 2% bonus for tier2 RBs
+          console.log('[Robust RB] Tier2 RB bonus applied:', player.playerName);
+        } else {
+          robustRBBonus = 0.0; // No bonus for additional RBs
         }
-      } else if (draftRound <= 8 && player.tier === 'tier2' && myRBs.length < 4) {
-        // Still aggressive on tier 2 RBs in rounds 6-8
-        robustRBBonus = 0.20; // 20% bonus
+      } else if (draftRound <= 8 && player.tier === 'tier2' && myRBs.length < 3 && rbBudgetPercent < 0.5) {
+        robustRBBonus = 0.02; // 2% bonus for mid-round tier2 RBs
       }
     }
     
-    // WR Depth acquisition after securing RB core
-    const myWRs = myRoster.filter(p => p.position === 'WR');
-    if (this.robustRBConfig.enabled && player.position === 'WR') {
-      // After we have 2+ elite RBs, pivot to WR depth
-      if (eliteRBCount >= 2 && myWRs.length < this.robustRBConfig.totalWRTarget) {
-        if (player.tier === 'tier2' || player.tier === 'tier3') {
-          wrDepthBonus = 0.25; // 25% bonus for mid-tier WRs
-          console.log('[Robust RB] WR depth bonus applied:', player.playerName);
+    // HERO RB STRATEGY: One elite RB, then pivot to WR
+    else if (this.activeStrategy === 'hero-rb') {
+      if (player.position === 'RB' && eliteRBCount === 0 && player.tier === 'elite') {
+        // Still want ONE elite RB
+        robustRBBonus = 0.40; // 40% bonus for single elite RB
+        console.log('[Hero RB] Elite RB bonus for anchor:', player.playerName);
+      } else if (player.position === 'WR' && (player.tier === 'elite' || player.tier === 'tier1')) {
+        // Pivot hard to elite WRs after getting one RB
+        wrDepthBonus = 0.35; // 35% bonus for elite WRs
+        console.log('[Hero RB] Elite WR bonus:', player.playerName);
+      }
+    }
+    
+    // ZERO RB STRATEGY: WR heavy, value RBs late
+    else if (this.activeStrategy === 'zero-rb') {
+      if (player.position === 'WR' && (player.tier === 'elite' || player.tier === 'tier1')) {
+        // Maximum aggression on WRs
+        wrDepthBonus = 0.45; // 45% bonus for elite WRs
+        console.log('[Zero RB] Elite WR maximum bonus:', player.playerName);
+      } else if (player.position === 'RB') {
+        // Only value RBs (tier3 or worse) in late rounds
+        if ((player.tier === 'tier3' || player.tier === 'replacement') && draftRound >= 8) {
+          robustRBBonus = 0.15; // Small bonus for value RBs
+          console.log('[Zero RB] Value RB bonus:', player.playerName);
+        } else {
+          // Actively avoid expensive RBs
+          robustRBBonus = -0.20; // PENALTY for elite/tier1 RBs
+          console.log('[Zero RB] Avoiding expensive RB:', player.playerName);
         }
       }
-      // Value WRs in middle rounds
-      if (draftRound >= 6 && draftRound <= 12 && myWRs.length < 5) {
-        wrDepthBonus = Math.max(wrDepthBonus, 0.20); // At least 20% for WR depth
+    }
+    
+    // WR Depth acquisition (applies to all strategies after core is secured)
+    const myWRs = myRoster.filter(p => p.position === 'WR');
+    if (player.position === 'WR' && this.activeStrategy !== 'zero-rb') {
+      // After securing RB core, prioritize WRs to hit 25-35% target
+      if (this.activeStrategy === 'robust-rb' && eliteRBCount >= 2) {
+        if (player.tier === 'elite' || player.tier === 'tier1') {
+          wrDepthBonus = 0.15; // 15% bonus for elite/tier1 WRs
+          console.log('[WR Depth] Elite WR bonus after RB core:', player.playerName);
+        } else if (myWRs.length < 5 && (player.tier === 'tier2' || player.tier === 'tier3')) {
+          wrDepthBonus = Math.max(wrDepthBonus, 0.10); // 10% for depth WRs
+          console.log('[WR Depth] Bonus applied:', player.playerName);
+        }
+      } else if (this.activeStrategy === 'hero-rb' && eliteRBCount >= 1) {
+        if (myWRs.length < 5 && (player.tier === 'tier2' || player.tier === 'tier3')) {
+          wrDepthBonus = Math.max(wrDepthBonus, 0.20); // Ensure WR depth
+          console.log('[WR Depth] Bonus applied:', player.playerName);
+        }
       }
     }
 
@@ -1959,13 +2003,28 @@ class BidAdvisorService {
         return { shouldPivot: false, newStrategy: this.activeStrategy };
       }
     
-    // Calculate RB inflation specifically
-    const rbInflation = this.calculatePositionInflation('RB', context);
+    // Calculate RB inflation from both draft history AND current market
+    const historicalInflation = this.calculatePositionInflation('RB', context);
+    
+    // NEW: Also check current market prices of available elite RBs
+    const availableEliteRBs = context.availablePlayers.filter(
+      p => p.position === 'RB' && (p.tier === 'elite' || p.tier === 'tier1')
+    );
+    
+    let currentMarketInflation = 0;
+    if (availableEliteRBs.length > 0) {
+      const avgMarketPrice = availableEliteRBs.reduce((sum, p) => sum + (p.marketValue || 0), 0) / availableEliteRBs.length;
+      const avgIntrinsicValue = availableEliteRBs.reduce((sum, p) => sum + (p.intrinsicValue || p.auctionValue || 0), 0) / availableEliteRBs.length;
+      if (avgIntrinsicValue > 0) {
+        currentMarketInflation = ((avgMarketPrice - avgIntrinsicValue) / avgIntrinsicValue) * 100;
+      }
+    }
+    
+    // Use the higher of historical or current market inflation
+    const rbInflation = Math.max(historicalInflation, currentMarketInflation);
+    
     const myRBs = (context.myTeam.players || []).filter(p => p.position === 'RB');
-    // Count elite RBs directly from the player objects since they're already drafted
     const eliteRBCount = myRBs.filter(rb => {
-      // Check tier on the player object itself if available
-      // For drafted players, we need to check from draft history or assume based on price
       const draftPick = context.draftHistory.find(pick => 
         pick.player && rb && (
           (pick.player.id && pick.player.id === (rb as any).id) || 
@@ -1976,51 +2035,63 @@ class BidAdvisorService {
       return draftPick && draftPick.price && draftPick.price >= 40;
     }).length;
     
-    // Check if elite RBs are going for 25%+ more than expected
-    if (rbInflation > 25 && eliteRBCount === 0 && this.activeStrategy === 'robust-rb') {
+    // NEW: Check if we're being priced out of the RB market
+    const myBudget = context.myTeam.budget || 0;
+    const cheapestEliteRB = availableEliteRBs.sort((a, b) => (a.marketValue || 0) - (b.marketValue || 0))[0];
+    const cantAffordEliteRB = cheapestEliteRB && (cheapestEliteRB.marketValue || 0) > myBudget * 0.35;
+    
+    // Pivot conditions - now more sensitive to market conditions
+    if (this.activeStrategy === 'robust-rb') {
       const draftProgress = this.calculateDraftProgress(context);
       
-      // If still early, pivot to Hero RB (get one elite)
-      if (draftProgress.percentComplete < 30) {
-        return {
-          shouldPivot: true,
-          newStrategy: 'hero-rb',
-          alert: '🔄 STRATEGY PIVOT: RBs inflated +' + rbInflation + '% - switching to Hero RB (one elite RB + WR depth)'
-        };
+      // Condition 1: RBs are inflated AND we haven't secured any elite RBs yet
+      if (rbInflation > 20 && eliteRBCount === 0) {
+        if (draftProgress.percentComplete < 25) {
+          return {
+            shouldPivot: true,
+            newStrategy: 'hero-rb',
+            alert: `🔄 STRATEGY PIVOT: RBs inflated +${Math.round(rbInflation)}% - switching to Hero RB (one elite RB + WR depth)`
+          };
+        } else if (draftProgress.percentComplete < 50) {
+          return {
+            shouldPivot: true,
+            newStrategy: 'zero-rb',
+            alert: `🔄 STRATEGY PIVOT: RBs too expensive (+${Math.round(rbInflation)}%) - switching to Zero RB (load up on WRs)`
+          };
+        }
       }
-      // If mid-draft, pivot to Zero RB
-      else if (draftProgress.percentComplete < 50) {
+      
+      // Condition 2: Can't afford elite RBs anymore
+      if (cantAffordEliteRB && eliteRBCount === 0 && draftProgress.percentComplete < 40) {
         return {
           shouldPivot: true,
           newStrategy: 'zero-rb',
-          alert: '🔄 STRATEGY PIVOT: RBs too expensive - switching to Zero RB (load up on WRs)'
+          alert: '🔄 STRATEGY PIVOT: Priced out of elite RB market - switching to Zero RB for value'
         };
       }
-    }
-    
-    // Check if too many teams are going Robust RB
-    const teamsWithMultipleEliteRBs = context.allTeams.filter(team => {
-      const teamPlayers = team.players || [];
-      const teamRBs = teamPlayers.filter(p => p.position === 'RB');
-      // Count RBs that were drafted for high prices (elite indicator)
-      const eliteCount = teamRBs.filter(rb => {
-        const draftPick = context.draftHistory.find(pick => 
-          pick.team === team.id && 
-          (pick.player?.id === rb.id || pick.player?.playerId === rb.id) &&
-          pick.player?.position === 'RB'
-        );
-        // Consider RBs drafted for $40+ as elite
-        return draftPick && draftPick.price && draftPick.price >= 40;
+      
+      // Condition 3: Too many teams hoarding elite RBs
+      const teamsWithMultipleEliteRBs = context.allTeams.filter(team => {
+        if (team.id === context.myTeam.id) return false;
+        const teamRBs = team.players?.filter(p => p.position === 'RB') || [];
+        const eliteCount = teamRBs.filter(rb => {
+          const draftPick = context.draftHistory.find(pick => 
+            pick.team === team.id && 
+            pick.player?.position === 'RB' &&
+            (pick.price || 0) >= 40
+          );
+          return draftPick != null;
+        }).length;
+        return eliteCount >= 2;
       }).length;
-      return eliteCount >= 2;
-    }).length;
-    
-    if (teamsWithMultipleEliteRBs >= 4 && eliteRBCount === 0) {
-      return {
-        shouldPivot: true,
-        newStrategy: 'zero-rb',
-        alert: '🚨 Market Alert: ' + teamsWithMultipleEliteRBs + ' teams using Robust RB - pivot to Zero RB for value'
-      };
+      
+      if (teamsWithMultipleEliteRBs >= 3 && eliteRBCount === 0 && availableEliteRBs.length <= 2) {
+        return {
+          shouldPivot: true,
+          newStrategy: 'zero-rb',
+          alert: `🚨 Market Alert: ${teamsWithMultipleEliteRBs} teams hoarding elite RBs - pivot to Zero RB for value`
+        };
+      }
     }
     
       return { shouldPivot: false, newStrategy: this.activeStrategy };
