@@ -324,6 +324,9 @@ export class CleanDataLoader {
           // Set SOS for team
           sosMap.set(teamCode, seasonSOS);
           
+          // Debug logging for production
+          console.log(`SOS Loaded: ${teamCode} = ${seasonSOS}`);
+          
           // Debug specific teams
           if (teamCode === 'DET' || teamCode === 'GB' || teamCode === 'SF' || teamCode === 'NYG') {
             logger.info(`SOS Debug: ${teamCode}, SOS = ${seasonSOS}`);
@@ -384,47 +387,57 @@ export class CleanDataLoader {
     const sosMap = await this.buildSOSMap();
     
     // Use projections_2025_with_adp.csv which has correct market values in column 65
-    return this.loadCleanCSV<PlayerProjection>('projections_2025_with_adp.csv', (row) => ({
-      id: `${row.playerName}_${row.position}_${row.teamName}`.toLowerCase(),
-      name: safeParseString(row.playerName) || '',
-      position: safeParseString(row.position) || '',
-      team: safeParseString(row.teamName) || '',
-      byeWeek: safeParseInt(row.byeWeek) || undefined,
-      projectedPoints: safeParseFloat(row.fantasyPoints, 2, null) ?? 0,
-      teamSeasonSOS: sosMap.get(row.teamName) || 0,  // Just lookup the SOS by team
+    return this.loadCleanCSV<PlayerProjection>('projections_2025_with_adp.csv', (row) => {
+      const team = safeParseString(row.teamName) || '';
+      const sosValue = sosMap.get(team) || 0;
       
-      // Projection details
-      games: safeParseFloat(row.games, 1, null) ?? 0,
+      // Debug logging for production
+      if (row.playerName && (row.playerName.includes('Mahomes') || row.playerName.includes('Jefferson') || row.playerName.includes('McCaffrey'))) {
+        console.log(`Player SOS mapping: ${row.playerName} (${team}) -> SOS = ${sosValue}`);
+      }
       
-      // Passing stats
-      passingYards: safeParseFloat(row.passYds, 1, null) ?? 0,
-      passingTDs: safeParseFloat(row.passTd, 1, null) ?? 0,
-      passingINTs: safeParseFloat(row.passInt, 1, null) ?? 0,
+      return {
+        id: `${row.playerName}_${row.position}_${row.teamName}`.toLowerCase(),
+        name: safeParseString(row.playerName) || '',
+        position: safeParseString(row.position) || '',
+        team: team,
+        byeWeek: safeParseInt(row.byeWeek) || undefined,
+        projectedPoints: safeParseFloat(row.fantasyPoints, 2, null) ?? 0,
+        teamSeasonSOS: sosValue,  // Just lookup the SOS by team
+        
+        // Projection details
+        games: safeParseFloat(row.games, 1, null) ?? 0,
+        
+        // Passing stats
+        passingYards: safeParseFloat(row.passYds, 1, null) ?? 0,
+        passingTDs: safeParseFloat(row.passTd, 1, null) ?? 0,
+        passingINTs: safeParseFloat(row.passInt, 1, null) ?? 0,
       
-      // Rushing stats
-      rushingYards: safeParseFloat(row.rushYds, 1, null) ?? 0,
-      rushingTDs: safeParseFloat(row.rushTd, 1, null) ?? 0,
-      
-      // Receiving stats
-      receptions: safeParseFloat(row.recvReceptions, 1, null) ?? 0,
-      receivingYards: safeParseFloat(row.recvYds, 1, null) ?? 0,
-      receivingTDs: safeParseFloat(row.recvTd, 1, null) ?? 0,
-      
-      // Confidence and value
-      confidence: 0.85, // Default confidence since cleaned data
-      marketValue: (() => {
-        const value = safeParseInt(row.marketValue) ?? 1;
-        // Debug log for Breece Hall
-        if (row.playerName === 'Breece Hall') {
-          console.log('[DEBUG] Breece Hall marketValue:', {
-            raw: row.marketValue,
-            parsed: value,
-            auctionValue: row.auctionValue
-          });
-        }
-        return value;
-      })()
-    }));
+        // Rushing stats
+        rushingYards: safeParseFloat(row.rushYds, 1, null) ?? 0,
+        rushingTDs: safeParseFloat(row.rushTd, 1, null) ?? 0,
+        
+        // Receiving stats
+        receptions: safeParseFloat(row.recvReceptions, 1, null) ?? 0,
+        receivingYards: safeParseFloat(row.recvYds, 1, null) ?? 0,
+        receivingTDs: safeParseFloat(row.recvTd, 1, null) ?? 0,
+        
+        // Confidence and value
+        confidence: 0.85, // Default confidence since cleaned data
+        marketValue: (() => {
+          const value = safeParseInt(row.marketValue) ?? 1;
+          // Debug log for Breece Hall
+          if (row.playerName === 'Breece Hall') {
+            console.log('[DEBUG] Breece Hall marketValue:', {
+              raw: row.marketValue,
+              parsed: value,
+              auctionValue: row.auctionValue
+            });
+          }
+          return value;
+        })()
+      };
+    });
   }
 
   /**

@@ -139,7 +139,14 @@ export class ProjectionAggregator {
       injuryStatus: bestSource?.injuryStatus,
       isRookie: bestSource?.isRookie,
       games: bestSource?.games,
-      teamSeasonSOS: bestSource?.teamSeasonSOS,  // Preserve SOS data
+      teamSeasonSOS: (() => {
+        const sos = bestSource?.teamSeasonSOS || 0;
+        // Debug logging for key players
+        if (basePlayerId.includes('mahomes') || basePlayerId.includes('jefferson') || basePlayerId.includes('mccaffrey')) {
+          console.log(`Aggregator SOS: ${basePlayerId} -> SOS = ${sos} (from ${bestSource?.source || 'unknown'})`);
+        }
+        return sos;
+      })(),  // Preserve SOS data
       
       // Include averaged stats
       passingYards: numericFields.passingYards > 0 ? Math.round(numericFields.passingYards) : undefined,
