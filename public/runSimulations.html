@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Draft Simulation Runner</title>
+    <script type="module">
+        // This will run after the app loads
+        setTimeout(async () => {
+            console.log('Starting draft simulations...');
+            
+            // Import the simulation functions
+            const module = await import('/fftool/src/lib/draftSimulator.ts');
+            const { runSimulations } = module;
+            
+            // Run 3 simulations
+            const results = await runSimulations(3);
+            
+            // Analyze results against strategy guidelines
+            const guidelines = {
+                rbSpendTarget: { min: 50, max: 60 },
+                totalBudgetTarget: { min: 190, max: 200 },
+                rbCountTarget: { min: 5, max: 6 },
+                wrCountTarget: { min: 6, max: 7 },
+                eliteRBTarget: { min: 2, max: 3 }
+            };
+            
+            console.log('\n========== SIMULATION RESULTS SUMMARY ==========\n');
+            
+            results.forEach((result, idx) => {
+                console.log(`\nSIMULATION ${idx + 1}:`);
+                console.log('------------------------');
+                
+                const analysis = result.analysis;
+                const posCounts = analysis.positionCounts;
+                
+                // Check against guidelines
+                const checks = {
+                    budgetSpent: analysis.totalSpent >= guidelines.totalBudgetTarget.min,
+                    rbSpendPercent: analysis.rbSpendPercent >= guidelines.rbSpendTarget.min && 
+                                   analysis.rbSpendPercent <= guidelines.rbSpendTarget.max,
+                    rbCount: (posCounts.RB || 0) >= guidelines.rbCountTarget.min && 
+                            (posCounts.RB || 0) <= guidelines.rbCountTarget.max,
+                    wrCount: (posCounts.WR || 0) >= guidelines.wrCountTarget.min && 
+                            (posCounts.WR || 0) <= guidelines.wrCountTarget.max,
+                    eliteRBs: analysis.eliteRBCount >= guidelines.eliteRBTarget.min
+                };
+                
+                console.log(`Budget: $${analysis.totalSpent}/200 ${checks.budgetSpent ? '✓' : '✗'}`);
+                console.log(`RB Spend: $${analysis.rbSpend} (${analysis.rbSpendPercent.toFixed(1)}%) ${checks.rbSpendPercent ? '✓' : '✗'}`);
+                console.log(`Elite RBs: ${analysis.eliteRBCount} ${checks.eliteRBs ? '✓' : '✗'}`);
+                console.log(`RB Count: ${posCounts.RB || 0} ${checks.rbCount ? '✓' : '✗'}`);
+                console.log(`WR Count: ${posCounts.WR || 0} ${checks.wrCount ? '✓' : '✗'}`);
+                console.log(`League Rank: #${analysis.leagueRank}/12`);
+                
+                console.log('\nPosition Distribution:');
+                console.log(`QB: ${posCounts.QB || 0}, RB: ${posCounts.RB || 0}, WR: ${posCounts.WR || 0}, TE: ${posCounts.TE || 0}, DST: ${posCounts.DST || 0}, K: ${posCounts.K || 0}`);
+                
+                console.log('\nTop Players:');
+                const sortedRoster = result.userTeam.roster
+                    .sort((a, b) => {
+                        const pickA = result.draftHistory.find(d => d.player.id === a.id);
+                        const pickB = result.draftHistory.find(d => d.player.id === b.id);
+                        return (pickB?.price || 0) - (pickA?.price || 0);
+                    })
+                    .slice(0, 5);
+                    
+                sortedRoster.forEach(p => {
+                    const pick = result.draftHistory.find(d => d.player.id === p.id);
+                    console.log(`  ${p.name} (${p.position}/${p.tier}) - $${pick?.price || 0}`);
+                });
+                
+                const allChecksPassed = Object.values(checks).every(v => v);
+                console.log(`\nOverall: ${allChecksPassed ? '✅ MEETS GUIDELINES' : '⚠️  NEEDS ADJUSTMENT'}`);
+            });
+            
+            // Calculate averages
+            const avgRBSpend = results.reduce((sum, r) => sum + r.analysis.rbSpendPercent, 0) / results.length;
+            const avgEliteRBs = results.reduce((sum, r) => sum + r.analysis.eliteRBCount, 0) / results.length;
+            const avgRank = results.reduce((sum, r) => sum + r.analysis.leagueRank, 0) / results.length;
+            
+            console.log('\n========== AVERAGES ACROSS ALL SIMULATIONS ==========');
+            console.log(`Average RB Spend: ${avgRBSpend.toFixed(1)}% (Target: 50-60%)`);
+            console.log(`Average Elite RBs: ${avgEliteRBs.toFixed(1)} (Target: 2-3)`);
+            console.log(`Average League Rank: ${avgRank.toFixed(1)} (Target: Top 3)`);
+            
+        }, 2000);
+    </script>
+</head>
+<body>
+    <h1>Check Console for Simulation Results</h1>
+    <p>Press F12 to open developer console</p>
+</body>
+</html>

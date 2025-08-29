@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Draft Simulation Test</title>
+    <style>
+        body {
+            font-family: monospace;
+            background: #111;
+            color: #0f0;
+            padding: 20px;
+        }
+        pre {
+            white-space: pre-wrap;
+        }
+        button {
+            background: #333;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Draft Simulation Test Runner</h1>
+    <p>Click the button below to run 3 draft simulations and compare against strategy guidelines.</p>
+    <button onclick="runTest()">Run Simulations</button>
+    <pre id="output"></pre>
+
+    <script type="module">
+        window.runTest = async function() {
+            const output = document.getElementById('output');
+            output.textContent = 'Loading app and running simulations...\n';
+            
+            // Navigate to the app first to ensure everything loads
+            const iframe = document.createElement('iframe');
+            iframe.src = '/fftool/';
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+            
+            // Wait for app to load
+            await new Promise(resolve => {
+                iframe.onload = resolve;
+            });
+            
+            // Access the app's window
+            const appWindow = iframe.contentWindow;
+            
+            // Wait a bit more for React to initialize
+            await new Promise(resolve => setTimeout(resolve, 3000));
+            
+            // Check if testSimulations is available
+            if (appWindow.testSimulations) {
+                output.textContent = 'Running simulations...\n';
+                
+                // Capture console output
+                const originalLog = console.log;
+                let logs = [];
+                console.log = function(...args) {
+                    logs.push(args.join(' '));
+                    originalLog.apply(console, args);
+                };
+                
+                try {
+                    await appWindow.testSimulations();
+                    output.textContent = logs.join('\n');
+                } catch (error) {
+                    output.textContent = 'Error: ' + error.message;
+                } finally {
+                    console.log = originalLog;
+                }
+            } else {
+                output.textContent = 'Test function not found. Please ensure the app is running on http://localhost:3009/fftool/';
+            }
+        };
+    </script>
+</body>
+</html>

@@ -36,7 +36,8 @@ function parsePercent(value: any): number | undefined {
 // Load WR advanced stats
 export async function loadWRAdvanced(): Promise<WRAdvancedStats[]> {
   try {
-    const response = await fetch('/canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_WR.csv');
+    const basePath = import.meta.env.BASE_URL || '/';
+    const response = await fetch(`${basePath}canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_WR.csv`);
     const content = await response.text();
     
     const parsed = parseCSVSafe<any>(content, undefined, ['Player']);
@@ -70,7 +71,8 @@ export async function loadWRAdvanced(): Promise<WRAdvancedStats[]> {
 // Load TE advanced stats
 export async function loadTEAdvanced(): Promise<TEAdvancedStats[]> {
   try {
-    const response = await fetch('/canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_TE.csv');
+    const basePath = import.meta.env.BASE_URL || '/';
+    const response = await fetch(`${basePath}canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_TE.csv`);
     const content = await response.text();
     
     const parsed = parseCSVSafe<any>(content, undefined, ['Player']);
@@ -104,7 +106,8 @@ export async function loadTEAdvanced(): Promise<TEAdvancedStats[]> {
 // Load RB advanced stats
 export async function loadRBAdvanced(): Promise<RBAdvancedStats[]> {
   try {
-    const response = await fetch('/canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_RB.csv');
+    const basePath = import.meta.env.BASE_URL || '/';
+    const response = await fetch(`${basePath}canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_RB.csv`);
     const content = await response.text();
     
     const parsed = parseCSVSafe<any>(content, undefined, ['Player']);
@@ -147,7 +150,8 @@ export async function loadRBAdvanced(): Promise<RBAdvancedStats[]> {
 // Load QB advanced stats
 export async function loadQBAdvanced(): Promise<QBAdvancedStats[]> {
   try {
-    const response = await fetch('/canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_QB.csv');
+    const basePath = import.meta.env.BASE_URL || '/';
+    const response = await fetch(`${basePath}canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_Advanced_Stats_Report_QB.csv`);
     const content = await response.text();
     
     const parsed = parseCSVSafe<any>(content, undefined, ['Player']);

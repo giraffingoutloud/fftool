@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Run Draft Simulations</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: #1a1a2e;
+            color: #eee;
+            padding: 20px;
+            margin: 0;
+        }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            display: block;
+            margin: 20px auto;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        button:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+        pre {
+            background: #0f0f23;
+            border: 1px solid #333;
+            border-radius: 5px;
+            padding: 20px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 12px;
+            line-height: 1.5;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .info {
+            background: #2a2a4e;
+            border-left: 4px solid #4CAF50;
+            padding: 10px 20px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏈 Fantasy Football Draft Simulation Runner</h1>
+        
+        <div class="info">
+            <p><strong>Robust RB Strategy Guidelines:</strong></p>
+            <ul>
+                <li>50-60% budget on RBs</li>
+                <li>70-80% on top 3-4 players</li>
+                <li>5-6 total RBs, 6-7 total WRs</li>
+                <li>2-3 elite/tier1 RBs</li>
+                <li>Spend 95%+ of budget ($190+)</li>
+            </ul>
+        </div>
+        
+        <button id="runBtn" onclick="runSimulations()">Run 2 Detailed Simulations</button>
+        
+        <pre id="output">Click the button above to run simulations and see full 16-player rosters...</pre>
+    </div>
+
+    <script type="module">
+        let isRunning = false;
+        
+        window.runSimulations = async function() {
+            if (isRunning) return;
+            
+            const btn = document.getElementById('runBtn');
+            const output = document.getElementById('output');
+            
+            isRunning = true;
+            btn.disabled = true;
+            btn.textContent = 'Running Simulations...';
+            output.textContent = 'Loading application and initializing draft simulator...\n';
+            
+            // Capture console output
+            const logs = [];
+            const originalLog = console.log;
+            console.log = function(...args) {
+                const text = args.map(arg => 
+                    typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+                ).join(' ');
+                logs.push(text);
+                originalLog.apply(console, args);
+            };
+            
+            try {
+                // Create iframe to load the app
+                const iframe = document.createElement('iframe');
+                iframe.src = 'http://localhost:3009/fftool/';
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+                
+                output.textContent = 'Loading Fantasy Football Tool application...\n';
+                
+                await new Promise(resolve => {
+                    iframe.onload = resolve;
+                    setTimeout(resolve, 5000); // Timeout after 5 seconds
+                });
+                
+                output.textContent = 'Application loaded. Initializing data...\n';
+                await new Promise(resolve => setTimeout(resolve, 3000));
+                
+                // Access the app window
+                const appWindow = iframe.contentWindow;
+                
+                if (appWindow && appWindow.runDetailedSimulations) {
+                    output.textContent = 'Running draft simulations...\n\n';
+                    logs.length = 0; // Clear previous logs
+                    
+                    await appWindow.runDetailedSimulations();
+                    
+                    // Display the captured output
+                    output.textContent = logs.join('\n');
+                } else {
+                    output.textContent = 'ERROR: Could not access simulation functions.\n\n';
+                    output.textContent += 'Please ensure:\n';
+                    output.textContent += '1. The development server is running on http://localhost:3009\n';
+                    output.textContent += '2. You have navigated to http://localhost:3009/fftool/\n';
+                    output.textContent += '3. The app has fully loaded\n\n';
+                    output.textContent += 'You can also open the console (F12) and run: runDetailedSimulations()';
+                }
+                
+                document.body.removeChild(iframe);
+            } catch (error) {
+                output.textContent = 'ERROR: ' + error.message + '\n\n';
+                output.textContent += 'Stack trace:\n' + error.stack;
+            } finally {
+                console.log = originalLog;
+                isRunning = false;
+                btn.disabled = false;
+                btn.textContent = 'Run 2 Detailed Simulations';
+            }
+        };
+    </script>
+</body>
+</html>

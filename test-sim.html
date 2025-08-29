@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Simulation</title>
+  <style>
+    body {
+      font-family: monospace;
+      padding: 20px;
+      background: #1a1a1a;
+      color: #fff;
+    }
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    button {
+      background: #4a5568;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+    button:hover {
+      background: #5a6578;
+    }
+  </style>
+</head>
+<body>
+  <h1>Draft Simulation Test</h1>
+  <button onclick="runTest()">Run Simulation</button>
+  <pre id="output"></pre>
+
+  <script type="module">
+    // Import the simulation directly
+    import { DraftSimulator } from './src/lib/draftSimulator';
+    
+    window.runTest = async function() {
+      const output = document.getElementById('output');
+      output.textContent = 'Running simulation with improved mock data...\n\n';
+      
+      try {
+        console.log('='.repeat(80));
+        console.log('RUNNING SIMULATION WITH IMPROVED MOCK DATA');
+        console.log('='.repeat(80));
+        
+        const sim = new DraftSimulator();
+        await sim.initialize();
+        const result = await sim.runDraft();
+        
+        const userTeam = result.userTeam;
+        const analysis = result.analysis;
+        const posCounts = analysis.positionCounts;
+        
+        // Get all picks for this team sorted by price
+        const teamPicks = result.draftHistory
+          .filter(p => p.teamId === userTeam.id)
+          .sort((a, b) => b.price - a.price);
+        
+        // Calculate top players spending
+        const top4Spend = teamPicks.slice(0, 4).reduce((sum, p) => sum + p.price, 0);
+        const top4Percent = analysis.totalSpent > 0 ? (top4Spend / analysis.totalSpent * 100) : 0;
+        
+        let report = '='.repeat(60) + '\n';
+        report += 'SIMULATION RESULTS\n';
+        report += '='.repeat(60) + '\n\n';
+        
+        report += `Budget: $${analysis.totalSpent}/$200 (${(analysis.totalSpent/200*100).toFixed(0)}% spent)\n`;
+        report += `Roster Size: ${userTeam.roster.length}/16 players\n`;
+        report += `League Rank: #${analysis.leagueRank}/12\n`;
+        report += `Projected Points: ${analysis.projectedPoints.toFixed(0)}\n\n`;
+        
+        report += '📊 KEY METRICS:\n';
+        report += `• RB Investment: $${analysis.rbSpend} (${analysis.rbSpendPercent.toFixed(1)}%) ${analysis.rbSpendPercent >= 50 && analysis.rbSpendPercent <= 60 ? '✅' : analysis.rbSpendPercent >= 45 && analysis.rbSpendPercent <= 65 ? '⚠️' : '❌'} [Target: 50-60%]\n`;
+        report += `• Top 4 Players: $${top4Spend} (${top4Percent.toFixed(1)}%) ${top4Percent >= 70 ? '✅' : top4Percent >= 60 ? '⚠️' : '❌'} [Target: 70-80%]\n`;
+        report += `• Elite/Tier1 RBs: ${analysis.eliteRBCount} ${analysis.eliteRBCount >= 2 ? '✅' : analysis.eliteRBCount === 1 ? '⚠️' : '❌'} [Target: 2-3]\n\n`;
+        
+        report += '📈 POSITION BREAKDOWN:\n';
+        report += `• QB:  ${(posCounts.QB || 0).toString().padStart(2)} players | $${(analysis.positionSpend.QB || 0).toString().padStart(3)}\n`;
+        report += `• RB:  ${(posCounts.RB || 0).toString().padStart(2)} players | $${(analysis.positionSpend.RB || 0).toString().padStart(3)} ${(posCounts.RB || 0) >= 5 && (posCounts.RB || 0) <= 6 ? '✅' : '⚠️'} [Target: 5-6]\n`;
+        report += `• WR:  ${(posCounts.WR || 0).toString().padStart(2)} players | $${(analysis.positionSpend.WR || 0).toString().padStart(3)} ${(posCounts.WR || 0) >= 6 && (posCounts.WR || 0) <= 7 ? '✅' : '⚠️'} [Target: 6-7]\n`;
+        report += `• TE:  ${(posCounts.TE || 0).toString().padStart(2)} players | $${(analysis.positionSpend.TE || 0).toString().padStart(3)}\n`;
+        report += `• DST: ${(posCounts.DST || 0).toString().padStart(2)} players | $${(analysis.positionSpend.DST || 0).toString().padStart(3)}\n`;
+        report += `• K:   ${(posCounts.K || 0).toString().padStart(2)} players | $${(analysis.positionSpend.K || 0).toString().padStart(3)}\n\n`;
+        
+        report += '='.repeat(60) + '\n';
+        report += 'COMPLETE ROSTER (sorted by price)\n';
+        report += '='.repeat(60) + '\n\n';
+        
+        teamPicks.forEach((pick, idx) => {
+          const player = pick.player;
+          const isEliteRB = player.position === 'RB' && (player.tier === 'elite' || player.tier === 'tier1');
+          const marker = isEliteRB ? '⭐' : '  ';
+          report += `${(idx + 1).toString().padStart(2)} ${marker} ${player.name.padEnd(28)} ${player.position.padEnd(3)} $${pick.price.toString().padStart(3)}\n`;
+        });
+        
+        report += '\n' + '='.repeat(60) + '\n';
+        report += 'FINAL ASSESSMENT\n';
+        report += '='.repeat(60) + '\n';
+        report += `✓ Budget efficiency (>95% spent): ${analysis.totalSpent >= 190 ? '✅ YES' : '❌ NO'}\n`;
+        report += `✓ RB-heavy strategy (50-60% on RBs): ${analysis.rbSpendPercent >= 50 && analysis.rbSpendPercent <= 60 ? '✅ YES' : analysis.rbSpendPercent >= 45 && analysis.rbSpendPercent <= 65 ? '⚠️ CLOSE' : '❌ NO'}\n`;
+        report += `✓ Elite talent acquired (2+ elite RBs): ${analysis.eliteRBCount >= 2 ? '✅ YES' : '❌ NO'}\n`;
+        report += `✓ Proper depth (5-6 RBs, 6-7 WRs): ${(posCounts.RB >= 5 && posCounts.RB <= 6 && posCounts.WR >= 6 && posCounts.WR <= 7) ? '✅ YES' : '⚠️ PARTIAL'}\n`;
+        
+        output.textContent += report;
+        console.log(report);
+        
+      } catch (error) {
+        output.textContent += 'Error: ' + error.message + '\n';
+        console.error('Simulation failed:', error);
+      }
+    };
+  </script>
+</body>
+</html>

@@ -31,7 +31,7 @@ interface BidAdvisorProps {
 const BidAdvisor: React.FC<BidAdvisorProps> = ({ player, currentBid = 0, onBidChange, allPlayers = [] }) => {
   const { teams, myTeamId, draftHistory } = useDraftStore();
   const [showDetails, setShowDetails] = useState(false);
-  const [simulatedBid, setSimulatedBid] = useState(currentBid);
+  const [simulatedBid, setSimulatedBid] = useState<number | ''>(currentBid || '');
 
   // Get recommendation
   const recommendation = useMemo(() => {
@@ -71,7 +71,7 @@ const BidAdvisor: React.FC<BidAdvisorProps> = ({ player, currentBid = 0, onBidCh
       allTeams: convertedTeams.length > 0 ? convertedTeams : [myTeam],
       draftHistory: draftHistory || [],
       availablePlayers,
-      currentBid: simulatedBid,
+      currentBid: typeof simulatedBid === 'number' ? simulatedBid : 0,
       totalBudget: 200,
       rosterRequirements: {
         QB: { min: 1, max: 2, optimal: 1 },
@@ -263,7 +263,7 @@ const BidAdvisor: React.FC<BidAdvisorProps> = ({ player, currentBid = 0, onBidCh
           <label className="text-sm text-gray-400">Simulate Bid Amount</label>
           <div className="flex items-center gap-2">
             <button
-              onClick={() => setSimulatedBid(Math.max(1, simulatedBid - 5))}
+              onClick={() => setSimulatedBid(Math.max(1, (typeof simulatedBid === 'number' ? simulatedBid : 0) - 5))}
               className="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-white"
             >
               -$5
@@ -271,11 +271,12 @@ const BidAdvisor: React.FC<BidAdvisorProps> = ({ player, currentBid = 0, onBidCh
             <input
               type="number"
               value={simulatedBid}
-              onChange={(e) => setSimulatedBid(Math.max(0, parseInt(e.target.value) || 0))}
+              onChange={(e) => setSimulatedBid(e.target.value === '' ? '' : Math.max(0, parseInt(e.target.value) || 0))}
               className="w-20 px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-center"
+              placeholder="$"
             />
             <button
-              onClick={() => setSimulatedBid(simulatedBid + 5)}
+              onClick={() => setSimulatedBid((typeof simulatedBid === 'number' ? simulatedBid : 0) + 5)}
               className="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-white"
             >
               +$5

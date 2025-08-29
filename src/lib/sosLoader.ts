@@ -39,7 +39,8 @@ export class SOSLoader {
     }
     
     try {
-      const response = await fetch('/artifacts/clean_data/sos_2025.csv');
+      const basePath = import.meta.env.BASE_URL || '/';
+      const response = await fetch(`${basePath}artifacts/clean_data/sos_2025.csv`);
       if (!response.ok) {
         throw new Error(`Failed to load SOS data: ${response.statusText}`);
       }

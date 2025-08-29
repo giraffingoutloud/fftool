@@ -1,0 +1,7 @@
+position,replacement_rank,min_rank,max_rank,description,calculation_method
+QB,15,12,24,Replacement level QB rank,Most teams roster 1-2 QBs
+RB,48,36,60,Replacement level RB rank,12 teams × 4 RBs average
+WR,60,48,72,Replacement level WR rank,12 teams × 5 WRs average
+TE,18,14,24,Replacement level TE rank,Most teams roster 1-2 TEs
+DST,14,12,16,Replacement level DST rank,Some teams stream defenses
+K,13,12,16,Replacement level K rank,Few teams roster backup kickers

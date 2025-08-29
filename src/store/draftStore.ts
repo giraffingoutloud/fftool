@@ -6,6 +6,7 @@ import type {
   LeagueSettings,
   PlayerValuation 
 } from '@/types';
+import type { ValuationResult } from '@/lib/calibratedValuationService';
 import { DataValidator } from '@/lib/dataValidator';
 
 interface DraftState {
@@ -18,6 +19,7 @@ interface DraftState {
   currentBidder: string | null;
   isDraftActive: boolean;
   availablePlayers: PlayerValuation[];
+  selectedPlayer: ValuationResult | null;
   
   initializeDraft: (settings: LeagueSettings) => void;
   setMyTeam: (teamId: string) => void;
@@ -26,6 +28,7 @@ interface DraftState {
   completeAuction: (player: Player, price: number, teamId: string) => void;
   updatePlayerValuations: (valuations: PlayerValuation[]) => void;
   updateTeamName: (teamId: string, newName: string) => void;
+  setSelectedPlayer: (player: ValuationResult | null) => void;
   resetDraft: () => void;
   undoLastPick: () => void;
 }
@@ -56,6 +59,7 @@ export const useDraftStore = create<DraftState>((set, get) => ({
   currentBidder: null,
   isDraftActive: false,
   availablePlayers: [],
+  selectedPlayer: null,
   
   initializeDraft: (settings) => {
     // Skip validation for now - we know our settings are correct
@@ -225,6 +229,10 @@ export const useDraftStore = create<DraftState>((set, get) => ({
     const teamNames = savedTeamNames ? JSON.parse(savedTeamNames) : {};
     teamNames[teamId] = newName;
     localStorage.setItem('ffToolTeamNames', JSON.stringify(teamNames));
+  },
+
+  setSelectedPlayer: (player) => {
+    set({ selectedPlayer: player });
   },
   
   resetDraft: () => set({

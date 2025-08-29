@@ -1,0 +1,7 @@
+position,market_adjustment,min,max,description
+QB,0.85,0.70,1.00,QBs typically go 15% cheaper than pure VBD suggests
+RB,1.15,1.00,1.30,RBs command 15% premium in auctions due to scarcity
+WR,1.00,0.90,1.10,WRs are typically valued fairly by the market
+TE,0.90,0.80,1.00,TEs slightly discounted except elite tier
+DST,0.50,0.30,0.70,Defenses heavily discounted by market
+K,0.45,0.30,0.60,Kickers heavily discounted by market

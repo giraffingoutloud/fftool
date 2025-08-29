@@ -7,11 +7,14 @@ A comprehensive fantasy football tool for ESPN 12-person PPR auction draft leagu
 ### Core Functionality
 - **V2.1 Calibrated Valuation Model**: VORP-based valuations with balanced tier adjustments that pass all invariant tests
 - **Real-Time Edge Calculations**: Shows value opportunities (Our Value - Market Price)
+- **Robust RB Strategy Support**: Advanced bid recommendations with 60% bonus for elite RBs in auction drafts
+- **Draft Simulation Engine**: Test auction strategies with realistic mock drafts and AI opponents
 - **Strength of Schedule (SOS) Integration**: Season-long difficulty ratings for all 32 teams
 - **Multi-Source ADP Aggregation**: Weighted averaging from 6 different fantasy sources
 - **Smart Tier System**: Elite, Tier 1-3, and Replacement level classifications
 - **Comprehensive Player Table**: Sortable columns with color-coded metrics
 - **Three-Column Layout**: Organized dashboard with budget allocation, market tracking, and draft history
+- **Version Toggle**: Switch between experimental and stable builds
 
 ### Data Integration
 The tool uses a Python ETL pipeline with TypeScript frontend integration:
@@ -79,6 +82,12 @@ Open http://localhost:3009 (or your configured port) in your browser
 - **`MarketTrackerCalibrated.tsx`**: Real-time market trend analysis
 - **`TeamStrengthAnalyzer.tsx`**: Team composition and strength metrics
 - **`DraftHistory.tsx`**: Track drafted players and spending
+- **`BidAdvisor.tsx`**: Real-time auction bid recommendations
+
+#### Auction Strategy (`src/lib/`)
+- **`bidAdvisorService.ts`**: Robust RB strategy implementation with dynamic bonuses
+- **`draftSimulator.ts`**: Full auction draft simulation with AI opponents
+- **`runDetailedSimulations.ts`**: Detailed simulation runner for strategy testing
 
 ### Data Flow
 1. **ETL Pipeline**: Python `robust_loader.py` validates and cleans all data sources
@@ -237,6 +246,35 @@ The application uses a three-column layout:
 - **FAIR**: Near market value
 - **PASS**: Slightly overpriced
 - **AVOID**: Significantly overpriced or roster doesn't need
+
+## Auction Strategy: Robust RB
+
+The tool implements a "Robust RB" auction strategy optimized for PPR leagues:
+
+### Strategy Guidelines
+- **Budget Allocation**: 50-60% on RBs, 70-80% on top 3-4 players
+- **Target Roster**: 5-6 RBs, 6-7 WRs, 2-3 elite RBs
+- **Minimum Budget Spend**: 95%+ ($190+ of $200)
+
+### Bid Bonuses by Tier
+- **Elite RBs**: 60% bonus over base value
+- **Tier 1 RBs**: 45% bonus
+- **Tier 2 RBs**: 35% bonus
+- **WR Depth**: 20% bonus after securing RB core
+
+### Draft Simulation
+Test strategies with the built-in simulator:
+```javascript
+// Run simulation in browser console
+runDetailedSimulations()
+```
+
+The simulator includes:
+- 12 AI opponents with varied strategies
+- Realistic nomination patterns
+- Dynamic bidding based on team needs
+- Full 16-player roster completion
+- Performance metrics and validation
 
 ## Technologies Used
 

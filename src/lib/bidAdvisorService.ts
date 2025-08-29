@@ -4,7 +4,19 @@
  */
 
 import type { ValuationResult } from './calibratedValuationService';
-import type { DraftPick, Team } from '@/store/draftStore';
+import type { DraftPick } from '@/store/draftStore';
+import type { Player } from '@/types';
+
+// Custom Team interface for BidAdvisor that includes players array
+interface BidAdvisorTeam {
+  id: string;
+  name: string;
+  budget: number;
+  players: Player[];
+  isUser?: boolean;
+  maxBid?: number;
+  nominations?: number;
+}
 
 export interface BidRecommendation {
   // Core recommendation
@@ -38,6 +50,12 @@ export interface BidRecommendation {
   byeWeekImpact?: ByeWeekAnalysis;
   teamStackBonus?: TeamStackInfo;
   smartAlternatives?: SmartAlternative[];
+  
+  // New: Budget and Draft Progress
+  budgetAdvantage?: BudgetAdvantage;
+  draftProgress?: DraftProgress;
+  activeStrategy?: 'robust-rb' | 'hero-rb' | 'zero-rb' | 'balanced';
+  strategyPivotAlert?: string;
 }
 
 export interface CompetitorInsight {
@@ -71,9 +89,25 @@ export interface SmartAlternative {
   availability: 'immediate' | 'likely-available' | 'risky';
 }
 
+export interface BudgetAdvantage {
+  myBudget: number;
+  averageBudget: number;
+  advantage: number; // positive = more than avg, negative = less
+  percentile: number; // 0-100, where you rank
+  canDominate: boolean; // true if significantly more budget
+}
+
+export interface DraftProgress {
+  totalPicks: number;
+  picksMade: number;
+  percentComplete: number;
+  isHalfway: boolean;
+  phase: 'early' | 'mid' | 'late' | 'end';
+}
+
 export interface DraftContext {
-  myTeam: Team;
-  allTeams: Team[];
+  myTeam: BidAdvisorTeam;
+  allTeams: BidAdvisorTeam[];
   draftHistory: DraftPick[];
   availablePlayers: ValuationResult[];
   currentBid: number;
@@ -92,20 +126,59 @@ export interface RosterRequirements {
   BENCH: number;
 }
 
-// Standard 12-team PPR roster requirements
+// 12-team Full PPR roster requirements (16 total players)
+// Starters: 1 QB, 2 RB, 2 WR, 1 TE, 1 FLEX, 1 DST, 1 K = 9 starters
+// Bench: 7 spots
+// Total: 16 players
 const DEFAULT_ROSTER_REQUIREMENTS: RosterRequirements = {
   QB: { min: 1, max: 2, optimal: 1 },
-  RB: { min: 2, max: 6, optimal: 4 },
-  WR: { min: 2, max: 6, optimal: 4 },
-  TE: { min: 1, max: 3, optimal: 2 },
-  DST: { min: 1, max: 2, optimal: 1 },
-  K: { min: 1, max: 2, optimal: 1 },
+  RB: { min: 2, max: 6, optimal: 6 }, // Per strat.md: 5-6 RBs total (lean towards 6)
+  WR: { min: 2, max: 7, optimal: 7 }, // Per strat.md: 6-7 WRs total (lean towards 7)
+  TE: { min: 1, max: 2, optimal: 1 },
+  DST: { min: 1, max: 1, optimal: 1 },
+  K: { min: 1, max: 1, optimal: 1 },
   FLEX: { count: 1, eligiblePositions: ['RB', 'WR', 'TE'] },
-  BENCH: 6
+  BENCH: 7
+};
+
+// Robust RB Strategy Configuration for 2025 - UPDATED FOR GUIDELINES
+const ROBUST_RB_CONFIG = {
+  enabled: true,
+  targetBudgetPercent: 0.55, // 50-60% on RBs per strat.md
+  eliteRBTarget: 2, // Target 2-3 elite RBs
+  maxEliteRBs: 3,
+  firstFiveRounds: 5, // Get elite RBs in first 5 nomination rounds
+  eliteRBBudget: 140, // $120-140 for 2-3 elite RBs (increased for 70-80% top player spend)
+  tier1RBRange: { min: 50, max: 70 }, // Increased for elite acquisition
+  tier2RBRange: { min: 40, max: 50 }, // Solid tier 2 range
+  inflationThreshold: 1.35, // Pivot if RBs cost 35% more than expected
+  totalRBTarget: 5.5, // Target 5-6 total RBs
+  totalWRTarget: 6.5 // Target 6-7 total WRs
+};
+
+// Backup Strategy Configurations
+const HERO_RB_CONFIG = {
+  targetBudgetPercent: 0.35, // 30-40% on RBs
+  eliteRBTarget: 1, // Just one elite RB
+  maxSpendOnOne: 65, // Max $65 on single RB
+  pivotToWR: true // Heavy WR investment after
+};
+
+const ZERO_RB_CONFIG = {
+  targetBudgetPercent: 0.15, // 10-20% on RBs
+  noEliteRBs: true,
+  waitUntilRound: 7, // Don't draft RBs until round 7+
+  loadWRs: true // Get 4+ WRs early
 };
 
 class BidAdvisorService {
   private rosterRequirements: RosterRequirements;
+  private originalValuations: Map<string, number> = new Map();
+  private robustRBConfig = ROBUST_RB_CONFIG;
+  private heroRBConfig = HERO_RB_CONFIG;
+  private zeroRBConfig = ZERO_RB_CONFIG;
+  private activeStrategy: 'robust-rb' | 'hero-rb' | 'zero-rb' | 'balanced' = 'robust-rb';
+  private strategyPivoted: boolean = false;
 
   constructor() {
     this.rosterRequirements = DEFAULT_ROSTER_REQUIREMENTS;
@@ -183,6 +256,17 @@ class BidAdvisorService {
     const byeWeekImpact = this.analyzeByeWeekImpact(player, context);
     const teamStackBonus = this.analyzeTeamStack(player, context);
     const smartAlternatives = this.generateSmartAlternatives(player, context, action);
+    
+    // New: Budget advantage and draft progress
+    const budgetAdvantage = this.calculateBudgetAdvantage(context);
+    const draftProgress = this.calculateDraftProgress(context);
+    
+    // Check if strategy pivot is needed
+    const strategyCheck = this.checkStrategyPivot(player, context, marketInflation);
+    if (strategyCheck.shouldPivot) {
+      this.activeStrategy = strategyCheck.newStrategy;
+      this.strategyPivoted = true;
+    }
 
     return {
       action,
@@ -204,7 +288,11 @@ class BidAdvisorService {
       alternativePlayers,
       byeWeekImpact,
       teamStackBonus,
-      smartAlternatives
+      smartAlternatives,
+      budgetAdvantage,
+      draftProgress,
+      activeStrategy: this.activeStrategy,
+      strategyPivotAlert: strategyCheck.alert
     };
   }
 
@@ -338,8 +426,8 @@ class BidAdvisorService {
       positionScore = 25; // Abundant
     }
 
-    // Weight tier scarcity more for top tiers
-    const weight = (tier === 'elite' || tier === 1) ? 0.7 : 0.4;
+    // Weight tier scarcity more for top tiers - Fixed tier comparison
+    const weight = (tier === 'elite' || tier === 'tier1') ? 0.7 : 0.4;
     const score = tierScore * weight + positionScore * (1 - weight);
 
     return Math.round(score);
@@ -384,8 +472,8 @@ class BidAdvisorService {
       score = 10; // Very expensive
     }
 
-    // Adjust for player quality
-    if (player.tier === 'elite' || player.tier === 1) {
+    // Adjust for player quality - Fixed tier comparison
+    if (player.tier === 'elite' || player.tier === 'tier1') {
       score = Math.min(100, score + 15); // More willing to spend on elite
     }
 
@@ -394,12 +482,20 @@ class BidAdvisorService {
 
   /**
    * Calculate current market inflation
+   * Fixed: Store original valuations at draft start
    */
   private calculateMarketInflation(context: DraftContext): number {
     const draftHistory = context.draftHistory;
     
     if (draftHistory.length === 0) {
-      return 0; // No inflation yet
+      // Store original valuations at draft start
+      context.availablePlayers.forEach(player => {
+        const playerId = player.playerId || player.id;
+        if (playerId && !this.originalValuations.has(playerId)) {
+          this.originalValuations.set(playerId, player.marketValue || player.auctionValue || 1);
+        }
+      });
+      return 0;
     }
 
     let totalExpectedValue = 0;
@@ -407,13 +503,11 @@ class BidAdvisorService {
 
     draftHistory.forEach(pick => {
       if (pick.price && pick.player) {
-        // Find the player's expected value
-        const playerValuation = context.availablePlayers.find(
-          p => p.playerId === pick.player.id
-        );
+        const playerId = pick.player.id || pick.player.playerId;
+        const originalValue = this.originalValuations.get(playerId);
         
-        if (playerValuation) {
-          totalExpectedValue += playerValuation.marketPrice || playerValuation.auctionValue;
+        if (originalValue) {
+          totalExpectedValue += originalValue;
           totalActualSpent += pick.price;
         }
       }
@@ -424,7 +518,7 @@ class BidAdvisorService {
     }
 
     const inflation = ((totalActualSpent - totalExpectedValue) / totalExpectedValue) * 100;
-    return Math.round(inflation);
+    return Math.round(Math.max(-30, Math.min(30, inflation))); // Cap at ±30%
   }
 
   /**
@@ -459,49 +553,137 @@ class BidAdvisorService {
     // Use the player's pre-calculated maxBid as a starting point if available
     let maxBid = player.maxBid || baseValue;
     
+    // Robust RB Strategy adjustments
+    const myRoster = context.myTeam.players || [];
+    const myRBs = myRoster.filter(p => p.position === 'RB');
+    // Count elite RBs based on draft price since they're no longer in available players
+    const eliteRBCount = myRBs.filter(rb => {
+      const draftPick = context.draftHistory.find(pick => 
+        pick.player && rb && (
+          (pick.player.id && pick.player.id === (rb as any).id) || 
+          ((pick.player as any).playerId && (pick.player as any).playerId === (rb as any).id)
+        )
+      );
+      // Consider RBs drafted for $40+ as elite
+      return draftPick && draftPick.price && draftPick.price >= 40;
+    }).length;
+    const draftRound = Math.floor(context.draftHistory.length / 12) + 1;
+    
+    // Apply Robust RB strategy if enabled - MORE AGGRESSIVE
+    let robustRBBonus = 0;
+    let wrDepthBonus = 0;
+    
+    if (this.robustRBConfig.enabled && player.position === 'RB') {
+      if (draftRound <= this.robustRBConfig.firstFiveRounds) {
+        if (player.tier === 'elite' && eliteRBCount < this.robustRBConfig.eliteRBTarget) {
+          // MAXIMUM aggression on elite RBs to ensure 70-80% top player spend
+          robustRBBonus = 0.60; // 60% bonus for elite RBs (increased)
+          console.log('[Robust RB] Elite RB MAXIMUM bonus applied:', player.playerName);
+        } else if (player.tier === 'tier1' && myRBs.length < 3) {
+          robustRBBonus = 0.45; // 45% bonus for tier1 RBs (increased)
+          console.log('[Robust RB] Tier1 RB bonus applied:', player.playerName);
+        } else if (player.tier === 'tier2' && myRBs.length < 4) {
+          robustRBBonus = 0.35; // 35% bonus for tier 2 RBs (increased)
+        }
+      } else if (draftRound <= 8 && player.tier === 'tier2' && myRBs.length < 4) {
+        // Still aggressive on tier 2 RBs in rounds 6-8
+        robustRBBonus = 0.20; // 20% bonus
+      }
+    }
+    
+    // WR Depth acquisition after securing RB core
+    const myWRs = myRoster.filter(p => p.position === 'WR');
+    if (this.robustRBConfig.enabled && player.position === 'WR') {
+      // After we have 2+ elite RBs, pivot to WR depth
+      if (eliteRBCount >= 2 && myWRs.length < this.robustRBConfig.totalWRTarget) {
+        if (player.tier === 'tier2' || player.tier === 'tier3') {
+          wrDepthBonus = 0.25; // 25% bonus for mid-tier WRs
+          console.log('[Robust RB] WR depth bonus applied:', player.playerName);
+        }
+      }
+      // Value WRs in middle rounds
+      if (draftRound >= 6 && draftRound <= 12 && myWRs.length < 5) {
+        wrDepthBonus = Math.max(wrDepthBonus, 0.20); // At least 20% for WR depth
+      }
+    }
+
     console.log('[MaxBid Calculation]', {
       playerName: player.playerName,
       startingMaxBid: maxBid,
       auctionValue: player.auctionValue,
       marketPrice: marketPrice,
       edge: player.edge,
-      tier: player.tier
+      tier: player.tier,
+      robustRBBonus,
+      wrDepthBonus
     });
 
-    // Adjust for market inflation
-    const inflationMultiplier = 1 + (scores.marketInflation / 100);
-    maxBid = maxBid * inflationMultiplier;
-
-    // Adjust for need (up to +20%)
-    const needMultiplier = 1 + (scores.needScore / 100) * 0.2;
-    maxBid = maxBid * needMultiplier;
-
-    // Adjust for scarcity (up to +15%)
-    const scarcityMultiplier = 1 + (scores.scarcityScore / 100) * 0.15;
-    maxBid = maxBid * scarcityMultiplier;
+    // Calculate total adjustment with CAP to prevent multiplier stacking
+    // Using additive approach instead of multiplicative
+    let totalAdjustment = 0;
     
-    // Team stack bonus (up to +10% for QB-WR/TE stacks)
+    // Market inflation adjustment (capped at ±30%)
+    totalAdjustment += (scores.marketInflation / 100);
+    
+    // Need adjustment (up to +20%)
+    totalAdjustment += (scores.needScore / 100) * 0.2;
+    
+    // Scarcity adjustment (up to +15%)
+    totalAdjustment += (scores.scarcityScore / 100) * 0.15;
+    
+    // Team stack bonus (up to +10%)
     const stackInfo = this.analyzeTeamStack(player, context);
     if (stackInfo && stackInfo.synergyBonus > 0) {
-      maxBid = maxBid * (1 + stackInfo.synergyBonus / 100);
+      totalAdjustment += stackInfo.synergyBonus / 100;
     }
     
-    // Dynamic adjustments based on draft flow
+    // Position run adjustment (up to +15%)
     if (adjustments.isPositionRun && scores.needScore > 70) {
-      // In a position run and we need this position - pay up!
-      maxBid = maxBid * 1.15;
+      totalAdjustment += 0.15;
     }
     
-    // Panic adjustment - if we're missing critical positions late
-    if (adjustments.panicLevel > 0.5) {
-      maxBid = maxBid * (1 + adjustments.panicLevel * 0.2);
+    // Panic adjustment (capped)
+    const cappedPanicLevel = Math.min(1.0, adjustments.panicLevel);
+    if (cappedPanicLevel > 0.5) {
+      totalAdjustment += cappedPanicLevel * 0.2;
     }
     
     // Stage adjustment
-    if (adjustments.draftStage === 'late' && player.tier <= 2) {
-      // More aggressive on remaining quality players late
-      maxBid = maxBid * 1.1;
+    if (adjustments.draftStage === 'late' && (player.tier === 'elite' || player.tier === 'tier1' || player.tier === 'tier2')) {
+      totalAdjustment += 0.1;
     }
+    
+    // Robust RB bonus
+    totalAdjustment += robustRBBonus;
+    
+    // WR Depth bonus
+    totalAdjustment += wrDepthBonus;
+    
+    // Dynamic cap based on draft context
+    const draftProgress = context.draftHistory.length / (12 * 16);
+    const isEarlyDraft = draftProgress < 0.25;
+    let maxIncrease = 0.5; // Default
+    
+    // More flexible caps early in draft - INCREASED for 70-80% top player spend
+    if (isEarlyDraft) {
+      if (player.tier === 'elite') {
+        maxIncrease = 1.0; // Allow up to 100% over for elite players early
+      } else if (player.tier === 'tier1') {
+        maxIncrease = 0.85; // Allow up to 85% over for tier1 early
+      } else {
+        maxIncrease = 0.7; // Allow up to 70% over for others early
+      }
+    }
+    
+    // Special RB allowance during Robust RB strategy - INCREASED
+    if (this.robustRBConfig.enabled && player.position === 'RB' && draftRound <= 5) {
+      maxIncrease = Math.max(maxIncrease, 0.90); // At least 90% flexibility for RBs
+    }
+    
+    totalAdjustment = Math.max(-0.3, Math.min(maxIncrease, totalAdjustment));
+    
+    // Apply the capped adjustment
+    maxBid = maxBid * (1 + totalAdjustment);
 
     // Budget constraint
     const remainingBudget = context.myTeam.budget || 200;
@@ -541,9 +723,58 @@ class BidAdvisorService {
     player: ValuationResult,
     context: DraftContext
   ): 'strong-buy' | 'consider' | 'avoid' | 'pass' {
-    // Can't afford
-    if (currentBid > maxBid) {
-      return 'pass';
+    // Calculate draft progress and context
+    const draftProgress = context.draftHistory.length / (12 * 16); // % of draft complete
+    const isEarlyDraft = draftProgress < 0.25;
+    const isMidDraft = draftProgress >= 0.25 && draftProgress < 0.6;
+    const isLateDraft = draftProgress >= 0.6;
+    
+    // Calculate market inflation
+    const marketInflation = this.calculateMarketInflation(context) / 100; // Convert to decimal
+    const isInflatedMarket = marketInflation > 0.1; // Market is 10%+ inflated
+    
+    // Budget context
+    const remainingBudget = context.myTeam.budget;
+    const avgBudgetPerSlot = remainingBudget / Math.max(1, 16 - (context.myTeam.players?.length || 0));
+    const hasAmpleBudget = remainingBudget > 100;
+    const isBudgetConstrained = remainingBudget < 50;
+    
+    // Flexible max bid based on context
+    let flexibleMaxBid = maxBid;
+    
+    // Early draft adjustments - be more aggressive
+    if (isEarlyDraft) {
+      if (player.tier === 'elite') {
+        flexibleMaxBid = maxBid * 1.15; // Allow 15% over for elite players early
+      } else if (player.tier === 'tier1') {
+        flexibleMaxBid = maxBid * 1.10; // Allow 10% over for tier1 early
+      }
+      
+      // If market is inflated and we have budget, be even more flexible
+      if (isInflatedMarket && hasAmpleBudget) {
+        flexibleMaxBid *= 1.1; // Additional 10% flexibility in inflated markets
+      }
+    }
+    
+    // Mid draft - moderate flexibility
+    else if (isMidDraft) {
+      if (player.tier === 'elite' || player.tier === 'tier1') {
+        flexibleMaxBid = maxBid * 1.05; // Allow 5% over for top tiers
+      }
+    }
+    
+    // Late draft - be strict unless desperate
+    else if (isLateDraft) {
+      // Only be flexible if we have critical needs
+      const criticalNeeds = this.identifyCriticalNeeds(context);
+      if (criticalNeeds.includes(player.position)) {
+        flexibleMaxBid = maxBid * 1.05;
+      }
+    }
+    
+    // Can't afford even with flexibility
+    if (currentBid > flexibleMaxBid * 1.2) {
+      return 'pass'; // Hard limit at 20% over flexible max
     }
 
     // Calculate composite score
@@ -583,14 +814,92 @@ class BidAdvisorService {
       return 'avoid';
     }
 
-    // Decision logic
-    if (compositeScore >= 75 || (hasGreatValue && hasCriticalNeed)) {
-      return 'strong-buy';
-    } else if (compositeScore >= 55 || (hasGreatValue && goodBudgetFit)) {
-      return 'consider';
-    } else if (compositeScore >= 35) {
-      return 'avoid';
+    // Special Robust RB logic - EXTREMELY aggressive on RBs
+    const draftRound = Math.floor(context.draftHistory.length / 12) + 1;
+    const myRBs = (context.myTeam.players || []).filter(p => p.position === 'RB');
+    const eliteRBCount = myRBs.filter(rb => {
+      const draftPick = context.draftHistory.find(pick => 
+        pick.player && rb && (
+          (pick.player.id && pick.player.id === (rb as any).id) || 
+          ((pick.player as any).playerId && (pick.player as any).playerId === (rb as any).id)
+        )
+      );
+      return draftPick && draftPick.price && draftPick.price >= 40;
+    }).length;
+    
+    // CRITICAL: Must get RBs at almost any cost
+    if (this.robustRBConfig.enabled && player.position === 'RB') {
+      // Elite RBs - pay whatever it takes
+      if (player.tier === 'elite' && eliteRBCount < 2) {
+        if (currentBid <= flexibleMaxBid * 1.5) { // Up to 50% over
+          return 'strong-buy';
+        }
+      }
+      // Tier1 RBs - very aggressive if no elites yet
+      else if (player.tier === 'tier1' && myRBs.length < 3) {
+        if (currentBid <= flexibleMaxBid * 1.3 || eliteRBCount === 0) {
+          return 'strong-buy';
+        } else if (currentBid <= flexibleMaxBid * 1.4) {
+          return 'consider';
+        }
+      }
+      // Tier2 RBs - still need depth
+      else if (player.tier === 'tier2' && myRBs.length < 4) {
+        if (currentBid <= flexibleMaxBid * 1.2) {
+          return draftRound <= 8 ? 'strong-buy' : 'consider';
+        }
+      }
+    }
+
+    // Adjust thresholds based on draft context
+    let strongBuyThreshold = 75;
+    let considerThreshold = 55;
+    let avoidThreshold = 35;
+    
+    if (isEarlyDraft) {
+      // Lower thresholds early to be more aggressive
+      strongBuyThreshold = 65;
+      considerThreshold = 45;
+      avoidThreshold = 25;
+      
+      // Extra aggressive for elite/tier1 players
+      if (player.tier === 'elite' || player.tier === 'tier1') {
+        strongBuyThreshold -= 10;
+        considerThreshold -= 10;
+      }
+    } else if (isInflatedMarket && hasAmpleBudget) {
+      // Adjust for inflated market with budget
+      strongBuyThreshold = 70;
+      considerThreshold = 50;
+      avoidThreshold = 30;
+    } else if (isBudgetConstrained) {
+      // Raise thresholds when budget constrained
+      strongBuyThreshold = 80;
+      considerThreshold = 65;
+      avoidThreshold = 45;
+    }
+    
+    // Check if within flexible budget
+    if (currentBid <= flexibleMaxBid) {
+      // Standard decision logic with adjusted thresholds
+      if (compositeScore >= strongBuyThreshold || (hasGreatValue && hasCriticalNeed)) {
+        return 'strong-buy';
+      } else if (compositeScore >= considerThreshold || (hasGreatValue && goodBudgetFit)) {
+        return 'consider';
+      } else if (compositeScore >= avoidThreshold) {
+        return 'avoid';
+      } else {
+        return 'pass';
+      }
+    } else if (currentBid <= flexibleMaxBid * 1.1) {
+      // Within 10% over flexible max - still consider if really good
+      if (compositeScore >= strongBuyThreshold + 10 || (player.tier === 'elite' && isEarlyDraft)) {
+        return 'consider';
+      } else {
+        return 'avoid';
+      }
     } else {
+      // Too expensive
       return 'pass';
     }
   }
@@ -752,12 +1061,44 @@ class BidAdvisorService {
       }
     }
 
-    // Tier warnings with context
+    // Robust RB Strategy warnings
+    if (this.robustRBConfig.enabled) {
+      const myRBs = (context.myTeam.players || []).filter(p => p.position === 'RB');
+      const eliteRBCount = myRBs.filter(rb => {
+        const draftPick = context.draftHistory.find(pick => 
+          (pick.player?.id === rb.id || pick.player?.playerId === rb.id)
+        );
+        // Consider RBs drafted for $40+ as elite
+        return draftPick && draftPick.price && draftPick.price >= 40;
+      }).length;
+      
+      const draftRound = Math.floor(context.draftHistory.length / 12) + 1;
+      const rbSpent = myRBs.reduce((sum, rb) => {
+        const pick = context.draftHistory.find(p => p.player?.id === rb.id);
+        return sum + (pick?.price || 0);
+      }, 0);
+      
+      if (draftRound > this.robustRBConfig.firstFiveRounds && 
+          eliteRBCount < this.robustRBConfig.eliteRBTarget) {
+        warnings.push(`🎯 Robust RB Alert: Only ${eliteRBCount}/${this.robustRBConfig.eliteRBTarget} elite RBs secured (target 2-3 in first 5 rounds)`);
+      }
+      
+      if (player.position !== 'RB' && eliteRBCount < 2 && draftRound <= 3) {
+        warnings.push(`⚠️ Focus on RBs early - Robust RB strategy targets 50-60% budget on elite RBs`);
+      }
+      
+      if (rbSpent > 120 && player.position === 'RB' && player.tier !== 'elite' && player.tier !== 'tier1') {
+        warnings.push(`💰 Already spent $${rbSpent} on RBs - consider WR value`);
+      }
+    }
+    
+    // Tier warnings with context - Fixed tier comparison
     const remainingElite = context.availablePlayers.filter(
-      p => p.tier === 'elite' || p.tier === 1
+      p => p.tier === 'elite' || p.tier === 'tier1'
     ).length;
 
-    if (remainingElite > 5 && player.tier > 2 && draftStage === 'early') {
+    if (remainingElite > 5 && player.tier !== 'elite' && player.tier !== 'tier1' && 
+        player.tier !== 'tier2' && draftStage === 'early') {
       warnings.push(`⭐ ${remainingElite} elite players still available`);
     }
     
@@ -788,10 +1129,51 @@ class BidAdvisorService {
   ): string[] {
     const opportunities: string[] = [];
 
+    // Robust RB Strategy opportunities
+    if (this.robustRBConfig.enabled && player.position === 'RB') {
+      const myRBs = (context.myTeam.players || []).filter(p => p.position === 'RB');
+      const eliteRBCount = myRBs.filter(rb => {
+        const draftPick = context.draftHistory.find(pick => 
+          (pick.player?.id === rb.id || pick.player?.playerId === rb.id)
+        );
+        // Consider RBs drafted for $40+ as elite
+        return draftPick && draftPick.price && draftPick.price >= 40;
+      }).length;
+      
+      const draftRound = Math.floor(context.draftHistory.length / 12) + 1;
+      
+      if ((player.tier === 'elite' || player.tier === 'tier1') && 
+          eliteRBCount < this.robustRBConfig.eliteRBTarget && 
+          draftRound <= this.robustRBConfig.firstFiveRounds) {
+        opportunities.push(`🎯 Core Robust RB target - secure elite RB foundation`);
+      }
+      
+      if (player.tier === 'tier2' && eliteRBCount >= 2) {
+        opportunities.push(`✅ Strong RB3 to complete Robust RB build`);
+      }
+    }
+    
+    // WR value opportunity in Robust RB
+    if (this.robustRBConfig.enabled && player.position === 'WR') {
+      const myRBs = (context.myTeam.players || []).filter(p => p.position === 'RB');
+      const eliteRBCount = myRBs.filter(rb => {
+        const draftPick = context.draftHistory.find(pick => 
+          (pick.player?.id === rb.id || pick.player?.playerId === rb.id)
+        );
+        // Consider RBs drafted for $40+ as elite
+        return draftPick && draftPick.price && draftPick.price >= 40;
+      }).length;
+      
+      if (eliteRBCount >= 2 && (player.tier === 'tier2' || player.tier === 'tier3') && 
+          currentBid <= 25) {
+        opportunities.push(`💎 WR value play after securing RB foundation`);
+      }
+    }
+    
     // Value opportunity
     const discount = player.auctionValue - currentBid;
     if (discount > 10) {
-      opportunities.push(`$${discount} discount from fair value`);
+      opportunities.push(`💰 $${discount} discount from fair value`);
     }
 
     // Tier opportunity
@@ -815,9 +1197,10 @@ class BidAdvisorService {
       }
     }
 
-    // Flex opportunity
-    if (this.isFlexEligible(player.position) && player.tier <= 2) {
-      opportunities.push('Strong flex play potential');
+    // Flex opportunity - Fixed tier comparison
+    if (this.isFlexEligible(player.position) && 
+        (player.tier === 'elite' || player.tier === 'tier1' || player.tier === 'tier2')) {
+      opportunities.push('🔥 Strong flex play potential');
     }
 
     return opportunities;
@@ -1020,10 +1403,10 @@ class BidAdvisorService {
     remainingSpots: number,
     draftStage: string
   ): number {
-    // Base caps by position and tier
+    // Base caps by position and tier - INCREASED for 70-80% top player spend
     const positionCaps: Record<string, number> = {
-      RB: 75,  // Top RBs can go up to $75
-      WR: 65,  // Top WRs can go up to $65
+      RB: 85,  // Top RBs can go up to $85 (increased)
+      WR: 70,  // Top WRs can go up to $70 (increased)
       QB: 45,  // Top QBs max around $45
       TE: 45,  // Premium TEs max around $45
       DST: 5,  // Never spend more than $5 on DST
@@ -1035,13 +1418,31 @@ class BidAdvisorService {
     // Adjust based on remaining budget and roster spots
     const budgetPerSpot = remainingBudget / Math.max(1, remainingSpots);
     
+    // Special handling for Robust RB strategy
+    if (this.robustRBConfig.enabled && player.position === 'RB' && player.tier === 'elite') {
+      // Allow spending up to 45% of total budget ($90) on elite RBs early
+      const draftProgress = context.draftHistory.length / (12 * 16);
+      if (draftProgress < 0.3) { // First 30% of draft
+        globalCap = Math.min(90, remainingBudget * 0.55); // Up to 55% of remaining
+      }
+    }
+    
     // Strategy pivot thresholds
     if (remainingSpots >= 10) {
-      // Many spots to fill - cap at 30% of remaining budget
-      globalCap = Math.min(globalCap, remainingBudget * 0.30);
+      // Many spots to fill - normally cap at 30% of remaining budget
+      // But for Robust RB, allow more on RBs - INCREASED
+      if (this.robustRBConfig.enabled && player.position === 'RB' && (player.tier === 'elite' || player.tier === 'tier1')) {
+        globalCap = Math.min(globalCap, remainingBudget * 0.50); // 50% for RBs (increased)
+      } else {
+        globalCap = Math.min(globalCap, remainingBudget * 0.30);
+      }
     } else if (remainingSpots >= 5) {
       // Some spots to fill - cap at 40% of remaining budget
-      globalCap = Math.min(globalCap, remainingBudget * 0.40);
+      if (this.robustRBConfig.enabled && player.position === 'RB' && (player.tier === 'elite' || player.tier === 'tier1')) {
+        globalCap = Math.min(globalCap, remainingBudget * 0.60); // 60% for RBs (increased)
+      } else {
+        globalCap = Math.min(globalCap, remainingBudget * 0.40);
+      }
     } else if (remainingSpots >= 2) {
       // Few spots left - can spend up to 60% if elite
       if (player.tier === 'elite' || player.tier === 'tier1') {
@@ -1061,13 +1462,20 @@ class BidAdvisorService {
       const picksCompleted = context.myTeam.players?.length || 0;
       
       if (picksCompleted === 0) {
-        // First pick - don't exceed 30% of total budget, but respect player's actual value
-        const budgetCap = context.totalBudget * 0.30;
-        globalCap = Math.min(globalCap, budgetCap);
+        // First pick - for Robust RB allow up to 40% on elite RBs
+        if (this.robustRBConfig.enabled && player.position === 'RB' && player.tier === 'elite') {
+          const budgetCap = context.totalBudget * 0.40; // $80 for elite RBs
+          globalCap = Math.min(globalCap, budgetCap);
+        } else {
+          const budgetCap = context.totalBudget * 0.30;
+          globalCap = Math.min(globalCap, budgetCap);
+        }
       } else if (picksCompleted <= 2) {
-        // Early picks - cap based on "stars and scrubs" vs "balanced" strategy
-        // If we've already spent big, cap lower to force balance
-        if (mySpentSoFar > context.totalBudget * 0.30) {
+        // Early picks - Robust RB should continue being aggressive
+        if (this.robustRBConfig.enabled && player.position === 'RB' && (player.tier === 'elite' || player.tier === 'tier1')) {
+          // Allow continued high spending on RBs
+          globalCap = Math.min(globalCap, remainingBudget * 0.45);
+        } else if (mySpentSoFar > context.totalBudget * 0.30) {
           globalCap = Math.min(globalCap, remainingBudget * 0.25);
         }
       }
@@ -1122,9 +1530,9 @@ class BidAdvisorService {
     
     if (stillNeeded === 0) return 0;
     
-    // Count quality players remaining
+    // Count quality players remaining - Fixed tier comparison
     const qualityRemaining = context.availablePlayers.filter(
-      p => p.position === position && (p.tier === 'elite' || p.tier === 1 || p.tier === 2)
+      p => p.position === position && (p.tier === 'elite' || p.tier === 'tier1' || p.tier === 'tier2')
     ).length;
     
     // Calculate how many picks until it's likely our turn again
@@ -1133,7 +1541,8 @@ class BidAdvisorService {
     
     // High panic if we need players and few quality options remain
     if (stillNeeded > 0 && qualityRemaining <= picksUntilTurn) {
-      return Math.min(1, stillNeeded / qualityRemaining);
+      // Cap panic level at 1.0
+      return Math.min(1.0, stillNeeded / qualityRemaining);
     }
     
     return 0;
@@ -1444,6 +1853,208 @@ class BidAdvisorService {
     }
     
     return criticalNeeds;
+  }
+
+  /**
+   * Calculate budget advantage compared to other teams
+   */
+  private calculateBudgetAdvantage(context: DraftContext): BudgetAdvantage {
+    try {
+      const myBudget = context.myTeam?.budget || 200;
+      const otherTeams = (context.allTeams || []).filter(t => t.id !== context.myTeam?.id);
+      
+      if (!otherTeams || otherTeams.length === 0) {
+        return {
+          myBudget,
+          averageBudget: myBudget,
+          advantage: 0,
+          percentile: 50,
+          canDominate: false
+        };
+      }
+      
+      const otherBudgets = otherTeams.map(t => t.budget || 0);
+      const averageBudget = otherBudgets.length > 0 
+        ? otherBudgets.reduce((sum, b) => sum + b, 0) / otherBudgets.length
+        : myBudget;
+      const advantage = myBudget - averageBudget;
+      
+      // Calculate percentile
+      const betterThan = otherBudgets.filter(b => b < myBudget).length;
+      const percentile = otherBudgets.length > 0 
+        ? Math.round((betterThan / otherBudgets.length) * 100)
+        : 50;
+      
+      // Can dominate if 20% more budget than average
+      const canDominate = myBudget > averageBudget * 1.2;
+      
+      return {
+        myBudget,
+        averageBudget: Math.round(averageBudget),
+        advantage: Math.round(advantage),
+        percentile,
+        canDominate
+      };
+    } catch (error) {
+      console.error('[BudgetAdvantage Error]', error);
+      return {
+        myBudget: 200,
+        averageBudget: 200,
+        advantage: 0,
+        percentile: 50,
+        canDominate: false
+      };
+    }
+  }
+
+  /**
+   * Calculate draft progress and phase
+   */
+  private calculateDraftProgress(context: DraftContext): DraftProgress {
+    try {
+      const teamsCount = (context.allTeams || []).length || 12;
+      const totalSpots = teamsCount * 16; // 16 players per team
+      const picksMade = (context.draftHistory || []).length;
+      const percentComplete = totalSpots > 0 
+        ? Math.round((picksMade / totalSpots) * 100)
+        : 0;
+      const isHalfway = picksMade >= totalSpots / 2;
+      
+      let phase: 'early' | 'mid' | 'late' | 'end';
+      if (percentComplete < 25) phase = 'early';
+      else if (percentComplete < 50) phase = 'mid';
+      else if (percentComplete < 75) phase = 'late';
+      else phase = 'end';
+      
+      return {
+        totalPicks: totalSpots,
+        picksMade,
+        percentComplete,
+        isHalfway,
+        phase
+      };
+    } catch (error) {
+      console.error('[DraftProgress Error]', error);
+      return {
+        totalPicks: 192,
+        picksMade: 0,
+        percentComplete: 0,
+        isHalfway: false,
+        phase: 'early'
+      };
+    }
+  }
+
+  /**
+   * Check if strategy pivot is needed due to market conditions
+   */
+  private checkStrategyPivot(
+    player: ValuationResult,
+    context: DraftContext,
+    marketInflation: number
+  ): { shouldPivot: boolean; newStrategy: 'robust-rb' | 'hero-rb' | 'zero-rb' | 'balanced'; alert?: string } {
+    try {
+      // Don't pivot if already pivoted
+      if (this.strategyPivoted) {
+        return { shouldPivot: false, newStrategy: this.activeStrategy };
+      }
+    
+    // Calculate RB inflation specifically
+    const rbInflation = this.calculatePositionInflation('RB', context);
+    const myRBs = (context.myTeam.players || []).filter(p => p.position === 'RB');
+    // Count elite RBs directly from the player objects since they're already drafted
+    const eliteRBCount = myRBs.filter(rb => {
+      // Check tier on the player object itself if available
+      // For drafted players, we need to check from draft history or assume based on price
+      const draftPick = context.draftHistory.find(pick => 
+        pick.player && rb && (
+          (pick.player.id && pick.player.id === (rb as any).id) || 
+          ((pick.player as any).playerId && (pick.player as any).playerId === (rb as any).id)
+        )
+      );
+      // If drafted for > $40, likely elite/tier1
+      return draftPick && draftPick.price && draftPick.price >= 40;
+    }).length;
+    
+    // Check if elite RBs are going for 25%+ more than expected
+    if (rbInflation > 25 && eliteRBCount === 0 && this.activeStrategy === 'robust-rb') {
+      const draftProgress = this.calculateDraftProgress(context);
+      
+      // If still early, pivot to Hero RB (get one elite)
+      if (draftProgress.percentComplete < 30) {
+        return {
+          shouldPivot: true,
+          newStrategy: 'hero-rb',
+          alert: '🔄 STRATEGY PIVOT: RBs inflated +' + rbInflation + '% - switching to Hero RB (one elite RB + WR depth)'
+        };
+      }
+      // If mid-draft, pivot to Zero RB
+      else if (draftProgress.percentComplete < 50) {
+        return {
+          shouldPivot: true,
+          newStrategy: 'zero-rb',
+          alert: '🔄 STRATEGY PIVOT: RBs too expensive - switching to Zero RB (load up on WRs)'
+        };
+      }
+    }
+    
+    // Check if too many teams are going Robust RB
+    const teamsWithMultipleEliteRBs = context.allTeams.filter(team => {
+      const teamPlayers = team.players || [];
+      const teamRBs = teamPlayers.filter(p => p.position === 'RB');
+      // Count RBs that were drafted for high prices (elite indicator)
+      const eliteCount = teamRBs.filter(rb => {
+        const draftPick = context.draftHistory.find(pick => 
+          pick.team === team.id && 
+          (pick.player?.id === rb.id || pick.player?.playerId === rb.id) &&
+          pick.player?.position === 'RB'
+        );
+        // Consider RBs drafted for $40+ as elite
+        return draftPick && draftPick.price && draftPick.price >= 40;
+      }).length;
+      return eliteCount >= 2;
+    }).length;
+    
+    if (teamsWithMultipleEliteRBs >= 4 && eliteRBCount === 0) {
+      return {
+        shouldPivot: true,
+        newStrategy: 'zero-rb',
+        alert: '🚨 Market Alert: ' + teamsWithMultipleEliteRBs + ' teams using Robust RB - pivot to Zero RB for value'
+      };
+    }
+    
+      return { shouldPivot: false, newStrategy: this.activeStrategy };
+    } catch (error) {
+      console.error('[StrategyPivot Error]', error);
+      return { shouldPivot: false, newStrategy: this.activeStrategy };
+    }
+  }
+
+  /**
+   * Calculate inflation for a specific position
+   */
+  private calculatePositionInflation(position: string, context: DraftContext): number {
+    const positionPicks = context.draftHistory.filter(
+      pick => pick.player?.position === position && pick.price
+    );
+    
+    if (positionPicks.length === 0) return 0;
+    
+    let totalExpected = 0;
+    let totalActual = 0;
+    
+    positionPicks.forEach(pick => {
+      const playerId = pick.player?.id || pick.player?.playerId;
+      const originalValue = this.originalValuations.get(playerId);
+      if (originalValue) {
+        totalExpected += originalValue;
+        totalActual += pick.price || 0;
+      }
+    });
+    
+    if (totalExpected === 0) return 0;
+    
+    return Math.round(((totalActual - totalExpected) / totalExpected) * 100);
   }
 }
 

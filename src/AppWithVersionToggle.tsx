@@ -4,7 +4,7 @@ import AppCalibrated from './AppCalibrated';
 import AppExperimental from './AppExperimental';
 
 function AppWithVersionToggle() {
-  const [isExperimental, setIsExperimental] = useState(false);
+  const [isExperimental, setIsExperimental] = useState(true); // Default to experimental
 
   return (
     <div className="min-h-screen bg-gray-950">

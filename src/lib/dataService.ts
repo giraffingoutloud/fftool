@@ -108,7 +108,8 @@ export class DataService {
     message: string;
   }> {
     try {
-      const response = await fetch('/artifacts/data_manifest.json');
+      const basePath = import.meta.env.BASE_URL || '/';
+      const response = await fetch(`${basePath}artifacts/data_manifest.json`);
       if (!response.ok) {
         return {
           isFresh: false,
@@ -175,7 +176,8 @@ export class DataService {
     
     // Get manifest for metadata
     try {
-      const response = await fetch('/artifacts/data_manifest.json');
+      const basePath = import.meta.env.BASE_URL || '/';
+      const response = await fetch(`${basePath}artifacts/data_manifest.json`);
       const manifest = await response.json();
       
       return {

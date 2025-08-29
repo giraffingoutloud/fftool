@@ -644,7 +644,7 @@ export class CleanDataLoader {
 
     // Load adp4_2025.txt
     try {
-      const response4 = await fetch('/artifacts/clean_data/adp4_2025.txt');
+      const response4 = await fetch(`${CleanDataLoader.CLEAN_DATA_PATH}/adp4_2025.txt`);
       if (response4.ok) {
         const text4 = await response4.text();
         const lines4 = text4.trim().split('\n').slice(1); // Skip header
@@ -692,7 +692,7 @@ export class CleanDataLoader {
 
     // Load adp5_2025.txt
     try {
-      const response5 = await fetch('/artifacts/clean_data/adp5_2025.txt');
+      const response5 = await fetch(`${CleanDataLoader.CLEAN_DATA_PATH}/adp5_2025.txt`);
       if (response5.ok) {
         const text5 = await response5.text();
         const lines5 = text5.trim().split('\n').slice(1); // Skip header

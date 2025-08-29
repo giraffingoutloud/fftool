@@ -1,13 +1,14 @@
 import React, { useState, useMemo } from 'react';
 import { ChevronUp, ChevronDown, Check, Eye, Plus, Minus, X } from 'lucide-react';
 import type { ValuationResult } from '@/lib/calibratedValuationService';
-import PlayerProfileModal from './PlayerProfileModalExperimentalClean';
 import { useDraftStore } from '@/store/draftStore';
 
 interface PlayerDataTableProps {
   players: ValuationResult[];
   onPlayerSelect?: (player: ValuationResult) => void;
   onPlayerDraft?: (player: ValuationResult) => void;
+  searchQuery?: string;
+  onSearchChange?: (query: string) => void;
 }
 
 type SortField = 'position' | 'team' | 'tier' | 'playerRank' | 'maxBid' | 'intrinsicValue' | 
@@ -17,16 +18,21 @@ type SortDirection = 'asc' | 'desc';
 const PlayerDataTable: React.FC<PlayerDataTableProps> = ({ 
   players, 
   onPlayerSelect,
-  onPlayerDraft 
+  onPlayerDraft,
+  searchQuery: externalSearchQuery,
+  onSearchChange 
 }) => {
   const { draftHistory } = useDraftStore();
   const [selectedPlayers, setSelectedPlayers] = useState<Set<string>>(new Set());
-  const [sortField, setSortField] = useState<SortField>('playerRank');
+  const [sortField, setSortField] = useState<SortField>('adp');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
   const [displayCount, setDisplayCount] = useState<number>(600); // Show all players by default
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [internalSearchQuery, setInternalSearchQuery] = useState<string>('');
   const [positionFilter, setPositionFilter] = useState<string>('ALL');
-  const [modalPlayer, setModalPlayer] = useState<ValuationResult | null>(null);
+  
+  // Use external search if provided, otherwise use internal
+  const searchQuery = externalSearchQuery !== undefined ? externalSearchQuery : internalSearchQuery;
+  const setSearchQuery = onSearchChange || setInternalSearchQuery;
   
   // Debug: Log when players prop changes
   React.useEffect(() => {
@@ -290,11 +296,11 @@ const PlayerDataTable: React.FC<PlayerDataTableProps> = ({
   };
 
   return (
-    <div className="w-full bg-gray-900 rounded-lg">
+    <div className="w-full bg-gray-900 rounded-lg overflow-hidden">
       {/* Table wrapper with horizontal scroll and sticky header */}
-      <div className="relative" style={{ scrollbarWidth: 'thin' }}>
+      <div className="overflow-x-auto overflow-y-hidden relative" style={{ scrollbarWidth: 'thin' }}>
         <table className="w-full min-w-[1200px] relative">
-          <thead className="sticky top-0 z-50" style={{ backgroundColor: '#1f2937', boxShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>
+          <thead className="sticky top-0 z-30" style={{ backgroundColor: '#1f2937', boxShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>
             <tr className="border-b border-gray-700">
               {/* Checkbox and Action columns with Position Filter */}
               <th className="px-1 py-2 text-center" colSpan={2} style={{ maxWidth: '80px', width: '80px' }}>
@@ -313,25 +319,29 @@ const PlayerDataTable: React.FC<PlayerDataTableProps> = ({
                 </select>
               </th>
 
-              {/* Name with Search */}
-              <th className="px-2 py-1 text-left text-xs font-medium min-w-[120px]" style={{ position: 'sticky', left: 0, backgroundColor: '#1f2937', zIndex: 20 }}>
-                <div className="relative">
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search..."
-                    className="w-full px-2 py-1 pr-6 text-xs bg-gray-700 border border-gray-600 rounded text-gray-200 placeholder-gray-400 focus:outline-none focus:border-blue-400"
-                  />
-                  {searchQuery && (
-                    <button
-                      onClick={() => setSearchQuery('')}
-                      className="absolute right-1 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
-                    >
-                      <X className="w-3 h-3" />
-                    </button>
-                  )}
-                </div>
+              {/* Name with Search - Hide if using external search */}
+              <th className="px-2 py-1 text-left text-xs font-medium min-w-[100px]" style={{ position: 'sticky', left: 0, backgroundColor: '#1f2937', zIndex: 40 }}>
+                {externalSearchQuery === undefined ? (
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder="Search..."
+                      className="w-full px-2 py-1 pr-6 text-xs bg-gray-700 border border-gray-600 rounded text-gray-200 placeholder-gray-400 focus:outline-none focus:border-blue-400"
+                    />
+                    {searchQuery && (
+                      <button
+                        onClick={() => setSearchQuery('')}
+                        className="absolute right-1 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    )}
+                  </div>
+                ) : (
+                  <span className="text-gray-400">Name</span>
+                )}
               </th>
 
               {/* Sortable columns */}
@@ -490,7 +500,11 @@ const PlayerDataTable: React.FC<PlayerDataTableProps> = ({
                   {/* Action Button */}
                   <td className="px-1 py-1 text-center" style={{ maxWidth: '30px', width: '30px' }}>
                     <button
-                      onClick={() => setModalPlayer(player)}
+                      onClick={() => {
+                        if (onPlayerSelect) {
+                          onPlayerSelect(player);
+                        }
+                      }}
                       className="p-0.5 hover:bg-gray-700 rounded transition-colors"
                       title="View Details"
                     >
@@ -499,7 +513,7 @@ const PlayerDataTable: React.FC<PlayerDataTableProps> = ({
                   </td>
 
                   {/* Name */}
-                  <td className="px-2 py-1 min-w-[120px]" style={{ position: 'sticky', left: 0, backgroundColor: '#111827', zIndex: 10 }}>
+                  <td className="px-2 py-1 min-w-[100px]" style={{ position: 'sticky', left: 0, backgroundColor: '#111827', zIndex: 20 }}>
                     <div style={{ color: 'white', fontWeight: '500' }} className="hover:text-blue-400 cursor-pointer truncate text-left">
                       {(() => {
                         const displayName = player.name || player.playerName || 'Unknown';
@@ -516,14 +530,14 @@ const PlayerDataTable: React.FC<PlayerDataTableProps> = ({
                   </td>
 
                   {/* Position */}
-                  <td className="px-2 py-1 text-center">
+                  <td className="px-1 py-1 text-center">
                     <span className={`font-semibold ${getPositionColor(player.position)}`}>
                       {player.position}
                     </span>
                   </td>
 
                   {/* Team */}
-                  <td className="px-2 py-1 text-gray-300 text-center">
+                  <td className="px-1 py-1 text-gray-300 text-center">
                     {(() => {
                       const teamDisplay = player.team || 'FA';
                       if (index === 0) {
@@ -534,14 +548,14 @@ const PlayerDataTable: React.FC<PlayerDataTableProps> = ({
                   </td>
 
                   {/* Tier */}
-                  <td className="px-2 py-1 text-center">
+                  <td className="px-1 py-1 text-center">
                     <span className={getTierColor(player.tier)}>
                       {getTierLabel(player.tier)}
                     </span>
                   </td>
 
                   {/* Player Rank */}
-                  <td className="px-2 py-1 text-center">
+                  <td className="px-1 py-1 text-center">
                     <span className={getRankColor(player.rank)}>
                       {player.rank || '-'}
                     </span>
@@ -661,16 +675,6 @@ const PlayerDataTable: React.FC<PlayerDataTableProps> = ({
           )}
         </div>
       </div>
-      
-      {/* Player Profile Modal */}
-      {modalPlayer && (
-        <PlayerProfileModal
-          player={modalPlayer}
-          isOpen={!!modalPlayer}
-          onClose={() => setModalPlayer(null)}
-          allPlayers={players}
-        />
-      )}
     </div>
   );
 };

@@ -134,8 +134,9 @@ export async function loadDepthCharts(): Promise<{
   byPlayer: Map<string, DepthChartEntry>;
   byTeam: Map<string, DepthChartTeam>;
 }> {
+  const basePath = import.meta.env.BASE_URL || '/';
   try {
-    const response = await fetch('/canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_2025_Depth_Charts.csv');
+    const response = await fetch(`${basePath}canonical_data/advanced_data/fantasy_pros_data/FantasyPros_Fantasy_Football_2025_Depth_Charts.csv`);
     const content = await response.text();
     
     const teams = parseDepthChartFile(content);

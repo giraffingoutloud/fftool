@@ -10,7 +10,8 @@ import {
   RefreshCw,
   Calculator,
   Settings,
-  Zap
+  Zap,
+  X
 } from 'lucide-react';
 import { useDraftStore } from '@/store/draftStore';
 import { dataService } from '@/lib/dataService';
@@ -23,12 +24,13 @@ import TeamRoster from '@/components/TeamRoster';
 import DraftHistory from '@/components/DraftHistory';
 import MarketTrackerCalibrated from '@/components/MarketTrackerCalibrated';
 import BudgetAllocator from '@/components/BudgetAllocator';
-import CompactDashboardPanel from '@/components/CompactDashboardPanel';
 import PlayerDataTable from '@/components/PlayerDataTableExperimental';
+import PlayerDetailPanel from '@/components/PlayerDetailPanelCompact';
 import CalculationsExplainerModal from '@/components/CalculationsExplainerModal';
 import SettingsModal from '@/components/SettingsModal';
 import OtherTeamsRosters from '@/components/OtherTeamsRosters';
 import NominationStrategy from '@/components/NominationStrategy';
+import { SimulationTester } from '@/components/SimulationTester';
 
 function AppExperimental() {
   const [loading, setLoading] = useState(true);
@@ -38,7 +40,12 @@ function AppExperimental() {
   const [summary, setSummary] = useState<ValuationSummary | null>(null);
   const [showCalculationsModal, setShowCalculationsModal] = useState(false);
   const [showSettingsModal, setShowSettingsModal] = useState(false);
+  const [showSimulationTester, setShowSimulationTester] = useState(false);
   const [isDynamicMode, setIsDynamicMode] = useState(false); // Start in static mode for testing
+  const [searchQuery, setSearchQuery] = useState<string>(''); // Shared search state
+  const [showDropdown, setShowDropdown] = useState(false); // Dropdown visibility
+  const [filteredPlayers, setFilteredPlayers] = useState<ValuationResult[]>([]); // Filtered results
+  const [highlightedIndex, setHighlightedIndex] = useState(-1); // Keyboard navigation
   const [integrityStatus, setIntegrityStatus] = useState<{
     checked: boolean;
     passed: boolean;
@@ -51,12 +58,21 @@ function AppExperimental() {
     updatePlayerValuations,
     draftHistory,
     myTeamId,
-    teams
+    teams,
+    selectedPlayer,
+    setSelectedPlayer
   } = useDraftStore();
 
   useEffect(() => {
     loadData();
+    // Expose valuations for simulation testing
+    (window as any).__playerValuations = valuations;
   }, []);
+  
+  useEffect(() => {
+    // Update exposed valuations when they change
+    (window as any).__playerValuations = valuations;
+  }, [valuations]);
 
   // Update valuations when draft progresses or dynamic mode changes
   useEffect(() => {
@@ -428,6 +444,16 @@ function AppExperimental() {
                 Settings
               </button>
               
+              {/* Simulation Tester Button */}
+              <button
+                onClick={() => setShowSimulationTester(true)}
+                className="bg-purple-600 hover:bg-purple-700 text-white px-3 py-1 rounded-lg text-sm flex items-center gap-2"
+                title="Run draft simulations"
+              >
+                <Zap className="w-4 h-4" />
+                Test Simulations
+              </button>
+              
               {/* Calculations Explainer Button */}
               <button
                 onClick={() => setShowCalculationsModal(true)}
@@ -462,26 +488,150 @@ function AppExperimental() {
       </header>
 
       {/* Main Content */}
-      <main className="px-6 lg:px-8 py-6">
+      <main className="px-2 sm:px-4 md:px-6 lg:px-8 py-4 md:py-6 max-w-full overflow-x-hidden">
         {summary && (
           <div className="flex flex-col gap-4">
-            {/* Compact Dashboard Panel at Top */}
-            <CompactDashboardPanel
-              summary={summary}
-              valuations={valuations}
-              isDraftActive={isDraftActive}
-              onStartDraft={() => initializeDraft({
-                teams: 12,
-                budget: 200,
-                scoring: 'PPR',
-                rosterPositions: []
-              })}
+            {/* Full Width Search Bar with Autocomplete */}
+            <div className="relative">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => {
+                  const query = e.target.value;
+                  setSearchQuery(query);
+                  setHighlightedIndex(-1);
+                  
+                  if (query.trim()) {
+                    const filtered = valuations.filter(player => 
+                      player.playerName?.toLowerCase().includes(query.toLowerCase()) ||
+                      player.team?.toLowerCase().includes(query.toLowerCase())
+                    ).slice(0, 10); // Limit to 10 results
+                    setFilteredPlayers(filtered);
+                    setShowDropdown(filtered.length > 0);
+                  } else {
+                    setShowDropdown(false);
+                    setFilteredPlayers([]);
+                  }
+                }}
+                onKeyDown={(e) => {
+                  if (!showDropdown) return;
+                  
+                  if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    setHighlightedIndex(prev => 
+                      prev < filteredPlayers.length - 1 ? prev + 1 : prev
+                    );
+                  } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    setHighlightedIndex(prev => prev > 0 ? prev - 1 : -1);
+                  } else if (e.key === 'Enter' && highlightedIndex >= 0) {
+                    e.preventDefault();
+                    const player = filteredPlayers[highlightedIndex];
+                    setSelectedPlayer(player);
+                    setSearchQuery('');
+                    setShowDropdown(false);
+                    setFilteredPlayers([]);
+                    setHighlightedIndex(-1);
+                  } else if (e.key === 'Escape') {
+                    setShowDropdown(false);
+                    setHighlightedIndex(-1);
+                  }
+                }}
+                onFocus={() => {
+                  if (searchQuery.trim() && filteredPlayers.length > 0) {
+                    setShowDropdown(true);
+                  }
+                }}
+                onBlur={() => {
+                  // Delay to allow click on dropdown items
+                  setTimeout(() => setShowDropdown(false), 200);
+                }}
+                placeholder="Search players..."
+                className="w-full px-3 py-2 pr-8 text-sm bg-gray-800 border border-gray-700 rounded-lg text-gray-200 placeholder-gray-400 focus:outline-none focus:border-blue-400"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => {
+                    setSearchQuery('');
+                    setShowDropdown(false);
+                    setFilteredPlayers([]);
+                    setHighlightedIndex(-1);
+                  }}
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white z-10"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+              
+              {/* Dropdown */}
+              {showDropdown && (
+                <div className="absolute top-full left-0 right-0 mt-1 bg-gray-800 border border-gray-700 rounded-lg shadow-xl max-h-80 overflow-y-auto z-50">
+                  {filteredPlayers.map((player, index) => {
+                    const getPositionColor = () => {
+                      const colors: Record<string, string> = {
+                        QB: 'text-red-400',
+                        RB: 'text-green-400',
+                        WR: 'text-blue-400',
+                        TE: 'text-orange-400',
+                        DST: 'text-purple-400',
+                        K: 'text-yellow-400'
+                      };
+                      return colors[player.position] || 'text-gray-400';
+                    };
+                    
+                    return (
+                      <div
+                        key={player.playerId}
+                        onClick={() => {
+                          setSelectedPlayer(player);
+                          setSearchQuery('');
+                          setShowDropdown(false);
+                          setFilteredPlayers([]);
+                          setHighlightedIndex(-1);
+                        }}
+                        className={`px-3 py-2 cursor-pointer transition-colors flex items-center justify-between ${
+                          index === highlightedIndex
+                            ? 'bg-gray-700'
+                            : 'hover:bg-gray-700/50'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className={`text-xs font-bold ${getPositionColor()}`}>
+                            {player.position}
+                          </span>
+                          <span className="text-sm font-medium text-white">
+                            {player.playerName}
+                          </span>
+                          <span className="text-xs text-gray-400">
+                            {player.team}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-3 text-xs">
+                          <span className="text-green-400 font-semibold">
+                            ${player.auctionValue}
+                          </span>
+                          <span className="text-gray-500">
+                            Rank #{player.rank || '-'}
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+            
+            {/* Full Width Player Detail Panel */}
+            <PlayerDetailPanel 
+              player={selectedPlayer}
+              allPlayers={valuations}
+              onClose={() => setSelectedPlayer(null)}
             />
             
-            {/* Three Column Layout */}
-            <div className="grid grid-cols-12 gap-4">
+            {/* Three Column Layout - Below Panel */}
+            <div className="grid grid-cols-12 gap-2 lg:gap-4">
               {/* Left Column - Team & Budget */}
-              <div className="col-span-12 lg:col-span-2 space-y-4">
+              <div className="col-span-12 xl:col-span-2 lg:col-span-3 md:col-span-4 space-y-4">
                 <TeamRoster teamId={myTeamId} />
                 <BudgetAllocator
                   remainingBudget={200 - draftHistory.reduce((sum: number, pick: any) => 
@@ -496,18 +646,22 @@ function AppExperimental() {
               </div>
               
               {/* Middle Column - Player Data Table */}
-              <div className="col-span-12 lg:col-span-8">
-                <PlayerDataTable
-                  players={valuations}
-                  onPlayerSelect={(player) => {
-                    console.log('Player selected:', player);
-                    // You can add modal or detail view logic here
-                  }}
-                />
+              <div className="col-span-12 xl:col-span-8 lg:col-span-9 md:col-span-8">
+                <div className="w-full overflow-hidden">
+                  <PlayerDataTable
+                    players={valuations}
+                    searchQuery={searchQuery}
+                    onSearchChange={setSearchQuery}
+                    onPlayerSelect={(player) => {
+                      console.log('Player selected:', player);
+                      setSelectedPlayer(player);
+                    }}
+                  />
+                </div>
               </div>
               
               {/* Right Column - Nomination Strategy, Market Tracker, Draft History & Other Teams */}
-              <div className="col-span-12 lg:col-span-2 space-y-4">
+              <div className="col-span-12 xl:col-span-2 lg:col-span-12 space-y-4">
                 <NominationStrategy valuations={valuations} />
                 <MarketTrackerCalibrated 
                   valuations={valuations}
@@ -537,6 +691,21 @@ function AppExperimental() {
         onClose={() => setShowSettingsModal(false)}
         onApply={handleSettingsApply}
       />
+      
+      {/* Simulation Tester Modal */}
+      {showSimulationTester && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-gray-900 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
+            <button
+              onClick={() => setShowSimulationTester(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-white"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            <SimulationTester />
+          </div>
+        </div>
+      )}
 
       {/* Player Detail Modal - Temporarily removed until fixed */}
     </div>

@@ -86,9 +86,10 @@ export class RosterDataLoader {
       'vikings': 'MIN'
     };
     
+    const basePath = import.meta.env.BASE_URL || '/';
     for (const teamFile of teams) {
       try {
-        const response = await fetch(`/canonical_data/advanced_data/2025-2026/${teamFile}.csv`);
+        const response = await fetch(`${basePath}canonical_data/advanced_data/2025-2026/${teamFile}.csv`);
         if (!response.ok) continue;
         
         const text = await response.text();

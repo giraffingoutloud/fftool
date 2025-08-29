@@ -8,6 +8,9 @@ import {
   logger 
 } from '@/lib/utils';
 
+// Base path for all fetch operations
+const BASE_PATH = import.meta.env.BASE_URL || '/';
+
 // Helper functions for parsing
 function parseNumber(value: string | undefined): number | null {
   const num = parseNum(value);
@@ -74,7 +77,7 @@ function parseTeamMetricsFile(content: string): Map<string, any> {
 // Load specific team metric files
 async function loadTeamPointsPerPlay(): Promise<Map<string, any>> {
   try {
-    const response = await fetch('/canonical_data/team_points_per_play.txt');
+    const response = await fetch(`${BASE_PATH}canonical_data/team_points_per_play.txt`);
     const content = await response.text();
     return parseTeamMetricsFile(content);
   } catch (error) {
@@ -85,7 +88,7 @@ async function loadTeamPointsPerPlay(): Promise<Map<string, any>> {
 
 async function loadTeamPointsPerGame(): Promise<Map<string, any>> {
   try {
-    const response = await fetch('/canonical_data/team_points_per_game.txt');
+    const response = await fetch(`${BASE_PATH}canonical_data/team_points_per_game.txt`);
     const content = await response.text();
     return parseTeamMetricsFile(content);
   } catch (error) {
@@ -96,7 +99,7 @@ async function loadTeamPointsPerGame(): Promise<Map<string, any>> {
 
 async function loadTeamPlaysPerGame(): Promise<Map<string, any>> {
   try {
-    const response = await fetch('/canonical_data/team_plays_per_game.txt');
+    const response = await fetch(`${BASE_PATH}canonical_data/team_plays_per_game.txt`);
     const content = await response.text();
     return parseTeamMetricsFile(content);
   } catch (error) {
@@ -107,7 +110,7 @@ async function loadTeamPlaysPerGame(): Promise<Map<string, any>> {
 
 async function loadTeamOffensiveTDs(): Promise<Map<string, any>> {
   try {
-    const response = await fetch('/canonical_data/team_offensive_tds_per_game.txt');
+    const response = await fetch(`${BASE_PATH}canonical_data/team_offensive_tds_per_game.txt`);
     const content = await response.text();
     return parseTeamMetricsFile(content);
   } catch (error) {
@@ -118,7 +121,7 @@ async function loadTeamOffensiveTDs(): Promise<Map<string, any>> {
 
 async function loadTeamYardsPerPlay(): Promise<Map<string, any>> {
   try {
-    const response = await fetch('/canonical_data/team_yards_per_play.txt');
+    const response = await fetch(`${BASE_PATH}canonical_data/team_yards_per_play.txt`);
     const content = await response.text();
     return parseTeamMetricsFile(content);
   } catch (error) {
@@ -129,7 +132,7 @@ async function loadTeamYardsPerPlay(): Promise<Map<string, any>> {
 
 async function loadTeamSecondsPerPlay(): Promise<Map<string, any>> {
   try {
-    const response = await fetch('/canonical_data/team_seconds_per_play.txt');
+    const response = await fetch(`${BASE_PATH}canonical_data/team_seconds_per_play.txt`);
     const content = await response.text();
     return parseTeamMetricsFile(content);
   } catch (error) {
@@ -140,7 +143,7 @@ async function loadTeamSecondsPerPlay(): Promise<Map<string, any>> {
 
 async function loadTeamTimeOfPossession(): Promise<Map<string, any>> {
   try {
-    const response = await fetch('/canonical_data/team_time_of_possession_percentage.txt');
+    const response = await fetch(`${BASE_PATH}canonical_data/team_time_of_possession_percentage.txt`);
     const content = await response.text();
     return parseTeamMetricsFile(content);
   } catch (error) {
@@ -151,7 +154,7 @@ async function loadTeamTimeOfPossession(): Promise<Map<string, any>> {
 
 async function loadTeamThirdDown(): Promise<Map<string, any>> {
   try {
-    const response = await fetch('/canonical_data/team_third_down_conversion_percentage.txt');
+    const response = await fetch(`${BASE_PATH}canonical_data/team_third_down_conversion_percentage.txt`);
     const content = await response.text();
     return parseTeamMetricsFile(content);
   } catch (error) {
@@ -162,7 +165,7 @@ async function loadTeamThirdDown(): Promise<Map<string, any>> {
 
 async function loadTeamFourthDown(): Promise<Map<string, any>> {
   try {
-    const response = await fetch('/canonical_data/team_fourth_down_conversion_percentage.txt');
+    const response = await fetch(`${BASE_PATH}canonical_data/team_fourth_down_conversion_percentage.txt`);
     const content = await response.text();
     return parseTeamMetricsFile(content);
   } catch (error) {
@@ -173,7 +176,7 @@ async function loadTeamFourthDown(): Promise<Map<string, any>> {
 
 async function loadTeamFirstDowns(): Promise<Map<string, any>> {
   try {
-    const response = await fetch('/canonical_data/team_first_downs_per_game.txt');
+    const response = await fetch(`${BASE_PATH}canonical_data/team_first_downs_per_game.txt`);
     const content = await response.text();
     return parseTeamMetricsFile(content);
   } catch (error) {
@@ -184,7 +187,7 @@ async function loadTeamFirstDowns(): Promise<Map<string, any>> {
 
 async function loadTeamScoringMargin(): Promise<Map<string, any>> {
   try {
-    const response = await fetch('/canonical_data/team_average_scoring_margin.txt');
+    const response = await fetch(`${BASE_PATH}canonical_data/team_average_scoring_margin.txt`);
     const content = await response.text();
     return parseTeamMetricsFile(content);
   } catch (error) {
@@ -195,7 +198,7 @@ async function loadTeamScoringMargin(): Promise<Map<string, any>> {
 
 async function loadTeamRedZoneTDs(): Promise<Map<string, any>> {
   try {
-    const response = await fetch('/canonical_data/team_red_zone_tds_per_game.txt');
+    const response = await fetch(`${BASE_PATH}canonical_data/team_red_zone_tds_per_game.txt`);
     const content = await response.text();
     return parseTeamMetricsFile(content);
   } catch (error) {
@@ -206,7 +209,7 @@ async function loadTeamRedZoneTDs(): Promise<Map<string, any>> {
 
 async function loadTeamRedZoneScoringPct(): Promise<Map<string, any>> {
   try {
-    const response = await fetch('/canonical_data/team_red_zone_td_scoring_percentage.txt');
+    const response = await fetch(`${BASE_PATH}canonical_data/team_red_zone_td_scoring_percentage.txt`);
     const content = await response.text();
     return parseTeamMetricsFile(content);
   } catch (error) {
@@ -217,7 +220,7 @@ async function loadTeamRedZoneScoringPct(): Promise<Map<string, any>> {
 
 async function loadTeamRedZoneAttempts(): Promise<Map<string, any>> {
   try {
-    const response = await fetch('/canonical_data/team_red_zone_scoring_attempts_per_game.txt');
+    const response = await fetch(`${BASE_PATH}canonical_data/team_red_zone_scoring_attempts_per_game.txt`);
     const content = await response.text();
     return parseTeamMetricsFile(content);
   } catch (error) {
@@ -228,7 +231,7 @@ async function loadTeamRedZoneAttempts(): Promise<Map<string, any>> {
 
 async function loadTeamPointsPerPlayMargin(): Promise<Map<string, any>> {
   try {
-    const response = await fetch('/canonical_data/team_points_per_play_margin.txt');
+    const response = await fetch(`${BASE_PATH}canonical_data/team_points_per_play_margin.txt`);
     const content = await response.text();
     return parseTeamMetricsFile(content);
   } catch (error) {
@@ -239,7 +242,7 @@ async function loadTeamPointsPerPlayMargin(): Promise<Map<string, any>> {
 
 async function loadTeamTouchdowns(): Promise<Map<string, any>> {
   try {
-    const response = await fetch('/canonical_data/team_touchdowns_per_game.txt');
+    const response = await fetch(`${BASE_PATH}canonical_data/team_touchdowns_per_game.txt`);
     const content = await response.text();
     return parseTeamMetricsFile(content);
   } catch (error) {

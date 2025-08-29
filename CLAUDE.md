@@ -3,6 +3,17 @@
 ## PROJECT PURPOSE
 The purpose of this tool is to assist the user in drafting the optimal fantasy team during an auction draft at the beginning of the season, and in rostering the optimal team each week during the season (currently only the former feature is implemented).
 
+IMPORTANT!: For server management in this project:
+- Never assume hot-reload worked for any changes
+- Whenever you make changes or I request server restart, always:
+  1. Run 'lsof -i :[PORT]' to check what's running
+  2. Kill any existing server process
+  3. Wait 2 seconds
+  4. Start the server
+  5. Confirm the server is running before proceeding
+
+## IF I TELL YOU TO DO X, BEFORE YOU TELL ME THAT YOU DID X, CONFIRM THAT YOU *REALLY* DID X AND ARE NOT JUST SAYING WHAT I WANT TO HEAR.
+
 ## DATA INTEGRITY REQUIREMENTS
 - Use only real, verified data from `artifacts/clean_data/` (post-ETL) and `canonical_data/` (raw sources)
 - Sleeper API is used ONLY for real-time injury updates and news
@@ -109,6 +120,25 @@ Before declaring something doesn't exist:
 3. If clarification is needed about anything, do not make any assumptions; seek the user's input
 4. If there is a better way to do something, inform the user so that a plan can be formulated
 5. Do not implement anything without the user's input
+
+## RECENT CHANGES (Aug 29, 2025)
+
+### Draft Simulation Engine Added
+- **Feature**: Complete auction draft simulator with AI opponents
+- **Implementation**: `draftSimulator.ts` with mock data fallback
+- **Browser/Node Support**: Works in both environments with window check
+- **Mock Data**: 60+ realistic players with proper tier/value distributions
+
+### Robust RB Strategy Enhanced  
+- **Elite RB Bonus**: Increased to 60% (from 50%) for more aggressive acquisition
+- **Position Caps**: RBs can go up to $85 (from $75)
+- **Flexibility**: Allow up to 100% over value for elite players early
+- **WR Depth**: 20% bonus after securing 3+ RBs
+
+### Version Toggle System
+- **Experimental/Stable**: Toggle between builds with visual indicator
+- **Default**: Experimental mode for testing new features
+- **Location**: Top-right corner button with icons
 
 ## RECENT IMPLEMENTATION FIXES
 

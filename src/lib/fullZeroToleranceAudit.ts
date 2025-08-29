@@ -167,8 +167,9 @@ export async function fullZeroToleranceAudit(): Promise<AuditReport> {
   const referenceData = new Map<string, Set<string>>();
   
   // First pass: Load ADP data for player name references
+  const basePath = import.meta.env.BASE_URL || '/';
   try {
-    const adpResponse = await fetch('/canonical_data/adp/adp0_2025.csv');
+    const adpResponse = await fetch(`${basePath}canonical_data/adp/adp0_2025.csv`);
     if (adpResponse.ok) {
       const adpContent = await adpResponse.text();
       const adpRows = parseCSVStrict(adpContent, ',');
@@ -194,7 +195,7 @@ export async function fullZeroToleranceAudit(): Promise<AuditReport> {
     };
 
     try {
-      const response = await fetch(file.path);
+      const response = await fetch(`${basePath}${file.path.startsWith('/') ? file.path.slice(1) : file.path}`);
       if (!response.ok) {
         fileAudit.errors.push({
           type: 'missing_required',
